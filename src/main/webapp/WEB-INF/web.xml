@@ -9,6 +9,16 @@
         <welcome-file>chart.jsp</welcome-file>
     </welcome-file-list>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring-mvc.xml,
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <listener>
         <listener-class>com.handsome.shop.listener.HibernateInitAndDestroyListener</listener-class>
     </listener>
@@ -58,17 +68,17 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SpringMVC</servlet-name>
-        <url-pattern>*.test</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>com.handsome.shop.framework.Controller</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+    <!--<servlet-name>Controller</servlet-name>-->
+    <!--<servlet-class>com.handsome.shop.framework.Controller</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>Controller</servlet-name>-->
+    <!--<url-pattern>*.do</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!--<servlet>-->
     <!--<servlet-name>DisplayChart</servlet-name>-->
