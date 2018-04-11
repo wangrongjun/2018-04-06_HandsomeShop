@@ -34,5 +34,4 @@
         <mapping class="com.handsome.shop.bean.ShopCar"/>
 
     </session-factory>
-
 </hibernate-configuration>

@@ -1,9 +1,6 @@
 package com.handsome.shop.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/18.
