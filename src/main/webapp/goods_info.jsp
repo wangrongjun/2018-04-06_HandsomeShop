@@ -10,13 +10,13 @@
 <html>
 <head>
     <title>${requestScope.goods.goodsName}</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <link rel="stylesheet" type="text/css" href="css/luara.left.css"/>
-    <link rel="stylesheet" type="text/css" href="css/goods_info.css"/>
-    <link rel="stylesheet" type="text/css" href="css/header_content_footer.css"/>
-    <script src="js/jquery.min-1.9.0.js"></script>
-    <script src="js/bootstrap.min-3.2.0.js"></script>
-    <script src="js/jquery.luara.0.0.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/luara.left.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/goods_info.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header_content_footer.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.luara.0.0.1.min.js"></script>
 </head>
 <body onload="showMsg('${requestScope.msg}')">
 
@@ -30,7 +30,7 @@
                 <%--<c:forEach var="image" items="${requestScope.goods.goodsImageList}">--%>
                     <%--<li><img src="${image.imageUrl}"></li>--%>
                 <%--</c:forEach>--%>
-                    <li><img src="admin/img/goods_1.jpg"></li>
+                    <li><img src="/admin/img/goods_1.jpg"></li>
             </ul>
             <ol>
                 <c:forEach var="image" items="${requestScope.goods.goodsImageList}">
@@ -108,11 +108,11 @@
                     <div>
                         <div class="gender">
                             <img src="${evaluate.orders.customer.gender==1?
-                            "img/ic_gender_man.png":"img/ic_gender_woman.png"}"/>
+                            "/img/ic_gender_man.png":"/img/ic_gender_woman.png"}"/>
                         </div>
                         <div class="evaluate">
-                            <img src="${evaluate.evaluateLevel==0?"img/ic_evaluate_bad.png":
-                            (evaluate.evaluateLevel==1?"img/ic_evaluate_normal.png":"img/ic_evaluate_good.png")}"/>
+                            <img src="${evaluate.evaluateLevel==0?"/img/ic_evaluate_bad.png":
+                            (evaluate.evaluateLevel==1?"/img/ic_evaluate_normal.png":"/img/ic_evaluate_good.png")}"/>
                         </div>
                         <span class="name">${evaluate.orders.customer.nickname}</span>
                         <span class="time">${evaluate.createTime}</span>

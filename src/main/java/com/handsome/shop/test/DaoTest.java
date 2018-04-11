@@ -101,12 +101,12 @@ public class DaoTest {
         goodsTypeDao.insert(new GoodsType("二手"));
         goodsTypeDao.insert(new GoodsType("其他"));
 
-        Seller 张三 = new Seller("110", "123", "张三", "明月公主", 0, "admin/img/seller_1.jpg");
-        Seller 李四 = new Seller("120", "123", "李四", "型男", 1, "admin/img/seller_2.jpg");
-        Shop 东方电脑城 = new Shop(张三, "东方电脑城", "专卖电脑及其设备", "admin/img/shop_1.jpg");
-        Shop 手机旗舰店 = new Shop(张三, "手机旗舰店", "出售最新的三星，苹果手机", "admin/img/shop_2.jpg");
-        Shop 生鲜店 = new Shop(李四, "生鲜店", "各种新鲜水果，蔬菜应有尽有！", "admin/img/shop_3.jpg");
-        Shop 零食店 = new Shop(李四, "零食店", "吃货预备营！", "admin/img/shop_4.jpg");
+        Seller 张三 = new Seller("110", "123", "张三", "明月公主", 0, "/admin/img/seller_1.jpg");
+        Seller 李四 = new Seller("120", "123", "李四", "型男", 1, "/admin/img/seller_2.jpg");
+        Shop 东方电脑城 = new Shop(张三, "东方电脑城", "专卖电脑及其设备", "/admin/img/shop_1.jpg");
+        Shop 手机旗舰店 = new Shop(张三, "手机旗舰店", "出售最新的三星，苹果手机", "/admin/img/shop_2.jpg");
+        Shop 生鲜店 = new Shop(李四, "生鲜店", "各种新鲜水果，蔬菜应有尽有！", "/admin/img/shop_3.jpg");
+        Shop 零食店 = new Shop(李四, "零食店", "吃货预备营！", "/admin/img/shop_4.jpg");
 
         Goods 宏基笔记本 = new Goods("宏基笔记本", "Aspire最新版", 20, 电子产品, 东方电脑城, 3200);
         Goods 苹果笔记本 = new Goods("苹果笔记本", "超薄迷你", 60, 电子产品, 东方电脑城, 5400);
@@ -132,8 +132,8 @@ public class DaoTest {
         goodsDao.insert(辣条);
         goodsDao.insert(可乐);
 
-        Customer 王荣俊 = new Customer("15521302230", "123", "王荣俊", "英俊", 1, "admin/img/customer_1.jpg");
-        Customer 沫沫 = new Customer("13023796942", "123", "沫沫", "沫宝儿", 0, "admin/img/customer_2.jpg");
+        Customer 王荣俊 = new Customer("15521302230", "123", "王荣俊", "英俊", 1, "/admin/img/customer_1.jpg");
+        Customer 沫沫 = new Customer("13023796942", "123", "沫沫", "沫宝儿", 0, "/admin/img/customer_2.jpg");
 
         customerDao.insert(王荣俊);
         customerDao.insert(沫沫);
@@ -176,34 +176,34 @@ public class DaoTest {
         evaluateDao.insert(new Evaluate(orders5, "苹果的ISO系统一直很快，装逼利器！", Evaluate.LEVEL_GOOD, "2015-03-07 15:34:12"));
         evaluateDao.insert(new Evaluate(orders6, "什么破电脑，买了没几天就坏了", Evaluate.LEVEL_BAD, "2015-05-22 15:34:12"));
 
-        goodsImageDao.insert(new GoodsImage(宏基笔记本, "admin/img/goods_1.jpg"));
-        goodsImageDao.insert(new GoodsImage(宏基笔记本, "admin/img/goods_2.jpg"));
-        goodsImageDao.insert(new GoodsImage(宏基笔记本, "admin/img/goods_3.jpg"));
-        goodsImageDao.insert(new GoodsImage(宏基笔记本, "admin/img/goods_4.jpg"));
-        goodsImageDao.insert(new GoodsImage(宏基笔记本, "admin/img/goods_5.jpg"));
-        goodsImageDao.insert(new GoodsImage(苹果笔记本, "admin/img/goods_6.jpg"));
-        goodsImageDao.insert(new GoodsImage(苹果笔记本, "admin/img/goods_7.jpg"));
-        goodsImageDao.insert(new GoodsImage(苹果笔记本, "admin/img/goods_8.jpg"));
-        goodsImageDao.insert(new GoodsImage(三星E7手机, "admin/img/goods_9.jpg"));
-        goodsImageDao.insert(new GoodsImage(三星E7手机, "admin/img/goods_10.jpg"));
-        goodsImageDao.insert(new GoodsImage(iPhone7手机, "admin/img/goods_11.jpg"));
-        goodsImageDao.insert(new GoodsImage(iPhone7手机, "admin/img/goods_12.jpg"));
-        goodsImageDao.insert(new GoodsImage(菜心, "admin/img/goods_13.jpg"));
-        goodsImageDao.insert(new GoodsImage(菜心, "admin/img/goods_14.jpg"));
-        goodsImageDao.insert(new GoodsImage(菜心, "admin/img/goods_15.jpg"));
-        goodsImageDao.insert(new GoodsImage(苹果, "admin/img/goods_16.jpg"));
-        goodsImageDao.insert(new GoodsImage(辣条, "admin/img/goods_17.jpg"));
-        goodsImageDao.insert(new GoodsImage(可乐, "admin/img/goods_18.jpg"));
-        goodsImageDao.insert(new GoodsImage(可乐, "admin/img/goods_19.jpg"));
+        goodsImageDao.insert(new GoodsImage(宏基笔记本, "/admin/img/goods_1.jpg"));
+        goodsImageDao.insert(new GoodsImage(宏基笔记本, "/admin/img/goods_2.jpg"));
+        goodsImageDao.insert(new GoodsImage(宏基笔记本, "/admin/img/goods_3.jpg"));
+        goodsImageDao.insert(new GoodsImage(宏基笔记本, "/admin/img/goods_4.jpg"));
+        goodsImageDao.insert(new GoodsImage(宏基笔记本, "/admin/img/goods_5.jpg"));
+        goodsImageDao.insert(new GoodsImage(苹果笔记本, "/admin/img/goods_6.jpg"));
+        goodsImageDao.insert(new GoodsImage(苹果笔记本, "/admin/img/goods_7.jpg"));
+        goodsImageDao.insert(new GoodsImage(苹果笔记本, "/admin/img/goods_8.jpg"));
+        goodsImageDao.insert(new GoodsImage(三星E7手机, "/admin/img/goods_9.jpg"));
+        goodsImageDao.insert(new GoodsImage(三星E7手机, "/admin/img/goods_10.jpg"));
+        goodsImageDao.insert(new GoodsImage(iPhone7手机, "/admin/img/goods_11.jpg"));
+        goodsImageDao.insert(new GoodsImage(iPhone7手机, "/admin/img/goods_12.jpg"));
+        goodsImageDao.insert(new GoodsImage(菜心, "/admin/img/goods_13.jpg"));
+        goodsImageDao.insert(new GoodsImage(菜心, "/admin/img/goods_14.jpg"));
+        goodsImageDao.insert(new GoodsImage(菜心, "/admin/img/goods_15.jpg"));
+        goodsImageDao.insert(new GoodsImage(苹果, "/admin/img/goods_16.jpg"));
+        goodsImageDao.insert(new GoodsImage(辣条, "/admin/img/goods_17.jpg"));
+        goodsImageDao.insert(new GoodsImage(可乐, "/admin/img/goods_18.jpg"));
+        goodsImageDao.insert(new GoodsImage(可乐, "/admin/img/goods_19.jpg"));
 
         // 添加额外的无意义数据
-        Shop shop = new Shop(张三, "张三的商店", "张三的商店的描述", "admin/img/shop_1.jpg");
+        Shop shop = new Shop(张三, "张三的商店", "张三的商店的描述", "/admin/img/shop_1.jpg");
         shopDao.insert(shop);
         for (int i = 1; i <= 103; i++) {
             Goods goods = new Goods("商品" + i, "商品描述" + i,
                     i, goodsTypeDao.queryById(i % 10 + 1), shop, 500 + i * 100);
             goodsDao.insert(goods);
-            GoodsImage goodsImage = new GoodsImage(goods, "admin/img/goods_" + (i % 19 + 1) + ".jpg");
+            GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
             goodsImageDao.insert(goodsImage);
         }
 

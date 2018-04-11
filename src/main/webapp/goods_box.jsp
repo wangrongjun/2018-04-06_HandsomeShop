@@ -37,14 +37,14 @@
             <div class="col-sm-3">
                 <div class="goods">
                     <div class="goods_image">
-                        <a href="goods_info.jsp?goodsId=${goods.goodsId}">
+                        <a href="/goods/${goods.goodsId}">
                                 <%--<c:if test="${goods.goodsImageList!=null&&goods.goodsImageList.size()>0}">--%>
                                 <%--<img src="${goods.goodsImageList.get(0).imageUrl}"/>--%>
                                 <%--</c:if>--%>
                             <img src="admin/img/goods_1.jpg"/>
                         </a>
                     </div>
-                    <a href="goods_info.jsp?goodsId=${goods.goodsId}" class="goods_name">
+                    <a href="/goods/${goods.goodsId}" class="goods_name">
                             ${goods.goodsName}
                     </a>
                     <div class="price">￥ ${goods.price}</div>

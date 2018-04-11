@@ -3,11 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>贵美商城 - 首页</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <script src="js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
+    <title>英俊商城 - 首页</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <script src="/js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
