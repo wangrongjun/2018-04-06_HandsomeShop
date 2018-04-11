@@ -1,0 +1,44 @@
+.pr {
+    position: relative;
+}
+
+body {
+    font-size: 14px;
+}
+
+/*-----------搜索框--------*/
+
+.search_box input {
+    width: 50%;
+    max-width: 500px;
+    margin: 10px auto;
+    display: inline-block;
+}
+
+/*-----------商品类型--------*/
+
+.goods_type_box {
+    margin: 5px;
+}
+
+.goods_type_box a {
+    margin: 10px;
+}
+
+.goods_box td {
+    padding: 20px;
+}
+
+/*------广告图片------*/
+
+.ad {
+    width: 800px;
+    height: 300px;
+    margin: 30px 0;
+    display: block;
+}
+
+.ad img {
+    height: 100%;
+    width: 100%;
+}

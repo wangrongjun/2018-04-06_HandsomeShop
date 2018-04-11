@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <!--<property name="connection.username">wang</property>-->
+        <!--<property name="connection.password">123</property>-->
+        <!--<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>-->
+        <!--<property name="connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>-->
+        <!--<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>-->
+
+        <property name="connection.username">root</property>
+        <property name="connection.password">21436587</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql:///handsome_shop_new?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=true</property>
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
+
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <!--禁用二级缓存-->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="hbm2ddl.auto">update</property>
+
+        <mapping class="com.handsome.shop.bean.Address"/>
+        <mapping class="com.handsome.shop.bean.Customer"/>
+        <mapping class="com.handsome.shop.bean.Evaluate"/>
+        <mapping class="com.handsome.shop.bean.Goods"/>
+        <mapping class="com.handsome.shop.bean.GoodsImage"/>
+        <mapping class="com.handsome.shop.bean.GoodsType"/>
+        <mapping class="com.handsome.shop.bean.Orders"/>
+        <mapping class="com.handsome.shop.bean.Seller"/>
+        <mapping class="com.handsome.shop.bean.Shop"/>
+        <mapping class="com.handsome.shop.bean.ShopCar"/>
+
+    </session-factory>
+
+</hibernate-configuration>

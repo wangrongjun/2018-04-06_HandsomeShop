@@ -1,0 +1,235 @@
+body,
+ul,
+li,
+ol,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+/*----------图片，商品信息的总体--------*/
+.top {
+    /*margin-left: 100px;*/
+    margin: 50px auto;
+    box-shadow: 0 0 2px gray;
+    background-color: #ffe;
+    width: 80%;
+    padding: 10px;
+}
+
+/*----------左边的商品图片轮播---------*/
+
+.img_box {
+    box-shadow: 0 0 10px gray;
+    display: inline-block;
+
+}
+
+.img_box ol {
+    position: relative;
+    /*width: 80px;*/
+    height: 20px;
+    bottom: 45px;
+    left: 10px;
+}
+
+.img_box ol li {
+    float: left;
+    width: 50px;
+    height: 35px;
+    margin: 5px;
+    background: #fff;
+}
+
+.img_box ol li img {
+    width: 100%;
+    height: 100%;
+}
+
+.img_box ol li.seleted {
+    border: 2px solid red;
+}
+
+/*---------右边的信息与操作按钮----------*/
+
+.right_box {
+    display: inline-block;
+    position: absolute;
+    padding-left: 50px;
+    font-size: 14px;
+}
+
+/*-----------商品详细信息------------*/
+
+.goods_info_box {
+}
+
+.goods_name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.goods_price {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: orangered;
+}
+
+.goods_description {
+    margin-top: 20px;
+}
+
+.goods_type {
+    margin-top: 20px;
+}
+
+/*-----------购买或添加购物车------------*/
+
+.buy_box {
+    margin-top: 30px;
+}
+
+.buy_box input {
+    width: 150px;
+}
+
+.buy_box .btn {
+    border-radius: 0;
+    margin-top: 20px;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+/*-----------商家详细信息------------*/
+
+.seller_box {
+    width: 60%;
+    margin: 10px auto;
+    position: relative;
+    box-shadow: 0 0 3px grey;
+    background-color: #fef;
+    padding: 10px;
+}
+
+.seller_head {
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+}
+
+.seller_head img {
+    width: 100%;
+    height: 100%;
+}
+
+.right_box {
+    display: inline-block;
+    padding-left: 50px;
+    position: absolute;
+    max-width: 70%;
+}
+
+.seller_name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn_box {
+    margin-top: 20px;
+}
+
+.btn_box button {
+    margin-right: 20px;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+/*-----------评论列表------------*/
+
+.evaluate_box {
+    margin: 10px auto;
+    width: 90%;
+    position: relative;
+    padding: 20px;
+    background-color: #eee;
+    box-shadow: 0 0 3px gray;
+}
+
+.evaluate_box .divider {
+    margin: 20px 0;
+    background-color: darkseagreen;
+    height: 1px;
+}
+
+.evaluate_box center:nth-child(1) {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.item_box {
+    height: 120px;
+}
+
+.evaluate_box .head {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+}
+
+.evaluate_box .head img {
+    height: 100%;
+    width: 100%;
+}
+
+.evaluate_box .right {
+    display: inline-block;
+    position: absolute;
+    padding: 10px;
+}
+
+.evaluate_box .gender {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
+.evaluate_box .gender img {
+    width: 100%;
+    height: 100%;
+}
+
+.evaluate_box .evaluate {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.evaluate_box .evaluate img {
+    width: 100%;
+    height: 100%;
+}
+
+.evaluate_box .name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.evaluate_box .time {
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.evaluate_box .content {
+    margin-top: 10px;
+}

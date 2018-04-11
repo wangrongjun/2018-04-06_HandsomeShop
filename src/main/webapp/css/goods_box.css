@@ -1,0 +1,80 @@
+/*-------------排序按钮组-----------*/
+.sort_box {
+    margin-bottom: 10px;
+}
+
+/*-------------商品box-----------*/
+.goods_box {
+    width: 80%;
+    background-color: ghostwhite;
+    border: 1px solid gainsboro;
+}
+
+/*-------------商品Item总体-----------*/
+.goods {
+    border: 1px solid gray;
+    width: 200px;
+    height: 280px;
+    max-height: 280px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.goods > * {
+    padding: 5px;
+}
+
+.goods:hover {
+    border: 2px solid red;
+}
+
+/*--------------商品Item每一个字段------------*/
+.goods .goods_image {
+    width: 200px;
+    height: 150px;
+}
+
+.goods .goods_image img {
+    width: 100%;
+    height: 100%;
+}
+
+.goods .goods_name {
+    left: 5px;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.goods .goods_name:hover {
+    text-decoration: underline;
+    color: orange;
+}
+
+.goods .price {
+    color: orange;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.goods .remain_and_sell {
+    position: relative;
+}
+
+.goods .remain_and_sell .sell {
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+}
+
+.goods .description {
+    width: 100%;
+    height: 100%;
+    background-color: gainsboro;
+}
+
+/*----------换页功能------------*/
+.change_page_box {
+    text-align: center;
+}
