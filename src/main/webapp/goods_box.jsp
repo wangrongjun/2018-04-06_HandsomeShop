@@ -92,6 +92,7 @@
             "pageIndex": pageIndex,
             "sortType": sortType
         };
+        var sss = updateParamInUrl(location.href, map) + "";
         location.href = updateParamInUrl(location.href, map) + "";
     }
 </script>
