@@ -84,7 +84,7 @@
 
 </div>
 
-<script src="js/util/TextUtil.js"></script>
+<script src="${pageContext.request.contextPath}/js/util/TextUtil.js"></script>
 <script type="text/javascript">
     function reload(pageIndex, sortType) {
         console.log("pageIndex:" + pageIndex);

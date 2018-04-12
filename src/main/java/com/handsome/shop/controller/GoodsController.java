@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -53,6 +52,24 @@ public class GoodsController {
         request.setAttribute("goods", goods);
         request.setAttribute("evaluateList", evaluateList);
         return "goods_info";
+    }
+
+    @RequestMapping("/searchGoodsListByType")
+    public String searchGoodsListByType(HttpServletRequest request,
+                                        int goodsTypeId,
+                                        @RequestParam(defaultValue = "0") int pageIndex,
+                                        @RequestParam(defaultValue = "0") int sortType) {
+
+        GoodsDao goodsDao = DaoFactory.getGoodsDao();
+        int totalCount = goodsDao.queryCountByGoodsTypeId(goodsTypeId);
+        List<Goods> goodsList = goodsDao.queryByGoodsTypeId(goodsTypeId, pageIndex * 12, 12);
+
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("totalCount", totalCount);
+        request.setAttribute("sortType", sortType);
+        request.setAttribute("goodsList", goodsList);
+        request.setAttribute("goodsTypeId", goodsTypeId);
+        return "search_goods_type";
     }
 
 }

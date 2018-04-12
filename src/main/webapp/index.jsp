@@ -21,7 +21,9 @@
         <div class="goods_type_box">
             <span>商品类型：</span>
             <c:forEach var="goodsType" items="${sessionScope.goodsTypeList}">
-                <a href="search_goods_type.jsp?goodsTypeId=${goodsType.goodsTypeId}">${goodsType.name}</a>
+                <a href="${pageContext.request.contextPath}/searchGoodsListByType?goodsTypeId=${goodsType.goodsTypeId}">
+                        ${goodsType.name}
+                </a>
             </c:forEach>
         </div>
 

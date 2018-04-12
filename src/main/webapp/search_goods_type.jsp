@@ -6,13 +6,13 @@
   Time: 21:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>${sessionScope.goodsTypeList.get(requestScope.goodsTypeId-1).name}</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <script src="js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .goods_type_box {
             margin: 5px;
@@ -42,11 +42,9 @@
         <div class="goods_type_box">
             <span>商品类型：</span>
             <c:forEach var="goodsType" items="${sessionScope.goodsTypeList}">
-                <a href="search_goods_type.jsp?goodsTypeId=${goodsType.goodsTypeId}"
+                <a href="${pageContext.request.contextPath}/searchGoodsListByType?goodsTypeId=${goodsType.goodsTypeId}"
                    <c:if test="${goodsType.goodsTypeId==requestScope.goodsTypeId}">class="selected"</c:if>
-                >
-                        ${goodsType.name}
-                </a>
+                >${goodsType.name}</a>
             </c:forEach>
         </div>
     </center>
