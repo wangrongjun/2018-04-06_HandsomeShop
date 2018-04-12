@@ -5,12 +5,14 @@ import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.framework.HibernateDao;
 import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * by wangrongjun on 2017/6/17.
  */
+@Repository
 public class GoodsDaoImpl extends HibernateDao<Goods> implements GoodsDao {
 
     private int begin = 0;

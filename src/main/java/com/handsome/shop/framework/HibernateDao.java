@@ -8,9 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,25 +17,39 @@ import java.util.List;
 /**
  * by wangrongjun on 2018/4/12.
  */
-@Repository
 public class HibernateDao<T> implements Dao<T> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    public static boolean openSessionInView = false;
+    private static SessionFactory sessionFactory;
     private Class<T> entityClass;
-    private Session session;
+    private static Session session;
 
-    protected Session openSession() {
+    public void setLocalSessionFactoryBean(SessionFactory sessionFactory) {
+        HibernateDao.sessionFactory = sessionFactory;
+    }
+
+    public static Session openSession() {
         if (session == null) {
             session = sessionFactory.openSession();
         }
         return session;
     }
 
-    protected void closeSession() {
-        if (session != null) {
-            session.close();
-            session = null;
+    protected static void closeSession() {
+        if (!openSessionInView) {
+            if (session != null) {
+                session.close();
+                session = null;
+            }
+        }
+    }
+
+    public static void closeSessionAfterView() {
+        if (!openSessionInView) {
+            if (session != null) {
+                session.close();
+                session = null;
+            }
         }
     }
 

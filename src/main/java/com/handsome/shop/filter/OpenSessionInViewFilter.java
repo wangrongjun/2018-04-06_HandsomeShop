@@ -1,6 +1,9 @@
 package com.handsome.shop.filter;
 
-import com.wangrj.java_lib.hibernate.HibernateDao;
+
+import com.handsome.shop.framework.HibernateDao;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -17,12 +20,16 @@ public class OpenSessionInViewFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HibernateDao.threadLocal = new ThreadLocal<>();
+        Session session = HibernateDao.openSession();
+        Transaction transaction = session.beginTransaction();
         try {
-            HibernateDao.threadLocal.set(HibernateDao.getSessionFactory().openSession());
             chain.doFilter(request, response);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
         } finally {
-            HibernateDao.threadLocal.get().close();
+            HibernateDao.closeSessionAfterView();
         }
     }
 

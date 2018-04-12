@@ -13,7 +13,7 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="css/header_content_footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header_content_footer.css">
 </head>
 <body>
 

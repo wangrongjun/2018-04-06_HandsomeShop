@@ -41,4 +41,5 @@ public class IndexController {
         request.setAttribute("sortType", sortType);
         return "index";
     }
+
 }
