@@ -6,8 +6,10 @@
     <title>英俊商城 - 首页</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript"
+            charset="utf-8"></script>
 </head>
 <body>
 
@@ -42,12 +44,13 @@
 
 <script type="text/javascript">
     function search() {
-        var searchWord = $("#search_word").val();
-        if (searchWord == "") {
+        var $search_word = $("#search_word");
+        var searchWord = $search_word.val();
+        if (!searchWord || searchWord === "") {
             alert("请输入关键字搜索");
             return;
         }
-        window.location.href = "search.do?searchWord=" + $("#search_word").val();
+        window.location.href = "/searchGoods?searchWord=" + encodeURIComponent($search_word.val());
     }
 </script>
 
