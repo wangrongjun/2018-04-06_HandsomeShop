@@ -9,16 +9,16 @@
         <!--<welcome-file>chart.jsp</welcome-file>-->
     </welcome-file-list>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:spring-mvc.xml,
-            classpath:spring-database.xml,
-        </param-value>
-    </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>-->
+            <!--classpath:spring-mvc.xml,-->
+            <!--classpath:spring-database.xml,-->
+        <!--</param-value>-->
+    <!--</context-param>-->
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--</listener>-->
 
     <!--<listener>-->
         <!--<listener-class>com.handsome.shop.listener.HibernateInitAndDestroyListener</listener-class>-->

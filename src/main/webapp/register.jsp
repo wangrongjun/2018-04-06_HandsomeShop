@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <link rel="stylesheet" type="text/css" href="css/header_content_footer.css"/>
-    <script src="js/jquery.min-1.9.0.js"></script>
-    <script src="js/bootstrap.min-3.2.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header_content_footer.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <title>用户注册</title>
     <style type="text/css">
         content {
-            background: url(img/bg_wood.jpg);
+            background: url(/img/bg_wood.jpg);
         }
 
         .register_box {
@@ -41,7 +41,7 @@
 <content>
     <div class="register_box">
         <center><h1>用户注册</h1></center>
-        <form action="register.do" method="post" onsubmit="return checkInput()">
+        <form action="${pageContext.request.contextPath}/register" method="post" onsubmit="return checkInput()">
             <div class="form-group">
                 <label>手机号：</label>
                 <input type="number" class="form-control" name="phone" placeholder="请输入手机号">
@@ -75,7 +75,7 @@
             <button type="submit" class="btn btn-primary">注册</button>
             <span id="msg">${msg}</span>
         </form>
-        <a href="login.jsp">已有帐号，马上登录</a>
+        <a href="${pageContext.request.contextPath}/login.jsp">已有帐号，马上登录</a>
     </div>
 </content>
 
@@ -108,7 +108,7 @@
         else {// code for IE6, IE5
             queryExistsXmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        var url = "queryExistsAccount.do?phone=" + phone;
+        var url = "phoneExists?phone=" + phone;
         queryExistsXmlHttp.open("POST", url, true);
         queryExistsXmlHttp.onreadystatechange = function () {
             if (queryExistsXmlHttp.readyState == 4) {

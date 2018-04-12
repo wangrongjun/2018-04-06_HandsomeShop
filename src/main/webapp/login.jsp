@@ -5,18 +5,18 @@
   Time: 15:33
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <link rel="stylesheet" type="text/css" href="css/header_content_footer.css"/>
-    <script src="js/jquery.min-1.9.0.js"></script>
-    <script src="js/bootstrap.min-3.2.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header_content_footer.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <title>用户登录</title>
     <style type="text/css">
         content {
-            background: url(img/bg_wood.jpg);
+            background: url(/img/bg_wood.jpg);
         }
 
         .ad {
@@ -82,7 +82,7 @@
 
     <div class="login_box">
         <center><h1>用户登录</h1></center>
-        <form action="login.do" method="post" onsubmit="return checkInput()">
+        <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return checkInput()">
             <div class="form-group">
                 <label>手机号：</label>
                 <input type="number" class="form-control" name="phone" value="${phone}" placeholder="请输入手机号">
@@ -106,12 +106,12 @@
                 <label for="validateCode">验证码：</label>
                 <input type="text" name="validateCode" id="validateCode">
                 <div id="validateCodeImageBox">
-                    <img src="validateCode.jsp" id="validateCodeImg" onclick="refreshValidateCode()">
+                    <%--<img src="validateCode.jsp" id="validateCodeImg" onclick="refreshValidateCode()">--%>
                 </div>
             </div>
             <button type="reset" class="btn btn-default">重置</button>
             <button type="submit" class="btn btn-primary">登录</button>
-            <span id="msg">${msg}</span>
+            <span id="msg">${requestScope.msg}</span>
             <br>
             <input type="checkbox" name="autoLogin" id="autoLogin" value="true" checked="checked"/>
             <label for="autoLogin">一周内自动登录</label>

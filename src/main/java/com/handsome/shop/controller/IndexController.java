@@ -23,7 +23,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String showIndex(
             HttpServletRequest request,
             @RequestParam(defaultValue = "0") int pageIndex,
