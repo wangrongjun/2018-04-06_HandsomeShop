@@ -4,7 +4,7 @@ import com.handsome.shop.bean.Customer;
 import com.handsome.shop.bean.Seller;
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.SellerDao;
-import com.handsome.shop.framework.DaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,19 +14,23 @@ import javax.servlet.http.HttpServletRequest;
  * by wangrongjun on 2018/4/12.
  */
 @Controller
-public class RegisterController {
+public class RegisterController extends BaseController {
+
+    @Autowired
+    private SellerDao sellerDao;
+    @Autowired
+    private CustomerDao customerDao;
 
     @PostMapping("/register")
     public String register(HttpServletRequest request,
-                          String phone,
-                          String password,
-                          String realName,
-                          String nickname,
-                          String gender,
-                          String identity) {
+                           String phone,
+                           String password,
+                           String realName,
+                           String nickname,
+                           String gender,
+                           String identity) {
 
         if (identity.equals("customer")) {
-            CustomerDao customerDao = DaoFactory.getCustomerDao();
             if (customerDao.queryByPhone(phone) != null) {
                 request.setAttribute("msg", "该手机号已注册");
                 return "register";
@@ -40,7 +44,6 @@ public class RegisterController {
             return "login";
         } else {
 
-            SellerDao sellerDao = DaoFactory.getSellerDao();
             if (sellerDao.queryByPhone(phone) != null) {
                 request.setAttribute("msg", "该手机号已注册");
                 return "register";

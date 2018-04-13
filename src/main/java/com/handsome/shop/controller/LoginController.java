@@ -4,11 +4,10 @@ import com.handsome.shop.bean.Customer;
 import com.handsome.shop.bean.Seller;
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.SellerDao;
-import com.handsome.shop.framework.DaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -20,7 +19,12 @@ import java.io.IOException;
  * by wangrongjun on 2018/4/12.
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
+
+    @Autowired
+    private SellerDao sellerDao;
+    @Autowired
+    private CustomerDao customerDao;
 
     @PostMapping("/login")
     public String login(HttpServletRequest request,
@@ -38,13 +42,12 @@ public class LoginController {
 //            return "login";
 //        }
 
-        if (identity.equals("customer")) {// 如果是客户登录
-            CustomerDao customerDao = DaoFactory.getCustomerDao();
+        if (identity.equals(ATTR_CUSTOMER)) {// 如果是客户登录
             Customer customer = customerDao.queryByPhone(phone);
             if (customer != null && password.equals(customer.getPassword())) {
                 request.getSession().invalidate();
-                request.getSession().setAttribute("customer", customer);
-                addCookie(response, phone, password, "customer", autoLogin);
+                setLoginCustomer(request, customer);
+                addCookie(response, phone, password, ATTR_CUSTOMER, autoLogin);
                 request.getRequestDispatcher("/").forward(request, response);
                 return null;
             } else {
@@ -52,12 +55,11 @@ public class LoginController {
                 return "login";
             }
         } else {// 如果是商家登录
-            SellerDao sellerDao = DaoFactory.getSellerDao();
             Seller seller = sellerDao.queryByPhone(phone);
             if (seller != null && password.equals(seller.getPassword())) {
                 request.getSession().invalidate();
-                request.getSession().setAttribute("seller", seller);
-                addCookie(response, phone, phone, password, "seller");
+                setLoginSeller(request, seller);
+                addCookie(response, phone, password, ATTR_SELLER, autoLogin);
                 request.getRequestDispatcher("/").forward(request, response);
                 return null;
             } else {

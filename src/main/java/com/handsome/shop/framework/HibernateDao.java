@@ -24,7 +24,7 @@ public class HibernateDao<T> implements Dao<T> {
     private Class<T> entityClass;
     private static Session session;
 
-    public void setLocalSessionFactoryBean(SessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
         HibernateDao.sessionFactory = sessionFactory;
     }
 
@@ -134,6 +134,17 @@ public class HibernateDao<T> implements Dao<T> {
         Session session = openSession();
         session.beginTransaction();
         String hql = "delete from " + getTableName() + (where == null ? "" : where);
+        session.createQuery(hql, getEntityClass()).executeUpdate();
+        session.getTransaction().commit();
+        closeSession();
+        return true;
+    }
+
+    @Override
+    public boolean deleteAll() {
+        Session session = openSession();
+        session.beginTransaction();
+        String hql = "delete from " + getTableName();
         session.createQuery(hql, getEntityClass()).executeUpdate();
         session.getTransaction().commit();
         closeSession();

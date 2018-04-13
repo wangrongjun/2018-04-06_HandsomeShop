@@ -4,7 +4,7 @@ import com.handsome.shop.bean.Evaluate;
 import com.handsome.shop.bean.Goods;
 import com.handsome.shop.dao.EvaluateDao;
 import com.handsome.shop.dao.GoodsDao;
-import com.handsome.shop.framework.DaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +20,12 @@ import java.util.List;
  * by wangrongjun on 2017/11/2.
  */
 @Controller
-public class GoodsController {
+public class GoodsController extends BaseController {
+
+    @Autowired
+    private GoodsDao goodsDao;
+    @Autowired
+    private EvaluateDao evaluateDao;
 
     @GetMapping("/searchGoods")
     public String searchGoods(HttpServletRequest request,
@@ -31,7 +36,6 @@ public class GoodsController {
 
         searchWord = URLDecoder.decode(searchWord, "utf-8");
 
-        GoodsDao goodsDao = DaoFactory.getGoodsDao();
         int totalCount = goodsDao.queryCountBySearchWord(searchWord);
         List<Goods> goodsList = goodsDao.queryBySearchWord(searchWord, 12 * pageIndex, 12);
 
@@ -45,9 +49,7 @@ public class GoodsController {
 
     @GetMapping("/goods/{goodsId}")
     public String showGoodsInfo(HttpServletRequest request, @PathVariable Integer goodsId) {
-        GoodsDao goodsDao = DaoFactory.getGoodsDao();
         Goods goods = goodsDao.queryById(goodsId);
-        EvaluateDao evaluateDao = DaoFactory.getEvaluateDao();
         List<Evaluate> evaluateList = evaluateDao.queryByGoodsId(goodsId);
         request.setAttribute("goods", goods);
         request.setAttribute("evaluateList", evaluateList);
@@ -60,7 +62,6 @@ public class GoodsController {
                                         @RequestParam(defaultValue = "0") int pageIndex,
                                         @RequestParam(defaultValue = "0") int sortType) {
 
-        GoodsDao goodsDao = DaoFactory.getGoodsDao();
         int totalCount = goodsDao.queryCountByGoodsTypeId(goodsTypeId);
         List<Goods> goodsList = goodsDao.queryByGoodsTypeId(goodsTypeId, pageIndex * 12, 12);
 

@@ -6,15 +6,15 @@
   Time: 0:48
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>我的订单</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" href="header.jsp">
-    <link rel="stylesheet" type="text/css" href="css/customer_order_list.css"/>
-    <script src="js/jquery.min-1.9.0.js"></script>
-    <script src="js/bootstrap.min-3.2.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/customer_order_list.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
 </head>
 <body>
 

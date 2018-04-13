@@ -3,32 +3,50 @@ package com.handsome.shop.test;
 import com.handsome.shop.bean.*;
 import com.handsome.shop.dao.*;
 import com.handsome.shop.framework.DaoFactory;
-import com.wangrj.java_lib.hibernate.HibernateDao;
+import com.handsome.shop.framework.HibernateDao;
 import com.wangrj.java_lib.java_util.LogUtil;
 import com.wangrj.java_lib.java_util.MathUtil;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.ProfileValueSource;
+import org.springframework.test.annotation.ProfileValueSourceConfiguration;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * by wangrongjun on 2017/6/17.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring-dataSource.xml")
+@ActiveProfiles("test")
 public class DaoTest {
 
+    @Autowired
     private GoodsTypeDao goodsTypeDao;
+    @Autowired
     private CustomerDao customerDao;
+    @Autowired
     private SellerDao sellerDao;
+    @Autowired
     private ShopDao shopDao;
+    @Autowired
     private GoodsDao goodsDao;
+    @Autowired
     private GoodsImageDao goodsImageDao;
+    @Autowired
     private OrdersDao ordersDao;
+    @Autowired
     private ShopCarDao shopCarDao;
+    @Autowired
     private EvaluateDao evaluateDao;
+    @Autowired
     private AddressDao addressDao;
 
     @Test
     public void testQuery() {
-        HibernateDao.buildSessionFactory();
-
         LogUtil.printEntity(customerDao.queryByPhone("15521302230"));
         LogUtil.printEntity(customerDao.countGender());
 
@@ -57,21 +75,15 @@ public class DaoTest {
         LogUtil.printEntity(addressDao.queryByCustomerId(25), "customer");
 
         LogUtil.printEntity(evaluateDao.queryByGoodsId(17));
-
-        HibernateDao.closeSessionFactory();
     }
 
     @Test
     public void testUpdate() {
-        HibernateDao.buildSessionFactory();
-
         String s = "newHeadUrl: " + MathUtil.random(0, 100);
         System.out.println(s);
         customerDao.updateHeadUrl(31, s);
         Customer customer = customerDao.queryById(31);
         System.out.println(customer.getHeadUrl());
-
-        HibernateDao.closeSessionFactory();
     }
 
     /**
@@ -86,8 +98,6 @@ public class DaoTest {
      */
     @Test
     public void testInsert() {
-        HibernateDao.buildSessionFactory("create");
-
         GoodsType 电子产品 = new GoodsType("电子产品");
         GoodsType 食品 = new GoodsType("食品");
         goodsTypeDao.insert(电子产品);
@@ -206,22 +216,20 @@ public class DaoTest {
             GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
             goodsImageDao.insert(goodsImage);
         }
-
-        HibernateDao.closeSessionFactory();
     }
 
     @Before
     public void init() {
-        goodsTypeDao = DaoFactory.getGoodsTypeDao();
-        customerDao = DaoFactory.getCustomerDao();
-        sellerDao = DaoFactory.getSellerDao();
-        shopDao = DaoFactory.getShopDao();
-        goodsDao = DaoFactory.getGoodsDao();
-        goodsImageDao = DaoFactory.getGoodsImageDao();
-        ordersDao = DaoFactory.getOrdersDao();
-        shopCarDao = DaoFactory.getShopCarDao();
-        evaluateDao = DaoFactory.getEvaluateDao();
-        addressDao = DaoFactory.getAddressDao();
+//        goodsTypeDao = DaoFactory.getGoodsTypeDao();
+//        customerDao = DaoFactory.getCustomerDao();
+//        sellerDao = DaoFactory.getSellerDao();
+//        shopDao = DaoFactory.getShopDao();
+//        goodsDao = DaoFactory.getGoodsDao();
+//        goodsImageDao = DaoFactory.getGoodsImageDao();
+//        ordersDao = DaoFactory.getOrdersDao();
+//        shopCarDao = DaoFactory.getShopCarDao();
+//        evaluateDao = DaoFactory.getEvaluateDao();
+//        addressDao = DaoFactory.getAddressDao();
     }
 
 }
