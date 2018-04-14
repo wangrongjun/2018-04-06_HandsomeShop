@@ -10,10 +10,10 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="com.handsome.shop.dao"/>
+
     <beans profile="development">
         <context:property-placeholder location="classpath:application.development.properties"/>
-
-        <context:component-scan base-package="com.handsome.shop.dao"/>
 
         <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
             <property name="driverClass" value="${jdbc.driver}"/>
@@ -59,8 +59,6 @@
 
     <beans profile="test">
         <context:property-placeholder location="classpath:application.test.properties"/>
-
-        <context:component-scan base-package="com.handsome.shop.dao"/>
 
         <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
             <property name="driverClass" value="${jdbc.driver}"/>

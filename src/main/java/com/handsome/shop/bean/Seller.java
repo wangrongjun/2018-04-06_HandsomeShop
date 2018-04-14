@@ -1,5 +1,7 @@
 package com.handsome.shop.bean;
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class Seller {
+public class Seller extends BaseEntity {
 
     @Transient
     public static final int GENDER_WOMAN = 0;
@@ -29,6 +31,10 @@ public class Seller {
     public Seller() {
     }
 
+    public Seller(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
     public Seller(String phone, String password, String realName, String nickname, int gender, String headUrl) {
         this.phone = phone;
         this.password = password;
@@ -36,6 +42,19 @@ public class Seller {
         this.nickname = nickname;
         this.gender = gender;
         this.headUrl = headUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Seller{" +
+                "sellerId=" + sellerId +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", realName='" + realName + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", gender=" + gender +
+                ", headUrl='" + headUrl + '\'' +
+                '}';
     }
 
     public int getSellerId() {

@@ -1,13 +1,15 @@
 package com.handsome.shop.bean;
 
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class Customer {
+public class Customer extends BaseEntity {
 
     @Transient
     public static final int GENDER_WOMAN = 0;

@@ -28,7 +28,7 @@ public class EvaluateDaoImpl extends HibernateDao<Evaluate> implements EvaluateD
         String hql = "select e,c from Evaluate e " +
                 "join Customer c on e.orders.customer=c " +
                 "where e.orders.goods.id=" + goodsId;
-        Session session =openSession();
+        Session session = getSession();
         Query query = session.createQuery(hql);
         List<Object[]> list = query.list();
         closeSession();

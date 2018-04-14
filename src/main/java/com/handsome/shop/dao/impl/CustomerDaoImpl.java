@@ -36,7 +36,7 @@ public class CustomerDaoImpl extends HibernateDao<Customer> implements CustomerD
 
     @Override
     public List<GenderReport> countGender() {
-        Session session = openSession();
+        Session session = getSession();
         String hql = "select gender,count(customerId) from Customer group by gender";
         Query query = session.createQuery(hql);
         List list = query.list();

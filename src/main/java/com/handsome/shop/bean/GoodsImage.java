@@ -1,25 +1,36 @@
 package com.handsome.shop.bean;
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class GoodsImage {
+public class GoodsImage extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int imageId;
+    private int goodsImageId;
     @ManyToOne(fetch = FetchType.LAZY)
     private Goods goods;//外键，该图片所属的商品。查询时不必给该变量赋值。
     private String imageUrl;
 
+    @Override
+    public String toString() {
+        return "GoodsImage{" +
+                "imageId=" + goodsImageId +
+                ", goods=" + goods +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
+
     public GoodsImage() {
     }
 
-    public GoodsImage(int imageId, String imageUrl) {
-        this.imageId = imageId;
+    public GoodsImage(int goodsImageId, String imageUrl) {
+        this.goodsImageId = goodsImageId;
         this.imageUrl = imageUrl;
     }
 
@@ -28,12 +39,12 @@ public class GoodsImage {
         this.imageUrl = imageUrl;
     }
 
-    public int getImageId() {
-        return imageId;
+    public int getGoodsImageId() {
+        return goodsImageId;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setGoodsImageId(int imageId) {
+        this.goodsImageId = imageId;
     }
 
     public Goods getGoods() {

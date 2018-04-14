@@ -35,8 +35,8 @@
     </c:if>
     <c:forEach items="${goodsImageList}" var="goods">
         <tr>
-            <td><input name="check" type="checkbox" value="${goods.imageId}"></td>
-            <td>${goods.imageId}</td>
+            <td><input name="check" type="checkbox" value="${goods.goodsImageId}"></td>
+            <td>${goods.goodsImageId}</td>
             <td>${goods.imageUrl}</td>
         </tr>
     </c:forEach>

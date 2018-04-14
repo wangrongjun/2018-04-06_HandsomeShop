@@ -1,13 +1,15 @@
 package com.handsome.shop.bean;
 
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/19.
  */
 @Entity
-public class Address {
+public class Address extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -17,6 +19,10 @@ public class Address {
     private String address;
 
     public Address() {
+    }
+
+    public Address(int addressId) {
+        this.addressId = addressId;
     }
 
     public Address(Customer customer, String address) {

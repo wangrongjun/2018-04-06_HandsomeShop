@@ -1,6 +1,5 @@
 package com.handsome.shop.framework;
 
-import com.wangrj.java_lib.hibernate.Dao;
 import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
 import com.wangrj.java_lib.java_util.ReflectUtil;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public class HibernateDao<T> implements Dao<T> {
 
-    public static boolean openSessionInView = false;
+    public static boolean remainSessionActive = false;
     private static SessionFactory sessionFactory;
     private Class<T> entityClass;
     private static Session session;
@@ -28,24 +27,15 @@ public class HibernateDao<T> implements Dao<T> {
         HibernateDao.sessionFactory = sessionFactory;
     }
 
-    public static Session openSession() {
+    public static Session getSession() {
         if (session == null) {
             session = sessionFactory.openSession();
         }
         return session;
     }
 
-    protected static void closeSession() {
-        if (!openSessionInView) {
-            if (session != null) {
-                session.close();
-                session = null;
-            }
-        }
-    }
-
-    public static void closeSessionAfterView() {
-        if (!openSessionInView) {
+    public static void closeSession() {
+        if (!remainSessionActive) {
             if (session != null) {
                 session.close();
                 session = null;
@@ -85,7 +75,7 @@ public class HibernateDao<T> implements Dao<T> {
     }
 
     protected List<T> executeNativeQuery(String sql, int offset, int rowCount) {
-        Session session = openSession();
+        Session session = getSession();
         NativeQuery<T> query = session.createNativeQuery(sql, getEntityClass());
         if (offset >= 0 && rowCount > 0) {
             query.setFirstResult(offset);
@@ -101,7 +91,7 @@ public class HibernateDao<T> implements Dao<T> {
     }
 
     protected List<T> executeQuery(String hql, int offset, int rowCount) {
-        Session session = openSession();
+        Session session = getSession();
         Query<T> query = session.createQuery(hql, getEntityClass());
         if (offset >= 0 && rowCount > 0) {
             query.setFirstResult(offset);
@@ -113,7 +103,7 @@ public class HibernateDao<T> implements Dao<T> {
     }
 
     protected int executeQueryCount(String hql) {
-        Session session = openSession();
+        Session session = getSession();
         Long count = (Long) session.createQuery(hql).uniqueResult();
         closeSession();
         return count.intValue();
@@ -121,7 +111,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public boolean insert(T entity) {
-        Session session = openSession();
+        Session session = getSession();
         session.beginTransaction();
         session.save(entity);
         session.getTransaction().commit();
@@ -131,7 +121,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public boolean delete(Where where) {
-        Session session = openSession();
+        Session session = getSession();
         session.beginTransaction();
         String hql = "delete from " + getTableName() + (where == null ? "" : where);
         session.createQuery(hql, getEntityClass()).executeUpdate();
@@ -142,7 +132,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public boolean deleteAll() {
-        Session session = openSession();
+        Session session = getSession();
         session.beginTransaction();
         String hql = "delete from " + getTableName();
         session.createQuery(hql, getEntityClass()).executeUpdate();
@@ -153,7 +143,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public boolean deleteById(long id) {
-        Session session = openSession();
+        Session session = getSession();
         session.beginTransaction();
         session.delete(queryById(id));
         session.getTransaction().commit();
@@ -163,7 +153,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public boolean update(T entity) {
-        Session session = openSession();
+        Session session = getSession();
         session.beginTransaction();
         session.update(entity);
         session.getTransaction().commit();
@@ -173,7 +163,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public T queryById(long id) {
-        Session session = openSession();
+        Session session = getSession();
         T entity;
         switch (getIdFieldType().getSimpleName()) {
             case "int":
@@ -193,7 +183,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public List<T> queryAll() {
-        Session session = openSession();
+        Session session = getSession();
         String hql = "from " + getTableName();
         List<T> entityList = session.createQuery(hql, getEntityClass()).list();
         closeSession();
@@ -202,7 +192,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public List<T> query(Where where) {
-        Session session = openSession();
+        Session session = getSession();
         String hql = "from " + getTableName() + (where == null ? "" : where);
         List<T> entityList = session.createQuery(hql, getEntityClass()).list();
         closeSession();
@@ -214,7 +204,7 @@ public class HibernateDao<T> implements Dao<T> {
         Where where = q.getWhere();
         String hql = "from " + getTableName() + (where == null ? "" : where);
         hql += Q.createOrderBy(q.getOrderBy());
-        Session session = openSession();
+        Session session = getSession();
         Query<T> query = session.createQuery(hql, getEntityClass());
         if (q.getOffset() >= 0 && q.getRowCount() > 0) {
             query.setFirstResult(q.getOffset());
@@ -227,7 +217,7 @@ public class HibernateDao<T> implements Dao<T> {
 
     @Override
     public int queryCount(Where where) {
-        Session session = openSession();
+        Session session = getSession();
         String hql = "select count(*) from " + getTableName();
         hql += where == null ? "" : where;
         Long count = (Long) session.createQuery(hql).uniqueResult();

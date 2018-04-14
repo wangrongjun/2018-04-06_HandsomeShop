@@ -1,12 +1,14 @@
 package com.handsome.shop.bean;
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class Shop {
+public class Shop extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -20,11 +22,26 @@ public class Shop {
     public Shop() {
     }
 
+    public Shop(int shopId) {
+        this.shopId = shopId;
+    }
+
     public Shop(Seller seller, String shopName, String description, String headUrl) {
         this.seller = seller;
         this.shopName = shopName;
         this.description = description;
         this.headUrl = headUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "shopId=" + shopId +
+                ", seller=" + seller +
+                ", shopName='" + shopName + '\'' +
+                ", description='" + description + '\'' +
+                ", headUrl='" + headUrl + '\'' +
+                '}';
     }
 
     public int getShopId() {

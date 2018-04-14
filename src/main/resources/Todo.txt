@@ -5,15 +5,15 @@
 * 商品的无限级分类
 * 商品的属性组合以及库存
 * 商家的商品管理，订单管理
-
+* 用户的手机号保存到Address中，登录就通过用户名
 
 技术改进：
 
 * 改进项目：改为使用 SpringMVC 的模式
-* 改进项目：使用 Hibernate 提供的 HibernateSupportDao
+* 改进项目：使用 Hibernate 提供的 JdbcTemplate
+* 改进项目：HibernateDao 的 id 类型参数化
 * 去掉所有 center 标签
 * 文件上传使用SpringMVC的框架
 * 使用Spring的权限认证功能，认证每个请求的合法性
 * 密码使用md5
 * 使用支付宝接口模拟支付过程
-

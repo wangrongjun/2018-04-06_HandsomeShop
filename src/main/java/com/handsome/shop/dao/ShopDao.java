@@ -1,7 +1,7 @@
 package com.handsome.shop.dao;
 
 import com.handsome.shop.bean.Shop;
-import com.wangrj.java_lib.hibernate.Dao;
+import com.handsome.shop.framework.Dao;
 
 /**
  * by wangrongjun on 2017/6/17.

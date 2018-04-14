@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -15,12 +16,22 @@ public class OpenSessionInViewFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        HibernateDao.openSessionInView = true;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        Session session = HibernateDao.openSession();
+        String requestURI = ((HttpServletRequest) request).getRequestURI();
+        if (requestURI.endsWith(".css") ||
+                requestURI.endsWith(".js") ||
+                requestURI.endsWith(".jsp") ||
+                requestURI.endsWith(".jpg")
+                ) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        HibernateDao.remainSessionActive = true;
+        Session session = HibernateDao.getSession();
         Transaction transaction = session.beginTransaction();
         try {
             chain.doFilter(request, response);
@@ -29,12 +40,12 @@ public class OpenSessionInViewFilter implements Filter {
             e.printStackTrace();
             transaction.rollback();
         } finally {
-            HibernateDao.closeSessionAfterView();
+            HibernateDao.remainSessionActive = false;
+            HibernateDao.closeSession();
         }
     }
 
     @Override
     public void destroy() {
-
     }
 }

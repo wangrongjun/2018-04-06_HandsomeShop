@@ -1,6 +1,8 @@
 package com.handsome.shop.bean;
 
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +12,7 @@ import javax.persistence.ManyToOne;
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class ShopCar {
+public class ShopCar extends BaseEntity {
 
     @Id
     @GeneratedValue

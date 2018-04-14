@@ -1,15 +1,16 @@
 package com.handsome.shop.bean;
 
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class Goods {
+public class Goods extends BaseEntity {
 
     // TODO 加一个字段：firstImage，那么在查询商品列表时，就不用为每个商品查询图片列表。适当的冗余可以极大地提高效率。
     // TODO 加一个字段：sellCount，那么在查询商品列表时，就不用为每个商品查询总销量。适当的冗余可以极大地提高效率。
@@ -28,8 +29,23 @@ public class Goods {
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;//Shop外键，所属的商店
     @OneToMany
+    @JoinColumn(name="goodsId")
     private List<GoodsImage> goodsImageList;
     private double price;
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "sellCount=" + sellCount +
+                ", goodsId=" + goodsId +
+                ", goodsName='" + goodsName + '\'' +
+                ", description='" + description + '\'' +
+                ", remainCount=" + remainCount +
+                ", goodsType=" + goodsType +
+                ", shop=" + shop +
+                ", price=" + price +
+                '}';
+    }
 
     public Goods() {
     }

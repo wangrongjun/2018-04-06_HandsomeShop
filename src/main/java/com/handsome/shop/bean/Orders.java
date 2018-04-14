@@ -1,13 +1,15 @@
 package com.handsome.shop.bean;
 
 
+import com.handsome.shop.framework.BaseEntity;
+
 import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-public class Orders {
+public class Orders extends BaseEntity {
 
     // TODO 订单应该有商品名称，下单时的价格，而且goods可为空，代表商品下架
 
@@ -50,6 +52,10 @@ public class Orders {
     }
 
     public Orders() {
+    }
+
+    public Orders(int ordersId) {
+        this.ordersId = ordersId;
     }
 
     public Orders(Customer customer, Goods goods, int buyCount, double price, String phone,
