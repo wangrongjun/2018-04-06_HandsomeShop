@@ -14,6 +14,7 @@ public class GoodsImage extends BaseEntity {
     @GeneratedValue
     private int goodsImageId;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "goodsId")
     private Goods goods;//外键，该图片所属的商品。查询时不必给该变量赋值。
     private String imageUrl;
 

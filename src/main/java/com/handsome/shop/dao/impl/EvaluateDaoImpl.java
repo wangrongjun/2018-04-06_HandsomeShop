@@ -20,29 +20,29 @@ public class EvaluateDaoImpl extends HibernateDao<Evaluate> implements EvaluateD
 
     @Override
     public List<Evaluate> queryByGoodsId(int goodsId) {
-//        String hql = "from Evaluate where orders.goods.id=" + goodsId;
-//        return executeQuery(hql);
-
-        List<Evaluate> evaluateList = new ArrayList<>();
-
-        String hql = "select e,c from Evaluate e " +
-                "join Customer c on e.orders.customer=c " +
-                "where e.orders.goods.id=" + goodsId;
+        String hql = "from Evaluate where orders.goods.id=" + goodsId;
         Session session = getSession();
-        Query query = session.createQuery(hql);
-        List<Object[]> list = query.list();
-        closeSession();
-        for (Object[] objects : list) {
-            Evaluate evaluate = (Evaluate) objects[0];
-            Customer customer = (Customer) objects[1];
-            customer.setPassword(null);
-            Orders orders = new Orders();
-            orders.setCustomer(customer);
-            evaluate.setOrders(orders);
-            evaluateList.add(evaluate);
-        }
+        Query<Evaluate> query = session.createQuery(hql, Evaluate.class);
+        return query.list();
 
-        return evaluateList;
+//        List<Evaluate> evaluateList = new ArrayList<>();
+//        String hql = "select e,c from Evaluate e " +
+//                "join Customer c on e.orders.customer=c " +
+//                "where e.orders.goods.id=" + goodsId;
+//        Session session = getSession();
+//        Query query = session.createQuery(hql);
+//        List<Object[]> list = query.list();
+//        closeSession();
+//        for (Object[] objects : list) {
+//            Evaluate evaluate = (Evaluate) objects[0];
+//            Customer customer = (Customer) objects[1];
+//            customer.setPassword(null);
+//            Orders orders = new Orders();
+//            orders.setCustomer(customer);
+//            evaluate.setOrders(orders);
+//            evaluateList.add(evaluate);
+//        }
+//        return evaluateList;
     }
 
 }

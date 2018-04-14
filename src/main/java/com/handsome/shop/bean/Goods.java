@@ -29,7 +29,7 @@ public class Goods extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;//Shop外键，所属的商店
     @OneToMany
-    @JoinColumn(name="goodsId")
+    @JoinColumn(name = "goodsId")
     private List<GoodsImage> goodsImageList;
     private double price;
 

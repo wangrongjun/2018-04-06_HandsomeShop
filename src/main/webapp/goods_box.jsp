@@ -10,11 +10,13 @@
 <html>
 <head>
     <title>GoodsBox</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <link rel="stylesheet" href="css/goods_box.css">
-    <script src="js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/wang.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/goods_box.css">
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/wang.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -38,10 +40,9 @@
                 <div class="goods">
                     <div class="goods_image">
                         <a href="/goods/${goods.goodsId}">
-                                <%--<c:if test="${goods.goodsImageList!=null&&goods.goodsImageList.size()>0}">--%>
-                                <%--<img src="${goods.goodsImageList.get(0).imageUrl}"/>--%>
-                                <%--</c:if>--%>
-                            <img src="admin/img/goods_1.jpg"/>
+                            <c:if test="${goods.goodsImageList != null && goods.goodsImageList.size() > 0}">
+                                <img src="${goods.goodsImageList.get(0).imageUrl}"/>
+                            </c:if>
                         </a>
                     </div>
                     <a href="/goods/${goods.goodsId}" class="goods_name">
@@ -67,7 +68,7 @@
         <c:when test="${totalCount>0}">
             <ul class="pagination">
                     <%--<li><a href="#">&laquo;&nbsp;首页</a></li>--%>
-                <c:forEach begin="0" end="${totalCount/12-1+(totalCount%12==0?0:1)}" varStatus="status">
+                <c:forEach begin="0" end="${totalCount/12-1+(totalCount%12 == 0 ? 0:1)}" varStatus="status">
                     <li <c:if test="${status.index==pageIndex}">class="active"</c:if>>
                         <a href="javascript:void(0);" onclick="reload(${status.index},${sortType})">
                                 ${status.index+1}

@@ -6,7 +6,7 @@
   Time: 13:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>${requestScope.goods.goodsName}</title>
@@ -27,10 +27,10 @@
     <div class="top">
         <div class="img_box">
             <ul>
-                <%--<c:forEach var="image" items="${requestScope.goods.goodsImageList}">--%>
-                    <%--<li><img src="${image.imageUrl}"></li>--%>
-                <%--</c:forEach>--%>
-                    <li><img src="/admin/img/goods_1.jpg"></li>
+                <c:forEach var="image" items="${requestScope.goods.goodsImageList}">
+                    <li><img src="${image.imageUrl}"></li>
+                </c:forEach>
+                <%--<li><img src="${pageContext.request.contextPath}/admin/img/goods_1.jpg"></li>--%>
             </ul>
             <ol>
                 <c:forEach var="image" items="${requestScope.goods.goodsImageList}">
@@ -82,7 +82,7 @@
                 <div class="seller_name">${requestScope.goods.shop.shopName}</div>
                 <div class="seller_description">${requestScope.goods.shop.description}</div>
                 <div class="btn_box">
-                    <a class="btn btn-success" href="shop_detail.jsp?shopId=${requestScope.goods.shop.shopId}">进店逛逛</a>
+                    <a class="btn btn-success" href="/shop/${requestScope.goods.shop.shopId}">进店逛逛</a>
                     <button class="btn btn-danger" onclick="showSellerInfo()">联系卖家</button>
                 </div>
             </div>
@@ -160,7 +160,7 @@
     }
 
     function showMsg(msg) {
-        if (msg != "") {
+        if (!msg && msg !== "") {
             alert(msg);
         }
     }
