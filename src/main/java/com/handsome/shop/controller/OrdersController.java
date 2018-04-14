@@ -3,11 +3,12 @@ package com.handsome.shop.controller;
 import com.handsome.shop.bean.Customer;
 import com.handsome.shop.bean.Orders;
 import com.handsome.shop.dao.OrdersDao;
-import com.handsome.shop.framework.DaoFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.handsome.shop.framework.BaseController;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -15,16 +16,15 @@ import java.util.List;
  * by wangrongjun on 2018/4/14.
  */
 @Controller
+@RequestMapping("/orders")
 public class OrdersController extends BaseController {
 
-    @Autowired
+    @Resource
     private OrdersDao ordersDao;
 
-    @RequestMapping("/showOrders")
-    public String showOrders(HttpServletRequest request) {
+    @GetMapping
+    public String list(HttpServletRequest request) {
         Customer customer = getLoginCustomer(request);
-
-        OrdersDao ordersDao = DaoFactory.getOrdersDao();
         List<Orders> ordersList = ordersDao.queryByCustomerId(customer.getCustomerId());
         int ordersCount = ordersDao.queryCountByCustomerId(customer.getCustomerId());
 

@@ -4,6 +4,7 @@ import com.handsome.shop.bean.Goods;
 import com.handsome.shop.bean.GoodsType;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.GoodsTypeDao;
+import com.handsome.shop.framework.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

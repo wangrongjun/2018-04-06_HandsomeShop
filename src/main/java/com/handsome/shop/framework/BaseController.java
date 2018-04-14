@@ -1,7 +1,8 @@
-package com.handsome.shop.controller;
+package com.handsome.shop.framework;
 
 import com.handsome.shop.bean.Customer;
 import com.handsome.shop.bean.Seller;
+import com.handsome.shop.constant.C;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,23 +11,20 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BaseController {
 
-    protected static final String ATTR_CUSTOMER = "customer";
-    protected static final String ATTR_SELLER = "seller";
-
     protected Customer getLoginCustomer(HttpServletRequest request) {
-        return (Customer) request.getSession().getAttribute(ATTR_CUSTOMER);
+        return (Customer) request.getSession().getAttribute(C.SESSION_CUSTOMER);
     }
 
     protected void setLoginCustomer(HttpServletRequest request, Customer customer) {
-        request.getSession().setAttribute(ATTR_CUSTOMER, customer);
+        request.getSession().setAttribute(C.SESSION_CUSTOMER, customer);
     }
 
     protected Seller getLoginSeller(HttpServletRequest request) {
-        return (Seller) request.getSession().getAttribute(ATTR_SELLER);
+        return (Seller) request.getSession().getAttribute(C.SESSION_SELLER);
     }
 
     protected void setLoginSeller(HttpServletRequest request, Seller seller) {
-        request.getSession().setAttribute(ATTR_SELLER, seller);
+        request.getSession().setAttribute(C.SESSION_SELLER, seller);
     }
 
 }

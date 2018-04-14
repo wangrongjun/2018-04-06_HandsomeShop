@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class HibernateDao<T> implements Dao<T> {
 
-    public static boolean remainSessionActive = false;
     private static SessionFactory sessionFactory;
     private Class<T> entityClass;
     private static Session session;
@@ -35,11 +34,9 @@ public class HibernateDao<T> implements Dao<T> {
     }
 
     public static void closeSession() {
-        if (!remainSessionActive) {
-            if (session != null) {
-                session.close();
-                session = null;
-            }
+        if (session != null) {
+            session.close();
+            session = null;
         }
     }
 
@@ -81,9 +78,7 @@ public class HibernateDao<T> implements Dao<T> {
             query.setFirstResult(offset);
             query.setMaxResults(rowCount);
         }
-        List<T> list = query.list();
-        closeSession();
-        return list;
+        return query.list();
     }
 
     protected List<T> executeQuery(String hql) {
@@ -97,67 +92,49 @@ public class HibernateDao<T> implements Dao<T> {
             query.setFirstResult(offset);
             query.setMaxResults(rowCount);
         }
-        List<T> list = query.list();
-        closeSession();
-        return list;
+        return query.list();
     }
 
     protected int executeQueryCount(String hql) {
         Session session = getSession();
         Long count = (Long) session.createQuery(hql).uniqueResult();
-        closeSession();
         return count.intValue();
     }
 
     @Override
     public boolean insert(T entity) {
         Session session = getSession();
-        session.beginTransaction();
         session.save(entity);
-        session.getTransaction().commit();
-        closeSession();
         return true;
     }
 
     @Override
     public boolean delete(Where where) {
         Session session = getSession();
-        session.beginTransaction();
         String hql = "delete from " + getTableName() + (where == null ? "" : where);
         session.createQuery(hql, getEntityClass()).executeUpdate();
-        session.getTransaction().commit();
-        closeSession();
         return true;
     }
 
     @Override
     public boolean deleteAll() {
         Session session = getSession();
-        session.beginTransaction();
         String hql = "delete from " + getTableName();
         session.createQuery(hql, getEntityClass()).executeUpdate();
-        session.getTransaction().commit();
-        closeSession();
         return true;
     }
 
     @Override
     public boolean deleteById(long id) {
         Session session = getSession();
-        session.beginTransaction();
         session.delete(queryById(id));
-        session.getTransaction().commit();
-        closeSession();
         return true;
     }
 
     @Override
     public boolean update(T entity) {
         Session session = getSession();
-        session.beginTransaction();
         session.update(entity);
-        session.getTransaction().commit();
-        closeSession();
         return true;
     }
 
@@ -177,7 +154,6 @@ public class HibernateDao<T> implements Dao<T> {
             default:
                 throw new RuntimeException(getEntityClass().getName() + " : id must be number");
         }
-        closeSession();
         return entity;
     }
 
@@ -185,18 +161,14 @@ public class HibernateDao<T> implements Dao<T> {
     public List<T> queryAll() {
         Session session = getSession();
         String hql = "from " + getTableName();
-        List<T> entityList = session.createQuery(hql, getEntityClass()).list();
-        closeSession();
-        return entityList;
+        return session.createQuery(hql, getEntityClass()).list();
     }
 
     @Override
     public List<T> query(Where where) {
         Session session = getSession();
         String hql = "from " + getTableName() + (where == null ? "" : where);
-        List<T> entityList = session.createQuery(hql, getEntityClass()).list();
-        closeSession();
-        return entityList;
+        return session.createQuery(hql, getEntityClass()).list();
     }
 
     @Override
@@ -210,9 +182,7 @@ public class HibernateDao<T> implements Dao<T> {
             query.setFirstResult(q.getOffset());
             query.setMaxResults(q.getRowCount());
         }
-        List<T> list = query.list();
-        closeSession();
-        return list;
+        return query.list();
     }
 
     @Override
@@ -221,7 +191,6 @@ public class HibernateDao<T> implements Dao<T> {
         String hql = "select count(*) from " + getTableName();
         hql += where == null ? "" : where;
         Long count = (Long) session.createQuery(hql).uniqueResult();
-        closeSession();
         return count.intValue();
     }
 

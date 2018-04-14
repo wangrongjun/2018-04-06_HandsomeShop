@@ -3,8 +3,6 @@ package com.handsome.shop.test;
 import com.handsome.shop.bean.*;
 import com.handsome.shop.dao.*;
 import com.handsome.shop.framework.HibernateDao;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +38,6 @@ public class DaoInsertTestBackup {
     private EvaluateDao evaluateDao;
     @Autowired
     private AddressDao addressDao;
-
-    @Before
-    public void init() {
-        HibernateDao.remainSessionActive = true;
-    }
-
-    @After
-    public void destroy() {
-        HibernateDao.remainSessionActive = false;
-        HibernateDao.closeSession();
-    }
 
     /**
      * GoodsType  1-10
@@ -204,6 +191,8 @@ public class DaoInsertTestBackup {
             GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
             goodsImageDao.insert(goodsImage);
         }
+
+        HibernateDao.closeSession();
     }
 
 }

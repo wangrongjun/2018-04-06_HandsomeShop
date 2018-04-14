@@ -2,13 +2,15 @@ package com.handsome.shop.controller;
 
 import com.handsome.shop.bean.Customer;
 import com.handsome.shop.bean.Seller;
+import com.handsome.shop.constant.C;
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.SellerDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.handsome.shop.framework.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +23,9 @@ import java.io.IOException;
 @Controller
 public class LoginController extends BaseController {
 
-    @Autowired
+    @Resource
     private SellerDao sellerDao;
-    @Autowired
+    @Resource
     private CustomerDao customerDao;
 
     @PostMapping("/login")
@@ -42,12 +44,12 @@ public class LoginController extends BaseController {
 //            return "login";
 //        }
 
-        if (identity.equals(ATTR_CUSTOMER)) {// 如果是客户登录
+        if (identity.equals(C.SESSION_CUSTOMER)) {// 如果是客户登录
             Customer customer = customerDao.queryByPhone(phone);
             if (customer != null && password.equals(customer.getPassword())) {
                 request.getSession().invalidate();
                 setLoginCustomer(request, customer);
-                addCookie(response, phone, password, ATTR_CUSTOMER, autoLogin);
+                addCookie(response, phone, password, C.SESSION_CUSTOMER, autoLogin);
                 request.getRequestDispatcher("/").forward(request, response);
                 return null;
             } else {
@@ -59,7 +61,7 @@ public class LoginController extends BaseController {
             if (seller != null && password.equals(seller.getPassword())) {
                 request.getSession().invalidate();
                 setLoginSeller(request, seller);
-                addCookie(response, phone, password, ATTR_SELLER, autoLogin);
+                addCookie(response, phone, password, C.SESSION_SELLER, autoLogin);
                 request.getRequestDispatcher("/").forward(request, response);
                 return null;
             } else {

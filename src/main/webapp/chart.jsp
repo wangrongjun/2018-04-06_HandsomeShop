@@ -1,6 +1,5 @@
 <%@ page import="com.handsome.shop.dao.CustomerDao" %>
 <%@ page import="com.handsome.shop.dao.impl.CustomerDaoImpl" %>
-<%@ page import="com.handsome.shop.domain.GenderReport" %>
 <%@ page import="org.jfree.chart.ChartFactory" %>
 <%@ page import="org.jfree.chart.JFreeChart" %>
 <%@ page import="org.jfree.chart.StandardChartTheme" %>
@@ -12,6 +11,7 @@
 <%@ page import="org.jfree.data.category.DefaultCategoryDataset" %>
 <%@ page import="java.awt.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangrongjun
@@ -19,7 +19,7 @@
   Time: 15:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Title</title>
@@ -27,12 +27,13 @@
 <body>
 <%
     CustomerDao customerDao = new CustomerDaoImpl();
-    List<GenderReport> genderReportList = customerDao.countGender();
+    List<Map<String, Object>> mapList = customerDao.countGender();
 
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    for (GenderReport gr : genderReportList) {
-        String gender = gr.getGender() == 1 ? "男" : "女";
-        dataset.addValue(gr.getCount(), "人数", gender);
+    for (Map<String, Object> map : mapList) {
+        int gender = (int) map.get("gender");
+        long count = (long) map.get("count");
+        dataset.addValue(count, "人数", gender == 1 ? "男" : "女");
     }
 
     // 表示支持中文

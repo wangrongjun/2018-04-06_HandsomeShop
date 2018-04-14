@@ -2,6 +2,7 @@ package com.handsome.shop.controller;
 
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.SellerDao;
+import com.handsome.shop.framework.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -36,8 +36,8 @@
         %>
         <a href="${pageContext.request.contextPath}/customer_info.jsp"><%=customer.getNickname()%>
         </a>
-        <a href="${pageContext.request.contextPath}/showShopCar">我的购物车(<%=shopCarCount%>)</a>
-        <a href="${pageContext.request.contextPath}/showOrders">我的订单(<%=ordersCount%>)</a>
+        <a href="${pageContext.request.contextPath}/shopCar/">我的购物车(<%=shopCarCount%>)</a>
+        <a href="${pageContext.request.contextPath}/orders/">我的订单(<%=ordersCount%>)</a>
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
         <%
             }

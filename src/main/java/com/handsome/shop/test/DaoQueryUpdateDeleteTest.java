@@ -6,7 +6,6 @@ import com.handsome.shop.framework.HibernateDao;
 import com.wangrj.java_lib.java_util.LogUtil;
 import com.wangrj.java_lib.java_util.MathUtil;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,20 +44,13 @@ public class DaoQueryUpdateDeleteTest {
     @Autowired
     private AddressDao addressDao;
 
-    @Before
-    public void init() {
-        HibernateDao.remainSessionActive = true;
-    }
-
     @After
     public void destroy() {
-        HibernateDao.remainSessionActive = false;
         HibernateDao.closeSession();
     }
 
     @Test
     public void testQuery() {
-        HibernateDao.remainSessionActive = true;
 
         List<Orders> ordersList = ordersDao.queryByCustomerId(customerDao.queryByPhone("15521302230").getCustomerId());
         for (Orders orders : ordersList) {

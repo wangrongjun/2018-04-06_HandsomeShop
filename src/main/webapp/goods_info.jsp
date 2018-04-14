@@ -167,7 +167,18 @@
 
     function addGoodsToShopCar() {
         var count = $("#count").val();
-        window.location.href = "addGoodsToShopCar.do?goodsId=${requestScope.goods.goodsId}&count=" + count;
+        var goodsId = ${requestScope.goods.goodsId};
+
+        var url = "/shopCar/";
+        var data = {count: count, goodsId: goodsId};
+        $.post(url, data, function (result, status) {
+            if (result === true && status === "success") {
+                alert("已添加到购物车！");
+                window.location.href = "/goods/" + goodsId;
+            } else {
+                alert("添加失败！");
+            }
+        });
     }
 
     $(function () {

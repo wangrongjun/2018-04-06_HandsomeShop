@@ -24,4 +24,17 @@
     <mvc:resources mapping="/img/**" location="/img/"/>
     <mvc:resources mapping="/admin/img/**" location="/admin/img/"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.handsome.shop.interceptor.RequestSecurityInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.handsome.shop.interceptor.OpenSessionInViewInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>
