@@ -2,19 +2,13 @@ package com.handsome.shop.test;
 
 import com.handsome.shop.bean.*;
 import com.handsome.shop.dao.*;
-import com.handsome.shop.framework.DaoFactory;
-import com.handsome.shop.framework.HibernateDao;
-import com.wangrj.java_lib.java_util.LogUtil;
-import com.wangrj.java_lib.java_util.MathUtil;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.ProfileValueSource;
-import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
 
 /**
  * by wangrongjun on 2017/6/17.
@@ -24,25 +18,25 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles("test")
 public class DaoInsertTest {
 
-    @Autowired
+    @Resource
     private GoodsTypeDao goodsTypeDao;
-    @Autowired
+    @Resource
     private CustomerDao customerDao;
-    @Autowired
+    @Resource
     private SellerDao sellerDao;
-    @Autowired
+    @Resource
     private ShopDao shopDao;
-    @Autowired
+    @Resource
     private GoodsDao goodsDao;
-    @Autowired
+    @Resource
     private GoodsImageDao goodsImageDao;
-    @Autowired
+    @Resource
     private OrdersDao ordersDao;
-    @Autowired
+    @Resource
     private ShopCarDao shopCarDao;
-    @Autowired
+    @Resource
     private EvaluateDao evaluateDao;
-    @Autowired
+    @Resource
     private AddressDao addressDao;
 
     /**
@@ -175,20 +169,6 @@ public class DaoInsertTest {
             GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
             goodsImageDao.insert(goodsImage);
         }
-    }
-
-    @Before
-    public void init() {
-//        goodsTypeDao = DaoFactory.getGoodsTypeDao();
-//        customerDao = DaoFactory.getCustomerDao();
-//        sellerDao = DaoFactory.getSellerDao();
-//        shopDao = DaoFactory.getShopDao();
-//        goodsDao = DaoFactory.getGoodsDao();
-//        goodsImageDao = DaoFactory.getGoodsImageDao();
-//        ordersDao = DaoFactory.getOrdersDao();
-//        shopCarDao = DaoFactory.getShopCarDao();
-//        evaluateDao = DaoFactory.getEvaluateDao();
-//        addressDao = DaoFactory.getAddressDao();
     }
 
 }

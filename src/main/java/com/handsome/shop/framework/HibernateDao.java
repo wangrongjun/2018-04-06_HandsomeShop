@@ -3,11 +3,13 @@ package com.handsome.shop.framework;
 import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
 import com.wangrj.java_lib.java_util.ReflectUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import javax.annotation.Resource;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.lang.reflect.Field;
@@ -18,26 +20,19 @@ import java.util.List;
  */
 public class HibernateDao<T> implements Dao<T> {
 
-    private static SessionFactory sessionFactory;
+    @Resource
+    private SessionFactory sessionFactory;
     private Class<T> entityClass;
-    private static Session session;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        HibernateDao.sessionFactory = sessionFactory;
-    }
-
-    public static Session getSession() {
-        if (session == null) {
+    protected Session getSession() {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            e.printStackTrace();
             session = sessionFactory.openSession();
         }
         return session;
-    }
-
-    public static void closeSession() {
-        if (session != null) {
-            session.close();
-            session = null;
-        }
     }
 
     @SuppressWarnings("unchecked")
