@@ -5,10 +5,7 @@ import com.handsome.shop.dao.*;
 import com.wangrj.java_lib.java_util.LogUtil;
 import com.wangrj.java_lib.java_util.MathUtil;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,10 +13,8 @@ import java.util.List;
 /**
  * by wangrongjun on 2018/4/14.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-dataSource.xml")
 @ActiveProfiles("development")
-public class DaoQueryUpdateDeleteTest {
+public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
 
     @Resource
     private GoodsTypeDao goodsTypeDao;
@@ -97,11 +92,14 @@ public class DaoQueryUpdateDeleteTest {
 
     @Test
     public void testUpdate() {
-        String s = "newHeadUrl: " + MathUtil.random(0, 100);
-        LogUtil.print(s);
-        customerDao.updateHeadUrl(31, s);
-        Customer customer = customerDao.queryById(31);
-        LogUtil.print(customer.getHeadUrl());
+//        String s = "newHeadUrl: " + MathUtil.random(0, 100);
+//        LogUtil.print(s);
+//        customerDao.updateHeadUrl(31, s);
+//        Customer customer = customerDao.queryById(31);
+//        LogUtil.print(customer.getHeadUrl());
+
+        ShopCar shopCar = new ShopCar(new Customer(25), new Goods(17));
+        shopCarDao.insert(shopCar);
     }
 
 }

@@ -2,17 +2,15 @@ package com.handsome.shop.controller;
 
 import com.handsome.shop.bean.Customer;
 import com.handsome.shop.bean.Goods;
-import com.handsome.shop.bean.ShopCar;
 import com.handsome.shop.dao.GoodsDao;
-import com.handsome.shop.dao.ShopCarDao;
 import com.handsome.shop.framework.BaseController;
+import com.handsome.shop.service.ShopCarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class ShopCarController extends BaseController {
     @Resource
     private GoodsDao goodsDao;
     @Resource
-    private ShopCarDao shopCarDao;
+    private ShopCarService shopCarService;
 
     @GetMapping
     public String list(HttpServletRequest request, @RequestParam(defaultValue = "0") int pageIndex) {
@@ -42,15 +40,12 @@ public class ShopCarController extends BaseController {
 
     @PostMapping
     @ResponseBody
-    public boolean add(HttpServletRequest request, HttpServletResponse response, int goodsId, int count) throws ServletException, IOException {
+    public boolean add(HttpServletRequest request, int goodsId, int count) throws ServletException, IOException {
         Customer customer = getLoginCustomer(request);
-        ShopCar shopCar = new ShopCar(customer, new Goods(goodsId));
         for (int i = 0; i < count; i++) {
-            shopCarDao.insert(shopCar);
+            shopCarService.addGoodsToShopCar(customer.getCustomerId(), goodsId);
         }
         return true;
-//        request.setAttribute("msg", "已加入购物车");
-//        request.getRequestDispatcher("/goods/").forward(request, response);
     }
 
 }

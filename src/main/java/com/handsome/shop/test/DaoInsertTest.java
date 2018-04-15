@@ -13,10 +13,7 @@ import javax.annotation.Resource;
 /**
  * by wangrongjun on 2017/6/17.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-dataSource.xml")
-@ActiveProfiles("test")
-public class DaoInsertTest {
+public class DaoInsertTest extends BaseDaoTest {
 
     @Resource
     private GoodsTypeDao goodsTypeDao;

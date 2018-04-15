@@ -1,5 +1,7 @@
 package com.handsome.shop.framework;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -16,6 +18,7 @@ public class SpringProperty extends PropertyPlaceholderConfigurer {
     public static final String ACTIVE_PROFILE = "spring.profiles.active";
 
     private static Map<String, String> propertyMap = new HashMap<>();
+    private static Logger logger = LoggerFactory.getLogger(SpringProperty.class);
 
     @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props) throws BeansException {
@@ -23,7 +26,7 @@ public class SpringProperty extends PropertyPlaceholderConfigurer {
         for (Map.Entry<Object, Object> entry : props.entrySet()) {
             String key = entry.getKey().toString();
             String value = entry.getValue().toString();
-            System.out.println("------- " + key + " : " + value);
+            logger.info("--- Read Properties: " + key + " = " + value);
             propertyMap.put(key, value);
         }
     }
