@@ -16,20 +16,27 @@
     <bean class="com.handsome.shop.framework.SpringContextHolder"/>
     <bean class="com.handsome.shop.framework.SpringProperty"/>
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-        </tx:attributes>
-    </tx:advice>
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+    <!--<tx:attributes>-->
+    <!--<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>-->
+    <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+    <!--<tx:method name="update*" propagation="REQUIRED"/>-->
+    <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
+    <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <bean id="transactionManageAspect" class="com.handsome.shop.framework.TransactionManageAspect"/>
     <aop:config>
         <!--TODO 对于queryAll，Dao和xxDao均有实现，导致执行了两边切面操作。以后应该只以Service一个方法作为切面。即Service一个方法对应一个事务-->
         <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.Dao.*(..))"/>-->
         <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.*.*(..))"/>-->
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.service.*.*(..))"/>
+        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.service.*.*(..))"/>-->
+        <aop:aspect ref="transactionManageAspect">
+            <aop:pointcut id="serviceMethodPointcut" expression="execution(* com.handsome.shop.service.*.*(..))"/>
+            <aop:before method="beginTransaction" pointcut-ref="serviceMethodPointcut"/>
+            <aop:after-returning method="commitTransaction" pointcut-ref="serviceMethodPointcut"/>
+            <aop:after-throwing method="rollbackTransaction" pointcut-ref="serviceMethodPointcut"/>
+        </aop:aspect>
     </aop:config>
 
     <beans profile="development">

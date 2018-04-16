@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BaseController {
 
-    protected Customer getLoginCustomer(HttpServletRequest request) {
+    protected Customer getLoginCustomerFromSession(HttpServletRequest request) {
         return (Customer) request.getSession().getAttribute(C.SESSION_CUSTOMER);
     }
 
-    protected void setLoginCustomer(HttpServletRequest request, Customer customer) {
+    protected void setLoginCustomerToSession(HttpServletRequest request, Customer customer) {
         request.getSession().setAttribute(C.SESSION_CUSTOMER, customer);
     }
 
-    protected Seller getLoginSeller(HttpServletRequest request) {
+    protected Seller getLoginSellerFromSession(HttpServletRequest request) {
         return (Seller) request.getSession().getAttribute(C.SESSION_SELLER);
     }
 
-    protected void setLoginSeller(HttpServletRequest request, Seller seller) {
+    protected void setLoginSellerToSession(HttpServletRequest request, Seller seller) {
         request.getSession().setAttribute(C.SESSION_SELLER, seller);
     }
 

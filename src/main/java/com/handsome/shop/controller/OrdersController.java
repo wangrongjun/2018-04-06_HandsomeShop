@@ -24,7 +24,7 @@ public class OrdersController extends BaseController {
 
     @GetMapping
     public String list(HttpServletRequest request) {
-        Customer customer = getLoginCustomer(request);
+        Customer customer = getLoginCustomerFromSession(request);
         List<Orders> ordersList = ordersDao.queryByCustomerId(customer.getCustomerId());
         int ordersCount = ordersDao.queryCountByCustomerId(customer.getCustomerId());
 

@@ -173,10 +173,14 @@
         var data = {count: count, goodsId: goodsId};
         $.post(url, data, function (result, status) {
             if (result === true && status === "success") {
-                alert("已添加到购物车！");
-                window.location.href = "/goods/" + goodsId;
+                if (result === true) {
+                    alert("已添加到购物车！");
+                    window.location.href = "/goods/" + goodsId;
+                } else {
+                    alert("添加失败！");
+                }
             } else {
-                alert("添加失败！");
+                window.location.href = "/login.jsp";
             }
         });
     }

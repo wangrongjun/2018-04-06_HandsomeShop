@@ -101,7 +101,9 @@ public class HibernateDao<T> implements Dao<T> {
     @Override
     public boolean insert(T entity) {
         Session session = getSession();
+        session.beginTransaction();
         session.save(entity);
+        session.getTransaction().commit();
         return true;
     }
 

@@ -28,7 +28,7 @@ public class ShopCarController extends BaseController {
 
     @GetMapping
     public String list(HttpServletRequest request, @RequestParam(defaultValue = "0") int pageIndex) {
-        Customer customer = getLoginCustomer(request);
+        Customer customer = getLoginCustomerFromSession(request);
         List<Goods> goodsList = goodsDao.queryByCustomerId(customer.getCustomerId(), 12 * pageIndex, 12);
         int totalCount = goodsDao.queryCountByCustomerId(customer.getCustomerId());
 
@@ -41,8 +41,9 @@ public class ShopCarController extends BaseController {
     @PostMapping
     @ResponseBody
     public boolean add(HttpServletRequest request, int goodsId, int count) throws ServletException, IOException {
-        Customer customer = getLoginCustomer(request);
+        Customer customer = getLoginCustomerFromSession(request);
         for (int i = 0; i < count; i++) {
+            // TODO 使用返回值
             shopCarService.addGoodsToShopCar(customer.getCustomerId(), goodsId);
         }
         return true;

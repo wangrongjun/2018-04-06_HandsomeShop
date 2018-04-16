@@ -48,7 +48,7 @@ public class LoginController extends BaseController {
             Customer customer = customerDao.queryByPhone(phone);
             if (customer != null && password.equals(customer.getPassword())) {
                 request.getSession().invalidate();
-                setLoginCustomer(request, customer);
+                setLoginCustomerToSession(request, customer);
                 addCookie(response, phone, password, C.SESSION_CUSTOMER, autoLogin);
                 request.getRequestDispatcher("/").forward(request, response);
                 return null;
@@ -60,9 +60,10 @@ public class LoginController extends BaseController {
             Seller seller = sellerDao.queryByPhone(phone);
             if (seller != null && password.equals(seller.getPassword())) {
                 request.getSession().invalidate();
-                setLoginSeller(request, seller);
+                setLoginSellerToSession(request, seller);
                 addCookie(response, phone, password, C.SESSION_SELLER, autoLogin);
-                request.getRequestDispatcher("/").forward(request, response);
+//                request.getRequestDispatcher("/").forward(request, response);
+                response.sendRedirect("/");
                 return null;
             } else {
                 request.setAttribute("msg", "用户名或密码错误");
