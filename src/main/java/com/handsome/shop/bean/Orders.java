@@ -34,6 +34,7 @@ public class Orders extends BaseEntity {
     private String address;//收货人的收货地址（预防下单后客户修改收货地址导致出错）
     private String createTime;//订单创建时间，格式：”yyyy-MM-dd HH:mm:ss”
     private int state;//订单状态，进行中，关闭，成功
+//    private Contact contact;// 订单所对应的
 
     @Override
     public String toString() {

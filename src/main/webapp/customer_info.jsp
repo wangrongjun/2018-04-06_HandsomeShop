@@ -1,17 +1,19 @@
-<%@ page import="com.handsome.shop.bean.Customer" %><%--
+<%@ page import="com.handsome.shop.bean.Customer" %>
+<%@ page import="com.handsome.shop.constant.C" %>
+<%--
   Created by IntelliJ IDEA.
   User: wangrongjun
   Date: 2017/6/18
   Time: 13:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>个人信息</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <script src="js/jquery.min-1.9.0.js"></script>
-    <script src="js/bootstrap.min-3.2.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <style type="text/css">
         .panel {
             width: 500px;
@@ -39,10 +41,10 @@
 <body onload="showMsg('${requestScope.msg}')">
 
 <%
-    Customer customer = (Customer) request.getSession().getAttribute("customer");
+    Customer customer = (Customer) request.getSession().getAttribute(C.SESSION_CUSTOMER);
     if (customer == null) {
         request.setAttribute("msg", "请登录");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
         return;
     }
 
@@ -73,7 +75,7 @@
             <button class="btn btn-info">修改昵称</button>
             <hr>
             <div id="upload_box" style="display: none;">
-                <form method="post" action="uploadImage.do" enctype="multipart/form-data">
+                <form method="post" action="${pageContext.request.contextPath}/user/head" enctype="multipart/form-data">
                     <input type="file" name="file">
                     <input type="submit" value="上传">
                 </form>
@@ -86,7 +88,7 @@
 
 <script type="text/javascript">
     function showMsg(msg) {
-        if (msg != "") {
+        if (!msg && msg !== "") {
             alert(msg);
         }
     }

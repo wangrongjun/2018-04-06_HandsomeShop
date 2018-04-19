@@ -5,13 +5,13 @@ import com.handsome.shop.bean.Goods;
 import com.handsome.shop.dao.EvaluateDao;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.framework.BaseController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -23,9 +23,9 @@ import java.util.List;
 @Controller
 public class GoodsController extends BaseController {
 
-    @Autowired
+    @Resource
     private GoodsDao goodsDao;
-    @Autowired
+    @Resource
     private EvaluateDao evaluateDao;
 
     @GetMapping("/searchGoods")

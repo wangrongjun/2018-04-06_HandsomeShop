@@ -60,7 +60,8 @@
                 </div>
             </div>
 
-            <form action="confirmOrder.do?goodsId=${requestScope.goods.goodsId}" method="post">
+            <form action="${pageContext.request.contextPath}/orders/confirm" method="post">
+                <input type="hidden" name="goodsId" value="${requestScope.goods.goodsId}"/>
                 <div class="buy_box">
                     <label for="count">购买数量：</label>
                     <input type="number" name="count" id="count" class="form-control" value="1"/>
@@ -167,9 +168,9 @@
 
     function addGoodsToShopCar() {
         var count = $("#count").val();
-        var goodsId = ${requestScope.goods.goodsId};
+        var goodsId = "${requestScope.goods.goodsId}";
 
-        var url = "/shopCar/";
+        var url = "/shopCar";
         var data = {count: count, goodsId: goodsId};
         $.post(url, data, function (result, status) {
             if (result === true && status === "success") {

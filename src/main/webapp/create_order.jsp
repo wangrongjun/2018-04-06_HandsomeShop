@@ -6,13 +6,13 @@
   Time: 20:19
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>创建订单-${goods.goodsName}</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min-3.2.0.css"/>
-    <script src="js/jquery.min-1.9.0.js"></script>
-    <script src="js/bootstrap.min-3.2.0.js"></script>
+    <title>创建订单-${requestScope.goods.goodsName}</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <style type="text/css">
         /*---------总体--------*/
 
@@ -67,18 +67,18 @@
 
 <content>
 
-    <center><h1>创建订单-${goods.goodsName}</h1></center>
+    <center><h1>创建订单-${sessionScope.goods.goodsName}</h1></center>
 
     <div class="order_box">
         <div class="goods_img">
-            <img src="${goods.goodsImageList[0].imageUrl}"/>
+            <img src="${sessionScope.goods.goodsImageList[0].imageUrl}"/>
         </div>
         <div class="order_info">
-            <div>商品：<span>${goods.goodsName}</span></div>
-            <div>单价：<span>${goods.price}</span></div>
-            <div>数量：<span>${count}</span></div>
+            <div>商品：<span>${sessionScope.goods.goodsName}</span></div>
+            <div>单价：<span>${sessionScope.goods.price}</span></div>
+            <div>数量：<span>${sessionScope.count}</span></div>
             <div>运费：<span>0</span></div>
-            <div>合计：<span>${goods.price * count}</span></div>
+            <div>合计：<span>${sessionScope.goods.price * requestScope.count}</span></div>
             <div>联系电话：<span id="phone">${sessionScope.customer.phone}</span></div>
             <div><a href="javascript:void(0);" onclick="updatePhone()">修改联系电话</a></div>
             <div>收货人：<span id="receiverName">${sessionScope.customer.realName}</span></div>
@@ -133,42 +133,69 @@
 <script type="text/javascript">
     function addAddress() {
         var address = $("#address").val();
-        if (address == "") {
-            alert("不能为空")
+        if (!address || address === "") {
+            alert("不能为空");
             return;
         }
-        window.location.href = "addAddress.do?address=" + address;
+        var url = "/address";
+        var data = {address: address};
+        $.post(url, data, function (data, status) {
+            if (status === "success") {
+                if (data === true) {
+                    alert("添加地址成功");
+                    var newOption = '<option value="' + address + '">' + address + '</option>';
+                    $(newOption).appendTo($("#address_list"));
+                } else {
+                    alert("添加地址失败");
+                }
+            } else {
+                window.location.href = "/login.jsp";
+            }
+        });
     }
 
     function createOrder() {
         var address = $("#address_list").val();
-        if (address == null || address == "") {
+        if (!address || address === "") {
             alert("请填写收货地址");
             return;
         }
         var phone = $("#phone").text();
-        if (phone == null || phone == "") {
+        if (!phone || phone === "") {
             alert("请填写收联系电话");
             return;
         }
         var receiverName = $("#receiverName").text();
-        if (receiverName == null || receiverName == "") {
+        if (!receiverName || receiverName === "") {
             alert("请填写收货人姓名");
             return;
         }
-        window.location.href = "createOrder.do?address=" + address +
-            "&phone=" + phone +
-            "&receiverName=" + receiverName;
+
+        var url = "/orders";
+        var data = {address: address, phone: phone, receiverName: receiverName};
+        $.post(url, data, function (result, status) {
+            if (status === "success") {
+                if (result === true) {
+                    window.location.href = "/create_order_succeed.jsp";
+                } else {
+                    alert("订单创建失败");
+                }
+            } else {
+                alert("订单创建失败");
+            }
+        });
     }
 
     function updatePhone() {
-        var phone = prompt("输入收货人的联系电话", $("#phone").text());
-        $("#phone").text(phone);
+        var $phone = $("#phone");
+        var phone = prompt("输入收货人的联系电话", $phone.text());
+        $phone.text(phone);
     }
 
     function updateReceiverName() {
-        var receiverName = prompt("输入收货人的姓名", $("#receiverName").text());
-        $("#receiverName").text(receiverName);
+        var $receiverName = $("#receiverName");
+        var receiverName = prompt("输入收货人的姓名", $receiverName.text());
+        $receiverName.text(receiverName);
     }
 </script>
 
