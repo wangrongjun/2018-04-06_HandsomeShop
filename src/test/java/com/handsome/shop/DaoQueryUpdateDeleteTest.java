@@ -1,9 +1,8 @@
-package com.handsome.shop.test;
+package com.handsome.shop;
 
 import com.handsome.shop.bean.*;
 import com.handsome.shop.dao.*;
 import com.wangrj.java_lib.java_util.LogUtil;
-import com.wangrj.java_lib.java_util.MathUtil;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 

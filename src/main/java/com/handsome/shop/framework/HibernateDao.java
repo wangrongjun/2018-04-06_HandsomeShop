@@ -7,8 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import javax.persistence.Entity;
@@ -26,15 +24,8 @@ public class HibernateDao<T> implements Dao<T> {
     private Class<T> entityClass;
 
     public Session getSession() {
-//        Session session;
-//        try {
-//            session = sessionFactory.getCurrentSession();
-//        } catch (HibernateException e) {
-////            logger.error(e.toString());
-//            session = sessionFactory.openSession();
-//        }
-//        return session;
-        return sessionFactory.getCurrentSession();
+//        return sessionFactory.getCurrentSession();
+        return sessionFactory.openSession();
     }
 
     @SuppressWarnings("unchecked")
@@ -110,30 +101,38 @@ public class HibernateDao<T> implements Dao<T> {
     @Override
     public boolean delete(Where where) {
         Session session = getSession();
+        session.beginTransaction();
         String hql = "delete from " + getTableName() + (where == null ? "" : where);
         session.createQuery(hql, getEntityClass()).executeUpdate();
+        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean deleteAll() {
         Session session = getSession();
+        session.beginTransaction();
         String hql = "delete from " + getTableName();
         session.createQuery(hql, getEntityClass()).executeUpdate();
+        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean deleteById(long id) {
         Session session = getSession();
+        session.beginTransaction();
         session.delete(queryById(id));
+        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean update(T entity) {
         Session session = getSession();
+        session.beginTransaction();
         session.update(entity);
+        session.getTransaction().commit();
         return true;
     }
 

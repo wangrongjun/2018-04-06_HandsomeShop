@@ -2,11 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
@@ -16,28 +14,20 @@
     <bean class="com.handsome.shop.framework.SpringContextHolder"/>
     <bean class="com.handsome.shop.framework.SpringProperty"/>
 
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-    <!--<tx:attributes>-->
-    <!--<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>-->
-    <!--<tx:method name="add*" propagation="REQUIRED"/>-->
-    <!--<tx:method name="update*" propagation="REQUIRED"/>-->
-    <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
-    <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-
-    <bean id="transactionManageAspect" class="com.handsome.shop.framework.TransactionManageAspect"/>
-    <aop:config>
-        <!--TODO 对于queryAll，Dao和xxDao均有实现，导致执行了两边切面操作。以后应该只以Service一个方法作为切面。即Service一个方法对应一个事务-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.Dao.*(..))"/>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.*.*(..))"/>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.service.*.*(..))"/>-->
-        <aop:aspect ref="transactionManageAspect">
-            <aop:pointcut id="serviceMethodPointcut" expression="execution(* com.handsome.shop.service.*.*(..))"/>
-            <aop:before method="beginTransaction" pointcut-ref="serviceMethodPointcut"/>
-            <aop:after-returning method="commitTransaction" pointcut-ref="serviceMethodPointcut"/>
-            <aop:after-throwing method="rollbackTransaction" pointcut-ref="serviceMethodPointcut"/>
-        </aop:aspect>
-    </aop:config>
+    <!--<bean id="transactionManageAspect" class="com.handsome.shop.framework.TransactionManageAspect"/>-->
+    <!--<aop:config proxy-target-class="true">-->
+        <!--&lt;!&ndash;TODO 对于queryAll，Dao和xxDao均有实现，导致执行了两边切面操作。以后应该只以Service一个方法作为切面。即Service一个方法对应一个事务&ndash;&gt;-->
+        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.Dao.*(..))"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.*.*(..))"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.service.*.*(..))"/>&ndash;&gt;-->
+        <!--<aop:aspect ref="transactionManageAspect">-->
+            <!--<aop:pointcut id="addMethodPointcut"-->
+                          <!--expression="execution(* com.handsome.shop.service.impl.*.add*(..))"/>-->
+            <!--<aop:before method="beginTransaction" pointcut-ref="addMethodPointcut"/>-->
+            <!--<aop:after-returning method="commitTransaction" pointcut-ref="addMethodPointcut"/>-->
+            <!--<aop:after-throwing method="rollbackTransaction" pointcut-ref="addMethodPointcut"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
 
     <beans profile="development">
         <context:property-placeholder location="classpath:application.development.properties"/>

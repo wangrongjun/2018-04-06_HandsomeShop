@@ -15,20 +15,20 @@ public class TransactionManageAspect {
     private SessionFactory sessionFactory;
 
     public void beginTransaction() {
-//        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
     }
 
     public void commitTransaction() {
-//        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.getTransaction();
-//        transaction.commit();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        transaction.commit();
     }
 
     public void rollbackTransaction() {
-//        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.getTransaction();
-//        transaction.rollback();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.getTransaction();
+        transaction.rollback();
     }
 
 }

@@ -1,12 +1,10 @@
-package com.handsome.shop.test;
+package com.handsome.shop;
 
 import com.handsome.shop.bean.*;
 import com.handsome.shop.dao.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
@@ -15,6 +13,8 @@ import javax.annotation.Resource;
  */
 public class DaoInsertTest extends BaseDaoTest {
 
+    @Resource
+    private SessionFactory sessionFactory;
     @Resource
     private GoodsTypeDao goodsTypeDao;
     @Resource
@@ -48,6 +48,8 @@ public class DaoInsertTest extends BaseDaoTest {
      */
     @Test
     public void testInsert() {
+        Session session = sessionFactory.openSession();
+
         GoodsType 电子产品 = new GoodsType("电子产品");
         GoodsType 食品 = new GoodsType("食品");
         goodsTypeDao.insert(电子产品);
@@ -166,6 +168,8 @@ public class DaoInsertTest extends BaseDaoTest {
             GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
             goodsImageDao.insert(goodsImage);
         }
+
+        session.close();
     }
 
 }

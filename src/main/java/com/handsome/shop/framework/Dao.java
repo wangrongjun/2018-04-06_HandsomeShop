@@ -12,27 +12,13 @@ public interface Dao<T> {
 
     boolean insert(T entity);
 
-    default boolean insertBatch(List<T> entityList) {
-        return false;
-    }
-
     boolean delete(Where where);
 
-    default boolean deleteBatchByIdList(List<Long> idList) {
-        return false;
-    }
+    boolean deleteAll();
 
     boolean deleteById(long id);
 
-    default boolean deleteAll() {
-        return false;
-    }
-
     boolean update(T entity);
-
-    default boolean updateBatch(List<T> entityList) {
-        return false;
-    }
 
     T queryById(long id);
 
@@ -45,4 +31,3 @@ public interface Dao<T> {
     int queryCount(Where where);
 
 }
-

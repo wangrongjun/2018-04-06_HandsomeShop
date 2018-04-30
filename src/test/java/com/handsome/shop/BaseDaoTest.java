@@ -1,4 +1,4 @@
-package com.handsome.shop.test;
+package com.handsome.shop;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +28,7 @@ public class BaseDaoTest {
     public void initSession() {
         // initSession 和 closeSession 的代码，都是参考 Spring 的 OpenSessionInViewInterceptor
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
+//        session.beginTransaction();
         SessionHolder sessionHolder = new SessionHolder(session);
         TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
     }
@@ -37,7 +37,7 @@ public class BaseDaoTest {
     public void closeSession() {
         SessionHolder sessionHolder = (SessionHolder) TransactionSynchronizationManager.unbindResource(sessionFactory);
         Session session = sessionHolder.getSession();
-        session.getTransaction().commit();
+//        session.getTransaction().commit();
         session.close();
     }
 
