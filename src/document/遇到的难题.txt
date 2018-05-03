@@ -1,6 +1,59 @@
-1. Hibernate 在测试中可以执行保存操作，但在服务器中执行保存操作失效！没有错误提示！
+## 问题1
 
-原因：受到OpenSessionInViewInterceptor的影响，导致commit了也不会马上同步到数据库，
-      具体原因是因为我使用了自己写的事务管理器来控制事务，没有使用Spring自带的。
+> 每次 Update classes 都重启了Spring和Hibernate，非常浪费时间！！
 
-解决：不使用OpenSessionInViewInterceptor，代价是不能使用Hibernate的延迟加载功能。
+    原因：tomcat配置了监听classes变化自动部署。
+    解决：tomcat配置文件的context.xml的Context根标签的reloadable="true"去掉。
+
+## 问题2
+
+> Hibernate 在测试中可以执行保存操作，但在服务器中执行保存操作失效！没有错误提示！
+
+    原因：受到OpenSessionInViewInterceptor的影响，导致commit了也不会马上同步到数据库，
+    具体原因是因为我使用了自己写的事务管理器来控制事务，没有使用Spring自带的。
+
+    解决：不使用OpenSessionInViewInterceptor，代价是不能使用Hibernate的延迟加载功能。
+
+## 问题3
+
+> SpringMVC 即使配置了 mvc:resources 也还是把静态资源当作控制方法处理（之前是生效的）
+
+    原因：未知。出现问题之前，配了一个OpenSessionInViewInterceptor，改了web.xml的contextLocation参数和DispatchServlet。
+    解决：访问静态资源文件时，先使用web.xml默认的Servlet处理，避免进入Spring的DispatchServlet。
+
+```xml
+<!--定义在DispatcherServlet前面-->
+<servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/css/*</url-pattern>
+    <url-pattern>/js/*</url-pattern>
+    <url-pattern>/img/*</url-pattern>
+    <url-pattern>/admin/img/*</url-pattern>
+    <!--<url-pattern>*.css</url-pattern>-->
+    <!--<url-pattern>*.js</url-pattern>-->
+    <!--<url-pattern>*.png</url-pattern>-->
+    <!--<url-pattern>*.jpg</url-pattern>-->
+</servlet-mapping>
+```
+
+## 问题4
+
+> 使用Spring自带的事务管理器来控制事务，但失效！！！数据没有更新到数据库！！！
+
+    原因：使用了 DataSourceTransactionManager
+    解决：换为 HibernateTransactionManager
+
+## 问题5
+
+> Gson解析Hibernate查询返回的对象时出错
+
+    原因：
+    1. Hibernate使用延迟加载时，Gson无法解析HibernateProxy代理对象而抛出异常。
+    2. 一对多的两个实体类相互引用，导致Gson解析进入死循环的情况。
+
+    解决：
+    1. 通过传入忽略字段来打断死循环。
+    2. 碰到HibernateProxy的子类类型，跳过不解析。
+       说明：也可以写一个专门的TypeAdapter来处理代理类，参考：
+[GSON 报错HibernateProxy. Forgot to register a type adapter?](https://blog.csdn.net/xspwz123/article/details/71425545)
+

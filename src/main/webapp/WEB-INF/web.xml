@@ -16,7 +16,8 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring-*.xml
+            classpath:spring-dataSource.xml,
+            classpath:spring-main.xml,
         </param-value>
     </context-param>
     <listener>
@@ -65,6 +66,19 @@
         <filter-name>SecurityFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!--如果springmvc即时配置了mvc:resources也无法识别资源文件，则可以让这些请求不进入ServletDispatcher，由Tomcat默认的Servlet处理-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>default</servlet-name>-->
+    <!--<url-pattern>/css/*</url-pattern>-->
+    <!--<url-pattern>/js/*</url-pattern>-->
+    <!--<url-pattern>/img/*</url-pattern>-->
+    <!--<url-pattern>/admin/img/*</url-pattern>-->
+    <!--&lt;!&ndash;<url-pattern>*.css</url-pattern>&ndash;&gt;-->
+    <!--&lt;!&ndash;<url-pattern>*.js</url-pattern>&ndash;&gt;-->
+    <!--&lt;!&ndash;<url-pattern>*.png</url-pattern>&ndash;&gt;-->
+    <!--&lt;!&ndash;<url-pattern>*.jpg</url-pattern>&ndash;&gt;-->
+    <!--</servlet-mapping>-->
 
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
