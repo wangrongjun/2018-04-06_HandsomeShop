@@ -1,6 +1,6 @@
 package com.handsome.shop.service.impl;
 
-import com.handsome.shop.bean.Address;
+import com.handsome.shop.entity.Address;
 import com.handsome.shop.dao.AddressDao;
 import com.handsome.shop.service.AddressService;
 import org.springframework.stereotype.Service;

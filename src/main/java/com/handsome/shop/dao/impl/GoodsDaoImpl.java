@@ -1,6 +1,6 @@
 package com.handsome.shop.dao.impl;
 
-import com.handsome.shop.bean.Goods;
+import com.handsome.shop.entity.Goods;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.framework.HibernateDao;
 import com.wangrj.java_lib.hibernate.Q;

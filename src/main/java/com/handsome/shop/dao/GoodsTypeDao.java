@@ -1,6 +1,6 @@
 package com.handsome.shop.dao;
 
-import com.handsome.shop.bean.GoodsType;
+import com.handsome.shop.entity.GoodsType;
 import com.handsome.shop.framework.Dao;
 
 /**

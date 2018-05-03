@@ -1,6 +1,6 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.bean.Customer;
+import com.handsome.shop.entity.Customer;
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.GoodsImageDao;
 import com.handsome.shop.framework.BaseController;

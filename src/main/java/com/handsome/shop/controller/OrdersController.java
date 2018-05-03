@@ -1,9 +1,9 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.bean.Address;
-import com.handsome.shop.bean.Customer;
-import com.handsome.shop.bean.Goods;
-import com.handsome.shop.bean.Orders;
+import com.handsome.shop.entity.Address;
+import com.handsome.shop.entity.Customer;
+import com.handsome.shop.entity.Goods;
+import com.handsome.shop.entity.Orders;
 import com.handsome.shop.dao.AddressDao;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.OrdersDao;

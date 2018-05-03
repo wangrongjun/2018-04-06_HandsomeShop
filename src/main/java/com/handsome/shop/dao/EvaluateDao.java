@@ -1,6 +1,6 @@
 package com.handsome.shop.dao;
 
-import com.handsome.shop.bean.Evaluate;
+import com.handsome.shop.entity.Evaluate;
 import com.handsome.shop.framework.Dao;
 
 import java.util.List;

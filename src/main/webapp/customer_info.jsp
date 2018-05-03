@@ -1,4 +1,4 @@
-<%@ page import="com.handsome.shop.bean.Customer" %>
+<%@ page import="com.handsome.shop.entity.Customer" %>
 <%@ page import="com.handsome.shop.constant.C" %>
 <%--
   Created by IntelliJ IDEA.

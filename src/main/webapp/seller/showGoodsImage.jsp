@@ -1,6 +1,6 @@
 <%@ page import="com.handsome.shop.dao.GoodsImageDao" %>
 <%@ page import="com.handsome.shop.dao.impl.GoodsImageDaoImpl" %>
-<%@ page import="com.handsome.shop.bean.GoodsImage" %>
+<%@ page import="com.handsome.shop.entity.GoodsImage" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: wangrongjun

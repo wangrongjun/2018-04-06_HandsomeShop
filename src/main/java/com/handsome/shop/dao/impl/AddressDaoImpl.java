@@ -1,6 +1,6 @@
 package com.handsome.shop.dao.impl;
 
-import com.handsome.shop.bean.Address;
+import com.handsome.shop.entity.Address;
 import com.handsome.shop.dao.AddressDao;
 import com.handsome.shop.framework.HibernateDao;
 import com.wangrj.java_lib.hibernate.Where;

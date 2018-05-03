@@ -1,15 +1,12 @@
 package com.handsome.shop.dao.impl;
 
-import com.handsome.shop.bean.Customer;
-import com.handsome.shop.bean.Evaluate;
-import com.handsome.shop.bean.Orders;
+import com.handsome.shop.entity.Evaluate;
 import com.handsome.shop.dao.EvaluateDao;
 import com.handsome.shop.framework.HibernateDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

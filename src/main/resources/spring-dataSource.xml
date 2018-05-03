@@ -25,7 +25,7 @@
           destroy-method="destroy">
         <property name="dataSource" ref="dataSource"/>
         <!--<property name="configLocation" value="classpath:hibernate.cfg.xml"/>-->
-        <property name="packagesToScan" value="com.handsome.shop.bean"/>
+        <property name="packagesToScan" value="com.handsome.shop.entity"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>

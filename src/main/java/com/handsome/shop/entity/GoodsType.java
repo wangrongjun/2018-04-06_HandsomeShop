@@ -1,4 +1,4 @@
-package com.handsome.shop.bean;
+package com.handsome.shop.entity;
 
 import com.handsome.shop.framework.BaseEntity;
 

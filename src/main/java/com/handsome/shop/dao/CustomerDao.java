@@ -1,6 +1,6 @@
 package com.handsome.shop.dao;
 
-import com.handsome.shop.bean.Customer;
+import com.handsome.shop.entity.Customer;
 import com.handsome.shop.framework.Dao;
 
 import java.util.List;

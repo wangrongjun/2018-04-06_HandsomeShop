@@ -1,7 +1,7 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.bean.Goods;
-import com.handsome.shop.bean.Shop;
+import com.handsome.shop.entity.Goods;
+import com.handsome.shop.entity.Shop;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.ShopDao;
 import org.springframework.stereotype.Controller;

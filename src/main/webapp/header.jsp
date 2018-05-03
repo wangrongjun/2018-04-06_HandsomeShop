@@ -1,4 +1,4 @@
-<%@ page import="com.handsome.shop.bean.Customer" %>
+<%@ page import="com.handsome.shop.entity.Customer" %>
 <%@ page import="com.handsome.shop.dao.OrdersDao" %>
 <%@ page import="com.handsome.shop.dao.ShopCarDao" %>
 <%@ page import="com.handsome.shop.framework.SpringContextHolder" %>

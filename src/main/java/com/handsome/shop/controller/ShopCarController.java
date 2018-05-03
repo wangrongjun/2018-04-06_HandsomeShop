@@ -1,7 +1,7 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.bean.Customer;
-import com.handsome.shop.bean.Goods;
+import com.handsome.shop.entity.Customer;
+import com.handsome.shop.entity.Goods;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.service.ShopCarService;

@@ -1,8 +1,8 @@
 package com.handsome.shop.service.impl;
 
-import com.handsome.shop.bean.Customer;
-import com.handsome.shop.bean.Goods;
-import com.handsome.shop.bean.ShopCar;
+import com.handsome.shop.entity.Customer;
+import com.handsome.shop.entity.Goods;
+import com.handsome.shop.entity.ShopCar;
 import com.handsome.shop.dao.ShopCarDao;
 import com.handsome.shop.service.ShopCarService;
 import org.springframework.stereotype.Service;

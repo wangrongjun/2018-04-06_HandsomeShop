@@ -1,6 +1,6 @@
 package com.handsome.shop.dao;
 
-import com.handsome.shop.bean.GoodsImage;
+import com.handsome.shop.entity.GoodsImage;
 import com.handsome.shop.framework.Dao;
 
 import java.util.List;

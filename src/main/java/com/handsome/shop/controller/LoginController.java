@@ -1,7 +1,7 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.bean.Customer;
-import com.handsome.shop.bean.Seller;
+import com.handsome.shop.entity.Customer;
+import com.handsome.shop.entity.Seller;
 import com.handsome.shop.constant.C;
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.SellerDao;

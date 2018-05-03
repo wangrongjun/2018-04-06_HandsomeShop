@@ -1,6 +1,6 @@
 package com.handsome.shop.service;
 
-import com.handsome.shop.bean.Address;
+import com.handsome.shop.entity.Address;
 
 import java.util.List;
 

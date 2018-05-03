@@ -1,6 +1,6 @@
 package com.handsome.shop;
 
-import com.handsome.shop.bean.*;
+import com.handsome.shop.entity.*;
 import com.handsome.shop.dao.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

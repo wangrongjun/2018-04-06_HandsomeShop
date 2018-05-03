@@ -1,6 +1,6 @@
 package com.handsome.shop.dao.impl;
 
-import com.handsome.shop.bean.Shop;
+import com.handsome.shop.entity.Shop;
 import com.handsome.shop.dao.ShopDao;
 import com.handsome.shop.framework.HibernateDao;
 import org.springframework.stereotype.Repository;
