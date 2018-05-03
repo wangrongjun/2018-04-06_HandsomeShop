@@ -1,5 +1,6 @@
 package com.handsome.shop.framework;
 
+import com.handsome.shop.util.Pager;
 import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
 
@@ -25,6 +26,8 @@ public interface Dao<T> {
     List<T> queryAll();
 
     List<T> query(Where where);
+
+    List<T> query(Where where, Pager<T> pager);
 
     List<T> query(Q q);
 

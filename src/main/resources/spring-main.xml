@@ -16,17 +16,17 @@
 
     <!--<bean id="transactionManageAspect" class="com.handsome.shop.framework.TransactionManageAspect"/>-->
     <!--<aop:config proxy-target-class="true">-->
-        <!--&lt;!&ndash;TODO 对于queryAll，Dao和xxDao均有实现，导致执行了两边切面操作。以后应该只以Service一个方法作为切面。即Service一个方法对应一个事务&ndash;&gt;-->
-        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.Dao.*(..))"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.*.*(..))"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.service.*.*(..))"/>&ndash;&gt;-->
-        <!--<aop:aspect ref="transactionManageAspect">-->
-            <!--<aop:pointcut id="addMethodPointcut"-->
-                          <!--expression="execution(* com.handsome.shop.service.impl.*.add*(..))"/>-->
-            <!--<aop:before method="beginTransaction" pointcut-ref="addMethodPointcut"/>-->
-            <!--<aop:after-returning method="commitTransaction" pointcut-ref="addMethodPointcut"/>-->
-            <!--<aop:after-throwing method="rollbackTransaction" pointcut-ref="addMethodPointcut"/>-->
-        <!--</aop:aspect>-->
+    <!--&lt;!&ndash;TODO 对于queryAll，Dao和xxDao均有实现，导致执行了两边切面操作。以后应该只以Service一个方法作为切面。即Service一个方法对应一个事务&ndash;&gt;-->
+    <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.Dao.*(..))"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.*.*(..))"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.service.*.*(..))"/>&ndash;&gt;-->
+    <!--<aop:aspect ref="transactionManageAspect">-->
+    <!--<aop:pointcut id="addMethodPointcut"-->
+    <!--expression="execution(* com.handsome.shop.service.impl.*.add*(..))"/>-->
+    <!--<aop:before method="beginTransaction" pointcut-ref="addMethodPointcut"/>-->
+    <!--<aop:after-returning method="commitTransaction" pointcut-ref="addMethodPointcut"/>-->
+    <!--<aop:after-throwing method="rollbackTransaction" pointcut-ref="addMethodPointcut"/>-->
+    <!--</aop:aspect>-->
     <!--</aop:config>-->
 
     <beans profile="development">

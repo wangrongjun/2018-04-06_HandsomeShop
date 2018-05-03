@@ -37,21 +37,23 @@
         </property>
     </bean>
 
-    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-    <!--</bean>-->
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-        <!--<tx:attributes>-->
-            <!--<tx:method name="query*" propagation="SUPPORTS" read-only="true"/>-->
-            <!--<tx:method name="insert*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="update*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
-        <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-    <!--<aop:config>-->
-        <!--&lt;!&ndash;<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.*.*(..))"/>&ndash;&gt;-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.Dao.*(..))"/>-->
-    <!--</aop:config>-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!-- 声明使用注解式事务 -->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config proxy-target-class="true">
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.HibernateDao.*(..))"/>
+    </aop:config>
 
     <beans profile="development">
         <context:property-placeholder location="classpath:application.development.properties"/>

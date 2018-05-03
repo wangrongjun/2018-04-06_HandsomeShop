@@ -1,18 +1,19 @@
 package com.handsome.shop.controller;
 
+import com.handsome.shop.controller.rest.OrdersController;
+import com.handsome.shop.dao.AddressDao;
+import com.handsome.shop.dao.GoodsDao;
+import com.handsome.shop.dao.OrdersDao;
 import com.handsome.shop.entity.Address;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Goods;
 import com.handsome.shop.entity.Orders;
-import com.handsome.shop.dao.AddressDao;
-import com.handsome.shop.dao.GoodsDao;
-import com.handsome.shop.dao.OrdersDao;
 import com.handsome.shop.framework.BaseController;
+import com.handsome.shop.util.Pager;
 import com.wangrj.java_lib.java_util.DateUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -20,32 +21,30 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * by wangrongjun on 2018/4/14.
+ * by wangrongjun on 2018/5/1.
  */
 @Controller
-@RequestMapping("/orders")
-public class OrdersController extends BaseController {
+public class BuyGoodsController extends BaseController {
 
     @Resource
-    private OrdersDao ordersDao;
+    private GoodsDao goodsDao;// TODO 把 Dao 换成 RestController
     @Resource
-    private GoodsDao goodsDao;
+    private AddressDao addressDao;// TODO 把 Dao 换成 RestController
     @Resource
-    private AddressDao addressDao;
+    private OrdersDao ordersDao;// TODO 把 Dao 换成 RestController
+    @Resource
+    private OrdersController ordersController;
 
-    @GetMapping
-    public String list(HttpServletRequest request) {
-        Customer customer = getLoginCustomerFromSession(request);
-        List<Orders> ordersList = ordersDao.queryByCustomerId(customer.getCustomerId());
-        int ordersCount = ordersDao.queryCountByCustomerId(customer.getCustomerId());
-
-        request.setAttribute("ordersList", ordersList);
-        request.setAttribute("ordersCount", ordersCount);
+    @GetMapping("/orders")
+    public String listOrders(HttpServletRequest request, Integer pageIndex, Integer pageSize) {
+        Pager<Orders> pager = ordersController.list(request, pageIndex, pageSize, "-createTime");
+        request.setAttribute("ordersList", pager.getDataList());
+        request.setAttribute("ordersCount", pager.getTotalCount());
         return "customer_order_list";
     }
 
-    @PostMapping("/confirm")
-    public String confirm(HttpServletRequest request, int goodsId, int count) {
+    @PostMapping("/confirmOrders")
+    public String confirmOrders(HttpServletRequest request, int goodsId, int count) {
         Customer customer = getLoginCustomerFromSession(request);
         Goods goods = goodsDao.queryById(goodsId);
         List<Address> addressList = addressDao.queryByCustomerId(customer.getCustomerId());
@@ -56,7 +55,7 @@ public class OrdersController extends BaseController {
         return "create_order";
     }
 
-    @PostMapping
+    @PostMapping("/orders")
     @ResponseBody
     public boolean create(HttpServletRequest request, String address, String phone, String receiverName) {
         // TODO 把参数保存到Contact对象中
@@ -76,7 +75,7 @@ public class OrdersController extends BaseController {
                 phone, receiverName, address, DateUtil.getCurrentDateAndTime(), Orders.STATE_CONTINUE);
         ordersDao.insert(orders);
 
-        // TODO 成功添加订单后，address_list,goods,count等变量就没必要了，可以清除
+        // 成功添加订单后，address_list,goods,count等变量就没必要了，可以清除
         request.getSession().removeAttribute("address_list");
         request.getSession().removeAttribute("goods");
         request.getSession().removeAttribute("count");
@@ -84,5 +83,4 @@ public class OrdersController extends BaseController {
         request.getSession().setAttribute("orders", orders);
         return true;
     }
-
 }

@@ -1,5 +1,6 @@
 package com.handsome.shop.framework;
 
+import com.handsome.shop.util.Pager;
 import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
 import com.wangrj.java_lib.java_util.ReflectUtil;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +26,7 @@ public class HibernateDao<T> implements Dao<T> {
     private Class<T> entityClass;
 
     public Session getSession() {
-//        return sessionFactory.getCurrentSession();
-        return sessionFactory.openSession();
+        return sessionFactory.getCurrentSession();
     }
 
     @SuppressWarnings("unchecked")
@@ -92,47 +93,37 @@ public class HibernateDao<T> implements Dao<T> {
     @Override
     public boolean insert(T entity) {
         Session session = getSession();
-        session.beginTransaction();
         session.save(entity);
-        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean delete(Where where) {
         Session session = getSession();
-        session.beginTransaction();
         String hql = "delete from " + getTableName() + (where == null ? "" : where);
         session.createQuery(hql, getEntityClass()).executeUpdate();
-        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean deleteAll() {
         Session session = getSession();
-        session.beginTransaction();
         String hql = "delete from " + getTableName();
         session.createQuery(hql, getEntityClass()).executeUpdate();
-        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean deleteById(long id) {
         Session session = getSession();
-        session.beginTransaction();
         session.delete(queryById(id));
-        session.getTransaction().commit();
         return true;
     }
 
     @Override
     public boolean update(T entity) {
         Session session = getSession();
-        session.beginTransaction();
         session.update(entity);
-        session.getTransaction().commit();
         return true;
     }
 
@@ -167,6 +158,24 @@ public class HibernateDao<T> implements Dao<T> {
         Session session = getSession();
         String hql = "from " + getTableName() + (where == null ? "" : where);
         return session.createQuery(hql, getEntityClass()).list();
+    }
+
+    @Override
+    public List<T> query(Where where, Pager<T> pager) {
+        if (pager == null) {
+            return query(where);
+        }
+        int count = queryCount(where);
+        if (count == 0) {
+            return new ArrayList<>();
+        }
+        pager.setTotalCount(count);
+        List<T> ordersList = query(Q.
+                where(where).
+                limit(pager.getOffset(), pager.getPageSize()).
+                orderBy(pager.getSortByList()));
+        pager.setDataList(ordersList);
+        return ordersList;
     }
 
     @Override

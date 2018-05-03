@@ -1,11 +1,13 @@
 package com.handsome.shop.framework;
 
+import com.handsome.shop.constant.C;
 import com.handsome.shop.entity.Address;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Seller;
-import com.handsome.shop.constant.C;
+import com.wangrj.java_lib.java_util.TextUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +39,28 @@ public class BaseController {
     @SuppressWarnings("unchecked")
     protected void setAddressListFromSession(HttpServletRequest request, List<Address> addressList) {
         request.getSession().setAttribute(C.SESSION_ADDRESS_LIST, addressList);
+    }
+
+    protected String[] parseSortByList(String sortByList) {
+        if (TextUtil.isEmpty(sortByList)) {
+            return null;
+        }
+        if (sortByList.contains(",")) {
+            List<String> resultList = new ArrayList<>();
+            String[] strings = sortByList.split(",");
+            for (String sortBy : strings) {
+                if (TextUtil.isNotBlank(sortBy)) {
+                    resultList.add(sortBy);
+                }
+            }
+            return resultList.toArray(new String[0]);
+        } else {
+            if (TextUtil.isNotBlank(sortByList)) {
+                return new String[]{sortByList};
+            } else {
+                return null;
+            }
+        }
     }
 
 }

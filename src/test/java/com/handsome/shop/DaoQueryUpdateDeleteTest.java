@@ -39,7 +39,7 @@ public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
     @Test
     public void testQuery() {
 
-        List<Orders> ordersList = ordersDao.queryByCustomerId(customerDao.queryByPhone("15521302230").getCustomerId());
+        List<Orders> ordersList = ordersDao.queryByCustomerId(customerDao.queryByPhone("15521302230").getCustomerId(), null);
         for (Orders orders : ordersList) {
             LogUtil.print(orders);
             LogUtil.print(orders.getGoods());

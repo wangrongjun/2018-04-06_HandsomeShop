@@ -115,5 +115,4 @@ public class GoodsImageController extends BaseController {
         return map;
     }
 
-
 }
