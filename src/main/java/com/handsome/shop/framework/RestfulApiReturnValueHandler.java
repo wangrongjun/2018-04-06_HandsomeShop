@@ -33,7 +33,7 @@ public class RestfulApiReturnValueHandler implements HandlerMethodReturnValueHan
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
         response.setContentType("application/json;charset=UTF-8");
 
-        ReturnValueParseIgnoreFields ignoreFieldsAnno = returnType.getMethodAnnotation(ReturnValueParseIgnoreFields.class);
+        ReturnObjectToJsonIgnoreFields ignoreFieldsAnno = returnType.getMethodAnnotation(ReturnObjectToJsonIgnoreFields.class);
         String[] ignoreFields = null;
         if (ignoreFieldsAnno != null) {
             ignoreFields = ignoreFieldsAnno.value();

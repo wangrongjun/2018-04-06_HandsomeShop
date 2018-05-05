@@ -49,6 +49,7 @@
             <tx:method name="insert*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="executeUpdate" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
     <aop:config proxy-target-class="true">

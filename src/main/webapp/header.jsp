@@ -38,6 +38,7 @@
         </a>
         <a href="${pageContext.request.contextPath}/shopCar">我的购物车(<%=shopCarCount%>)</a>
         <a href="${pageContext.request.contextPath}/orders">我的订单(<%=ordersCount%>)</a>
+        <a href="${pageContext.request.contextPath}/showContacts">我的收货地址</a>
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
         <%
             }

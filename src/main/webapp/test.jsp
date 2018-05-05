@@ -13,7 +13,18 @@
 </head>
 <body>
 
-Test!!!
+<script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
+<script>
+    $.ajax({
+        url: "/rest/customer/25/contact",
+        success: function (data) {
+            alert("success: " + data);
+        },
+        error: function (XMLHttpRequest, errorMsg, exception) {
+            alert("errorMsg: " + errorMsg + ", exception: " + exception);
+        }
+    });
+</script>
 
 </body>
 </html>

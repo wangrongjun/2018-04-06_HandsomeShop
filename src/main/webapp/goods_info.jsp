@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <form action="${pageContext.request.contextPath}/orders/confirm" method="post">
+            <form action="${pageContext.request.contextPath}/confirmOrders" method="post">
                 <input type="hidden" name="goodsId" value="${requestScope.goods.goodsId}"/>
                 <div class="buy_box">
                     <label for="count">购买数量：</label>

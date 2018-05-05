@@ -1,7 +1,7 @@
 package com.handsome.shop.framework;
 
 import com.handsome.shop.constant.C;
-import com.handsome.shop.entity.Address;
+import com.handsome.shop.entity.Contact;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Seller;
 import com.wangrj.java_lib.java_util.TextUtil;
@@ -32,12 +32,12 @@ public class BaseController {
     }
 
     @SuppressWarnings("unchecked")
-    protected List<Address> getAddressListFromSession(HttpServletRequest request) {
-        return (List<Address>) request.getSession().getAttribute(C.SESSION_ADDRESS_LIST);
+    protected List<Contact> getAddressListFromSession(HttpServletRequest request) {
+        return (List<Contact>) request.getSession().getAttribute(C.SESSION_ADDRESS_LIST);
     }
 
     @SuppressWarnings("unchecked")
-    protected void setAddressListFromSession(HttpServletRequest request, List<Address> addressList) {
+    protected void setAddressListFromSession(HttpServletRequest request, List<Contact> addressList) {
         request.getSession().setAttribute(C.SESSION_ADDRESS_LIST, addressList);
     }
 

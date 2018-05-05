@@ -3,41 +3,55 @@ package com.handsome.shop.util;
 /**
  * by wangrongjun on 2018/5/1.
  */
-public class RequestStatus {
+public class RequestStatus<T> {
 
     public static final int SUCCESS = 0;
     public static final int FAIL = -1;
     public static final int ERROR = -2;
     public static final int EXCEPTION = -3;
 
-    private int statusCode;
+    private int status;
     private String msg;
+    private T data;
     private Exception e;
 
-    public RequestStatus(int statusCode, String msg, Exception e) {
-        this.statusCode = statusCode;
+    public RequestStatus(int status, String msg, T data, Exception e) {
+        this.status = status;
         this.msg = msg;
+        this.data = data;
         this.e = e;
     }
 
-    public static RequestStatus success() {
-        return new RequestStatus(SUCCESS, null, null);
+    public static <T> RequestStatus<T> success() {
+        return new RequestStatus<T>(SUCCESS, null, null, null);
     }
 
-    public static RequestStatus success(String msg) {
-        return new RequestStatus(SUCCESS, msg, null);
+    public static <T> RequestStatus<T> success(String msg) {
+        return new RequestStatus<>(SUCCESS, msg, null, null);
     }
 
-    public static RequestStatus fail(String msg) {
-        return new RequestStatus(FAIL, msg, null);
+    public static <T> RequestStatus<T> success(T data) {
+        return new RequestStatus<>(SUCCESS, null, data, null);
     }
 
-    public static RequestStatus error(String msg) {
-        return new RequestStatus(ERROR, msg, null);
+    public static <T> RequestStatus<T> success(String msg, T data) {
+        return new RequestStatus<>(SUCCESS, msg, data, null);
     }
 
-    public static RequestStatus exception(Exception e) {
-        return new RequestStatus(EXCEPTION, e.toString(), e);
+    public static <T> RequestStatus<T> fail() {
+        return new RequestStatus<T>(FAIL, null, null, null);
+    }
+
+    public static <T> RequestStatus<T> fail(String msg) {
+        return new RequestStatus<T>(FAIL, msg, null, null);
+    }
+
+    public static <T> RequestStatus<T> error(String msg) {
+        return new RequestStatus<>(ERROR, msg, null, null);
+    }
+
+    public static <T> RequestStatus<T> exception(Exception e) {
+        return new RequestStatus<>(EXCEPTION, e.toString(), null, e);
     }
 
 }

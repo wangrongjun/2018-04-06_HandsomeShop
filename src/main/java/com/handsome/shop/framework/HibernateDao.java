@@ -90,6 +90,17 @@ public class HibernateDao<T> implements Dao<T> {
         return count.intValue();
     }
 
+    protected int executeUpdate(String hql, Object... parameters) {
+        Session session = getSession();
+        Query query = session.createQuery(hql);
+        if (parameters != null) {
+            for (int i = 0; i < parameters.length; i++) {
+                query.setParameter(i + 1, parameters[i]);
+            }
+        }
+        return query.executeUpdate();
+    }
+
     @Override
     public boolean insert(T entity) {
         Session session = getSession();

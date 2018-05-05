@@ -2,11 +2,13 @@ package com.handsome.shop;
 
 import com.handsome.shop.entity.*;
 import com.handsome.shop.dao.*;
+import com.wangrj.java_lib.java_util.DateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * by wangrongjun on 2017/6/17.
@@ -34,7 +36,7 @@ public class DaoInsertTest extends BaseDaoTest {
     @Resource
     private EvaluateDao evaluateDao;
     @Resource
-    private AddressDao addressDao;
+    private ContactDao addressDao;
 
     /**
      * GoodsType  1-10
@@ -110,19 +112,21 @@ public class DaoInsertTest extends BaseDaoTest {
         shopCarDao.insert(new ShopCar(沫沫, iPhone7手机));
         shopCarDao.insert(new ShopCar(沫沫, 苹果));
 
-        Address address1 = new Address(王荣俊, "广州市番禺区广州大学城XX学校XX宿舍");
-        Address address2 = new Address(沫沫, "广州市天河区车陂冬景花园XX座XX号");
-        addressDao.insert(address1);
-        addressDao.insert(address2);
+        Contact contact1 = new Contact(王荣俊, "13710512633", "柏林", "广州市番禺区沙头大大", true);
+        Contact contact2 = new Contact(王荣俊, "15521302233", "王荣俊", "广州市番禺区广州大学城XX学校XX宿舍", false);
+        Contact contact3 = new Contact(沫沫, "13023796942", "沫沫", "广州市天河区车陂冬景花园XX座XX号", true);
+        addressDao.insert(contact1);
+        addressDao.insert(contact2);
+        addressDao.insert(contact3);
 
-        Orders orders1 = new Orders(王荣俊, 三星E7手机, 1, 三星E7手机.getPrice(), "15521302230", "英俊", address1.getAddress(), "2016-04-14 15:34:12", 1);
-        Orders orders2 = new Orders(王荣俊, 宏基笔记本, 1, 宏基笔记本.getPrice(), "15521302230", "英俊", address1.getAddress(), "2014-08-06 16:14:45", 1);
-        Orders orders3 = new Orders(王荣俊, 菜心, 6, 菜心.getPrice() * 6, "15521302230", "英俊", address1.getAddress(), "2016-04-14 15:34:12", 0);
-        Orders orders4 = new Orders(王荣俊, 辣条, 10, 辣条.getPrice() * 10, "15521302230", "英俊", address1.getAddress(), "2017-06-12 08:23:45", 0);
-        Orders orders5 = new Orders(沫沫, iPhone7手机, 1, iPhone7手机.getPrice(), "13023796942", "沫沫", address2.getAddress(), "2015-03-04 21:54:23", 1);
-        Orders orders6 = new Orders(沫沫, 宏基笔记本, 1, 宏基笔记本.getPrice(), "13023796942", "沫沫", address2.getAddress(), "2015-05-12 21:54:23", 1);
-        Orders orders7 = new Orders(沫沫, 可乐, 2, 可乐.getPrice() * 2, "13023796942", "沫沫", address2.getAddress(), "2017-06-10 18:37:58", 0);
-        Orders orders8 = new Orders(沫沫, 辣条, 20, 辣条.getPrice() * 20, "13023796942", "沫沫", address2.getAddress(), "2017-06-10 18:32:10", 0);
+        Orders orders1 = new Orders(王荣俊, 三星E7手机, 1, 三星E7手机.getPrice(), contact1, d("2016-04-14 15:34:12"), 1);
+        Orders orders2 = new Orders(王荣俊, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact1, d("2014-08-06 16:14:45"), 1);
+        Orders orders3 = new Orders(王荣俊, 菜心, 6, 菜心.getPrice() * 6, contact2, d("2016-04-14 15:34:12"), 0);
+        Orders orders4 = new Orders(王荣俊, 辣条, 10, 辣条.getPrice() * 10, contact2, d("2017-06-12 08:23:45"), 0);
+        Orders orders5 = new Orders(沫沫, iPhone7手机, 1, iPhone7手机.getPrice(), contact3, d("2015-03-04 21:54:23"), 1);
+        Orders orders6 = new Orders(沫沫, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact3, d("2015-05-12 21:54:23"), 1);
+        Orders orders7 = new Orders(沫沫, 可乐, 2, 可乐.getPrice() * 2, contact3, d("2017-06-10 18:37:58"), 0);
+        Orders orders8 = new Orders(沫沫, 辣条, 20, 辣条.getPrice() * 20, contact3, d("2017-06-10 18:32:10"), 0);
 
         ordersDao.insert(orders1);
         ordersDao.insert(orders2);
@@ -170,6 +174,10 @@ public class DaoInsertTest extends BaseDaoTest {
         }
 
         session.close();
+    }
+
+    private static Date d(String dateTime) {
+        return DateUtil.toDate(dateTime);
     }
 
 }

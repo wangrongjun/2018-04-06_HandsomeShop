@@ -34,7 +34,7 @@ public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
     @Resource
     private EvaluateDao evaluateDao;
     @Resource
-    private AddressDao addressDao;
+    private ContactDao addressDao;
 
     @Test
     public void testQuery() {

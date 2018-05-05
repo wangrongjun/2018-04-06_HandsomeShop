@@ -4,6 +4,7 @@ package com.handsome.shop.entity;
 import com.handsome.shop.framework.BaseEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -23,18 +24,16 @@ public class Orders extends BaseEntity {
     @Id
     @GeneratedValue
     private int ordersId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Customer customer;
     @ManyToOne
     private Goods goods;
     private int buyCount;//该商品购买的数量
     private double price;//订单创建时商品的总价格（预防下单后商家修改该商品的价格导致出错）
-    private String phone;//收货人的联系电话
-    private String receiverName;//收货人的姓名
-    private String address;//收货人的收货地址（预防下单后客户修改收货地址导致出错）
-    private String createTime;//订单创建时间，格式：”yyyy-MM-dd HH:mm:ss”
-    private int state;//订单状态，进行中，关闭，成功
-//    private Contact contact;// 订单所对应的
+    @ManyToOne
+    private Contact contact;// 订单所对应的收货地址
+    private Date createTime;//订单创建时间，格式：”yyyy-MM-dd HH:mm:ss”
+    private int state;//订单状态，进行中，关闭，成功 TODO 改为enum类型
 
     @Override
     public String toString() {
@@ -44,9 +43,7 @@ public class Orders extends BaseEntity {
                 ", goods=" + goods +
                 ", buyCount=" + buyCount +
                 ", price=" + price +
-                ", phone='" + phone + '\'' +
-                ", receiverName='" + receiverName + '\'' +
-                ", address='" + address + '\'' +
+                ", contact=" + contact +
                 ", createTime='" + createTime + '\'' +
                 ", state=" + state +
                 '}';
@@ -59,17 +56,26 @@ public class Orders extends BaseEntity {
         this.ordersId = ordersId;
     }
 
-    public Orders(Customer customer, Goods goods, int buyCount, double price, String phone,
-                  String receiverName, String address, String createTime, int state) {
+    public Orders(Customer customer, Goods goods, int buyCount, double price, Contact contact, Date createTime, int state) {
         this.customer = customer;
         this.goods = goods;
         this.buyCount = buyCount;
         this.price = price;
-        this.phone = phone;
-        this.receiverName = receiverName;
-        this.address = address;
+        this.contact = contact;
         this.createTime = createTime;
         this.state = state;
+    }
+
+    public static int getStateContinue() {
+        return STATE_CONTINUE;
+    }
+
+    public static int getStateSucceed() {
+        return STATE_SUCCEED;
+    }
+
+    public static int getStateFailed() {
+        return STATE_FAILED;
     }
 
     public int getOrdersId() {
@@ -112,11 +118,19 @@ public class Orders extends BaseEntity {
         this.price = price;
     }
 
-    public String getCreateTime() {
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -126,29 +140,5 @@ public class Orders extends BaseEntity {
 
     public void setState(int state) {
         this.state = state;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(String realName) {
-        this.receiverName = receiverName;
     }
 }

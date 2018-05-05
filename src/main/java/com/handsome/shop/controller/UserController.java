@@ -1,14 +1,15 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.entity.Address;
-import com.handsome.shop.entity.Customer;
+import com.handsome.shop.dao.ContactDao;
 import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.SellerDao;
+import com.handsome.shop.entity.Contact;
+import com.handsome.shop.entity.Customer;
 import com.handsome.shop.framework.BaseController;
-import com.handsome.shop.service.AddressService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ public class UserController extends BaseController {
     @Resource
     private CustomerDao customerDao;
     @Resource
-    private AddressService addressService;
+    private ContactDao contactDao;
 
     @RequestMapping("/phoneExists")
     @ResponseBody
@@ -34,14 +35,19 @@ public class UserController extends BaseController {
         return customerDao.queryByPhone(phone) != null || sellerDao.queryByPhone(phone) != null;
     }
 
-    @PostMapping("/address")
+    @PostMapping("/contact")
     @ResponseBody
-    public boolean addAddress(HttpServletRequest request, String address) {
+    public boolean addContact(HttpServletRequest request,
+                              @RequestParam String phone,
+                              @RequestParam String receiver,
+                              @RequestParam String address,
+                              @RequestParam(defaultValue = "false") Boolean defaultContact) {
         Customer customer = getLoginCustomerFromSession(request);
-        addressService.addAddress(new Address(customer, address));
-        List<Address> addressList = getAddressListFromSession(request);
+        Contact contact = new Contact(customer, phone, receiver, address, defaultContact);
+        contactDao.insert(contact);
+        List<Contact> addressList = getAddressListFromSession(request);
         if (addressList != null) {
-            addressList.add(new Address(null, address));
+            addressList.add(contact);
         }
         return true;
     }

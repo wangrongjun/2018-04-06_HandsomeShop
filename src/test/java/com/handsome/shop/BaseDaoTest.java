@@ -27,18 +27,18 @@ public class BaseDaoTest {
     @Before
     public void initSession() {
         // initSession 和 closeSession 的代码，都是参考 Spring 的 OpenSessionInViewInterceptor
-        Session session = sessionFactory.openSession();
+//        Session session = sessionFactory.openSession();
 //        session.beginTransaction();
-        SessionHolder sessionHolder = new SessionHolder(session);
-        TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
+//        SessionHolder sessionHolder = new SessionHolder(session);
+//        TransactionSynchronizationManager.bindResource(sessionFactory, sessionHolder);
     }
 
     @After
     public void closeSession() {
-        SessionHolder sessionHolder = (SessionHolder) TransactionSynchronizationManager.unbindResource(sessionFactory);
-        Session session = sessionHolder.getSession();
+//        SessionHolder sessionHolder = (SessionHolder) TransactionSynchronizationManager.unbindResource(sessionFactory);
+//        Session session = sessionHolder.getSession();
 //        session.getTransaction().commit();
-        session.close();
+//        session.close();
     }
 
 }

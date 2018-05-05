@@ -87,6 +87,12 @@
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!--SpringMVC请求方法的参数校验-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.3.6.Final</version>
+        </dependency>
 
         <!--通用日志接口 slf4j-->
         <dependency>
@@ -106,6 +112,7 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.19</version>
         </dependency>
+
     </dependencies>
 
 </project>
