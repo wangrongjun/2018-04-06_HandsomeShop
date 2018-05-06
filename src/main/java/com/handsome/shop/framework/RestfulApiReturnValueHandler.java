@@ -20,6 +20,9 @@ public class RestfulApiReturnValueHandler implements HandlerMethodReturnValueHan
         return true;
     }
 
+    /**
+     * 注意：RestfulController不要注解@ResponseBody！否则不会进入这个方法！
+     */
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest) throws Exception {

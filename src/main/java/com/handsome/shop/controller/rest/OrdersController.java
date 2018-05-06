@@ -7,24 +7,28 @@ import com.handsome.shop.entity.Contact;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Goods;
 import com.handsome.shop.entity.Orders;
+import com.handsome.shop.entity.view.PageParam;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.framework.ReturnObjectToJsonIgnoreFields;
 import com.handsome.shop.util.Pager;
 import com.handsome.shop.util.RequestStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * by wangrongjun on 2018/5/1.
  */
 @Controller
-@RequestMapping("/rest/customer/{customerId}/orders")
+@RequestMapping("/rest/orders/customer/{customerId}")
 public class OrdersController extends BaseController {
 
     @Resource
@@ -36,19 +40,24 @@ public class OrdersController extends BaseController {
 
     @GetMapping
     @ReturnObjectToJsonIgnoreFields({"shop", "goodsImageList"})
-    public Pager<Orders> list(HttpServletRequest request, Integer pageIndex, Integer pageSize, String sortBy) {
-        Customer customer = getLoginCustomerFromSession(request);
-        Pager<Orders> pager = new Pager<>(pageIndex, pageSize, parseSortByList(sortBy));
-        ordersDao.queryByCustomerId(customer.getCustomerId(), pager);
+    public Pager<Orders> listByCustomer(@PathVariable int customerId,
+                                        @Valid PageParam pageParam, BindingResult pageParamResult) {
+        if (pageParamResult.hasErrors()) {
+            throw new IllegalArgumentException(pageParamResult.getAllErrors().get(0).getDefaultMessage());
+        }
+        Pager<Orders> pager = pageParam.toPager(Orders.class);
+        ordersDao.queryByCustomerId(customerId, pager);
         return pager;
     }
 
     @PostMapping
-    public RequestStatus create(HttpServletRequest request, int goodsId, int count, int contactId) {
+    public RequestStatus create(@PathVariable @NotNull Integer customerId,
+                                @NotNull Integer goodsId,
+                                @NotNull Integer count,
+                                @NotNull Integer contactId) {
         // TODO 把参数保存到Contact对象中
-        Customer customer = getLoginCustomerFromSession(request);
         Goods goods = goodsDao.queryById(goodsId);
-        Orders orders = new Orders(new Customer(customer.getCustomerId()), goods, count,
+        Orders orders = new Orders(new Customer(customerId), goods, count,
                 count * goods.getPrice(), new Contact(contactId), new Date(), Orders.STATE_CONTINUE);
         ordersDao.insert(orders);
         return RequestStatus.success();

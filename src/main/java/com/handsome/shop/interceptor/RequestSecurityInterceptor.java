@@ -16,6 +16,7 @@ public class RequestSecurityInterceptor extends HandlerInterceptorAdapter {
             "/orders",
             "/shopCar",
             "/user/head",
+            "/confirmOrders",
     };
 
     @Override

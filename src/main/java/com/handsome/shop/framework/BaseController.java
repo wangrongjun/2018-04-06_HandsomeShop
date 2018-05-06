@@ -3,11 +3,15 @@ package com.handsome.shop.framework;
 import com.handsome.shop.constant.C;
 import com.handsome.shop.entity.Contact;
 import com.handsome.shop.entity.Customer;
+import com.handsome.shop.entity.Orders;
 import com.handsome.shop.entity.Seller;
-import com.wangrj.java_lib.java_util.TextUtil;
+import com.handsome.shop.util.Pager;
+import com.wangrj.java_lib.java_util.ReflectUtil;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.MapBindingResult;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,26 +45,8 @@ public class BaseController {
         request.getSession().setAttribute(C.SESSION_ADDRESS_LIST, addressList);
     }
 
-    protected String[] parseSortByList(String sortByList) {
-        if (TextUtil.isEmpty(sortByList)) {
-            return null;
-        }
-        if (sortByList.contains(",")) {
-            List<String> resultList = new ArrayList<>();
-            String[] strings = sortByList.split(",");
-            for (String sortBy : strings) {
-                if (TextUtil.isNotBlank(sortBy)) {
-                    resultList.add(sortBy);
-                }
-            }
-            return resultList.toArray(new String[0]);
-        } else {
-            if (TextUtil.isNotBlank(sortByList)) {
-                return new String[]{sortByList};
-            } else {
-                return null;
-            }
-        }
+    protected BindingResult createBR() {
+        return new MapBindingResult(new HashMap<>(), null);
     }
 
 }

@@ -3,6 +3,7 @@ package com.handsome.shop.dao.impl;
 import com.handsome.shop.entity.Contact;
 import com.handsome.shop.dao.ContactDao;
 import com.handsome.shop.framework.HibernateDao;
+import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,7 @@ public class ContactDaoImpl extends HibernateDao<Contact> implements ContactDao 
 
     @Override
     public List<Contact> queryByCustomerId(int customerId) {
-        return query(Where.eq("customer.id", customerId));
+        return query(Q.where(Where.eq("customer.id", customerId)).orderBy("-defaultContact"));
     }
 
     @Override
@@ -24,7 +25,6 @@ public class ContactDaoImpl extends HibernateDao<Contact> implements ContactDao 
         String hql = "update Contact set defaultContact=0 where customer.customerId=?";
         executeUpdate(hql, customerId);
         hql = "update Contact set defaultContact=1 where customer.customerId=? and defaultContact=?";
-//        getSession().createQuery(hql);
         executeUpdate(hql, customerId);
     }
 

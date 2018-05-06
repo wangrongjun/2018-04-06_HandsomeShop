@@ -13,7 +13,15 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
     <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script>
+        var customer = ${requestScope.customerJson};
+        var goods = ${requestScope.goodsJson};
+        var contactList = ${requestScope.contactListJson};
+        var count = ${requestScope.count};
+    </script>
+    <script src="${pageContext.request.contextPath}/js/create_order.js"></script>
     <style type="text/css">
         /*---------总体--------*/
 
@@ -70,52 +78,44 @@
 
 <jsp:include page="header.jsp"/>
 
-<content>
+<content id="content">
 
-    <center><h1>创建订单-${requestScope.goods.goodsName}</h1></center>
+    <center><h1>创建订单 - {{goods.goodsName}}</h1></center>
 
     <div class="order_box">
         <div class="goods_img">
-            <img src="${requestScope.goods.goodsImageList[0].imageUrl}"/>
+            <img v-bind:src="goods.goodsImageList[0].imageUrl"/>
         </div>
         <div class="order_info">
-            <div>商品：<span>${requestScope.goods.goodsName}</span></div>
-            <div>单价：<span>${requestScope.goods.price}</span></div>
-            <div>数量：<span>${requestScope.count}</span></div>
+            <div>商品：<span>{{goods.goodsName}}</span></div>
+            <div>单价：<span>{{goods.price}}</span></div>
+            <div>数量：<span>{{count}}</span></div>
             <div>运费：<span>0</span></div>
-            <div>合计：<span>${requestScope.goods.price * requestScope.count}</span></div>
+            <div>合计：<span>{{goods.price * count}}</span></div>
 
-            <div><%--默认收货地址--%>
+            <%--收货地址--%>
+            <div>
                 收货地址：
                 <div class="contact_item">
                     <div>
-                        收件人：<span id="selectedContactReceiver"></span>
+                        收件人：
+                        <span v-if="selectedContact != null">{{selectedContact.receiver}}</span>
+                        &nbsp;&nbsp;&nbsp;
+                        收件人电话：
+                        <span v-if="selectedContact != null">{{selectedContact.phone}}</span>
                     </div>
                     <div>
-                        收件人电话：<span id="selectedContactPhone"></span>
-                    </div>
-                    <div>
-                        收件人地址：<span id="selectedContactAddress"></span>
+                        收件人地址：
+                        <span v-if="selectedContact != null">{{selectedContact.address}}</span>
                     </div>
                 </div>
-            </div><%--默认收货地址--%>
-
-            <%--<div>联系电话：<span id="phone">${requestScope.customer.phone}</span></div>--%>
-            <%--<div><a href="javascript:void(0);" onclick="updatePhone()">修改联系电话</a></div>--%>
-            <%--<div>收货人：<span id="receiverName">${sessionScope.customer.realName}</span></div>--%>
-            <%--<div><a href="javascript:void(0);" onclick="updateReceiverName()">修改收货人姓名</a></div>--%>
-            <%--<div>收货地址：--%>
-            <%--<div class="form-group">--%>
-            <%--<select class="form-control" id="address_list">--%>
-            <%--<c:forEach var="address" items="${sessionScope.addressList}">--%>
-            <%--<option value="${address.address}">${address.address}</option>--%>
-            <%--</c:forEach>--%>
-            <%--</select>--%>
-            <%--</div>--%>
-            <%--</div>--%>
+            </div>
+            <%--收货地址--%>
 
             <div class="goods_name">
-                <a href="javascript:void(0);" onclick="javascript:$('#mymodal').modal('toggle');">添加收货地址</a>
+                <a href="javascript:void(0)" onclick="$('#modal_add_contact').modal('toggle')">添加收货地址</a>
+                <br/>
+                <a href="javascript:void(0)" onclick="$('#modal_change_contact').modal('toggle')">更改收货地址</a>
             </div>
             <button onclick="createOrder()" class="btn btn-danger">确认付款</button>
         </div>
@@ -123,53 +123,33 @@
 
 </content>
 
-<!-- 模态弹出窗 -->
-<div class="modal fade" id="mymodal">
+<!-- 添加收货地址的模态弹出窗 -->
+<div class="modal fade" id="modal_add_contact">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">选择收货地址</h4>
+                <h4 class="modal-title">添加收货地址</h4>
             </div>
             <%--TODO 模态弹出窗在提交时会失效--%>
             <%--<form action="addAddress.do" method="post">--%>
             <div class="modal-body">
-                <button class="btn-info" onclick="showAddContact">添加收货地址</button>
                 <div>
                     <div>
-                        收件人：<input type="text" name="addContactReceiver"/>
+                        收件人名字：<input type="text" id="addContactReceiver"/>
                     </div>
                     <div>
-                        收件人电话：<input type="text" name="addContactPhone"/>
+                        收件人电话：<input type="text" id="addContactPhone"/>
                     </div>
                     <div>
-                        收件人地址：<input type="text" name="addContactAddress"/>
-                    </div>
-                    <div>
-                        <button class="btn-default" onclick="addContact">添加</button>
+                        收件人地址：<input type="text" id="addContactAddress"/>
                     </div>
                 </div>
-                <div><%--收货地址列表--%>
-                    收货地址：
-                    <div class="contact_item">
-                        <div>
-                            收件人：<span id="contactReceiver"></span>
-                        </div>
-                        <div>
-                            收件人电话：<span id="contactPhone"></span>
-                        </div>
-                        <div>
-                            收件人地址：<span id="contactAddress"></span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <div class="modal-footer">
-                <%--<input type="reset" class="btn btn-default"/>--%>
-                <button class="btn btn-primary" onclick="addAddress()" data-dismiss="modal">保存</button>
+                <button class="btn btn-primary" onclick="addContact()" data-dismiss="modal">添加</button>
             </div>
             <%--</form>--%>
         </div>
@@ -177,96 +157,9 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!-- 模态弹出窗 -->
+<!-- 添加收货地址的模态弹出窗 -->
 
 <jsp:include page="footer.jsp"/>
-
-<script type="text/javascript">
-    var contactList =${requestScope.contactList};
-
-    function showAddContact() {
-        var contactReceiver = $("#addContactReceiver").text();
-        var contactPhone = $("#addContactPhone").text();
-        var contactAddress = $("#addContactAddress").text();
-
-    }
-
-    function addContact() {
-        var contactReceiver = $("#addContactReceiver").text();
-        var contactPhone = $("#addContactPhone").text();
-        var contactAddress = $("#addContactAddress").text();
-        $.ajax({
-            url: "/orders",
-            type: "POST",
-
-        });
-
-        var address = $("#address").val();
-        if (!address || address === "") {
-            alert("不能为空");
-            return;
-        }
-        var url = "/address";
-        var data = {address: address};
-        $.post(url, data, function (data, status) {
-            if (status === "success") {
-                if (data === true) {
-                    alert("添加地址成功");
-                    var newOption = '<option value="' + address + '">' + address + '</option>';
-                    $(newOption).appendTo($("#address_list"));
-                } else {
-                    alert("添加地址失败");
-                }
-            } else {
-                window.location.href = "/login.jsp";
-            }
-        });
-    }
-
-    function createOrder() {
-        var address = $("#address_list").val();
-        if (!address || address === "") {
-            alert("请填写收货地址");
-            return;
-        }
-        var phone = $("#phone").text();
-        if (!phone || phone === "") {
-            alert("请填写收联系电话");
-            return;
-        }
-        var receiverName = $("#receiverName").text();
-        if (!receiverName || receiverName === "") {
-            alert("请填写收货人姓名");
-            return;
-        }
-
-        var url = "/orders";
-        var data = {address: address, phone: phone, receiverName: receiverName};
-        $.post(url, data, function (result, status) {
-            if (status === "success") {
-                if (result === true) {
-                    window.location.href = "/create_order_succeed.jsp";
-                } else {
-                    alert("订单创建失败");
-                }
-            } else {
-                alert("订单创建失败");
-            }
-        });
-    }
-
-    function updatePhone() {
-        var $phone = $("#phone");
-        var phone = prompt("输入收货人的联系电话", $phone.text());
-        $phone.text(phone);
-    }
-
-    function updateReceiverName() {
-        var $receiverName = $("#receiverName");
-        var receiverName = prompt("输入收货人的姓名", $receiverName.text());
-        $receiverName.text(receiverName);
-    }
-</script>
 
 </body>
 </html>

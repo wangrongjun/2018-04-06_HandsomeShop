@@ -10,10 +10,10 @@ public class TestClass {
 
     public static void main(String[] args) {
         HttpRequest.Response response = new HttpRequest().
-                setRequestMethod("POST").
-                setRequestBody("phone=155&receiver=abc".getBytes()).
-                request("http://localhost:8080/contact");
-        GsonUtil.printFormatJson(response);
+                setRequestMethod("GET").
+//                setRequestBody("goodsId=17&count=1&contactId=81".getBytes()).
+                request("http://localhost:8080/rest/orders/customer/25");
+        GsonUtil.printFormatJson(response.getResponseData());
     }
 
 }

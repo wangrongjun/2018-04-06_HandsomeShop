@@ -50,7 +50,8 @@ public class LoginController extends BaseController {
                 request.getSession().invalidate();
                 setLoginCustomerToSession(request, customer);
                 addCookie(response, phone, password, C.SESSION_CUSTOMER, autoLogin);
-                request.getRequestDispatcher("/").forward(request, response);
+//                request.getRequestDispatcher("/").forward(request, response);
+                response.sendRedirect("/");
                 return null;
             } else {
                 request.setAttribute("msg", "用户名或密码错误");

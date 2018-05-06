@@ -8,10 +8,12 @@ import com.handsome.shop.entity.Contact;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Goods;
 import com.handsome.shop.entity.Orders;
+import com.handsome.shop.entity.view.PageParam;
 import com.handsome.shop.framework.BaseController;
+import com.handsome.shop.util.GsonConverter;
 import com.handsome.shop.util.Pager;
+import com.wangrj.java_lib.java_util.GsonUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,8 +39,9 @@ public class BuyGoodsController extends BaseController {
     private OrdersController ordersController;
 
     @GetMapping("/orders")
-    public String listOrders(HttpServletRequest request, Integer pageIndex, Integer pageSize) {
-        Pager<Orders> pager = ordersController.list(request, pageIndex, pageSize, "-createTime");
+    public String listOrders(HttpServletRequest request) {
+        int customerId = getLoginCustomerFromSession(request).getCustomerId();
+        Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createTime"), createBR());
         request.setAttribute("ordersList", pager.getDataList());
         request.setAttribute("ordersCount", pager.getTotalCount());
         return "customer_order_list";
@@ -50,9 +53,10 @@ public class BuyGoodsController extends BaseController {
         Goods goods = goodsDao.queryById(goodsId);
         List<Contact> contactList = contactDao.queryByCustomerId(customer.getCustomerId());
 
-        request.setAttribute("goods", goods);
-        request.setAttribute("contactList", contactList);
-        request.setAttribute("count", count);// TODO 应该不需要放到session中
+        request.setAttribute("customerJson", GsonConverter.toJson(customer));
+        request.setAttribute("goodsJson", GsonConverter.toJson(goods, "goods"));
+        request.setAttribute("contactListJson", GsonConverter.toJson(contactList));
+        request.setAttribute("count", count);
         return "create_order";
     }
 

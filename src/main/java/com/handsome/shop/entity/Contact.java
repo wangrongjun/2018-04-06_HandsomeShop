@@ -4,6 +4,7 @@ package com.handsome.shop.entity;
 import com.handsome.shop.framework.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -23,6 +24,7 @@ public class Contact extends BaseEntity {
     private String receiver;// 收货人
     @NotNull
     private String address;// 收货人地址
+    @AssertFalse
     private boolean defaultContact;// 默认收货地址
 
     public Contact() {
