@@ -5,20 +5,21 @@
   Time: 19:46
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>下单完成</title>
+    <title>成功下单</title>
 </head>
 <body>
 <h1>你已成功下单！</h1>
-<div>商品：${sessionScope.orders.goods.goodsName}</div>
-<div>价格：${sessionScope.orders.price}</div>
-<div>购买数量：${sessionScope.orders.buyCount}</div>
-<div>创建时间：${sessionScope.orders.createTime}</div>
-<div>收货人：${sessionScope.orders.receiverName}</div>
-<div>联系电话：${sessionScope.orders.phone}</div>
-<div>收货地址：${sessionScope.orders.address}</div>
-<a href="index.jsp">返回首页</a>
+
+<button onclick="window.location.href='${pageContext.request.contextPath}/orders'" class="btn-default">
+    查看订单
+</button>
+
+<button onclick="window.location.href='${pageContext.request.contextPath}/'" class="btn-default">
+    返回首页
+</button>
+
 </body>
 </html>

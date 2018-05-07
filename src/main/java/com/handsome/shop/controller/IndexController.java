@@ -1,9 +1,9 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.entity.Goods;
-import com.handsome.shop.entity.GoodsType;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.GoodsTypeDao;
+import com.handsome.shop.entity.Goods;
+import com.handsome.shop.entity.GoodsType;
 import com.handsome.shop.framework.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +42,8 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping("/test")
-    public String test() {
+    public String test(@RequestParam Integer testId) {
+        System.out.println(testId);
         return "test";
     }
 

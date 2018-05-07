@@ -72,6 +72,18 @@
         .order_info .contact_item {
             border: 1px solid orangered;
         }
+
+        /*-----------收货地址------------*/
+
+        #select_contact_model .select_contact_item {
+            margin: 5px 10px;
+        }
+
+        #select_contact_model .select_contact_item:hover {
+            box-shadow: 0 0 10px gray;
+            background-color: #ccc;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +127,7 @@
             <div class="goods_name">
                 <a href="javascript:void(0)" onclick="$('#modal_add_contact').modal('toggle')">添加收货地址</a>
                 <br/>
-                <a href="javascript:void(0)" onclick="$('#modal_change_contact').modal('toggle')">更改收货地址</a>
+                <a href="javascript:void(0)" onclick="$('#modal_select_contact').modal('toggle')">更改收货地址</a>
             </div>
             <button onclick="createOrder()" class="btn btn-danger">确认付款</button>
         </div>
@@ -158,6 +170,40 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- 添加收货地址的模态弹出窗 -->
+
+<!-- 选择收货地址的模态弹出窗 -->
+<div class="modal fade" id="modal_select_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">选择收货地址</h4>
+            </div>
+            <div class="modal-body" id="select_contact_model">
+                <div v-for="(contact,index) in contactList" :key="contact.contactId"
+                     v-on:click="selectContact(contact.contactId)"
+                     class="select_contact_item" data-dismiss="modal">
+                    <strong>{{index + 1}}</strong>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    收件人名字：<span>{{contact.receiver}}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    收件人电话：<span>{{contact.phone}}</span>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    收件人地址：<span>{{contact.address}}</span>
+                </div>
+            </div>
+            <%--<div class="modal-footer">--%>
+            <%--<button class="btn btn-primary" onclick="addContact()" data-dismiss="modal">选择</button>--%>
+            <%--</div>--%>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- 选择收货地址的模态弹出窗 -->
 
 <jsp:include page="footer.jsp"/>
 

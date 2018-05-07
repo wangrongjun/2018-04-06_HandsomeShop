@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/customer_order_list.css"/>
     <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
 </head>
 <body>
 
@@ -35,7 +36,7 @@
                     <div>商品名称：${orders.goods.goodsName}</div>
                     <div>店鋪名称：${orders.goods.shop.shopName}</div>
                     <div>购买数量：${orders.buyCount}</div>
-                    <div>收货人：${orders.receiverName}</div>
+                    <div>收货人：${orders.receiver}</div>
                     <div>联系电话：${orders.phone}</div>
                     <div>收货地址：${orders.address}</div>
                     <div>创建时间：${orders.createTime}</div>

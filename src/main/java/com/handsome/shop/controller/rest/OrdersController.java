@@ -1,6 +1,5 @@
 package com.handsome.shop.controller.rest;
 
-import com.handsome.shop.dao.ContactDao;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.OrdersDao;
 import com.handsome.shop.entity.Contact;
@@ -14,14 +13,10 @@ import com.handsome.shop.util.Pager;
 import com.handsome.shop.util.RequestStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -35,8 +30,6 @@ public class OrdersController extends BaseController {
     private OrdersDao ordersDao;
     @Resource
     private GoodsDao goodsDao;
-    @Resource
-    private ContactDao addressDao;
 
     @GetMapping
     @ReturnObjectToJsonIgnoreFields({"shop", "goodsImageList"})
@@ -51,11 +44,10 @@ public class OrdersController extends BaseController {
     }
 
     @PostMapping
-    public RequestStatus create(@PathVariable @NotNull Integer customerId,
-                                @NotNull Integer goodsId,
-                                @NotNull Integer count,
-                                @NotNull Integer contactId) {
-        // TODO 把参数保存到Contact对象中
+    public RequestStatus create(@PathVariable Integer customerId,
+                                @RequestParam Integer goodsId,
+                                @RequestParam Integer count,
+                                @RequestParam Integer contactId) {
         Goods goods = goodsDao.queryById(goodsId);
         Orders orders = new Orders(new Customer(customerId), goods, count,
                 count * goods.getPrice(), new Contact(contactId), new Date(), Orders.STATE_CONTINUE);

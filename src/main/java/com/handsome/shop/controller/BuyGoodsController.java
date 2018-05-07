@@ -12,7 +12,6 @@ import com.handsome.shop.entity.view.PageParam;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.util.GsonConverter;
 import com.handsome.shop.util.Pager;
-import com.wangrj.java_lib.java_util.GsonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
