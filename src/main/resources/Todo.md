@@ -13,8 +13,9 @@
 * 改进项目：HibernateDao 的 id 类型参数化
 * 改进项目：使用 Hibernate 提供的 JdbcTemplate
 * 改进项目：在数据库中保存图片，编写一个请求方法返回图片
-* Address表改名为Contact
-* Orders的receiver和phone改为contact
+* 无限分类（闭包集实现树型结构）
+* [完成]Address表改名为Contact
+* [完成]Orders的receiver和phone改为contact
 * 给每个实体类加上createdOn，modifiedOn，isObsolete
 * 去掉所有 center 标签
 * 文件上传使用SpringMVC的框架
