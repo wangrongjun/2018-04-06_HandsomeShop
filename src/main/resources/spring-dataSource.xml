@@ -54,6 +54,7 @@
     </tx:advice>
     <aop:config proxy-target-class="true">
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.HibernateDao.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.OrdersDaoImpl.*(..))"/>
     </aop:config>
 
     <beans profile="development">

@@ -13,7 +13,7 @@ public class Shop extends BaseEntity {
     @Id
     @GeneratedValue
     private int shopId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Seller seller;
     private String shopName;
     private String description;

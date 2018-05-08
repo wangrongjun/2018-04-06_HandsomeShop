@@ -69,6 +69,12 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!--Spring的Jpa接口数据读写-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.0.6.RELEASE</version>
+        </dependency>
         <!--Spring与Junit整合的测试框架-->
         <dependency>
             <groupId>org.springframework</groupId>

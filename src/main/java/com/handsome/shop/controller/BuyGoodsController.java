@@ -41,8 +41,8 @@ public class BuyGoodsController extends BaseController {
     public String listOrders(HttpServletRequest request) {
         int customerId = getLoginCustomerFromSession(request).getCustomerId();
         Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createTime"), createBR());
-        request.setAttribute("ordersList", pager.getDataList());
         request.setAttribute("ordersCount", pager.getTotalCount());
+        request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(), "Shop.seller", "GoodsImage.goods"));
         return "customer_order_list";
     }
 

@@ -1,14 +1,14 @@
 package com.handsome.shop.dao.impl;
 
-import com.handsome.shop.entity.Orders;
 import com.handsome.shop.dao.OrdersDao;
+import com.handsome.shop.entity.Orders;
 import com.handsome.shop.framework.HibernateDao;
 import com.handsome.shop.util.Pager;
-import com.wangrj.java_lib.hibernate.Q;
 import com.wangrj.java_lib.hibernate.Where;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import java.util.List;
 
 /**
@@ -19,6 +19,7 @@ public class OrdersDaoImpl extends HibernateDao<Orders> implements OrdersDao {
 
     @Override
     public List<Orders> queryByCustomerId(int customerId, Pager<Orders> pager) {
+        CriteriaQuery<Orders> query = getSession().getCriteriaBuilder().createQuery(Orders.class);
         return query(Where.eq("customer.id", customerId), pager);
     }
 
