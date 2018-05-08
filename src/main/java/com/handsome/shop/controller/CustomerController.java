@@ -4,18 +4,14 @@ import com.handsome.shop.controller.rest.OrdersController;
 import com.handsome.shop.dao.ContactDao;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.OrdersDao;
-import com.handsome.shop.entity.Contact;
-import com.handsome.shop.entity.Customer;
-import com.handsome.shop.entity.Goods;
-import com.handsome.shop.entity.Orders;
+import com.handsome.shop.dao.ShopDao;
+import com.handsome.shop.entity.*;
 import com.handsome.shop.entity.view.PageParam;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.util.GsonConverter;
 import com.handsome.shop.util.Pager;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,16 +22,33 @@ import java.util.List;
  * by wangrongjun on 2018/5/1.
  */
 @Controller
-public class BuyGoodsController extends BaseController {
+public class CustomerController extends BaseController {
 
     @Resource
-    private GoodsDao goodsDao;// TODO 把 Dao 换成 RestController
+    private GoodsDao goodsDao;
     @Resource
-    private ContactDao contactDao;// TODO 把 Dao 换成 RestController
+    private ContactDao contactDao;
     @Resource
-    private OrdersDao ordersDao;// TODO 把 Dao 换成 RestController
+    private OrdersDao ordersDao;
+    @Resource
+    private ShopDao shopDao;
     @Resource
     private OrdersController ordersController;
+
+    @RequestMapping("/shop/{shopId}")
+    public String showShopDetail(HttpServletRequest request,
+                                 @PathVariable int shopId,
+                                 @RequestParam(defaultValue = "0") int pageIndex) {
+        int totalCount = goodsDao.queryCountByShopId(shopId);
+        List<Goods> goodsList = goodsDao.queryByShopId(shopId, pageIndex * 12, 12);
+        Shop shop = shopDao.queryById(shopId);
+
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("totalCount", totalCount);
+        request.setAttribute("goodsList", goodsList);
+        request.setAttribute("shop", shop);
+        return "shop_detail";
+    }
 
     @GetMapping("/orders")
     public String listOrders(HttpServletRequest request) {
@@ -86,13 +99,6 @@ public class BuyGoodsController extends BaseController {
 
         request.getSession().setAttribute("orders", orders);
         return true;
-    }
-
-    @GetMapping("/showContacts")
-    public String showContacts(HttpServletRequest request) {
-        Customer customer = getLoginCustomerFromSession(request);
-        // TODO
-        return "aaa";
     }
 
 }

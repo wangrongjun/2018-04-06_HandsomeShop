@@ -2,6 +2,7 @@
 <%@ page import="com.handsome.shop.dao.OrdersDao" %>
 <%@ page import="com.handsome.shop.dao.ShopCarDao" %>
 <%@ page import="com.handsome.shop.framework.SpringContextHolder" %>
+<%@ page import="com.handsome.shop.entity.Seller" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangrongjun
@@ -23,12 +24,13 @@
         <a href="${pageContext.request.contextPath}/">首页</a>
         <%
             Customer customer = (Customer) request.getSession().getAttribute("customer");
-            if (customer == null) {
+            Seller seller = (Seller) request.getSession().getAttribute("seller");
+            if (customer == null && seller == null) {
         %>
         <a href="${pageContext.request.contextPath}/login.jsp">登录</a>
         <a href="${pageContext.request.contextPath}/register.jsp">注册</a>
         <%
-        } else {
+        } else if (customer != null && seller == null) {// 顾客登录
             ShopCarDao shopCarDao = SpringContextHolder.getBean(ShopCarDao.class);
             OrdersDao ordersDao = SpringContextHolder.getBean(OrdersDao.class);
             long shopCarCount = shopCarDao.queryCountByCustomerId(customer.getCustomerId());
@@ -38,8 +40,18 @@
         </a>
         <a href="${pageContext.request.contextPath}/shopCar">我的购物车(<%=shopCarCount%>)</a>
         <a href="${pageContext.request.contextPath}/orders">我的订单(<%=ordersCount%>)</a>
-        <a href="${pageContext.request.contextPath}/showContacts">我的收货地址</a>
+        <a href="${pageContext.request.contextPath}/contact">我的收货地址</a>
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
+        <%
+        } else if (customer == null) {// 商家登录
+        %>
+        <a href="#"><%=seller.getNickname()%>
+        </a>
+        <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
+        <%
+        } else {
+        %>
+        程序异常！
         <%
             }
         %>
