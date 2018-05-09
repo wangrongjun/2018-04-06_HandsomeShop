@@ -23,7 +23,7 @@ public class Picture extends BaseEntity {
     private Integer pictureId;
     @Enumerated(EnumType.STRING)
     private PictureType pictureType;
-    private Blob picture;
+    private Blob pictureData;
 
     public Picture() {
     }
@@ -32,8 +32,32 @@ public class Picture extends BaseEntity {
         this.pictureId = pictureId;
     }
 
-    public Picture(PictureType pictureType, Blob picture) {
+    public Picture(PictureType pictureType, Blob pictureData) {
         this.pictureType = pictureType;
-        this.picture = picture;
+        this.pictureData = pictureData;
+    }
+
+    public Integer getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(Integer pictureId) {
+        this.pictureId = pictureId;
+    }
+
+    public PictureType getPictureType() {
+        return pictureType;
+    }
+
+    public void setPictureType(PictureType pictureType) {
+        this.pictureType = pictureType;
+    }
+
+    public Blob getPictureData() {
+        return pictureData;
+    }
+
+    public void setPictureData(Blob pictureData) {
+        this.pictureData = pictureData;
     }
 }

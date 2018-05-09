@@ -1,6 +1,7 @@
 package com.handsome.shop.entity;
 
 import com.handsome.shop.framework.BaseEntity;
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -13,11 +14,6 @@ import java.util.List;
 @Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Seller extends BaseEntity {
 
-    @Transient
-    public static final int GENDER_WOMAN = 0;
-    @Transient
-    public static final int GENDER_MAN = 1;
-
     @Id
     @GeneratedValue
     private int sellerId;
@@ -25,26 +21,12 @@ public class Seller extends BaseEntity {
     private String password;
     private String realName;
     private String nickname;
-    private int gender;
-    private String headUrl;
+    @Check(constraints = "gender IS NULL OR gender = '男' OR gender = '女'")
+    private String gender;
+    @ManyToOne
+    private Picture head;
     @OneToMany
     private List<Shop> shopList;
-
-    public Seller() {
-    }
-
-    public Seller(int sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public Seller(String phone, String password, String realName, String nickname, int gender, String headUrl) {
-        this.phone = phone;
-        this.password = password;
-        this.realName = realName;
-        this.nickname = nickname;
-        this.gender = gender;
-        this.headUrl = headUrl;
-    }
 
     @Override
     public String toString() {
@@ -54,9 +36,26 @@ public class Seller extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", realName='" + realName + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", gender=" + gender +
-                ", headUrl='" + headUrl + '\'' +
+                ", gender='" + gender + '\'' +
+                ", head=" + head +
+                ", shopList=" + shopList +
                 '}';
+    }
+
+    public Seller() {
+    }
+
+    public Seller(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public Seller(String phone, String password, String realName, String nickname, String gender, Picture head) {
+        this.phone = phone;
+        this.password = password;
+        this.realName = realName;
+        this.nickname = nickname;
+        this.gender = gender;
+        this.head = head;
     }
 
     public int getSellerId() {
@@ -99,20 +98,20 @@ public class Seller extends BaseEntity {
         this.nickname = nickname;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public String getHeadUrl() {
-        return headUrl;
+    public Picture getHead() {
+        return head;
     }
 
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl;
+    public void setHead(Picture head) {
+        this.head = head;
     }
 
     public List<Shop> getShopList() {

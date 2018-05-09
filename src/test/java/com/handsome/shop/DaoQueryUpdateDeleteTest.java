@@ -39,13 +39,13 @@ public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
     @Test
     public void testQuery() {
 
-        List<Orders> ordersList = ordersDao.queryByCustomerId(customerDao.queryByPhone("15521302230").getCustomerId(), null);
-        for (Orders orders : ordersList) {
-            LogUtil.print(orders);
-            LogUtil.print(orders.getGoods());
-            LogUtil.print(orders.getGoods().getGoodsImageList());
-            LogUtil.print("-------------------------------");
-        }
+//        List<Orders> ordersList = ordersDao.queryByCustomerId(customerDao.queryByPhone("15521302230").getCustomerId(), null);
+//        for (Orders orders : ordersList) {
+//            LogUtil.print(orders);
+//            LogUtil.print(orders.getGoods());
+//            LogUtil.print(orders.getGoods().getGoodsImageList());
+//            LogUtil.print("-------------------------------");
+//        }
 
         LogUtil.printEntity(customerDao.queryByPhone("15521302230"));
         LogUtil.printEntity(customerDao.countGender());
@@ -64,12 +64,12 @@ public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
         LogUtil.printEntity(shopCarDao.queryCountByCustomerId(25));
 
         System.out.println("******************************");
-        Goods 菜心 = goodsDao.queryBySearchWord("菜心", 0, 1).get(0);
-        List<GoodsImage> goodsImageList = 菜心.getGoodsImageList();
+//        Goods 菜心 = goodsDao.queryBySearchWord("菜心", 0, 1).get(0);
+//        List<GoodsImage> goodsImageList = 菜心.getGoodsImageList();
 //        List<GoodsImage> goodsImageList = goodsImageDao.queryByGoodsId(菜心);
-        for (GoodsImage goodsImage : goodsImageList) {
-            LogUtil.print(goodsImage);
-        }
+//        for (GoodsImage goodsImage : goodsImageList) {
+//            LogUtil.print(goodsImage);
+//        }
 
 //        LogUtil.printEntity(goodsDao.queryCountByShopId(13));
 //        LogUtil.printEntity(goodsDao.queryByShopId(13, 0, 0), "goodsType", "shop", "goodsImageList");

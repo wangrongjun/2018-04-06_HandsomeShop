@@ -27,14 +27,14 @@
     <div class="top">
         <div class="img_box">
             <ul>
-                <c:forEach var="image" items="${requestScope.goods.goodsImageList}">
-                    <li><img src="${image.imageUrl}"></li>
+                <c:forEach var="picture" items="${requestScope.goods.pictureList}">
+                    <li><img src="/rest/picture/${picture.pictureId}"></li>
                 </c:forEach>
                 <%--<li><img src="${pageContext.request.contextPath}/admin/img/goods_1.jpg"></li>--%>
             </ul>
             <ol>
-                <c:forEach var="image" items="${requestScope.goods.goodsImageList}">
-                    <li><img src="${image.imageUrl}"></li>
+                <c:forEach var="picture" items="${requestScope.goods.pictureList}">
+                    <li><img src="/rest/picture/${picture.pictureId}"></li>
                 </c:forEach>
             </ol>
         </div>
@@ -76,7 +76,7 @@
 
     <div class="seller_box">
         <div class="seller_head">
-            <img src="${requestScope.goods.shop.headUrl}"/>
+            <img src="/rest/picture/${requestScope.goods.shop.head.pictureId}"/>
         </div>
         <div class="right_box">
             <div class="seller_info">
@@ -103,12 +103,12 @@
         <c:forEach var="evaluate" items="${requestScope.evaluateList}">
             <div class="item_box">
                 <div class="head">
-                    <img src="${evaluate.orders.customer.headUrl}"/>
+                    <img src="/rest/picture/${evaluate.orders.customer.head.pictureId}"/>
                 </div>
                 <div class="right">
                     <div>
                         <div class="gender">
-                            <img src="${evaluate.orders.customer.gender==1?
+                            <img src="${evaluate.orders.customer.gender=='男'?
                             "/img/ic_gender_man.png":"/img/ic_gender_woman.png"}"/>
                         </div>
                         <div class="evaluate">
@@ -140,11 +140,11 @@
             </div>
             <div class="modal-body">
                 <div style="height: 100px;width: 100px">
-                    <img src="${requestScope.goods.shop.seller.headUrl}" style="height: 100% ;width: 100%;">
+                    <img src="/rest/picture/${requestScope.goods.shop.seller.head.pictureId}" style="height: 100% ;width: 100%;">
                 </div>
                 <div>商家昵称：${requestScope.goods.shop.seller.nickname}</div>
                 <div>商家姓名：${requestScope.goods.shop.seller.realName}</div>
-                <div>商家性别：${requestScope.goods.shop.seller.gender==1?"男":"女"}</div>
+                <div>商家性别：${requestScope.goods.shop.seller.gender}</div>
                 <div>商家电话：${requestScope.goods.shop.seller.phone}</div>
             </div>
             <div class="modal-footer">

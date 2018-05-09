@@ -4,7 +4,8 @@
 * 把按分类来查询的方法合并到搜索方法中
 * 商品的无限级分类
 * 商品的属性组合以及库存
-* 商家的商品管理，订单管理
+* 商家的商品管理
+* 商家的订单管理
 * 用户的手机号保存到Address中，登录就通过用户名
 
 ## 技术改进
@@ -12,12 +13,12 @@
 * [完成]改进项目：改为使用 SpringMVC 的模式
 * 改进项目：HibernateDao 的 id 类型参数化
 * 改进项目：使用 Hibernate 提供的 JdbcTemplate
-* 改进项目：在数据库中保存图片，编写一个请求方法返回图片
+* [完成]改进项目：在数据库中保存图片，编写一个请求方法返回图片
 * 无限分类（闭包集实现树型结构）
 * [完成]Address表改名为Contact
 * [完成]Orders的receiver和phone改为contact
 * [完成]给每个实体类加上createdOn，modifiedOn，isObsolete
-* 去掉所有 center 标签
+* [完成]去掉所有 center 标签
 * 文件上传使用SpringMVC的框架
 * 使用Spring的权限认证功能，认证每个请求的合法性
 * 密码使用md5加密保存

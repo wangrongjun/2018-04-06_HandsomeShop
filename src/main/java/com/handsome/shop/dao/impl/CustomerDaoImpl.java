@@ -29,13 +29,6 @@ public class CustomerDaoImpl extends HibernateDao<Customer> implements CustomerD
     }
 
     @Override
-    public boolean updateHeadUrl(int customerId, String headUrl) {
-        Customer customer = queryById(customerId);
-        customer.setHeadUrl(headUrl);
-        return update(customer);
-    }
-
-    @Override
     public List<Map<String, Object>> countGender() {
         Session session = getSession();
         String hql = "select gender,count(customerId) from Customer group by gender";

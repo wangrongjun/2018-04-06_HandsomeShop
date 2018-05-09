@@ -19,21 +19,8 @@ public class Shop extends BaseEntity {
     private Seller seller;
     private String shopName;
     private String description;
-    private String headUrl;
-
-    public Shop() {
-    }
-
-    public Shop(int shopId) {
-        this.shopId = shopId;
-    }
-
-    public Shop(Seller seller, String shopName, String description, String headUrl) {
-        this.seller = seller;
-        this.shopName = shopName;
-        this.description = description;
-        this.headUrl = headUrl;
-    }
+    @ManyToOne
+    private Picture head;
 
     @Override
     public String toString() {
@@ -42,8 +29,22 @@ public class Shop extends BaseEntity {
                 ", seller=" + seller +
                 ", shopName='" + shopName + '\'' +
                 ", description='" + description + '\'' +
-                ", headUrl='" + headUrl + '\'' +
+                ", head=" + head +
                 '}';
+    }
+
+    public Shop() {
+    }
+
+    public Shop(int shopId) {
+        this.shopId = shopId;
+    }
+
+    public Shop(Seller seller, String shopName, String description, Picture head) {
+        this.seller = seller;
+        this.shopName = shopName;
+        this.description = description;
+        this.head = head;
     }
 
     public int getShopId() {
@@ -78,11 +79,11 @@ public class Shop extends BaseEntity {
         this.description = description;
     }
 
-    public String getHeadUrl() {
-        return headUrl;
+    public Picture getHead() {
+        return head;
     }
 
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl;
+    public void setHead(Picture head) {
+        this.head = head;
     }
 }

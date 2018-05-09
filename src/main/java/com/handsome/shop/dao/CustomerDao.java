@@ -13,8 +13,6 @@ public interface CustomerDao extends Dao<Customer> {
 
     Customer queryByPhone(String phone);
 
-    boolean updateHeadUrl(int customerId, String headUrl);
-
     /**
      * @return map contains key "gender", "count"
      */

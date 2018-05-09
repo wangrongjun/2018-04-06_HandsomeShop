@@ -17,35 +17,31 @@ public class Goods extends BaseEntity {
     // TODO 加一个字段：firstImage，那么在查询商品列表时，就不用为每个商品查询图片列表。适当的冗余可以极大地提高效率。
     // TODO 加一个字段：sellCount，那么在查询商品列表时，就不用为每个商品查询总销量。适当的冗余可以极大地提高效率。
 
-    @Transient
-    private int sellCount;
-
     @Id
     @GeneratedValue
     private int goodsId;
     private String goodsName;
     private String description;
+    private double price;
     private int remainCount;// 库存
     @ManyToOne
     private GoodsType goodsType;
     @ManyToOne
     private Shop shop;//Shop外键，所属的商店
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "goodsId")
-    private List<GoodsImage> goodsImageList;
-    private double price;
+    @ManyToMany
+    private List<Picture> pictureList;
 
     @Override
     public String toString() {
         return "Goods{" +
-                "sellCount=" + sellCount +
-                ", goodsId=" + goodsId +
+                "goodsId=" + goodsId +
                 ", goodsName='" + goodsName + '\'' +
                 ", description='" + description + '\'' +
+                ", price=" + price +
                 ", remainCount=" + remainCount +
                 ", goodsType=" + goodsType +
                 ", shop=" + shop +
-                ", price=" + price +
+                ", pictureList=" + pictureList +
                 '}';
     }
 
@@ -56,21 +52,14 @@ public class Goods extends BaseEntity {
         this.goodsId = goodsId;
     }
 
-    public Goods(String goodsName, String description, int remainCount, GoodsType goodsType, double price) {
+    public Goods(String goodsName, String description, double price, int remainCount, GoodsType goodsType, Shop shop, List<Picture> pictureList) {
         this.goodsName = goodsName;
         this.description = description;
-        this.remainCount = remainCount;
-        this.goodsType = goodsType;
         this.price = price;
-    }
-
-    public Goods(String goodsName, String description, int remainCount, GoodsType goodsType, Shop shop, double price) {
-        this.goodsName = goodsName;
-        this.description = description;
         this.remainCount = remainCount;
         this.goodsType = goodsType;
         this.shop = shop;
-        this.price = price;
+        this.pictureList = pictureList;
     }
 
     public int getGoodsId() {
@@ -97,36 +86,12 @@ public class Goods extends BaseEntity {
         this.description = description;
     }
 
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
-
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public List<GoodsImage> getGoodsImageList() {
-        return goodsImageList;
-    }
-
-    public void setGoodsImageList(List<GoodsImage> goodsImageList) {
-        this.goodsImageList = goodsImageList;
-    }
-
-    public GoodsType getGoodsType() {
-        return goodsType;
-    }
-
-    public void setGoodsType(GoodsType goodsType) {
-        this.goodsType = goodsType;
     }
 
     public int getRemainCount() {
@@ -137,12 +102,27 @@ public class Goods extends BaseEntity {
         this.remainCount = remainCount;
     }
 
-    public int getSellCount() {
-        return sellCount;
+    public GoodsType getGoodsType() {
+        return goodsType;
     }
 
-    public void setSellCount(int sellCount) {
-        this.sellCount = sellCount;
+    public void setGoodsType(GoodsType goodsType) {
+        this.goodsType = goodsType;
     }
 
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public List<Picture> getPictureList() {
+        return pictureList;
+    }
+
+    public void setPictureList(List<Picture> pictureList) {
+        this.pictureList = pictureList;
+    }
 }

@@ -2,9 +2,13 @@ package com.handsome.shop.entity;
 
 
 import com.handsome.shop.framework.BaseEntity;
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -13,11 +17,6 @@ import javax.persistence.*;
 @Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Customer extends BaseEntity {
 
-    @Transient
-    public static final int GENDER_WOMAN = 0;
-    @Transient
-    public static final int GENDER_MAN = 1;
-
     @Id
     @GeneratedValue
     private int customerId;
@@ -25,8 +24,10 @@ public class Customer extends BaseEntity {
     private String password;
     private String realName;
     private String nickname;
-    private int gender;
-    private String headUrl;
+    @Check(constraints = "gender IS NULL OR gender = '男' OR gender = '女'")
+    private String gender;
+    @ManyToOne
+    private Picture head;
 
     @Override
     public String toString() {
@@ -37,7 +38,7 @@ public class Customer extends BaseEntity {
                 ", realName='" + realName + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", gender=" + gender +
-                ", headUrl='" + headUrl + '\'' +
+                ", head=" + head +
                 '}';
     }
 
@@ -48,14 +49,13 @@ public class Customer extends BaseEntity {
         this.customerId = customerId;
     }
 
-    public Customer(String phone, String password, String realName, String nickname,
-                    int gender, String headUrl) {
+    public Customer(String phone, String password, String realName, String nickname, String gender, Picture head) {
         this.phone = phone;
         this.password = password;
         this.realName = realName;
         this.nickname = nickname;
         this.gender = gender;
-        this.headUrl = headUrl;
+        this.head = head;
     }
 
     public int getCustomerId() {
@@ -66,36 +66,12 @@ public class Customer extends BaseEntity {
         this.customerId = customerId;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getHeadUrl() {
-        return headUrl;
-    }
-
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl;
     }
 
     public String getPassword() {
@@ -112,5 +88,29 @@ public class Customer extends BaseEntity {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Picture getHead() {
+        return head;
+    }
+
+    public void setHead(Picture head) {
+        this.head = head;
     }
 }

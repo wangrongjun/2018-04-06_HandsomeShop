@@ -8,6 +8,7 @@ import com.handsome.shop.dao.ShopDao;
 import com.handsome.shop.entity.*;
 import com.handsome.shop.entity.view.PageParam;
 import com.handsome.shop.framework.BaseController;
+import com.handsome.shop.framework.ReturnObjectToJsonIgnoreFields;
 import com.handsome.shop.util.GsonConverter;
 import com.handsome.shop.util.Pager;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,14 @@ public class CustomerController extends BaseController {
     private ShopDao shopDao;
     @Resource
     private OrdersController ordersController;
+
+    @GetMapping("/contact")
+    @ReturnObjectToJsonIgnoreFields("customer")
+    public List<Contact> listContacts(HttpServletRequest request) {
+        Customer customer = getLoginCustomerFromSession(request);
+        // TODO 创建一个显示所有收货地址的页面
+        return contactDao.queryByCustomerId(customer.getCustomerId());
+    }
 
     @RequestMapping("/shop/{shopId}")
     public String showShopDetail(HttpServletRequest request,

@@ -29,8 +29,6 @@ public class GoodsImageController extends BaseController {
 
     @Resource
     private GoodsImageDao goodsImageDao;
-    @Resource
-    private CustomerDao customerDao;
 
     @PostMapping("/user/head")
     public String uploadUserHead(HttpServletRequest request) {
@@ -74,8 +72,8 @@ public class GoodsImageController extends BaseController {
 
         switch (state) {
             case 0:
-                customerDao.updateHeadUrl(customer.getCustomerId(), url);
-                customer.setHeadUrl(url);
+//                customerDao.updateHeadUrl(customer.getCustomerId(), url);
+//                customer.setHeadUrl(url);
                 request.setAttribute("msg", "上传成功");
                 break;
             case 1:
