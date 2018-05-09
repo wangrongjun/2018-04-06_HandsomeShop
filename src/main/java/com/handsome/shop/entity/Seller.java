@@ -26,6 +26,7 @@ public class Seller extends BaseEntity {
     @ManyToOne
     private Picture head;
     @OneToMany
+    @JoinColumn(name = "sellerId")
     private List<Shop> shopList;
 
     @Override

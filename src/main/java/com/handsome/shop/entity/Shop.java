@@ -16,6 +16,7 @@ public class Shop extends BaseEntity {
     @GeneratedValue
     private int shopId;
     @ManyToOne
+    @JoinColumn(name = "sellerId")
     private Seller seller;
     private String shopName;
     private String description;
