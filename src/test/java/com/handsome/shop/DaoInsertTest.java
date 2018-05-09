@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.sql.Blob;
 import java.util.Date;
 
 /**
@@ -37,6 +38,8 @@ public class DaoInsertTest extends BaseDaoTest {
     private EvaluateDao evaluateDao;
     @Resource
     private ContactDao addressDao;
+    @Resource
+    private PictureDao pictureDao;
 
     /**
      * GoodsType  1-10
@@ -163,15 +166,17 @@ public class DaoInsertTest extends BaseDaoTest {
         goodsImageDao.insert(new GoodsImage(可乐, "/admin/img/goods_19.jpg"));
 
         // 添加额外的无意义数据
-        Shop shop = new Shop(张三, "张三的商店", "张三的商店的描述", "/admin/img/shop_1.jpg");
-        shopDao.insert(shop);
-        for (int i = 1; i <= 103; i++) {
-            Goods goods = new Goods("商品" + i, "商品描述" + i,
-                    i, goodsTypeDao.queryById(i % 10 + 1), shop, 500 + i * 100);
-            goodsDao.insert(goods);
-            GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
-            goodsImageDao.insert(goodsImage);
-        }
+//        Shop shop = new Shop(张三, "张三的商店", "张三的商店的描述", "/admin/img/shop_1.jpg");
+//        shopDao.insert(shop);
+//        for (int i = 1; i <= 103; i++) {
+//            Goods goods = new Goods("商品" + i, "商品描述" + i,
+//                    i, goodsTypeDao.queryById(i % 10 + 1), shop, 500 + i * 100);
+//            goodsDao.insert(goods);
+//            GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
+//            goodsImageDao.insert(goodsImage);
+//        }
+
+        pictureDao.insert(new Picture());
 
         session.close();
     }
