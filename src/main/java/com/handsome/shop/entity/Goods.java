@@ -2,6 +2,7 @@ package com.handsome.shop.entity;
 
 
 import com.handsome.shop.framework.BaseEntity;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/16.
  */
 @Entity
+@Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Goods extends BaseEntity {
 
     // TODO 加一个字段：firstImage，那么在查询商品列表时，就不用为每个商品查询图片列表。适当的冗余可以极大地提高效率。

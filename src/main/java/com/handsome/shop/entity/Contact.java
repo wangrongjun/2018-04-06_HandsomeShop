@@ -2,6 +2,7 @@ package com.handsome.shop.entity;
 
 
 import com.handsome.shop.framework.BaseEntity;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.AssertFalse;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
  * by wangrongjun on 2017/6/19.
  */
 @Entity
+@Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Contact extends BaseEntity {
 
     @Id

@@ -6,46 +6,64 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Title</title>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
+    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/js/vue-router.js"></script>
 </head>
 <body>
 
-<div>url: <input type="text" value="/rest/orders/customer/25" id="url"/></div>
-<div>
-    method:
-    <br/>
-    <input type="radio" value="GET" id="methodGet" name="method" checked/><label for="methodGet">GET</label><br/>
-    <input type="radio" value="POST" id="methodPost" name="method"/><label for="methodPost">POST</label><br/>
-</div>
-<div>requestBody: <input type="text" id="requestBody"/></div>
-<div>
-    <button onclick="submit()">Submit</button>
+<div id="app">
+    <button v-on:click="font++">放大字体</button>
+    <button v-on:click="font--">缩小字体</button>
+    {{font}}
+    <div v-bind:style="{fontSize: font + 'em'}">{{hello}}</div>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
 </div>
 
-<div id="vm">
-    <div>{{abc.def}}</div>
-</div>
-<button onclick="changeUser()">改变用户</button>
-
-<script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/vue.js"></script>
 <script>
-    var vm;
-    $(function () {
-        vm = new Vue({
-            el: "#vm",
-            data: {
-                abc: {def: "wang"},
-            }
-        });
+    const router = new VueRouter({
+        routes: [
+            {
+                path: "/wang",
+                component: {
+                    template: `
+                        <transition name="slide-left">
+                            <div>Wang id: {{$route.query}} hash:{{$route.hash}}</div>
+                        </transition>
+                    `
+                }
+            },
+            {
+                path: "/footer",
+                component: {
+                    template: "<div>#footer</div>"
+                }
+            },
+        ]
     });
 
-    function changeUser() {
-        vm.abc = {def: "rong"};
-    }
+    // 定义一个名为 button-counter 的新组件
+    Vue.component('button-counter', {
+        data: function () {
+            return {count: 1};
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    });
+    new Vue({
+        el: "#app",
+        // router: router,
+        data: {
+            font: 2,
+            hello: "Hello World!!!"
+        },
+    });
 </script>
 
 </body>

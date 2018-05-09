@@ -12,7 +12,7 @@
     <title>我的订单</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/customer_order_list.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <script>

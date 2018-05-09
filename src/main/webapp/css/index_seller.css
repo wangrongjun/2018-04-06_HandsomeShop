@@ -1,0 +1,29 @@
+#title {
+    text-align: center;
+}
+
+/*商店总体布局*/
+.shop_box {
+    /*width: 90%;*/
+}
+
+/*每个商店项的细节*/
+
+.shop_item_box:hover {
+    border: 1px solid red;
+}
+
+.img_box {
+    width: 200px;
+    height: 150px;
+}
+
+.img_box > img {
+    width: 100%;
+    height: 100%;
+}
+
+.info_box .shop_name {
+    font-size: 30px;
+    font-weight: bold;
+}

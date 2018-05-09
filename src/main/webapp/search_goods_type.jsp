@@ -11,7 +11,7 @@
 <head>
     <title>${sessionScope.goodsTypeList.get(requestScope.goodsTypeId-1).name}</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery.min-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .goods_type_box {

@@ -1,6 +1,7 @@
 package com.handsome.shop.entity;
 
 import com.handsome.shop.framework.BaseEntity;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/16.
  */
 @Entity
+@Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Seller extends BaseEntity {
 
     @Transient

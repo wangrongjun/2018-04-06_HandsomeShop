@@ -42,7 +42,7 @@
     </c:forEach>
 </table>
 
-<script src="../js/jquery.min-1.9.0.js"></script>
+<script src="../js/jquery-1.9.0.min.js"></script>
 <script>
     function requestDelete() {
         var deleteIdList = "";
