@@ -92,7 +92,7 @@
 
 <content id="content">
 
-    <center><h1>创建订单 - {{goods.goodsName}}</h1></center>
+    <div class="text-center"><h1>创建订单 - {{goods.goodsName}}</h1></div>
 
     <div class="order_box">
         <div class="goods_img">

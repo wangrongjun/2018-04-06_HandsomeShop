@@ -93,11 +93,11 @@
     <hr/>
 
     <div class="evaluate_box">
-        <center>用户评价</center>
+        <div class="text-center">用户评价</div>
         <div class="divider"></div>
 
         <c:if test="${requestScope.evaluateList.size()==0}">
-            <center>暂无评价</center>
+            <div class="text-center">暂无评价</div>
         </c:if>
 
         <c:forEach var="evaluate" items="${requestScope.evaluateList}">

@@ -40,7 +40,7 @@
 
 <content>
     <div class="register_box">
-        <center><h1>用户注册</h1></center>
+        <div class="text-center"><h1>用户注册</h1></div>
         <form action="${pageContext.request.contextPath}/register" method="post" onsubmit="return checkInput()">
             <div class="form-group">
                 <label>手机号：</label>

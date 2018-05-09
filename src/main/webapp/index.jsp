@@ -17,7 +17,7 @@
 
 <content>
 
-    <center>
+    <div class="text-center">
         <div class="goods_type_box">
             <span>商品类型：</span>
             <c:forEach var="goodsType" items="${sessionScope.goodsTypeList}">
@@ -35,8 +35,7 @@
         <%--<a class="ad" title="618狂欢节会场" href="#">--%>
         <%--<img src="img/img_618.jpg">--%>
         <%--</a>--%>
-
-    </center>
+    </div>
 
     <jsp:include page="goods_box.jsp"/>
 

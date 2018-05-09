@@ -10,9 +10,11 @@
 <html>
 <head>
     <title>${sessionScope.goodsTypeList.get(requestScope.goodsTypeId-1).name}</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript"
+            charset="utf-8"></script>
     <style type="text/css">
         .goods_type_box {
             margin: 5px;
@@ -38,7 +40,7 @@
 
 <content>
 
-    <center>
+    <div class="text-center">
         <div class="goods_type_box">
             <span>商品类型：</span>
             <c:forEach var="goodsType" items="${sessionScope.goodsTypeList}">
@@ -47,7 +49,7 @@
                 >${goodsType.name}</a>
             </c:forEach>
         </div>
-    </center>
+    </div>
     <hr>
 
     <jsp:include page="goods_box.jsp"/>

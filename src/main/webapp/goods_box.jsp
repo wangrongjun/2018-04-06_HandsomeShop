@@ -23,14 +23,14 @@
 <%--该页面需要4个参数：goodsList,pageIndex,totalCount,sortType--%>
 <%--sortType：0.综合排序  1.销量  2.价格由低到高  3.价格由高到低--%>
 
-<center>
+<div class="text-center">
     <div class="sort_box btn-group">
         <button class="btn btn-default <c:if test="${sortType==0}">active</c:if>">综合排序</button>
         <button class="btn btn-default <c:if test="${sortType==1}">active</c:if>">销量由高到低</button>
         <button class="btn btn-default <c:if test="${sortType==2}">active</c:if>">价格由低到高</button>
         <button class="btn btn-default <c:if test="${sortType==3}">active</c:if>">价格由高到低</button>
     </div>
-</center>
+</div>
 
 <div class="goods_box container">
     <div class="row">
@@ -79,7 +79,7 @@
             </ul>
         </c:when>
         <c:otherwise>
-            <center><h2>抱歉，没有商品！</h2></center>
+            <div class="text-center"><h2>抱歉，没有商品！</h2></div>
         </c:otherwise>
     </c:choose>
 

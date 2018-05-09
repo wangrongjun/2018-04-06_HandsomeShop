@@ -16,7 +16,7 @@
 
 <content>
 
-    <center>
+    <div class="text-center">
         <h1>${requestScope.shop.shopName}</h1>
         <div style="height: 120px;width: 120px">
             <img src="${requestScope.shop.seller.headUrl}" style="height: 100% ;width: 100%;">
@@ -24,7 +24,7 @@
         <div>商家姓名：${requestScope.shop.seller.realName}</div>
         <div>商家性别：${requestScope.shop.seller.gender==1?"男":"女"}</div>
         <div>商家电话：${requestScope.shop.seller.phone}</div>
-    </center>
+    </div>
 
     <hr>
 

@@ -28,13 +28,13 @@
 
 <content>
 
-    <center>
+    <div class="text-center">
         <div class="search_box">
             <input type="text" class="form-control" id="search_word"
                    placeholder="请输入商品关键字" value="${requestScope.searchWord}">
             <button class="btn btn-primary" onclick="search()">搜索</button>
         </div>
-    </center>
+    </div>
     <hr>
 
     <jsp:include page="goods_box.jsp"/>

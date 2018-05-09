@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
@@ -49,10 +50,11 @@ public class GoodsController extends BaseController {
     }
 
     @GetMapping("/goods/{goodsId}")
-    public String showGoodsInfo(HttpServletRequest request, @PathVariable Integer goodsId) {
+    public String showGoodsInfo(HttpServletRequest request, HttpServletResponse response, @PathVariable Integer goodsId) {
         Goods goods = goodsDao.queryById(goodsId);
         List<Evaluate> evaluateList = evaluateDao.queryByGoodsId(goodsId);
         request.setAttribute("goods", goods);
+        response.setHeader("Content-Length", null);
         request.setAttribute("evaluateList", evaluateList);
         return "goods_info";
     }

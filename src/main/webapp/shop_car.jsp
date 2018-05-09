@@ -18,12 +18,12 @@
 
 <jsp:include page="header.jsp"/>
 <content>
-    <center><h1>我的购物车(${requestScope.totalCount})</h1></center>
+    <div class="text-center"><h1>我的购物车(${requestScope.totalCount})</h1></div>
     <jsp:include page="goods_box.jsp"/>
     <c:if test="${requestScope.goodsList.size()>0}">
-        <center>
+        <div class="text-center">
             <button class="btn btn-danger btn-lg" style="margin-top: 30px">结算</button>
-        </center>
+        </div>
     </c:if>
 </content>
 <jsp:include page="footer.jsp"/>

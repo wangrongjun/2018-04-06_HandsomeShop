@@ -27,7 +27,7 @@
 
 <content id="content">
 
-    <center><h1>我的订单({{ordersCount}})</h1></center>
+    <div class="text-center"><h1>我的订单({{ordersCount}})</h1></div>
 
     <template v-for="orders in ordersList">
         <div class="order_item">

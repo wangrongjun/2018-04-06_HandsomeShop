@@ -16,7 +16,7 @@
 * 无限分类（闭包集实现树型结构）
 * [完成]Address表改名为Contact
 * [完成]Orders的receiver和phone改为contact
-* 给每个实体类加上createdOn，modifiedOn，isObsolete
+* [完成]给每个实体类加上createdOn，modifiedOn，isObsolete
 * 去掉所有 center 标签
 * 文件上传使用SpringMVC的框架
 * 使用Spring的权限认证功能，认证每个请求的合法性

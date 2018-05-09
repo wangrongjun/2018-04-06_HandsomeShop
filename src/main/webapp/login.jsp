@@ -81,7 +81,7 @@
     %>
 
     <div class="login_box">
-        <center><h1>用户登录</h1></center>
+        <div class="text-center"><h1>用户登录</h1></div>
         <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return checkInput()">
             <div class="form-group">
                 <label>手机号：</label>
