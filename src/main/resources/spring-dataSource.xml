@@ -52,6 +52,7 @@
         <tx:attributes>
             <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="executeUpdate" propagation="REQUIRED"/>
@@ -59,7 +60,7 @@
     </tx:advice>
     <aop:config proxy-target-class="true">
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.framework.HibernateDao.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.OrdersDaoImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.handsome.shop.dao.impl.*.*(..))"/>
     </aop:config>
 
     <beans profile="development">

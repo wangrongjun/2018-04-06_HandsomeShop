@@ -9,6 +9,6 @@ import com.handsome.shop.framework.Dao;
  */
 public interface GoodsTypeRelationDao extends Dao<GoodsTypeRelation> {
 
-//    void addRelation(GoodsType ancestor, GoodsType descendant);
+    void addRelation(GoodsType parentType, GoodsType newType);
 
 }

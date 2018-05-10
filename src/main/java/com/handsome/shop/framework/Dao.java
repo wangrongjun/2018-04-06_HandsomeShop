@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface Dao<T> {
 
+    int executeUpdate(String hql, Object... parameters);
+
     boolean insert(T entity);
 
     boolean delete(Where where);

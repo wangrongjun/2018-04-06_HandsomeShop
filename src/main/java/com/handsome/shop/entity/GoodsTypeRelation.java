@@ -22,13 +22,15 @@ public class GoodsTypeRelation extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "descendantId")
     private GoodsType descendant;// 后代
+    private Integer descendantDepth;
 
     public GoodsTypeRelation() {
     }
 
-    public GoodsTypeRelation(GoodsType ancestor, GoodsType descendant) {
+    public GoodsTypeRelation(GoodsType ancestor, GoodsType descendant, Integer descendantDepth) {
         this.ancestor = ancestor;
         this.descendant = descendant;
+        this.descendantDepth = descendantDepth;
     }
 
     public Integer getGoodsTypeRelationId() {
@@ -53,5 +55,13 @@ public class GoodsTypeRelation extends BaseEntity {
 
     public void setDescendant(GoodsType descendant) {
         this.descendant = descendant;
+    }
+
+    public Integer getDescendantDepth() {
+        return descendantDepth;
+    }
+
+    public void setDescendantDepth(Integer depth) {
+        this.descendantDepth = depth;
     }
 }

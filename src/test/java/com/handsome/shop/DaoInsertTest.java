@@ -70,17 +70,43 @@ public class DaoInsertTest extends BaseDaoTest {
     @Test
     public void testInsert() throws IOException {
         GoodsType 电子产品 = new GoodsType("电子产品");
+        GoodsType 笔记本 = new GoodsType("笔记本");
+        GoodsType 游戏机 = new GoodsType("游戏机");
+        GoodsType 手机 = new GoodsType("手机");
+        GoodsType 安卓手机 = new GoodsType("安卓手机");
+        GoodsType 苹果手机 = new GoodsType("苹果手机");
+        GoodsType WinPhone手机 = new GoodsType("WinPhone手机");
+
         GoodsType 食品 = new GoodsType("食品");
+        GoodsType 蔬菜 = new GoodsType("蔬菜");
+        GoodsType 水果 = new GoodsType("水果");
+        GoodsType 零食 = new GoodsType("零食");
+        GoodsType 饮料 = new GoodsType("饮料");
+
         goodsTypeDao.insert(电子产品);
+        goodsTypeDao.insert(笔记本);
+        goodsTypeDao.insert(游戏机);
+        goodsTypeDao.insert(手机);
+        goodsTypeDao.insert(安卓手机);
+        goodsTypeDao.insert(苹果手机);
+        goodsTypeDao.insert(WinPhone手机);
         goodsTypeDao.insert(食品);
-        goodsTypeDao.insert(new GoodsType("服饰"));
-        goodsTypeDao.insert(new GoodsType("家电"));
-        goodsTypeDao.insert(new GoodsType("玩具"));
-        goodsTypeDao.insert(new GoodsType("运动"));
-        goodsTypeDao.insert(new GoodsType("书籍"));
-        goodsTypeDao.insert(new GoodsType("汽车"));
-        goodsTypeDao.insert(new GoodsType("二手"));
-        goodsTypeDao.insert(new GoodsType("其他"));
+        goodsTypeDao.insert(蔬菜);
+        goodsTypeDao.insert(水果);
+        goodsTypeDao.insert(零食);
+        goodsTypeDao.insert(饮料);
+
+        goodsTypeRelationDao.addRelation(电子产品, 笔记本);
+        goodsTypeRelationDao.addRelation(电子产品, 游戏机);
+        goodsTypeRelationDao.addRelation(电子产品, 手机);
+        goodsTypeRelationDao.addRelation(手机, 安卓手机);
+        goodsTypeRelationDao.addRelation(手机, 苹果手机);
+        goodsTypeRelationDao.addRelation(手机, WinPhone手机);
+
+        goodsTypeRelationDao.addRelation(食品, 蔬菜);
+        goodsTypeRelationDao.addRelation(食品, 水果);
+        goodsTypeRelationDao.addRelation(食品, 零食);
+        goodsTypeRelationDao.addRelation(食品, 饮料);
 
         Seller 张三 = new Seller("210", "123", "张三", "明月公主", "女", pic("seller_1.jpg"));
         Seller 李四 = new Seller("220", "123", "李四", "型男", "男", pic("seller_2.jpg"));
@@ -89,13 +115,13 @@ public class DaoInsertTest extends BaseDaoTest {
         Shop 生鲜店 = new Shop(李四, "生鲜店", "各种新鲜水果，蔬菜应有尽有！", pic("shop_3.jpg"));
         Shop 零食店 = new Shop(李四, "零食店", "吃货预备营！", pic("shop_4.jpg"));
 
-        Goods 宏基笔记本 = new Goods("宏基笔记本", "Aspire最新版", 3200, 20, 电子产品, 东方电脑城, pics("goods_1.jpg", "goods_2.jpg", "goods_3.jpg", "goods_4.jpg", "goods_5.jpg"));
-        Goods 苹果笔记本 = new Goods("苹果笔记本", "超薄迷你", 5400, 60, 电子产品, 东方电脑城, pics("goods_6.jpg", "goods_7.jpg", "goods_8.jpg"));
-        Goods 三星E7手机 = new Goods("三星E7手机", "E7系列", 1500, 38, 电子产品, 手机旗舰店, pics("goods_9.jpg", "goods_10.jpg"));
-        Goods iPhone7手机 = new Goods("iPhone7手机", "乔布斯呕心沥血之作！", 5000, 8, 电子产品, 手机旗舰店, pics("goods_11.jpg", "goods_12.jpg"));
-        Goods 菜心 = new Goods("菜心", "新鲜的菜心一斤，纯天然无农药", 7.5, 200, 食品, 生鲜店, pics("goods_13.jpg", "goods_14.jpg", "goods_15.jpg"));
-        Goods 苹果 = new Goods("苹果", "新鲜的苹果一斤，纯天然无农药", 11.2, 80, 食品, 生鲜店, pics("goods_16.jpg"));
-        Goods 辣条 = new Goods("辣条", "老外都抢着吃，欲购从速！", 2.5, 250, 食品, 零食店, pics("goods_17.jpg"));
+        Goods 宏基笔记本 = new Goods("宏基笔记本", "Aspire最新版", 3200, 20, 笔记本, 东方电脑城, pics("goods_1.jpg", "goods_2.jpg", "goods_3.jpg", "goods_4.jpg", "goods_5.jpg"));
+        Goods 苹果笔记本 = new Goods("苹果笔记本", "超薄迷你", 5400, 60, 笔记本, 东方电脑城, pics("goods_6.jpg", "goods_7.jpg", "goods_8.jpg"));
+        Goods 三星E7手机 = new Goods("三星E7手机", "E7系列", 1500, 38, 安卓手机, 手机旗舰店, pics("goods_9.jpg", "goods_10.jpg"));
+        Goods iPhone7手机 = new Goods("iPhone7手机", "乔布斯呕心沥血之作！", 5000, 8, 苹果手机, 手机旗舰店, pics("goods_11.jpg", "goods_12.jpg"));
+        Goods 菜心 = new Goods("菜心", "新鲜的菜心一斤，纯天然无农药", 7.5, 200, 蔬菜, 生鲜店, pics("goods_13.jpg", "goods_14.jpg", "goods_15.jpg"));
+        Goods 苹果 = new Goods("苹果", "新鲜的苹果一斤，纯天然无农药", 11.2, 80, 水果, 生鲜店, pics("goods_16.jpg"));
+        Goods 辣条 = new Goods("辣条", "老外都抢着吃，欲购从速！", 2.5, 250, 零食, 零食店, pics("goods_17.jpg"));
         Goods 可乐 = new Goods("可乐", "透心凉，心飞扬！", 5, 300, 食品, 零食店, pics("goods_18.jpg", "goods_19.jpg"));
 
         sellerDao.insert(张三);

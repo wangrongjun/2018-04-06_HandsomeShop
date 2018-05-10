@@ -90,7 +90,8 @@ public class HibernateDao<T> implements Dao<T> {
         return count.intValue();
     }
 
-    protected int executeUpdate(String hql, Object... parameters) {
+    @Override
+    public int executeUpdate(String hql, Object... parameters) {
         Session session = getSession();
         Query query = session.createQuery(hql);
         if (parameters != null) {
