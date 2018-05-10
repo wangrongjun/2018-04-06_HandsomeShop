@@ -27,12 +27,15 @@ public class Orders extends BaseEntity {
     @GeneratedValue
     private int ordersId;
     @ManyToOne
+    @JoinColumn(name = "customerId")
     private Customer customer;
     @ManyToOne
+    @JoinColumn(name = "goodsId")
     private Goods goods;
     private int buyCount;//该商品购买的数量
     private double price;//订单创建时商品的总价格（预防下单后商家修改该商品的价格导致出错）
     @ManyToOne
+    @JoinColumn(name = "contactId")
     private Contact contact;// 订单所对应的收货地址
     private Date createTime;//订单创建时间，格式：”yyyy-MM-dd HH:mm:ss”
     private int state;//订单状态，进行中，关闭，成功 TODO 改为enum类型

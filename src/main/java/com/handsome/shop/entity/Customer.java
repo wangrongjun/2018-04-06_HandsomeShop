@@ -5,10 +5,7 @@ import com.handsome.shop.framework.BaseEntity;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -27,6 +24,7 @@ public class Customer extends BaseEntity {
     @Check(constraints = "gender IS NULL OR gender = '男' OR gender = '女'")
     private String gender;
     @ManyToOne
+    @JoinColumn(name = "headId")
     private Picture head;
 
     @Override

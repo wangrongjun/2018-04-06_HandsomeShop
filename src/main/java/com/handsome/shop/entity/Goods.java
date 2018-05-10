@@ -25,10 +25,13 @@ public class Goods extends BaseEntity {
     private double price;
     private int remainCount;// 库存
     @ManyToOne
+    @JoinColumn(name = "goodsTypeId")
     private GoodsType goodsType;
     @ManyToOne
-    private Shop shop;//Shop外键，所属的商店
+    @JoinColumn(name = "shopId")
+    private Shop shop;
     @ManyToMany
+    @JoinTable(name = "Goods_Picture", joinColumns = @JoinColumn(name = "goodsId"), inverseJoinColumns = @JoinColumn(name = "pictureId"))
     private List<Picture> pictureList;
 
     @Override

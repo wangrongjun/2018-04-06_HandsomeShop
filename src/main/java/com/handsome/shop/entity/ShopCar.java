@@ -4,10 +4,7 @@ package com.handsome.shop.entity;
 import com.handsome.shop.framework.BaseEntity;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -20,8 +17,10 @@ public class ShopCar extends BaseEntity {
     @GeneratedValue
     private int carId;
     @ManyToOne
+    @JoinColumn(name = "customerId")
     private Customer customer;
     @ManyToOne
+    @JoinColumn(name = "goodsId")
     private Goods goods;
 
     public ShopCar() {

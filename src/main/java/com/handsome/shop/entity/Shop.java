@@ -21,6 +21,7 @@ public class Shop extends BaseEntity {
     private String shopName;
     private String description;
     @ManyToOne
+    @JoinColumn(name = "headId")
     private Picture head;
 
     @Override

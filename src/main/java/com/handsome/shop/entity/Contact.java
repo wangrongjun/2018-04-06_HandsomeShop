@@ -19,6 +19,7 @@ public class Contact extends BaseEntity {
     @GeneratedValue
     private int contactId;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customerId")
     private Customer customer;
     @NotNull
     private String phone;// 收货人电话

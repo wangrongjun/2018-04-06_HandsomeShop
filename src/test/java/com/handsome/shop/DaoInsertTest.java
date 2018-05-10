@@ -3,9 +3,11 @@ package com.handsome.shop;
 import com.handsome.shop.dao.*;
 import com.handsome.shop.entity.*;
 import com.wangrj.java_lib.java_util.DateUtil;
+import com.wangrj.java_lib.java_util.StreamUtil;
 import com.wangrj.java_lib.java_util.TextUtil;
 import org.hibernate.Hibernate;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -25,6 +27,8 @@ public class DaoInsertTest extends BaseDaoTest {
     @Resource
     private GoodsTypeDao goodsTypeDao;
     @Resource
+    private GoodsTypeRelationDao goodsTypeRelationDao;
+    @Resource
     private CustomerDao customerDao;
     @Resource
     private SellerDao sellerDao;
@@ -42,6 +46,16 @@ public class DaoInsertTest extends BaseDaoTest {
     private ContactDao addressDao;
     @Resource
     private PictureDao pictureDao;
+
+    @BeforeClass
+    public static void rebuildDatabase() throws IOException {
+        Process process = Runtime.getRuntime().exec("cmd /c cd src/main/resources/sql && mysql -uroot -p21436587 < rebuild_db.sql");
+        System.out.println(StreamUtil.readInputStream(process.getInputStream()));
+        System.out.println("---------------------");
+        System.out.println(StreamUtil.readInputStream(process.getErrorStream()));
+        System.out.println("---------------------");
+        System.out.println("exitValue: " + process.exitValue());
+    }
 
     /**
      * GoodsType  1-10

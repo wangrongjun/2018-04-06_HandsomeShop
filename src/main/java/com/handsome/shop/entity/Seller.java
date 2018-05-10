@@ -24,6 +24,7 @@ public class Seller extends BaseEntity {
     @Check(constraints = "gender IS NULL OR gender = '男' OR gender = '女'")
     private String gender;
     @ManyToOne
+    @JoinColumn(name = "headId")
     private Picture head;
     @OneToMany
     @JoinColumn(name = "sellerId")
