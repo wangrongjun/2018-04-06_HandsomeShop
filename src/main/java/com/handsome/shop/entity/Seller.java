@@ -40,7 +40,6 @@ public class Seller extends BaseEntity {
                 ", nickname='" + nickname + '\'' +
                 ", gender='" + gender + '\'' +
                 ", head=" + head +
-                ", shopList=" + shopList +
                 '}';
     }
 

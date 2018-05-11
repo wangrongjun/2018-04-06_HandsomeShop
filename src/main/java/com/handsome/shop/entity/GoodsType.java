@@ -4,6 +4,7 @@ import com.handsome.shop.framework.BaseEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * by wangrongjun on 2017/6/18.
@@ -17,6 +18,9 @@ public class GoodsType extends BaseEntity {
     private int goodsTypeId;
     @Column(nullable = false, unique = true)
     private String name;
+
+    @Transient
+    private List<GoodsType> children;
 
     public GoodsType() {
     }
@@ -51,5 +55,13 @@ public class GoodsType extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<GoodsType> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<GoodsType> children) {
+        this.children = children;
     }
 }

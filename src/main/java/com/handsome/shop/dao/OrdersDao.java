@@ -15,4 +15,6 @@ public interface OrdersDao extends Dao<Orders> {
     int queryCountByCustomerId(int customerId);
 
     int queryCountByGoodsId(int goodsId);
+
+    void deleteLogically(int ordersId);
 }

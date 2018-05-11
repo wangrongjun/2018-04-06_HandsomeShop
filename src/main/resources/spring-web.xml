@@ -32,6 +32,7 @@
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/img/**" location="/img/"/>
     <mvc:resources mapping="/admin/img/**" location="/admin/img/"/>
+    <mvc:resources mapping="*.html" location="/"/>
 
     <mvc:interceptors>
         <mvc:interceptor>

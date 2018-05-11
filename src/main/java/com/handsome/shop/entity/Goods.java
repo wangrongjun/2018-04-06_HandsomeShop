@@ -30,7 +30,7 @@ public class Goods extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "shopId")
     private Shop shop;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Goods_Picture", joinColumns = @JoinColumn(name = "goodsId"), inverseJoinColumns = @JoinColumn(name = "pictureId"))
     private List<Picture> pictureList;
 

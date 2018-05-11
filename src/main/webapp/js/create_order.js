@@ -55,13 +55,15 @@ function addContact() {
 
 function createOrder() {
     $.ajax({
-        url: "/rest/orders/customer/" + customer.customerId,
+        url: "/rest/orders",
+        type: "POST",
         data: {
+            customerId: customer.customerId,
             goodsId: goods.goodsId,
             count: count,
             contactId: contentVm.selectedContact.contactId
         },
-        success: function () {
+        success: function (data) {
             window.location.href = "/create_order_succeed.jsp";
         },
         error: function (xhr, errorMsg, exception) {

@@ -75,7 +75,7 @@ public class CustomerController extends BaseController {
         List<Contact> contactList = contactDao.queryByCustomerId(customer.getCustomerId());
 
         request.setAttribute("customerJson", GsonConverter.toJson(customer));
-        request.setAttribute("goodsJson", GsonConverter.toJson(goods, "goods"));
+        request.setAttribute("goodsJson", GsonConverter.toJson(goods, "Goods.shop"));
         request.setAttribute("contactListJson", GsonConverter.toJson(contactList));
         request.setAttribute("count", count);
         return "create_order";

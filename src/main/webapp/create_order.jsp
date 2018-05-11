@@ -69,11 +69,12 @@
             border-radius: 0;
         }
 
+        /*-----------收货地址------------*/
+
         .order_info .contact_item {
             border: 1px solid orangered;
+            border-radius: 5px;
         }
-
-        /*-----------收货地址------------*/
 
         #select_contact_model .select_contact_item {
             margin: 5px 10px;
@@ -96,7 +97,7 @@
 
     <div class="order_box">
         <div class="goods_img">
-            <img v-bind:src="goods.goodsImageList[0].imageUrl"/>
+            <img :src="'/rest/picture/' + goods.pictureList[0].pictureId"/>
         </div>
         <div class="order_info">
             <div>商品：<span>{{goods.goodsName}}</span></div>

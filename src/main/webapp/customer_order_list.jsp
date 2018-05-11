@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/customer_order_list.css"/>
     <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <script>
         var ordersCount = ${requestScope.ordersCount};
@@ -32,7 +33,7 @@
     <template v-for="orders in ordersList">
         <div class="order_item">
             <div class="goods_image">
-                <img v-bind:src="orders.goods.goodsImageList[0].imageUrl"
+                <img :src="'/rest/picture/' + orders.goods.pictureList[0].pictureId"
                      v-on:click="showGoodsInfo(orders.goods.goodsId)"/>
             </div>
             <div class="right_box">
@@ -41,9 +42,9 @@
                     <div>商品名称：{{orders.goods.goodsName}}</div>
                     <div>店鋪名称：{{orders.goods.shop.shopName}}</div>
                     <div>购买数量：{{orders.buyCount}}</div>
-                    <div>收货人：{{orders.receiver}}</div>
-                    <div>联系电话：{{orders.phone}}</div>
-                    <div>收货地址：{{orders.address}}</div>
+                    <div>收货人：{{orders.contact.receiver}}</div>
+                    <div>联系电话：{{orders.contact.phone}}</div>
+                    <div>收货地址：{{orders.contact.address}}</div>
                     <div>创建时间：{{orders.createTime}}</div>
                     <div>订单状态：<span>
                         {{orders.state==0?"交易中":(orders.state==1?"交易成功":"交易失败")}}
@@ -55,7 +56,7 @@
                             <button class="btn btn-danger">申请退款</button>
                             <button class="btn btn-success" v-on:click="confirmOrders(orders.ordersId)">确认收货</button>
                         </template>
-                        <template v-else-if="orders.state==1 || orders.state==2">
+                        <template v-if="orders.state==0 || orders.state==1 || orders.state==2">
                             <button class="btn btn-danger" v-on:click="deleteOrders(orders.ordersId)">删除订单</button>
                         </template>
                     </div>

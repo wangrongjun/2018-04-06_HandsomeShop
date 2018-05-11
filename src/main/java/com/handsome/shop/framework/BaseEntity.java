@@ -15,4 +15,19 @@ public class BaseEntity implements Serializable {
     private Date createdOn = new Date();
     private Date obsoleteDate;
 
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Date getObsoleteDate() {
+        return obsoleteDate;
+    }
+
+    public void setObsoleteDate(Date obsoleteDate) {
+        this.obsoleteDate = obsoleteDate;
+    }
 }

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>JS实现天猫首页菜单效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font: 16px Microsoft YaHei, arial, sans-serif;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: 1000px;
+            height: auto;
+            /*position: relative;*/
+            margin: 0 auto;
+            /*top: 50px;*/
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        .nav_left {
+            width: 200px;
+            height: 200px;
+            background: #FF0036;
+        }
+
+        .nav_left ul {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav_left ul li {
+            height: 50px;
+            line-height: 50px;
+            text-align: left;
+        }
+
+        .nav_left ul li span {
+            padding-left: 10px;
+            height: 50px;
+            line-height: 50px;
+            display: block;
+            background: #FF0036;
+            color: #fff;
+        }
+
+        .nav_left ul li span:hover {
+            color: #FF0036;
+            background: #aaa;
+            cursor: pointer;
+        }
+
+        .nav_right {
+            width: 800px;
+            height: 200px;
+            position: absolute;
+            margin-left: 200px;
+            top: 0;
+            /*padding-top: 10px;*/
+        }
+
+        .sub {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 200px;
+            background: #FFFFFF;
+            /*padding: 10px 0px;*/
+        }
+
+        .sub dl {
+            overflow: hidden;
+            padding: 0 0 10px 0;
+        }
+
+        .sub dt {
+            width: 100px;
+            float: left;
+            display: block;
+            position: relative;
+            clear: left;
+        }
+
+        .sub dt a {
+            font-size: 14px;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            padding-left: 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .sub dt i {
+            width: 4px;
+            right: 12px;
+            top: 2px;
+            font-size: 14px;
+            position: absolute;
+            font-style: normal;
+        }
+
+        .sub dd {
+            width: 680px;
+            float: left;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            padding-right: 20px;
+            border-bottom: 1px dashed #E3E3E3;
+        }
+
+        .sub dd a {
+            font-size: 12px;
+            float: left;
+            color: #666;
+            padding: 0 10px;
+            margin: 4px 0px 10px 0px;
+            text-decoration: none;
+            cursor: pointer;
+            border-left: 1px solid #E3E3E3;
+        }
+
+        .sub dd a:hover {
+            color: #FF0036;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+    <script type="text/javascript" src="/js/jquery-1.9.0.min.js"></script>
+    <script>
+        $(function () {
+            $('.container').on('mouseenter', function () {
+                $(".nav_right").removeClass('hide');
+                // }).on('mouseleave', function () {
+                //     $(".nav_right").addClass('hide');
+                //     $(".sub").addClass('hide');
+            }).on('mouseenter', 'li', function (e) {
+                var li_data = $(this).attr('data-id');
+                $(".sub").addClass('hide');
+                $('.sub[data-id="' + li_data + '"]').removeClass('hide');
+            })
+        })
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="nav_left">
+        <ul>
+            <li data-id="1"><span>美妆 / 个人护理</span></li>
+            <li data-id="2"><span>手机 / 数码 / 电脑办公</span></li>
+            <li data-id="3"><span>零食 / 茶酒 / 进口食品</span></li>
+            <li data-id="9"><span>生鲜水果</span></li>
+        </ul>
+    </div>
+
+    <div class="nav_right">
+
+        <div class="sub" data-id="1">
+            <dl>
+                <dt><a>护肤品 <i> &gt;</i></a></dt>
+                <dd>
+                    <a>面膜</a>
+                    <a>护肤套装</a>
+                    <a>乳液面霜</a>
+                    <a>精华液</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><a>彩妆 <i> &gt;</i></a></dt>
+                <dd>
+                    <a>时尚彩妆</a>
+                    <a>香水</a>
+                    <a>气垫护肤</a>
+                    <a>BB霜</a>
+                    <a>口红</a>
+                    <a>隔离</a>
+                    <a>粉底</a>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="sub hide" data-id="2">
+            <dl>
+                <dt><a>手机 <i> &gt;</i></a></dt>
+                <dd>
+                    <a>安卓手机</a>
+                    <a>苹果手机</a>
+                    <a>Win Phone</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><a>电脑办公 <i> &gt;</i></a></dt>
+                <dd>
+                    <a>笔记本</a>
+                    <a>平板电脑</a>
+                    <a>打印机</a>
+                    <a>键盘</a>
+                    <a>鼠标</a>
+                    <a>U盘</a>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="sub hide" data-id="3">
+            <dl>
+                <dt><a>食品<i> &gt;</i></a></dt>
+                <dd>
+                    <a>官方直售</a>
+                    <a>饼干</a>
+                    <a>海苔</a>
+                    <a>火腿肠</a>
+                    <a>方便面</a>
+                    <a>果冻</a>
+                    <a>水果干</a>
+                    <a>坚果</a>
+                    <a>面包蛋糕</a>
+                    <a>华夫饼</a>
+                    <a>进口巧克力</a>
+                    <a>进口咖啡</a>
+                    <a>进口葡萄酒</a>
+                    <a>啤酒饮料</a>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="sub hide" data-id="4">
+            <dl>
+                <dt><a>服装<i> &gt;</i></a></dt>
+                <dd>
+                    <a>童装</a>
+                    <a>秋换新</a>
+                    <a>商场同款</a>
+                    <a>特价优惠</a>
+                    <a>秋衣秋裤</a>
+                    <a>外套</a>
+                    <a>羽绒服</a>
+                    <a>夹克</a>
+                    <a>连衣裙</a>
+                    <a>裤子</a>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="sub hide" data-id="9">
+            <dl>
+                <dt><a>生鲜水果 <i> &gt;</i></a></dt>
+                <dd>
+                    <a>火龙果</a>
+                    <a>苹果</a>
+                    <a>榴莲</a>
+                    <a>进口水果</a>
+                    <a>优惠活动</a>
+                    <a>雪梨</a>
+                    <a>山竹</a>
+                    <a>葡萄</a>
+                    <a>泰国芒果</a>
+                    <a>柚子</a>
+                    <a>马蹄</a>
+                    <a>橘子</a>
+                    <a>香蕉</a>
+                    <a>猕猴桃</a>
+                    <a>椰子</a>
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+</html>

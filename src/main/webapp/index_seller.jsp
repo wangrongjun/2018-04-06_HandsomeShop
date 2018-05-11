@@ -32,7 +32,7 @@
         <div class="row">
             <div class="shop_item_box col-sm-3" v-for="shop in shopList" v-on:click="showShopInfo(shop.shopId)">
                 <div class="img_box">
-                    <img :src="shop.headUrl" class="img">
+                    <img :src="'/rest/picture/' + shop.head.pictureId" class="img">
                 </div>
                 <div class="info_box">
                     <div class="shop_name">{{shop.shopName}}</div>

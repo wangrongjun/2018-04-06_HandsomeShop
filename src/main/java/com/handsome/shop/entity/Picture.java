@@ -25,6 +25,14 @@ public class Picture extends BaseEntity {
     private PictureType pictureType;
     private Blob pictureData;
 
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "pictureId=" + pictureId +
+                ", pictureType=" + pictureType +
+                '}';
+    }
+
     public Picture() {
     }
 

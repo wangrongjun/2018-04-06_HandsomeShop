@@ -30,6 +30,18 @@ public class Contact extends BaseEntity {
     @AssertFalse
     private boolean defaultContact;// 默认收货地址
 
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "contactId=" + contactId +
+                ", customer=" + customer +
+                ", phone='" + phone + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", address='" + address + '\'' +
+                ", defaultContact=" + defaultContact +
+                '}';
+    }
+
     public Contact() {
     }
 

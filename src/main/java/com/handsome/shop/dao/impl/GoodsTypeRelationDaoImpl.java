@@ -20,7 +20,6 @@ public class GoodsTypeRelationDaoImpl extends HibernateDao<GoodsTypeRelation> im
      */
     @Override
     public void addRelation(GoodsType parentType, GoodsType newType) {
-        int parentDepth;
 
         Where where = new Where().
                 equal("ancestorId", parentType.getGoodsTypeId()).
@@ -29,17 +28,19 @@ public class GoodsTypeRelationDaoImpl extends HibernateDao<GoodsTypeRelation> im
         // 如果父母没有自己到自己的关联，就先添加
         if (list.size() == 0) {
             insert(new GoodsTypeRelation(parentType, parentType, 0));
-            parentDepth = 0;
-        } else {
-            parentDepth = list.get(0).getDescendantDepth();
         }
 
         List<GoodsTypeRelation> ancestorList = query(Where.eq("descendantId", parentType.getGoodsTypeId()));
         for (GoodsTypeRelation ancestor : ancestorList) {
-            insert(new GoodsTypeRelation(ancestor.getAncestor(), newType, parentDepth + 1));
+            insert(new GoodsTypeRelation(ancestor.getAncestor(), newType, ancestor.getPathDepth() + 1));
         }
 
-        insert(new GoodsTypeRelation(newType, newType, parentDepth + 1));
+        insert(new GoodsTypeRelation(newType, newType, 0));
+    }
+
+    @Override
+    public GoodsType queryWithChildren(Where where) {
+        return null;
     }
 
 }

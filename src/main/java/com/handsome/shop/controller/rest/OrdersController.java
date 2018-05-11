@@ -23,7 +23,7 @@ import java.util.Date;
  * by wangrongjun on 2018/5/1.
  */
 @Controller
-@RequestMapping("/rest/orders/customer/{customerId}")
+@RequestMapping("/rest/orders")
 public class OrdersController extends BaseController {
 
     @Resource
@@ -32,8 +32,8 @@ public class OrdersController extends BaseController {
     private GoodsDao goodsDao;
 
     @GetMapping
-    @ReturnObjectToJsonIgnoreFields({"Goods.shop","GoodsImage.goods"})
-    public Pager<Orders> listByCustomer(@PathVariable int customerId,
+    @ReturnObjectToJsonIgnoreFields({"Goods.shop", "GoodsImage.goods"})
+    public Pager<Orders> listByCustomer(@RequestParam Integer customerId,
                                         @Valid PageParam pageParam, BindingResult pageParamResult) {
         if (pageParamResult.hasErrors()) {
             throw new IllegalArgumentException(pageParamResult.getAllErrors().get(0).getDefaultMessage());
@@ -44,7 +44,7 @@ public class OrdersController extends BaseController {
     }
 
     @PostMapping
-    public RequestStatus create(@PathVariable Integer customerId,
+    public RequestStatus create(@RequestParam Integer customerId,
                                 @RequestParam Integer goodsId,
                                 @RequestParam Integer count,
                                 @RequestParam Integer contactId) {
@@ -52,6 +52,12 @@ public class OrdersController extends BaseController {
         Orders orders = new Orders(new Customer(customerId), goods, count,
                 count * goods.getPrice(), new Contact(contactId), new Date(), Orders.STATE_CONTINUE);
         ordersDao.insert(orders);
+        return RequestStatus.success();
+    }
+
+    @DeleteMapping("/{ordersId}")
+    public RequestStatus delete(@PathVariable Integer ordersId) {
+        ordersDao.deleteLogically(ordersId);
         return RequestStatus.success();
     }
 
