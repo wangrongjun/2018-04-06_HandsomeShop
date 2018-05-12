@@ -56,7 +56,8 @@
                             <button class="btn btn-danger">申请退款</button>
                             <button class="btn btn-success" v-on:click="confirmOrders(orders.ordersId)">确认收货</button>
                         </template>
-                        <template v-if="orders.state==0 || orders.state==1 || orders.state==2">
+                        <template v-else-if="orders.state==1 || orders.state==2">
+                            <button class="btn btn-danger">申请售后</button>
                             <button class="btn btn-danger" v-on:click="deleteOrders(orders.ordersId)">删除订单</button>
                         </template>
                     </div>

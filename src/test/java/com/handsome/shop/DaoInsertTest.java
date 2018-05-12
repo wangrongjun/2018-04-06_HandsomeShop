@@ -157,14 +157,14 @@ public class DaoInsertTest extends BaseDaoTest {
         addressDao.insert(contact2);
         addressDao.insert(contact3);
 
-        Orders orders1 = new Orders(王荣俊, 三星E7手机, 1, 三星E7手机.getPrice(), contact1, d("2016-04-14 15:34:12"), 1);
-        Orders orders2 = new Orders(王荣俊, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact1, d("2014-08-06 16:14:45"), 1);
-        Orders orders3 = new Orders(王荣俊, 菜心, 6, 菜心.getPrice() * 6, contact2, d("2016-04-14 15:34:12"), 0);
-        Orders orders4 = new Orders(王荣俊, 辣条, 10, 辣条.getPrice() * 10, contact2, d("2017-06-12 08:23:45"), 0);
-        Orders orders5 = new Orders(沫沫, iPhone7手机, 1, iPhone7手机.getPrice(), contact3, d("2015-03-04 21:54:23"), 1);
-        Orders orders6 = new Orders(沫沫, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact3, d("2015-05-12 21:54:23"), 1);
-        Orders orders7 = new Orders(沫沫, 可乐, 2, 可乐.getPrice() * 2, contact3, d("2017-06-10 18:37:58"), 0);
-        Orders orders8 = new Orders(沫沫, 辣条, 20, 辣条.getPrice() * 20, contact3, d("2017-06-10 18:32:10"), 0);
+        Orders orders1 = new Orders(王荣俊, 三星E7手机, 1, 三星E7手机.getPrice(), contact1, "备注1", d("2016-04-14 15:34:12"), 1);
+        Orders orders2 = new Orders(王荣俊, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact1, "备注2", d("2014-08-06 16:14:45"), 1);
+        Orders orders3 = new Orders(王荣俊, 菜心, 6, 菜心.getPrice() * 6, contact2, "备注3", d("2016-04-14 15:34:12"), 0);
+        Orders orders4 = new Orders(王荣俊, 辣条, 10, 辣条.getPrice() * 10, contact2, "备注4", d("2017-06-12 08:23:45"), 0);
+        Orders orders5 = new Orders(沫沫, iPhone7手机, 1, iPhone7手机.getPrice(), contact3, "备注5", d("2015-03-04 21:54:23"), 1);
+        Orders orders6 = new Orders(沫沫, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact3, "备注6", d("2015-05-12 21:54:23"), 1);
+        Orders orders7 = new Orders(沫沫, 可乐, 2, 可乐.getPrice() * 2, contact3, "备注7", d("2017-06-10 18:37:58"), 0);
+        Orders orders8 = new Orders(沫沫, 辣条, 20, 辣条.getPrice() * 20, contact3, "备注8", d("2017-06-10 18:32:10"), 0);
 
         ordersDao.insert(orders1);
         ordersDao.insert(orders2);

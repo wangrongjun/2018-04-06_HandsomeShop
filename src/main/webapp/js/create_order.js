@@ -44,6 +44,7 @@ function addContact() {
         type: "POST",
         data: newContact,
         success: function (data) {
+            newContact.contactId = data.data;
             Vue.set(selectContactModelVm.contactList, selectContactModelVm.contactList.length, newContact);
             contentVm.selectedContact = newContact;
         },

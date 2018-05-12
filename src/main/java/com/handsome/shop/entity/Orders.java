@@ -23,6 +23,36 @@ public class Orders extends BaseEntity {
     @Transient
     public static final int STATE_FAILED = 2;
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public enum Status {
+        /**
+         * 顾客下单后，等待商家处理的状态
+         */
+        CREATED,
+        /**
+         * 已发货，等待顾客收货的状态
+         */
+        PENDING_RECEIVE,
+        /**
+         * 顾客已经收货
+         */
+        RECEIVED,
+        /**
+         *
+         */
+        RETURN,
+
+        FINISH;
+        int value;
+    }
+
     @Id
     @GeneratedValue
     private int ordersId;
@@ -37,8 +67,9 @@ public class Orders extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "contactId")
     private Contact contact;// 订单所对应的收货地址
+    private String remark;
     private Date createTime;//订单创建时间，格式：”yyyy-MM-dd HH:mm:ss”
-    private int state;//订单状态，进行中，关闭，成功 TODO 改为enum类型
+    private int status;//订单状态，进行中，关闭，成功 TODO 改为enum类型
 
     @Override
     public String toString() {
@@ -49,8 +80,9 @@ public class Orders extends BaseEntity {
                 ", buyCount=" + buyCount +
                 ", price=" + price +
                 ", contact=" + contact +
-                ", createTime='" + createTime + '\'' +
-                ", state=" + state +
+                ", remark='" + remark + '\'' +
+                ", createTime=" + createTime +
+                ", status=" + status +
                 '}';
     }
 
@@ -61,14 +93,15 @@ public class Orders extends BaseEntity {
         this.ordersId = ordersId;
     }
 
-    public Orders(Customer customer, Goods goods, int buyCount, double price, Contact contact, Date createTime, int state) {
+    public Orders(Customer customer, Goods goods, int buyCount, double price, Contact contact, String remark, Date createTime, int status) {
         this.customer = customer;
         this.goods = goods;
         this.buyCount = buyCount;
         this.price = price;
         this.contact = contact;
+        this.remark = remark;
         this.createTime = createTime;
-        this.state = state;
+        this.status = status;
     }
 
     public static int getStateContinue() {
@@ -139,11 +172,11 @@ public class Orders extends BaseEntity {
         this.createTime = createTime;
     }
 
-    public int getState() {
-        return state;
+    public int getStatus() {
+        return status;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setStatus(int state) {
+        this.status = state;
     }
 }

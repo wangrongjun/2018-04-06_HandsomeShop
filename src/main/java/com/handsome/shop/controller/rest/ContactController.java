@@ -29,14 +29,14 @@ public class ContactController {
     }
 
     @PostMapping
-    public RequestStatus add(@PathVariable int customerId,
+    public RequestStatus<Integer> add(@PathVariable int customerId,
                              @Valid Contact contact, BindingResult result) {
         if (result.hasErrors()) {
             throw new IllegalArgumentException(result.getAllErrors().get(0).getDefaultMessage());
         }
         contact.setCustomer(new Customer(customerId));
         contactDao.insert(contact);
-        return RequestStatus.success();
+        return RequestStatus.success(contact.getContactId());
     }
 
     @PutMapping("/default")

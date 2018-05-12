@@ -1,0 +1,38 @@
+@startuml
+
+title 商家管理商品时序图
+
+actor 商家 as seller
+participant 页面 as view
+control 业务层和持久层 as sc
+
+seller -> view : 输入条件搜索商品
+view   -> sc   : 根据关键字查询商品
+sc     -> view : 返回商品列表
+seller <- view : 显示商品列表
+
+seller -> view : 点击某一个商品
+view   -> sc   : 根据商品id查询商品详情
+sc     -> view : 返回商品详细信息
+seller <- view : 显示商品详细信息
+
+seller -> view : 点击修改商品信息
+seller <- view : 显示修改商品信息页面
+seller -> view : 点击确认修改
+view   -> sc   : 修改商品信息
+sc     -> view : 修改成功
+seller <- view : 提示修改成功
+
+seller -> view : 点击删除
+view   -> sc   : 根据id删除商品
+sc     -> view : 删除成功
+seller <- view : 提示删除成功
+
+seller -> view : 点击添加商品
+seller <- view : 显示添加商品页面
+seller -> view : 输入要添加的商品信息并确认
+view   -> sc   : 添加商品
+sc     -> view : 添加成功
+seller <- view : 提示添加成功
+
+@enduml
