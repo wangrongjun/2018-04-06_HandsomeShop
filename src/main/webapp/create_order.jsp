@@ -99,14 +99,13 @@
         <div class="goods_img">
             <img :src="'/rest/picture/' + goods.pictureList[0].pictureId"/>
         </div>
+
         <div class="order_info">
             <div>商品：<span>{{goods.goodsName}}</span></div>
             <div>单价：<span>{{goods.price}}</span></div>
             <div>数量：<span>{{count}}</span></div>
             <div>运费：<span>0</span></div>
             <div>合计：<span>{{goods.price * count}}</span></div>
-
-            <%--收货地址--%>
             <div>
                 收货地址：
                 <div class="contact_item">
@@ -123,12 +122,13 @@
                     </div>
                 </div>
             </div>
-            <%--收货地址--%>
-
             <div class="goods_name">
                 <a href="javascript:void(0)" onclick="$('#modal_add_contact').modal('toggle')">添加收货地址</a>
                 <br/>
                 <a href="javascript:void(0)" onclick="$('#modal_select_contact').modal('toggle')">更改收货地址</a>
+            </div>
+            <div>
+                备注：<input class="form-control" type="text" v-model="remark">
             </div>
             <button onclick="createOrder()" class="btn btn-danger">确认付款</button>
         </div>

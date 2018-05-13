@@ -9,6 +9,7 @@ $(function () {
         data: {
             goods: goods,
             count: count,
+            remark: null,// 这个属性需要用户输入，而其他数据都是从请求中获取的。
             selectedContact: contactList.length > 0 ? contactList[0] : null,
         }
     });
@@ -62,6 +63,7 @@ function createOrder() {
             customerId: customer.customerId,
             goodsId: goods.goodsId,
             count: count,
+            remark: contentVm.remark,
             contactId: contentVm.selectedContact.contactId
         },
         success: function (data) {

@@ -10,26 +10,72 @@ $(function () {
             ordersList: ordersList,
         },
         methods: {
-            showGoodsInfo: showGoodsInfo,
-            confirmOrders: confirmOrders,
+            showGoodsInfo: function (goodsId) {
+                window.location.href = "/goods/" + goodsId;
+            },
+            ordersStatusMsg: function (ordersStatus) {
+                switch (ordersStatus) {
+                    case "Created":
+                        return "等待卖家发货";
+                    case "Pending_Receive":
+                        return "卖家已发货";
+                    case "Received":
+                        return "买家已收货";
+                    case "Finish":
+                        return "订单完成";
+                    case "Pending_Return_Money":
+                        return "退款中";
+                    case "Closed":
+                        return "交易已关闭";
+                    default:
+                        return "订单异常";
+                }
+            },
+            showLogisticsBtn: function (ordersStatus) {
+                return ordersStatus === "Pending_Receive";
+            },
+            showReturnMoneyBtn: function (ordersStatus) {
+                return ordersStatus === "Created" ||
+                    ordersStatus === "Pending_Receive" ||
+                    ordersStatus === "Received" ||
+                    ordersStatus === "Finish";
+            },
+            showReceiveGoodsBtn: function (ordersStatus) {
+                return ordersStatus === "Pending_Receive";
+            },
+            showDeleteOrdersBtn: function (ordersStatus) {
+                return ordersStatus === "Finish" ||
+                    ordersStatus === "Closed";
+            },
+            showEvaluateBtn: function (ordersStatus) {
+                return ordersStatus === "Received";
+            },
+            showLogistics: showLogistics,
+            returnMoney: returnMoney,
+            receiveGoods: receiveGoods,
             deleteOrders: deleteOrders,
-        }
+            evaluate: evaluate,
+        },
+
     });
 });
 
-function showGoodsInfo(goodsId) {
-    window.location.href = "/goods/" + goodsId;
+function showLogistics(ordersId) {
+    alert("showLogistics: " + ordersId);
 }
 
-function confirmOrders(ordersId) {
-    alert("confirmOrders: " + ordersId);
+function returnMoney(ordersId) {
+    alert("returnMoney: " + ordersId);
+}
+
+function receiveGoods(ordersId) {
+    alert("receiveGoods: " + ordersId);
 }
 
 function deleteOrders(ordersId) {
     if (!confirm("确实要删除该订单吗？")) {
         return
     }
-
     $.ajax({
         url: "/rest/orders/" + ordersId,
         type: "DELETE",
@@ -46,4 +92,8 @@ function deleteOrders(ordersId) {
             alert("订单删除失败！错误信息：" + exception);
         }
     });
+}
+
+function evaluate(ordersId) {
+    alert("evaluate: " + ordersId);
 }

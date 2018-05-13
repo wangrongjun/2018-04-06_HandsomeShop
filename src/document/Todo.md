@@ -2,7 +2,6 @@
 
 * 分页和搜索：多条件搜索，需要有排序，缓存搜索条件，同时做好分页（使用Pager辅助分页）
 * 把按分类来查询的方法合并到搜索方法中
-* 商品的无限级分类
 * 商品的属性组合以及库存
 * 商家的商品管理
 * 商家的订单管理
@@ -15,7 +14,7 @@
 * 改进项目：HibernateDao 的 id 类型参数化
 * 改进项目：使用 Hibernate 提供的 JdbcTemplate
 * [完成]改进项目：在数据库中保存图片，编写一个请求方法返回图片
-* 无限分类（闭包集实现树型结构）
+* [完成]无限分类（闭包集实现树型结构）
 * [完成]Address表改名为Contact
 * [完成]Orders的receiver和phone改为contact
 * [完成]给每个实体类加上createdOn，modifiedOn，isObsolete

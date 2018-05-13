@@ -81,33 +81,4 @@ public class CustomerController extends BaseController {
         return "create_order";
     }
 
-    @PostMapping("/orders")
-    @ResponseBody
-    public boolean create(HttpServletRequest request, int contactId) {
-        Customer customer = getLoginCustomerFromSession(request);
-        Goods goods = (Goods) request.getSession().getAttribute("goods");
-        if (goods == null) {
-            return false;
-        }
-
-        int count;
-        try {
-            count = (int) request.getSession().getAttribute("count");
-        } catch (Exception e) {
-            return false;
-        }
-
-        Orders orders = new Orders(new Customer(customer.getCustomerId()), goods, count, count * goods.getPrice(),
-                new Contact(contactId), new Date(), Orders.STATE_CONTINUE);
-        ordersDao.insert(orders);
-
-        // 成功添加订单后，address_list,goods,count等变量就没必要了，可以清除
-        request.getSession().removeAttribute("address_list");
-        request.getSession().removeAttribute("goods");
-        request.getSession().removeAttribute("count");
-
-        request.getSession().setAttribute("orders", orders);
-        return true;
-    }
-
 }

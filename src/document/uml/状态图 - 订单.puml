@@ -4,7 +4,8 @@ state "Created：订单已创建，等待商家发货" as Created
 state "Pending_Receive：商家已发货，顾客等待收货" as Pending_Receive
 state "Received：顾客已经收货" as Received
 state "Pending_Return_Money：顾客申请退款，等待商家退款" as Pending_Return_Money
-state "Finish：订单结束" as Finish
+state "Closed：订单关闭" as Closed
+state "Finish：订单完成" as Finish
 
 [*] --> Created : 顾客下单
 Created --> Pending_Receive : 商家发货
@@ -13,9 +14,10 @@ Pending_Receive --> Pending_Return_Money : 顾客申请退款
 Pending_Receive --> Received : 顾客确认收货
 Received --> Pending_Return_Money : 顾客申请退款
 
-Pending_Return_Money --> Finish : 商家退款
-Received --> Finish : 顾客评价
+Pending_Return_Money --> Closed : 商家退款
+Received --> Finish : 顾客对订单进行评价
 
+Closed --> [*]
 Finish --> [*]
 
 @enduml

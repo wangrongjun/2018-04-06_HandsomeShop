@@ -30,42 +30,44 @@
 
     <div class="text-center"><h1>我的订单({{ordersCount}})</h1></div>
 
-    <template v-for="orders in ordersList">
-        <div class="order_item">
-            <div class="goods_image">
-                <img :src="'/rest/picture/' + orders.goods.pictureList[0].pictureId"
-                     v-on:click="showGoodsInfo(orders.goods.goodsId)"/>
-            </div>
-            <div class="right_box">
-                <div class="order_info">
-                    <div>订单编号：{{orders.ordersId}}</div>
-                    <div>商品名称：{{orders.goods.goodsName}}</div>
-                    <div>店鋪名称：{{orders.goods.shop.shopName}}</div>
-                    <div>购买数量：{{orders.buyCount}}</div>
-                    <div>收货人：{{orders.contact.receiver}}</div>
-                    <div>联系电话：{{orders.contact.phone}}</div>
-                    <div>收货地址：{{orders.contact.address}}</div>
-                    <div>创建时间：{{orders.createTime}}</div>
-                    <div>订单状态：<span>
-                        {{orders.state==0?"交易中":(orders.state==1?"交易成功":"交易失败")}}
-                    </span>
-                    </div>
-                    <div>总价：￥ <span>{{orders.price}}</span></div>
-                    <div class="btn_box">
-                        <template v-if="orders.state==0">
-                            <button class="btn btn-danger">申请退款</button>
-                            <button class="btn btn-success" v-on:click="confirmOrders(orders.ordersId)">确认收货</button>
-                        </template>
-                        <template v-else-if="orders.state==1 || orders.state==2">
-                            <button class="btn btn-danger">申请售后</button>
-                            <button class="btn btn-danger" v-on:click="deleteOrders(orders.ordersId)">删除订单</button>
-                        </template>
-                    </div>
+    <div v-for="orders in ordersList" class="order_item">
+        <div class="goods_image">
+            <img :src="'/rest/picture/' + orders.goods.pictureList[0].pictureId"
+                 v-on:click="showGoodsInfo(orders.goods.goodsId)"/>
+        </div>
+        <div class="right_box">
+            <div class="order_info">
+                <div>订单编号：{{orders.ordersId}}</div>
+                <div>商品名称：{{orders.goods.goodsName}}</div>
+                <div>店鋪名称：{{orders.goods.shop.shopName}}</div>
+                <div>购买数量：{{orders.buyCount}}</div>
+                <div>收货人：{{orders.contact.receiver}}</div>
+                <div>联系电话：{{orders.contact.phone}}</div>
+                <div>收货地址：{{orders.contact.address}}</div>
+                <div>创建时间：{{orders.createTime}}</div>
+                <div>订单状态：<span>{{ordersStatusMsg(orders.status)}}</span></div>
+                <div>总价：￥ <span>{{orders.price}}</span></div>
+                <div>备注：{{orders.remark}}</div>
+                <div class="btn_box">
+                    <button v-if="showLogisticsBtn(orders.status)" v-on:click="showLogistics(orders.ordersId)"
+                            class="btn btn-default">查看物流
+                    </button>
+                    <button v-if="showReturnMoneyBtn(orders.status)" v-on:click="returnMoney(orders.ordersId)"
+                            class="btn btn-warning">申请退款
+                    </button>
+                    <button v-if="showReceiveGoodsBtn(orders.status)" v-on:click="receiveGoods(orders.ordersId)"
+                            class="btn btn-success">确认收货
+                    </button>
+                    <button v-if="showDeleteOrdersBtn(orders.status)" v-on:click="deleteOrders(orders.ordersId)"
+                            class="btn btn-danger">删除订单
+                    </button>
+                    <button v-if="showEvaluateBtn(orders.status)" v-on:click="evaluate(orders.ordersId)"
+                            class="btn btn-info">评价订单
+                    </button>
                 </div>
             </div>
         </div>
-        <hr>
-    </template>
+    </div>
 
 </content>
 

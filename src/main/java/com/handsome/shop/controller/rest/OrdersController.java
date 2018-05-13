@@ -11,13 +11,13 @@ import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.framework.ReturnObjectToJsonIgnoreFields;
 import com.handsome.shop.util.Pager;
 import com.handsome.shop.util.RequestStatus;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
 
 /**
  * by wangrongjun on 2018/5/1.
@@ -47,10 +47,11 @@ public class OrdersController extends BaseController {
     public RequestStatus create(@RequestParam Integer customerId,
                                 @RequestParam Integer goodsId,
                                 @RequestParam Integer count,
-                                @RequestParam Integer contactId) {
+                                @RequestParam Integer contactId,
+                                @NotBlank String remark) {
         Goods goods = goodsDao.queryById(goodsId);
-        Orders orders = new Orders(new Customer(customerId), goods, count,
-                count * goods.getPrice(), new Contact(contactId), new Date(), Orders.STATE_CONTINUE);
+        Orders orders = new Orders(new Customer(customerId), goods, count, count * goods.getPrice(),
+                new Contact(contactId), remark, Orders.Status.Created);
         ordersDao.insert(orders);
         return RequestStatus.success();
     }

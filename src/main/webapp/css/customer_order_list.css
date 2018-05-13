@@ -5,13 +5,14 @@
     box-shadow: 0 0 3px grey;
     background-color: #fef;
     padding: 10px;
+    overflow: hidden;
 }
 
 .goods_image {
     width: 200px;
     height: 200px;
-    margin-bottom: 80px;
     display: inline-block;
+    float: left;
 }
 
 .goods_image img {
@@ -22,7 +23,6 @@
 .right_box {
     display: inline-block;
     padding-left: 50px;
-    position: absolute;
     max-width: 70%;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .btn_box {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .btn_box button {

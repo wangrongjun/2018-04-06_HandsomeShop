@@ -14,15 +14,6 @@ import java.util.Date;
 @Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Orders extends BaseEntity {
 
-    // TODO 订单应该有商品名称，下单时的价格，而且goods可为空，代表商品下架
-
-    @Transient
-    public static final int STATE_CONTINUE = 0;
-    @Transient
-    public static final int STATE_SUCCEED = 1;
-    @Transient
-    public static final int STATE_FAILED = 2;
-
     public String getRemark() {
         return remark;
     }
@@ -33,24 +24,35 @@ public class Orders extends BaseEntity {
 
     public enum Status {
         /**
-         * 顾客下单后，等待商家处理的状态
+         * 订单已创建，等待商家发货
          */
-        CREATED,
+        Created(0),
         /**
-         * 已发货，等待顾客收货的状态
+         * 商家已发货，顾客等待收货
          */
-        PENDING_RECEIVE,
+        Pending_Receive(1),
         /**
          * 顾客已经收货
          */
-        RECEIVED,
+        Received(2),
         /**
-         *
+         * 顾客申请退款，等待商家退款
          */
-        RETURN,
+        Pending_Return_Money(3),
+        /**
+         * 订单关闭
+         */
+        Closed(4),
+        /**
+         * 订单完成
+         */
+        Finish(5);
 
-        FINISH;
-        int value;
+        int code;
+
+        Status(int code) {
+            this.code = code;
+        }
     }
 
     @Id
@@ -68,8 +70,8 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "contactId")
     private Contact contact;// 订单所对应的收货地址
     private String remark;
-    private Date createTime;//订单创建时间，格式：”yyyy-MM-dd HH:mm:ss”
-    private int status;//订单状态，进行中，关闭，成功 TODO 改为enum类型
+    @Enumerated(EnumType.STRING)
+    private Status status;//订单状态
 
     @Override
     public String toString() {
@@ -81,7 +83,6 @@ public class Orders extends BaseEntity {
                 ", price=" + price +
                 ", contact=" + contact +
                 ", remark='" + remark + '\'' +
-                ", createTime=" + createTime +
                 ", status=" + status +
                 '}';
     }
@@ -93,27 +94,14 @@ public class Orders extends BaseEntity {
         this.ordersId = ordersId;
     }
 
-    public Orders(Customer customer, Goods goods, int buyCount, double price, Contact contact, String remark, Date createTime, int status) {
+    public Orders(Customer customer, Goods goods, int buyCount, double price, Contact contact, String remark, Status status) {
         this.customer = customer;
         this.goods = goods;
         this.buyCount = buyCount;
         this.price = price;
         this.contact = contact;
         this.remark = remark;
-        this.createTime = createTime;
         this.status = status;
-    }
-
-    public static int getStateContinue() {
-        return STATE_CONTINUE;
-    }
-
-    public static int getStateSucceed() {
-        return STATE_SUCCEED;
-    }
-
-    public static int getStateFailed() {
-        return STATE_FAILED;
     }
 
     public int getOrdersId() {
@@ -164,19 +152,11 @@ public class Orders extends BaseEntity {
         this.contact = contact;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int state) {
-        this.status = state;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
