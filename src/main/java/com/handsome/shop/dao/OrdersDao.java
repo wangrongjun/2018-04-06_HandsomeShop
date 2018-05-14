@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2017/6/17.
  */
-public interface OrdersDao extends Dao<Orders> {
+public interface OrdersDao extends Dao<Orders, Integer> {
     List<Orders> queryByCustomerId(int customerId, Pager<Orders> pager);
 
     int queryCountByCustomerId(int customerId);

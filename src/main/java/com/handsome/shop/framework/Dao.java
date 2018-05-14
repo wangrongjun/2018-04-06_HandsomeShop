@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2018/4/14.
  */
-public interface Dao<T> {
+public interface Dao<T,ID> {
 
     int executeUpdate(String hql, Object... parameters);
 
@@ -19,11 +19,11 @@ public interface Dao<T> {
 
     boolean deleteAll();
 
-    boolean deleteById(long id);
+    boolean deleteById(ID id);
 
     boolean update(T entity);
 
-    T queryById(long id);
+    T queryById(ID id);
 
     List<T> queryAll();
 

@@ -14,7 +14,7 @@ public class GoodsImage extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int goodsImageId;
+    private Integer goodsImageId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goodsId")
     private Goods goods;//外键，该图片所属的商品。查询时不必给该变量赋值。
@@ -32,7 +32,7 @@ public class GoodsImage extends BaseEntity {
     public GoodsImage() {
     }
 
-    public GoodsImage(int goodsImageId, String imageUrl) {
+    public GoodsImage(Integer goodsImageId, String imageUrl) {
         this.goodsImageId = goodsImageId;
         this.imageUrl = imageUrl;
     }
@@ -42,11 +42,11 @@ public class GoodsImage extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    public int getGoodsImageId() {
+    public Integer getGoodsImageId() {
         return goodsImageId;
     }
 
-    public void setGoodsImageId(int imageId) {
+    public void setGoodsImageId(Integer imageId) {
         this.goodsImageId = imageId;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/17.
  */
 @Repository
-public class OrdersDaoImpl extends HibernateDao<Orders> implements OrdersDao {
+public class OrdersDaoImpl extends HibernateDao<Orders, Integer> implements OrdersDao {
 
     @Override
     public List<Orders> queryByCustomerId(int customerId, Pager<Orders> pager) {

@@ -1,5 +1,6 @@
 package com.handsome.shop.controller.rest;
 
+import com.google.gson.JsonObject;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.dao.OrdersDao;
 import com.handsome.shop.entity.Contact;
@@ -51,7 +52,7 @@ public class OrdersController extends BaseController {
                                 @NotBlank String remark) {
         Goods goods = goodsDao.queryById(goodsId);
         Orders orders = new Orders(new Customer(customerId), goods, count, count * goods.getPrice(),
-                new Contact(contactId), remark, Orders.Status.Created);
+                new Contact(contactId), remark, Orders.Status.Pending_Receive, null);
         ordersDao.insert(orders);
         return RequestStatus.success();
     }
@@ -62,10 +63,58 @@ public class OrdersController extends BaseController {
         return RequestStatus.success();
     }
 
-    @PutMapping("/{ordersId}/toNewStatus/{newStatus}")
+    /**
+     * @param refundReason 该变量只有 action 为 customerApplyForRefund 时才有效
+     */
+    @PutMapping("/{ordersId}/action/{action}")
     public RequestStatus changeToNewStatus(@PathVariable Integer ordersId,
-                                           @PathVariable Orders.Status newStatus) {
-        return RequestStatus.success();
+                                           @PathVariable String action,
+                                           String refundReason) {
+        Orders orders = ordersDao.queryById(ordersId);
+        Orders.Status currStatus = orders.getStatus();
+        Orders.Status nextStatus = null;
+        // 根据订单当前状态以及执行的动作推导出订单的下一个状态
+        switch (action) {
+            case "sellerDeliverGoods":// 卖家发货
+                if (currStatus == Orders.Status.Created) {
+                    nextStatus = Orders.Status.Pending_Receive;
+                }
+                break;
+            case "customerReceiveGoods":// 买家收货
+                if (currStatus == Orders.Status.Pending_Receive) {
+                    nextStatus = Orders.Status.Received;
+                }
+                break;
+            case "customerEvaluateOrders":// 买家评价订单
+                if (currStatus == Orders.Status.Received) {
+                    nextStatus = Orders.Status.Finish;
+                }
+                break;
+            case "customerApplyForRefund":// 买家申请退款
+                if (currStatus == Orders.Status.Created ||
+                        currStatus == Orders.Status.Pending_Receive ||
+                        currStatus == Orders.Status.Received) {
+                    nextStatus = Orders.Status.Pending_Refund;
+                    orders.setRefundReason(refundReason);
+                }
+                break;
+            case "sellerRefund":// 卖家退款
+                if (currStatus == Orders.Status.Pending_Refund) {
+                    nextStatus = Orders.Status.Closed;
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid action: " + action);
+        }
+        if (nextStatus == null) {
+            throw new IllegalArgumentException("Not support to take the action on this orders: " + action);
+        }
+        orders.setStatus(nextStatus);
+        ordersDao.update(orders);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("newStatus", nextStatus.toString());
+        return RequestStatus.success(jsonObject);
     }
 
 }

@@ -6,5 +6,5 @@ import com.handsome.shop.framework.HibernateDao;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PictureDaoImpl extends HibernateDao<Picture> implements PictureDao {
+public class PictureDaoImpl extends HibernateDao<Picture, Integer> implements PictureDao {
 }

@@ -16,7 +16,7 @@ public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int customerId;
+    private Integer customerId;
     private String phone;
     private String password;
     private String realName;
@@ -43,7 +43,7 @@ public class Customer extends BaseEntity {
     public Customer() {
     }
 
-    public Customer(int customerId) {
+    public Customer(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -56,11 +56,11 @@ public class Customer extends BaseEntity {
         this.head = head;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 

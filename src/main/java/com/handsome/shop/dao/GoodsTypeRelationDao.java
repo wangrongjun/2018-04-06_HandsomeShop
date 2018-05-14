@@ -8,7 +8,7 @@ import com.wangrj.java_lib.hibernate.Where;
 /**
  * by wangrongjun on 2018/5/10.
  */
-public interface GoodsTypeRelationDao extends Dao<GoodsTypeRelation> {
+public interface GoodsTypeRelationDao extends Dao<GoodsTypeRelation, Integer> {
 
     void addRelation(GoodsType parentType, GoodsType newType);
 

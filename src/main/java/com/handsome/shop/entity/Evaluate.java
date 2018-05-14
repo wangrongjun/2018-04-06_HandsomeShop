@@ -21,7 +21,7 @@ public class Evaluate extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int evaluateId;
+    private Integer evaluateId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ordersId")
     private Orders orders;//Order外键，对某次购物（即一份订单）的评价
@@ -50,11 +50,11 @@ public class Evaluate extends BaseEntity {
         this.createTime = createTime;
     }
 
-    public int getEvaluateId() {
+    public Integer getEvaluateId() {
         return evaluateId;
     }
 
-    public void setEvaluateId(int evaluateId) {
+    public void setEvaluateId(Integer evaluateId) {
         this.evaluateId = evaluateId;
     }
 

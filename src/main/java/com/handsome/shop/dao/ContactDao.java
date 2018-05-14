@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2017/6/19.
  */
-public interface ContactDao extends Dao<Contact> {
+public interface ContactDao extends Dao<Contact, Integer> {
 
     List<Contact> queryByCustomerId(int customerId);
 

@@ -8,6 +8,8 @@ $(function () {
         data: {
             ordersCount: ordersCount,
             ordersList: ordersList,
+            selectedOrdersId: null,// 只在申请退款中，模态窗弹出时由于无法传id才需要用到
+            refundReason: null,
         },
         methods: {
             showGoodsInfo: function (goodsId) {
@@ -23,18 +25,18 @@ $(function () {
                         return "买家已收货";
                     case "Finish":
                         return "订单完成";
-                    case "Pending_Return_Money":
+                    case "Pending_Refund":
                         return "退款中";
                     case "Closed":
                         return "交易已关闭";
                     default:
-                        return "订单异常";
+                        return "异常状态：" + ordersStatus;
                 }
             },
             showLogisticsBtn: function (ordersStatus) {
                 return ordersStatus === "Pending_Receive";
             },
-            showReturnMoneyBtn: function (ordersStatus) {
+            showRefundBtn: function (ordersStatus) {
                 return ordersStatus === "Created" ||
                     ordersStatus === "Pending_Receive" ||
                     ordersStatus === "Received" ||
@@ -50,29 +52,55 @@ $(function () {
             showEvaluateBtn: function (ordersStatus) {
                 return ordersStatus === "Received";
             },
-            showLogistics: showLogistics,
-            returnMoney: returnMoney,
+            queryLogistics: queryLogistics,
             receiveGoods: receiveGoods,
+            evaluateOrders: evaluateOrders,
+            applyForRefund: applyForRefund,
             deleteOrders: deleteOrders,
-            evaluate: evaluate,
         },
     });
 });
 
-function showLogistics(ordersId) {
-    alert("showLogistics: " + ordersId);
-}
-
-function returnMoney(ordersId) {
-    alert("returnMoney: " + ordersId);
+function queryLogistics(ordersId) {
+    alert("查看订单号为 " + ordersId + " 的物流信息");
 }
 
 function receiveGoods(ordersId) {
     $.ajax({
-        url: "/rest/orders/" + ordersId + "/toNewStatus/Received",
+        url: "/rest/orders/" + ordersId + "/action/customerReceiveGoods",
         type: "PUT",
         success: function (data) {
-            alert("succeed: " + data);
+            for (let i = 0; i < contentVm.ordersList.length; i++) {
+                let orders = contentVm.ordersList[i];
+                if (orders.ordersId === ordersId) {
+                    orders.status = data.data.newStatus;
+                }
+            }
+        },
+        error: function (xhr, errorMsg, exception) {
+            alert("fail: " + exception);
+        }
+    });
+}
+
+function evaluateOrders(ordersId) {
+    alert("evaluate: " + ordersId);
+}
+
+function applyForRefund(ordersId, refundReason) {
+    $.ajax({
+        url: "/rest/orders/" + ordersId + "/action/customerApplyForRefund",
+        data: {
+            refundReason: refundReason
+        },
+        type: "PUT",
+        success: function (data) {
+            for (let i = 0; i < contentVm.ordersList.length; i++) {
+                let orders = contentVm.ordersList[i];
+                if (orders.ordersId === ordersId) {
+                    orders.status = data.data.newStatus;
+                }
+            }
         },
         error: function (xhr, errorMsg, exception) {
             alert("fail: " + exception);
@@ -100,8 +128,4 @@ function deleteOrders(ordersId) {
             alert("订单删除失败！错误信息：" + exception);
         }
     });
-}
-
-function evaluate(ordersId) {
-    alert("evaluate: " + ordersId);
 }

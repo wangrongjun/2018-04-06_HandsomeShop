@@ -22,15 +22,15 @@ public class GoodsType extends BaseEntity {
     @Transient
     private List<GoodsType> children;
 
-    public GoodsType() {
-    }
-
     @Override
     public String toString() {
         return "GoodsType{" +
                 "goodsTypeId=" + goodsTypeId +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public GoodsType() {
     }
 
     public GoodsType(int goodsTypeId) {

@@ -14,7 +14,7 @@ public class Shop extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int shopId;
+    private Integer shopId;
     @ManyToOne
     @JoinColumn(name = "sellerId")
     private Seller seller;
@@ -38,7 +38,7 @@ public class Shop extends BaseEntity {
     public Shop() {
     }
 
-    public Shop(int shopId) {
+    public Shop(Integer shopId) {
         this.shopId = shopId;
     }
 
@@ -49,11 +49,11 @@ public class Shop extends BaseEntity {
         this.head = head;
     }
 
-    public int getShopId() {
+    public Integer getShopId() {
         return shopId;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
 

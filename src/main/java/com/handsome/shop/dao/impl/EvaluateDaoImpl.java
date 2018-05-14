@@ -13,7 +13,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/17.
  */
 @Repository
-public class EvaluateDaoImpl extends HibernateDao<Evaluate> implements EvaluateDao {
+public class EvaluateDaoImpl extends HibernateDao<Evaluate, Integer> implements EvaluateDao {
 
     @Override
     public List<Evaluate> queryByGoodsId(int goodsId) {

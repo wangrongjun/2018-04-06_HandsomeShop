@@ -13,7 +13,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/17.
  */
 @Repository
-public class GoodsDaoImpl extends HibernateDao<Goods> implements GoodsDao {
+public class GoodsDaoImpl extends HibernateDao<Goods, Integer> implements GoodsDao {
 
     private int begin = 0;
     private int count = 0;

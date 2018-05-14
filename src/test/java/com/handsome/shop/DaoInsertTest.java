@@ -160,7 +160,7 @@ public class DaoInsertTest extends BaseDaoTest {
         Orders orders1 = new Orders(王荣俊, 三星E7手机, 1, 三星E7手机.getPrice(), contact1, "备注1", Orders.Status.Created);
         Orders orders2 = new Orders(王荣俊, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact1, "备注2", Orders.Status.Pending_Receive);
         Orders orders3 = new Orders(王荣俊, 菜心, 6, 菜心.getPrice() * 6, contact2, null, Orders.Status.Received);
-        Orders orders4 = new Orders(王荣俊, 辣条, 10, 辣条.getPrice() * 10, contact2, null, Orders.Status.Pending_Return_Money);
+        Orders orders4 = new Orders(王荣俊, 辣条, 10, 辣条.getPrice() * 10, contact2, null, Orders.Status.Pending_Refund);
         Orders orders5 = new Orders(沫沫, iPhone7手机, 1, iPhone7手机.getPrice(), contact3, "备注1", Orders.Status.Closed);
         Orders orders6 = new Orders(沫沫, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact3, "备注2", Orders.Status.Finish);
         Orders orders7 = new Orders(沫沫, 可乐, 2, 可乐.getPrice() * 2, contact3, null, Orders.Status.Created);

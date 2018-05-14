@@ -29,7 +29,7 @@ public class Orders extends BaseEntity {
         /**
          * 顾客申请退款，等待商家退款
          */
-        Pending_Return_Money(3),
+        Pending_Refund(3),
         /**
          * 订单关闭
          */
@@ -48,7 +48,7 @@ public class Orders extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int ordersId;
+    private Integer ordersId;
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
@@ -63,6 +63,7 @@ public class Orders extends BaseEntity {
     private String remark;
     @Enumerated(EnumType.STRING)
     private Status status;//订单状态
+    private String refundReason;// 退款理由
 
     @Override
     public String toString() {
@@ -75,13 +76,14 @@ public class Orders extends BaseEntity {
                 ", contact=" + contact +
                 ", remark='" + remark + '\'' +
                 ", status=" + status +
+                ", refundReason='" + refundReason + '\'' +
                 '}';
     }
 
     public Orders() {
     }
 
-    public Orders(int ordersId) {
+    public Orders(Integer ordersId) {
         this.ordersId = ordersId;
     }
 
@@ -95,11 +97,11 @@ public class Orders extends BaseEntity {
         this.status = status;
     }
 
-    public int getOrdersId() {
+    public Integer getOrdersId() {
         return ordersId;
     }
 
-    public void setOrdersId(int ordersId) {
+    public void setOrdersId(Integer ordersId) {
         this.ordersId = ordersId;
     }
 
@@ -159,4 +161,11 @@ public class Orders extends BaseEntity {
         this.remark = remark;
     }
 
+    public String getRefundReason() {
+        return refundReason;
+    }
+
+    public void setRefundReason(String refundReason) {
+        this.refundReason = refundReason;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2017/6/17.
  */
-public interface ShopDao extends Dao<Shop> {
+public interface ShopDao extends Dao<Shop, Integer> {
 
     List<Shop> queryBySellerId(int sellerId);//查询某个商家的所有商店
 

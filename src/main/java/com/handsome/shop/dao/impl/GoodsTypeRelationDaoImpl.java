@@ -13,7 +13,7 @@ import java.util.List;
  * by wangrongjun on 2018/5/10.
  */
 @Repository
-public class GoodsTypeRelationDaoImpl extends HibernateDao<GoodsTypeRelation> implements GoodsTypeRelationDao {
+public class GoodsTypeRelationDaoImpl extends HibernateDao<GoodsTypeRelation, Integer> implements GoodsTypeRelationDao {
 
     /**
      * 添加的策略：newType 先加自己与父母及父母祖先的关系，再加自己与自己的关系

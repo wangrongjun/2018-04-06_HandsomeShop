@@ -17,7 +17,7 @@ public class Contact extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int contactId;
+    private Integer contactId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerId")
     private Customer customer;
@@ -45,7 +45,7 @@ public class Contact extends BaseEntity {
     public Contact() {
     }
 
-    public Contact(int contactId) {
+    public Contact(Integer contactId) {
         this.contactId = contactId;
     }
 
@@ -57,11 +57,11 @@ public class Contact extends BaseEntity {
         this.defaultContact = defaultContact;
     }
 
-    public int getContactId() {
+    public Integer getContactId() {
         return contactId;
     }
 
-    public void setContactId(int contactId) {
+    public void setContactId(Integer contactId) {
         this.contactId = contactId;
     }
 

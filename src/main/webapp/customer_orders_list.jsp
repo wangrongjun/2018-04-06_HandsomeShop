@@ -50,25 +50,63 @@
                 <div>总价：￥ <span>{{orders.price}}</span></div>
                 <div>备注：{{orders.remark}}</div>
                 <div class="btn_box">
-                    <button v-if="showLogisticsBtn(orders.status)" @click="showLogistics(orders.ordersId)"
+                    <button v-if="showLogisticsBtn(orders.status)" @click="queryLogistics(orders.ordersId)"
                             class="btn btn-default">查看物流
-                    </button>
-                    <button v-if="showReturnMoneyBtn(orders.status)" @click="returnMoney(orders.ordersId)"
-                            class="btn btn-warning">申请退款
                     </button>
                     <button v-if="showReceiveGoodsBtn(orders.status)" @click="receiveGoods(orders.ordersId)"
                             class="btn btn-success">确认收货
                     </button>
+                    <button v-if="showEvaluateBtn(orders.status)" @click="evaluateOrders(orders.ordersId)"
+                            class="btn btn-info">评价订单
+                    </button>
+                    <button v-if="showRefundBtn(orders.status)" onclick="$('#modal_refund').modal('toggle')"
+                            @click="selectedOrdersId=orders.ordersId"
+                            class="btn btn-warning">申请退款
+                    </button>
                     <button v-if="showDeleteOrdersBtn(orders.status)" @click="deleteOrders(orders.ordersId)"
                             class="btn btn-danger">删除订单
-                    </button>
-                    <button v-if="showEvaluateBtn(orders.status)" @click="evaluate(orders.ordersId)"
-                            class="btn btn-info">评价订单
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 填写退款理由的模态弹出窗 -->
+    <div class="modal fade" id="modal_refund">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">退款理由</h4>
+                </div>
+                <div class="modal-body">
+                    <label><input type="radio" name="refundReason" value="不喜欢" v-model="refundReason">不喜欢</label>
+                    <br>
+                    <label><input type="radio" name="refundReason" value="拍错了" v-model="refundReason">拍错了</label>
+                    <br>
+                    <label><input type="radio" name="refundReason" value="颜色不好看" v-model="refundReason">颜色不好看</label>
+                    <br>
+                    <label><input type="radio" name="refundReason" value="商品与描述不一致"
+                                  v-model="refundReason">商品与描述不一致</label>
+                    <br>
+                    <br>
+                    <label>理由：<input type="text" v-model="refundReason"></label>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" @click="applyForRefund(selectedOrdersId, refundReason)"
+                            data-dismiss="modal">申请退款
+                    </button>
+                </div>
+                <%--</form>--%>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- 填写退款理由的模态弹出窗 -->
 
 </content>
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * by wangrongjun on 2017/6/16.
  */
 @Repository
-public class ShopCarDaoImpl extends HibernateDao<ShopCar> implements ShopCarDao {
+public class ShopCarDaoImpl extends HibernateDao<ShopCar, Integer> implements ShopCarDao {
 
     @Override
     public long queryCountByCustomerId(int customerId) {

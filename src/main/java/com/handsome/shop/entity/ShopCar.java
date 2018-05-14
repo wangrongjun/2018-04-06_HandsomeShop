@@ -15,7 +15,7 @@ public class ShopCar extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int carId;
+    private Integer shopCarId;
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
@@ -31,12 +31,12 @@ public class ShopCar extends BaseEntity {
         this.goods = goods;
     }
 
-    public int getCarId() {
-        return carId;
+    public Integer getShopCarId() {
+        return shopCarId;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setShopCarId(Integer shopCarId) {
+        this.shopCarId = shopCarId;
     }
 
     public Customer getCustomer() {

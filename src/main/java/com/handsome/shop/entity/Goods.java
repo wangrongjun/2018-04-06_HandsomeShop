@@ -19,7 +19,7 @@ public class Goods extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int goodsId;
+    private Integer goodsId;
     private String goodsName;
     private String description;
     private double price;
@@ -51,7 +51,7 @@ public class Goods extends BaseEntity {
     public Goods() {
     }
 
-    public Goods(int goodsId) {
+    public Goods(Integer goodsId) {
         this.goodsId = goodsId;
     }
 
@@ -65,11 +65,11 @@ public class Goods extends BaseEntity {
         this.pictureList = pictureList;
     }
 
-    public int getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 

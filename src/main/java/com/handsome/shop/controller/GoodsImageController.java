@@ -1,8 +1,7 @@
 package com.handsome.shop.controller;
 
-import com.handsome.shop.entity.Customer;
-import com.handsome.shop.dao.CustomerDao;
 import com.handsome.shop.dao.GoodsImageDao;
+import com.handsome.shop.entity.Customer;
 import com.handsome.shop.framework.BaseController;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -94,7 +93,7 @@ public class GoodsImageController extends BaseController {
         boolean succeedAll = true;
         long failId = 0;
         for (String s : split) {
-            long id = Long.parseLong(s);
+            Integer id = new Integer(s);
             if (!goodsImageDao.deleteById(id)) {
                 succeedAll = false;
                 failId = id;

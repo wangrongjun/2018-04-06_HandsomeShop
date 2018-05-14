@@ -16,7 +16,7 @@ public class Seller extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private int sellerId;
+    private Integer sellerId;
     private String phone;
     private String password;
     private String realName;
@@ -46,7 +46,7 @@ public class Seller extends BaseEntity {
     public Seller() {
     }
 
-    public Seller(int sellerId) {
+    public Seller(Integer sellerId) {
         this.sellerId = sellerId;
     }
 
@@ -59,11 +59,11 @@ public class Seller extends BaseEntity {
         this.head = head;
     }
 
-    public int getSellerId() {
+    public Integer getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    public void setSellerId(Integer sellerId) {
         this.sellerId = sellerId;
     }
 

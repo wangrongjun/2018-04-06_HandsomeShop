@@ -17,7 +17,7 @@ import java.util.Map;
  * by wangrongjun on 2017/6/17.
  */
 @Repository
-public class CustomerDaoImpl extends HibernateDao<Customer> implements CustomerDao {
+public class CustomerDaoImpl extends HibernateDao<Customer, Integer> implements CustomerDao {
 
     @Override
     public Customer queryByPhone(String phone) {

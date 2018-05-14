@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2017/6/17.
  */
-public interface GoodsDao extends Dao<Goods> {
+public interface GoodsDao extends Dao<Goods, Integer> {
 
     GoodsDao begin(int begin);
 

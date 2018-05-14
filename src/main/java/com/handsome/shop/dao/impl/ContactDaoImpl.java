@@ -13,7 +13,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/19.
  */
 @Repository
-public class ContactDaoImpl extends HibernateDao<Contact> implements ContactDao {
+public class ContactDaoImpl extends HibernateDao<Contact, Integer> implements ContactDao {
 
     @Override
     public List<Contact> queryByCustomerId(int customerId) {

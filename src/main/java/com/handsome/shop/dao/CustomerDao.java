@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * by wangrongjun on 2017/6/17.
  */
-public interface CustomerDao extends Dao<Customer> {
+public interface CustomerDao extends Dao<Customer, Integer> {
 
     Customer queryByPhone(String phone);
 

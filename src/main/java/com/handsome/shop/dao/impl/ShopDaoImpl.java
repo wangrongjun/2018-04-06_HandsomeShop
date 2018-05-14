@@ -12,7 +12,7 @@ import java.util.List;
  * by wangrongjun on 2017/6/17.
  */
 @Repository
-public class ShopDaoImpl extends HibernateDao<Shop> implements ShopDao {
+public class ShopDaoImpl extends HibernateDao<Shop, Integer> implements ShopDao {
 
     @Override
     public List<Shop> queryBySellerId(int sellerId) {

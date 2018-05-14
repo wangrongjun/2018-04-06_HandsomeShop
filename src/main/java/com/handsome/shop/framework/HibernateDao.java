@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import javax.annotation.Resource;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2018/4/12.
  */
-public class HibernateDao<T> implements Dao<T> {
+public class HibernateDao<T, ID> implements Dao<T, ID> {
 
     @Resource
     private SessionFactory sessionFactory;
@@ -126,7 +127,7 @@ public class HibernateDao<T> implements Dao<T> {
     }
 
     @Override
-    public boolean deleteById(long id) {
+    public boolean deleteById(ID id) {
         Session session = getSession();
         session.delete(queryById(id));
         return true;
@@ -140,17 +141,17 @@ public class HibernateDao<T> implements Dao<T> {
     }
 
     @Override
-    public T queryById(long id) {
+    public T queryById(ID id) {
         Session session = getSession();
         T entity;
         switch (getIdFieldType().getSimpleName()) {
             case "int":
             case "Integer":
-                entity = session.get(getEntityClass(), (int) id);
+                entity = session.get(getEntityClass(), (Integer) id);
                 break;
             case "long":
             case "Long":
-                entity = session.get(getEntityClass(), id);
+                entity = session.get(getEntityClass(), (Long) id);
                 break;
             default:
                 throw new RuntimeException(getEntityClass().getName() + " : id must be number");
