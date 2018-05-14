@@ -20,6 +20,7 @@
         var ordersCount = ${requestScope.ordersCount};
         var ordersList = ${requestScope.ordersListJson};
     </script>
+    <script src="${pageContext.request.contextPath}/js/util/DateUtil.js"></script>
     <script src="${pageContext.request.contextPath}/js/customer_order_list.js"></script>
 </head>
 <body>
@@ -44,7 +45,7 @@
                 <div>收货人：{{orders.contact.receiver}}</div>
                 <div>联系电话：{{orders.contact.phone}}</div>
                 <div>收货地址：{{orders.contact.address}}</div>
-                <div>创建时间：{{orders.createTime}}</div>
+                <div>创建时间：{{new Date(orders.createdOn).format("yyyy-MM-dd HH:mm:ss")}}</div>
                 <div>订单状态：<span>{{ordersStatusMsg(orders.status)}}</span></div>
                 <div>总价：￥ <span>{{orders.price}}</span></div>
                 <div>备注：{{orders.remark}}</div>

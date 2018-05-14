@@ -62,7 +62,7 @@ public class CustomerController extends BaseController {
     @GetMapping("/orders")
     public String listOrders(HttpServletRequest request) {
         int customerId = getLoginCustomerFromSession(request).getCustomerId();
-        Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createTime"), createBR());
+        Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createdOn"), createBR());
         request.setAttribute("ordersCount", pager.getTotalCount());
         request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(), "Shop.seller", "GoodsImage.goods"));
         return "customer_order_list";

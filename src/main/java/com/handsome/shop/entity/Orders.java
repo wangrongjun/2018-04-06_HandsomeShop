@@ -5,7 +5,6 @@ import com.handsome.shop.framework.BaseEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -13,14 +12,6 @@ import java.util.Date;
 @Entity
 @Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Orders extends BaseEntity {
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
 
     public enum Status {
         /**
@@ -159,4 +150,13 @@ public class Orders extends BaseEntity {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
 }
