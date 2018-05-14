@@ -56,7 +56,6 @@ $(function () {
             deleteOrders: deleteOrders,
             evaluate: evaluate,
         },
-
     });
 });
 
@@ -69,7 +68,16 @@ function returnMoney(ordersId) {
 }
 
 function receiveGoods(ordersId) {
-    alert("receiveGoods: " + ordersId);
+    $.ajax({
+        url: "/rest/orders/" + ordersId + "/toNewStatus/Received",
+        type: "PUT",
+        success: function (data) {
+            alert("succeed: " + data);
+        },
+        error: function (xhr, errorMsg, exception) {
+            alert("fail: " + exception);
+        }
+    });
 }
 
 function deleteOrders(ordersId) {

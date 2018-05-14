@@ -62,4 +62,10 @@ public class OrdersController extends BaseController {
         return RequestStatus.success();
     }
 
+    @PutMapping("/{ordersId}/toNewStatus/{newStatus}")
+    public RequestStatus changeToNewStatus(@PathVariable Integer ordersId,
+                                           @PathVariable Orders.Status newStatus) {
+        return RequestStatus.success();
+    }
+
 }

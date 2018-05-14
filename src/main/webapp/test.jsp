@@ -18,8 +18,8 @@
 <body>
 
 <div id="app">
-    <button v-on:click="font++">放大字体</button>
-    <button v-on:click="font--">缩小字体</button>
+    <button @click="font++">放大字体</button>
+    <button @click="font--">缩小字体</button>
     {{font}}
     <div v-bind:style="{fontSize: font + 'em'}">{{hello}}</div>
     <button-counter></button-counter>
@@ -54,7 +54,7 @@
         data: function () {
             return {count: 1};
         },
-        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        template: '<button @click="count++">You clicked me {{ count }} times.</button>'
     });
     new Vue({
         el: "#app",

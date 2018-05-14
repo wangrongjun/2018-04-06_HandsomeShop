@@ -30,7 +30,7 @@
 
     <div class="shop_box container">
         <div class="row">
-            <div class="shop_item_box col-sm-3" v-for="shop in shopList" v-on:click="showShopInfo(shop.shopId)">
+            <div class="shop_item_box col-sm-3" v-for="shop in shopList" @click="showShopInfo(shop.shopId)">
                 <div class="img_box">
                     <img :src="'/rest/picture/' + shop.head.pictureId" class="img">
                 </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <%--添加商店的按钮--%>
-            <div class="shop_item_box col-sm-3" v-on:click="addShop">
+            <div class="shop_item_box col-sm-3" @click="addShop">
                 <div class="img_box">
                     <img src="${pageContext.request.contextPath}/img/ic_add.png" class="img">
                 </div>

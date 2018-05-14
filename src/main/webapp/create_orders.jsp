@@ -184,7 +184,7 @@
             </div>
             <div class="modal-body" id="select_contact_model">
                 <div v-for="(contact,index) in contactList" :key="contact.contactId"
-                     v-on:click="selectContact(contact.contactId)"
+                     @click="selectContact(contact.contactId)"
                      class="select_contact_item" data-dismiss="modal">
                     <strong>{{index + 1}}</strong>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

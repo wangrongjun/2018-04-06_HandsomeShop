@@ -32,7 +32,9 @@
             <%--</a>--%>
             <%--</c:forEach>--%>
             <div id="iframe-wrap">
-                <iframe id="iframe" src="/index.html" frameborder="0" width="100%" height="200px"></iframe>
+                <iframe id="iframe" src="${pageContext.request.contextPath}/index_category.html" frameborder="0"
+                        width="100%"
+                        height="200px"></iframe>
             </div>
         </div>
 

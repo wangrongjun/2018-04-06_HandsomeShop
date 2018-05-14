@@ -3,7 +3,6 @@ package com.handsome.shop.controller;
 import com.handsome.shop.controller.rest.OrdersController;
 import com.handsome.shop.dao.ContactDao;
 import com.handsome.shop.dao.GoodsDao;
-import com.handsome.shop.dao.OrdersDao;
 import com.handsome.shop.dao.ShopDao;
 import com.handsome.shop.entity.*;
 import com.handsome.shop.entity.view.PageParam;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,8 +27,6 @@ public class CustomerController extends BaseController {
     private GoodsDao goodsDao;
     @Resource
     private ContactDao contactDao;
-    @Resource
-    private OrdersDao ordersDao;
     @Resource
     private ShopDao shopDao;
     @Resource
@@ -65,7 +61,7 @@ public class CustomerController extends BaseController {
         Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createdOn"), createBR());
         request.setAttribute("ordersCount", pager.getTotalCount());
         request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(), "Shop.seller", "GoodsImage.goods"));
-        return "customer_order_list";
+        return "customer_orders_list";
     }
 
     @PostMapping("/confirmOrders")
@@ -78,7 +74,7 @@ public class CustomerController extends BaseController {
         request.setAttribute("goodsJson", GsonConverter.toJson(goods, "Goods.shop"));
         request.setAttribute("contactListJson", GsonConverter.toJson(contactList));
         request.setAttribute("count", count);
-        return "create_order";
+        return "create_orders";
     }
 
 }

@@ -67,7 +67,7 @@ function createOrder() {
             contactId: contentVm.selectedContact.contactId
         },
         success: function (data) {
-            window.location.href = "/create_order_succeed.jsp";
+            window.location.href = "/create_orders_succeed.jsp";
         },
         error: function (xhr, errorMsg, exception) {
             alert("订单创建失败！错误信息：" + exception);

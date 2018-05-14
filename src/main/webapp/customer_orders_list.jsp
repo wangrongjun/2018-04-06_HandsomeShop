@@ -16,11 +16,11 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
-    <script>
-        var ordersCount = ${requestScope.ordersCount};
-        var ordersList = ${requestScope.ordersListJson};
-    </script>
     <script src="${pageContext.request.contextPath}/js/util/DateUtil.js"></script>
+    <script>
+        let ordersCount = ${requestScope.ordersCount};
+        let ordersList = ${requestScope.ordersListJson};
+    </script>
     <script src="${pageContext.request.contextPath}/js/customer_order_list.js"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
     <div v-for="orders in ordersList" class="order_item">
         <div class="goods_image">
             <img :src="'/rest/picture/' + orders.goods.pictureList[0].pictureId"
-                 v-on:click="showGoodsInfo(orders.goods.goodsId)"/>
+                 @click="showGoodsInfo(orders.goods.goodsId)"/>
         </div>
         <div class="right_box">
             <div class="order_info">
@@ -50,19 +50,19 @@
                 <div>总价：￥ <span>{{orders.price}}</span></div>
                 <div>备注：{{orders.remark}}</div>
                 <div class="btn_box">
-                    <button v-if="showLogisticsBtn(orders.status)" v-on:click="showLogistics(orders.ordersId)"
+                    <button v-if="showLogisticsBtn(orders.status)" @click="showLogistics(orders.ordersId)"
                             class="btn btn-default">查看物流
                     </button>
-                    <button v-if="showReturnMoneyBtn(orders.status)" v-on:click="returnMoney(orders.ordersId)"
+                    <button v-if="showReturnMoneyBtn(orders.status)" @click="returnMoney(orders.ordersId)"
                             class="btn btn-warning">申请退款
                     </button>
-                    <button v-if="showReceiveGoodsBtn(orders.status)" v-on:click="receiveGoods(orders.ordersId)"
+                    <button v-if="showReceiveGoodsBtn(orders.status)" @click="receiveGoods(orders.ordersId)"
                             class="btn btn-success">确认收货
                     </button>
-                    <button v-if="showDeleteOrdersBtn(orders.status)" v-on:click="deleteOrders(orders.ordersId)"
+                    <button v-if="showDeleteOrdersBtn(orders.status)" @click="deleteOrders(orders.ordersId)"
                             class="btn btn-danger">删除订单
                     </button>
-                    <button v-if="showEvaluateBtn(orders.status)" v-on:click="evaluate(orders.ordersId)"
+                    <button v-if="showEvaluateBtn(orders.status)" @click="evaluate(orders.ordersId)"
                             class="btn btn-info">评价订单
                     </button>
                 </div>
