@@ -67,6 +67,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--把当前的请求类型（如GET，POST）替换为参数_method值所对应的类型（如PUT，DELETE）-->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <!-- 注意，这边的名称必须和配置DispatcherServlet的servlet的servlet-name一样 -->
+        <servlet-name>SpringMVC</servlet-name>
+    </filter-mapping>
+
     <!--如果springmvc即时配置了mvc:resources也无法识别资源文件，则可以让这些请求不进入ServletDispatcher，由Tomcat默认的Servlet处理-->
     <!--<servlet-mapping>-->
     <!--<servlet-name>default</servlet-name>-->

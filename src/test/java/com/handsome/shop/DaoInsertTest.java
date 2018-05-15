@@ -15,9 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * by wangrongjun on 2017/6/17.
@@ -46,6 +44,8 @@ public class DaoInsertTest extends BaseDaoTest {
     private ContactDao addressDao;
     @Resource
     private PictureDao pictureDao;
+    @Resource
+    private RefundDao refundDao;
 
     @BeforeClass
     public static void rebuildDatabase() throws IOException {
@@ -184,6 +184,9 @@ public class DaoInsertTest extends BaseDaoTest {
         ordersDao.insert(orders7);
         ordersDao.insert(orders8);
 
+        refundDao.insert(new Refund(orders4, "不喜欢辣条", pics("goods_11.jpg", "goods_12.jpg")));
+        refundDao.insert(new Refund(orders5, "不喜欢iPhone7手机", pics("goods_17.jpg")));
+
         evaluateDao.insert(new Evaluate(orders1, "三星E7用了很久了，质量很好！好评！", Evaluate.LEVEL_GOOD, "2016-05-12 09:21:42"));
         evaluateDao.insert(new Evaluate(orders2, "电脑一般吧，有时很卡", Evaluate.LEVEL_NORMAL, "2015-01-12 09:21:42"));
         evaluateDao.insert(new Evaluate(orders5, "苹果的ISO系统一直很快，装逼利器！", Evaluate.LEVEL_GOOD, "2015-03-07 15:34:12"));
@@ -232,12 +235,12 @@ public class DaoInsertTest extends BaseDaoTest {
         return picture;
     }
 
-    private List<Picture> pics(String... fileNameList) throws IOException {
-        List<Picture> pictureList = new ArrayList<>();
+    private Set<Picture> pics(String... fileNameList) throws IOException {
+        Set<Picture> pictureSet = new HashSet<>();
         for (String fileName : fileNameList) {
-            pictureList.add(pic(fileName));
+            pictureSet.add(pic(fileName));
         }
-        return pictureList;
+        return pictureSet;
     }
 
     @After

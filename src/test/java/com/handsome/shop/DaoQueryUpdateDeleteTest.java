@@ -1,7 +1,7 @@
 package com.handsome.shop;
 
-import com.handsome.shop.entity.*;
 import com.handsome.shop.dao.*;
+import com.handsome.shop.entity.*;
 import com.wangrj.java_lib.java_util.LogUtil;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
@@ -25,8 +25,6 @@ public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
     private ShopDao shopDao;
     @Resource
     private GoodsDao goodsDao;
-    @Resource
-    private GoodsImageDao goodsImageDao;
     @Resource
     private OrdersDao ordersDao;
     @Resource

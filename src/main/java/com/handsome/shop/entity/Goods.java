@@ -5,7 +5,7 @@ import com.handsome.shop.framework.BaseEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -31,8 +31,9 @@ public class Goods extends BaseEntity {
     @JoinColumn(name = "shopId")
     private Shop shop;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Goods_Picture", joinColumns = @JoinColumn(name = "goodsId"), inverseJoinColumns = @JoinColumn(name = "pictureId"))
-    private List<Picture> pictureList;
+    @JoinTable(joinColumns = @JoinColumn(name = "goodsId"), inverseJoinColumns = @JoinColumn(name = "pictureId"))
+    @OrderBy("pictureId")
+    private Set<Picture> pictureSet;
 
     @Override
     public String toString() {
@@ -44,7 +45,7 @@ public class Goods extends BaseEntity {
                 ", remainCount=" + remainCount +
                 ", goodsType=" + goodsType +
                 ", shop=" + shop +
-                ", pictureList=" + pictureList +
+                ", pictureSet=" + pictureSet +
                 '}';
     }
 
@@ -55,14 +56,14 @@ public class Goods extends BaseEntity {
         this.goodsId = goodsId;
     }
 
-    public Goods(String goodsName, String description, double price, int remainCount, GoodsType goodsType, Shop shop, List<Picture> pictureList) {
+    public Goods(String goodsName, String description, double price, int remainCount, GoodsType goodsType, Shop shop, Set<Picture> pictureSet) {
         this.goodsName = goodsName;
         this.description = description;
         this.price = price;
         this.remainCount = remainCount;
         this.goodsType = goodsType;
         this.shop = shop;
-        this.pictureList = pictureList;
+        this.pictureSet = pictureSet;
     }
 
     public Integer getGoodsId() {
@@ -121,11 +122,11 @@ public class Goods extends BaseEntity {
         this.shop = shop;
     }
 
-    public List<Picture> getPictureList() {
-        return pictureList;
+    public Set<Picture> getPictureSet() {
+        return pictureSet;
     }
 
-    public void setPictureList(List<Picture> pictureList) {
-        this.pictureList = pictureList;
+    public void setPictureSet(Set<Picture> pictureList) {
+        this.pictureSet = pictureList;
     }
 }

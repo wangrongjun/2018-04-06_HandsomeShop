@@ -90,15 +90,17 @@ function evaluateOrders(ordersId) {
 function applyForRefund(ordersId, refundReason) {
     $.ajax({
         url: "/rest/orders/" + ordersId + "/action/customerApplyForRefund",
+        type: "POST",
         data: {
+            _method: "PUT",
             refundReason: refundReason
         },
-        type: "PUT",
         success: function (data) {
             for (let i = 0; i < contentVm.ordersList.length; i++) {
                 let orders = contentVm.ordersList[i];
                 if (orders.ordersId === ordersId) {
                     orders.status = data.data.newStatus;
+                    orders.refund = data.data.refund;
                 }
             }
         },

@@ -97,7 +97,7 @@
 
     <div class="order_box">
         <div class="goods_img">
-            <img :src="'/rest/picture/' + goods.pictureList[0].pictureId"/>
+            <img :src="'/rest/picture/' + goods.pictureSet[0].pictureId"/>
         </div>
 
         <div class="order_info">

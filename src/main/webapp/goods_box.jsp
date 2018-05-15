@@ -40,8 +40,8 @@
                 <div class="goods">
                     <div class="goods_image">
                         <a href="/goods/${goods.goodsId}">
-                            <c:if test="${goods.pictureList != null && goods.pictureList.size() > 0}">
-                                <img src="/rest/picture/${goods.pictureList.get(0).pictureId}"/>
+                            <c:if test="${goods.pictureSet != null && goods.pictureSet.size() > 0}">
+                                <img src="/rest/picture/${goods.pictureSet.iterator().next().pictureId}"/>
                             </c:if>
                         </a>
                     </div>

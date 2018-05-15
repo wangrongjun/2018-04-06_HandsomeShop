@@ -8,6 +8,7 @@
 * 用户的手机号保存到Address中，登录就通过用户名
 * 新增角色管理员：管理商品分类
 * 用户评价可以筛选好，中，差评
+* 填写退款理由时可以上传图片
 
 ## 技术改进
 
@@ -24,6 +25,7 @@
 * [完成]Orders的receiver和phone改为contact
 * [完成]给每个实体类加上createdOn，modifiedOn，isObsolete
 * [完成]去掉所有 center 标签
+* 把所有jsp改为html，所有页面都通过ajax加载数据
 * 文件上传使用SpringMVC的框架
 * 使用Spring的权限认证功能，认证每个请求的合法性
 * 密码使用md5加密保存

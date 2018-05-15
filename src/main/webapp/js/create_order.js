@@ -2,7 +2,7 @@ var contentVm;
 var selectContactModelVm;
 $(function () {
     // 在发起JQuery的Ajax请求前后，显示和去除遮罩层
-    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI());
 
     contentVm = new Vue({
         el: "#content",
@@ -67,7 +67,8 @@ function createOrder() {
             contactId: contentVm.selectedContact.contactId
         },
         success: function (data) {
-            window.location.href = "/create_orders_succeed.jsp";
+            // 不是跳转到新地址，而是直接把新地址覆盖了当前地址，防止用户点击后退
+            window.location.replace("/create_orders_succeed.jsp");
         },
         error: function (xhr, errorMsg, exception) {
             alert("订单创建失败！错误信息：" + exception);

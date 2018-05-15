@@ -5,8 +5,6 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.GsonBuilder;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.lang.reflect.Type;
-
 /**
  * by wangrongjun on 2018/5/3.
  */

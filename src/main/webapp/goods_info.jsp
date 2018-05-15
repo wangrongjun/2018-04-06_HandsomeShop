@@ -27,13 +27,13 @@
     <div class="top">
         <div class="img_box">
             <ul>
-                <c:forEach var="picture" items="${requestScope.goods.pictureList}">
+                <c:forEach var="picture" items="${requestScope.goods.pictureSet}">
                     <li><img src="/rest/picture/${picture.pictureId}"></li>
                 </c:forEach>
                 <%--<li><img src="${pageContext.request.contextPath}/admin/img/goods_1.jpg"></li>--%>
             </ul>
             <ol>
-                <c:forEach var="picture" items="${requestScope.goods.pictureList}">
+                <c:forEach var="picture" items="${requestScope.goods.pictureSet}">
                     <li><img src="/rest/picture/${picture.pictureId}"></li>
                 </c:forEach>
             </ol>

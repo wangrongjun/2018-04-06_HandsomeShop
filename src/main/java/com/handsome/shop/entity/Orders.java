@@ -63,7 +63,8 @@ public class Orders extends BaseEntity {
     private String remark;
     @Enumerated(EnumType.STRING)
     private Status status;//订单状态
-    private String refundReason;// 退款理由
+    @OneToOne(mappedBy = "orders")
+    private Refund refund;
 
     @Override
     public String toString() {
@@ -76,7 +77,7 @@ public class Orders extends BaseEntity {
                 ", contact=" + contact +
                 ", remark='" + remark + '\'' +
                 ", status=" + status +
-                ", refundReason='" + refundReason + '\'' +
+                ", refund='" + refund + '\'' +
                 '}';
     }
 
@@ -145,14 +146,6 @@ public class Orders extends BaseEntity {
         this.contact = contact;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public String getRemark() {
         return remark;
     }
@@ -161,11 +154,19 @@ public class Orders extends BaseEntity {
         this.remark = remark;
     }
 
-    public String getRefundReason() {
-        return refundReason;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setRefundReason(String refundReason) {
-        this.refundReason = refundReason;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Refund getRefund() {
+        return refund;
+    }
+
+    public void setRefund(Refund refund) {
+        this.refund = refund;
     }
 }
