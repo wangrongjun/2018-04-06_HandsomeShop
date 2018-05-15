@@ -8,8 +8,11 @@ $(function () {
         data: {
             ordersCount: ordersCount,
             ordersList: ordersList,
-            selectedOrdersId: null,// 只在申请退款中，模态窗弹出时由于无法传id才需要用到
+
+            selectedOrdersId: null,// 只在申请退款和评价订单中，模态窗弹出时由于无法传id才需要用到
             refundReason: null,
+            evaluateLevel: "Good",
+            evaluateContent: null,
         },
         methods: {
             showGoodsInfo: function (goodsId) {
@@ -83,8 +86,28 @@ function receiveGoods(ordersId) {
     });
 }
 
-function evaluateOrders(ordersId) {
-    alert("evaluate: " + ordersId);
+function evaluateOrders(ordersId, evaluateContent, evaluateLevel) {
+    $.ajax({
+        url: "/rest/orders/" + ordersId + "/action/customerEvaluateOrders",
+        type: "POST",
+        data: {
+            _method: "PUT",
+            evaluateContent: evaluateContent,
+            evaluateLevel: evaluateLevel
+        },
+        success: function (data) {
+            for (let i = 0; i < contentVm.ordersList.length; i++) {
+                let orders = contentVm.ordersList[i];
+                if (orders.ordersId === ordersId) {
+                    orders.status = data.data.newStatus;
+                    orders.refund = data.data.refund;
+                }
+            }
+        },
+        error: function (xhr, errorMsg, exception) {
+            alert("fail: " + exception);
+        }
+    });
 }
 
 function applyForRefund(ordersId, refundReason) {

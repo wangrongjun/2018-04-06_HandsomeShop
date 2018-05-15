@@ -2,7 +2,6 @@ package com.handsome.shop.entity;
 
 
 import com.handsome.shop.framework.BaseEntity;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -10,7 +9,9 @@ import javax.persistence.*;
  * by wangrongjun on 2017/6/16.
  */
 @Entity
-@Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
+//@Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
+// 这里不使用@Where来过滤obsoleteDate为空的订单，是因为一旦订单被客户删除了（obsoleteDate不为空），查询该订单对应的评论会出错。
+// 所以不写死只能查询obsoleteDate为空的订单，而是动态地根据不同情况决定是否需要查询obsoleteDate为空的订单。
 public class Orders extends BaseEntity {
 
     public enum Status {

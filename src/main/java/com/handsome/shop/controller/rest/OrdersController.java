@@ -11,7 +11,6 @@ import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.framework.ReturnObjectToJsonIgnoreFields;
 import com.handsome.shop.util.Pager;
 import com.handsome.shop.util.RequestStatus;
-import com.wangrj.java_lib.java_util.DateUtil;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,9 +104,9 @@ public class OrdersController extends BaseController {
     @PutMapping("/{ordersId}/action/customerEvaluateOrders")
     public RequestStatus customerEvaluateOrders(@PathVariable Integer ordersId,
                                                 @RequestParam String evaluateContent,
-                                                @RequestParam @Size(max = 2) Integer evaluateLevel, BindingResult evaluateLevelResult) {
-        if (evaluateLevelResult.hasErrors()) {
-            throw new IllegalArgumentException(evaluateLevelResult.getAllErrors().get(0).getDefaultMessage());
+                                                @RequestParam Evaluate.Level evaluateLevel) {
+        if (evaluateLevel == null) {
+            throw new IllegalArgumentException("evaluateLevel is null");
         }
 
         Orders orders = ordersDao.queryById(ordersId);
@@ -116,12 +114,12 @@ public class OrdersController extends BaseController {
         orders.setStatus(newStatus);
         ordersDao.update(orders);
 
-        Evaluate evaluate = new Evaluate(orders, evaluateContent, evaluateLevel, DateUtil.getCurrentDateAndTime());
+        Evaluate evaluate = new Evaluate(orders, evaluateContent, evaluateLevel);
         evaluateDao.insert(evaluate);
 
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("newStatus", newStatus.toString());
-        return RequestStatus.success(jsonObject);
+        Map<String, Object> result = new HashMap<>();
+        result.put("newStatus", newStatus.toString());
+        return RequestStatus.success(result);
     }
 
     /**
@@ -150,6 +148,7 @@ public class OrdersController extends BaseController {
      */
     @PutMapping("/{ordersId}/action/sellerRefund")
     public RequestStatus sellerRefund(@PathVariable Integer ordersId) {
+        // TODO 卖家退款
         return RequestStatus.success(ordersId);
     }
 

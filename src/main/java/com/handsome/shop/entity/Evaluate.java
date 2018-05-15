@@ -12,22 +12,27 @@ import javax.persistence.*;
 @Where(clause = BaseEntity.OBSOLETE_DATE_IS_NULL)
 public class Evaluate extends BaseEntity {
 
-    @Transient
-    public static final int LEVEL_BAD = 0;
-    @Transient
-    public static final int LEVEL_NORMAL = 1;
-    @Transient
-    public static final int LEVEL_GOOD = 2;
+    public enum Level {
+        Good(0),// 好评
+        Normal(1),// 中评
+        Bad(2);// 差评
+
+        int code;
+
+        Level(int code) {
+            this.code = code;
+        }
+    }
 
     @Id
     @GeneratedValue
     private Integer evaluateId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ordersId")
-    private Orders orders;//Order外键，对某次购物（即一份订单）的评价
-    private String content;//评价内容
-    private int evaluateLevel;//评价，好评，中评，差评
-    private String createTime;//评价时间，格式：”yyyy-MM-dd HH:mm:ss”
+    private Orders orders;// Order外键，对某次购物（即一份订单）的评价
+    private String content;// 评价内容
+    @Enumerated(EnumType.STRING)
+    private Level level;// 评价等级
 
     @Override
     public String toString() {
@@ -35,19 +40,17 @@ public class Evaluate extends BaseEntity {
                 "evaluateId=" + evaluateId +
                 ", orders=" + orders +
                 ", content='" + content + '\'' +
-                ", evaluateLevel=" + evaluateLevel +
-                ", createTime='" + createTime + '\'' +
+                ", level=" + level +
                 '}';
     }
 
     public Evaluate() {
     }
 
-    public Evaluate(Orders orders, String content, int evaluateLevel, String createTime) {
+    public Evaluate(Orders orders, String content, Level level) {
         this.orders = orders;
         this.content = content;
-        this.evaluateLevel = evaluateLevel;
-        this.createTime = createTime;
+        this.level = level;
     }
 
     public Integer getEvaluateId() {
@@ -74,19 +77,11 @@ public class Evaluate extends BaseEntity {
         this.content = content;
     }
 
-    public int getEvaluateLevel() {
-        return evaluateLevel;
+    public Level getLevel() {
+        return level;
     }
 
-    public void setEvaluateLevel(int level) {
-        this.evaluateLevel = level;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String time) {
-        this.createTime = time;
+    public void setLevel(Level level) {
+        this.level = level;
     }
 }

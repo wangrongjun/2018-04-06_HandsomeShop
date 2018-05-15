@@ -18,12 +18,12 @@ public class OrdersDaoImpl extends HibernateDao<Orders, Integer> implements Orde
 
     @Override
     public List<Orders> queryByCustomerId(int customerId, Pager<Orders> pager) {
-        return query(Where.eq("customer.id", customerId), pager);
+        return query(Where.eq("customer.id", customerId).isNull("obsoleteDate"), pager);
     }
 
     @Override
     public int queryCountByCustomerId(int customerId) {
-        return queryCount(Where.eq("customer.id", customerId));
+        return queryCount(Where.eq("customer.id", customerId).isNull("obsoleteDate"));
     }
 
     @Override

@@ -211,7 +211,7 @@ li {
     display: inline-block;
     width: 25px;
     height: 25px;
-    margin-left: 10px;
+    margin: 0 10px;
 }
 
 .evaluate_box .evaluate img {

@@ -187,10 +187,18 @@ public class DaoInsertTest extends BaseDaoTest {
         refundDao.insert(new Refund(orders4, "不喜欢辣条", pics("goods_11.jpg", "goods_12.jpg")));
         refundDao.insert(new Refund(orders5, "不喜欢iPhone7手机", pics("goods_17.jpg")));
 
-        evaluateDao.insert(new Evaluate(orders1, "三星E7用了很久了，质量很好！好评！", Evaluate.LEVEL_GOOD, "2016-05-12 09:21:42"));
-        evaluateDao.insert(new Evaluate(orders2, "电脑一般吧，有时很卡", Evaluate.LEVEL_NORMAL, "2015-01-12 09:21:42"));
-        evaluateDao.insert(new Evaluate(orders5, "苹果的ISO系统一直很快，装逼利器！", Evaluate.LEVEL_GOOD, "2015-03-07 15:34:12"));
-        evaluateDao.insert(new Evaluate(orders6, "什么破电脑，买了没几天就坏了", Evaluate.LEVEL_BAD, "2015-05-22 15:34:12"));
+        Evaluate evaluate1 = new Evaluate(orders1, "三星E7用了很久了，质量很好！好评！", Evaluate.Level.Good);
+        Evaluate evaluate2 = new Evaluate(orders2, "电脑一般吧，有时很卡", Evaluate.Level.Normal);
+        Evaluate evaluate3 = new Evaluate(orders5, "苹果的ISO系统一直很快，装逼利器！", Evaluate.Level.Good);
+        Evaluate evaluate4 = new Evaluate(orders6, "什么破电脑，买了没几天就坏了", Evaluate.Level.Bad);
+        evaluate1.setCreatedOn(d("2016-05-12 09:21:42"));
+        evaluate2.setCreatedOn(d("2015-01-12 09:21:42"));
+        evaluate3.setCreatedOn(d("2015-03-07 15:34:12"));
+        evaluate4.setCreatedOn(d("2015-05-22 15:34:12"));
+        evaluateDao.insert(evaluate1);
+        evaluateDao.insert(evaluate2);
+        evaluateDao.insert(evaluate3);
+        evaluateDao.insert(evaluate4);
 
         // 添加额外的无意义数据
 //        for (int i = 1; i <= 50; i++) {

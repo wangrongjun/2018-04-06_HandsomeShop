@@ -57,7 +57,8 @@
                     <button v-if="showReceiveGoodsBtn(orders.status)" @click="receiveGoods(orders.ordersId)"
                             class="btn btn-success">确认收货
                     </button>
-                    <button v-if="showEvaluateBtn(orders.status)" @click="evaluateOrders(orders.ordersId)"
+                    <button v-if="showEvaluateBtn(orders.status)" onclick="$('#modal_evaluate_orders').modal('toggle')"
+                            @click="selectedOrdersId=orders.ordersId"
                             class="btn btn-info">评价订单
                     </button>
                     <button v-if="showRefundBtn(orders.status)" onclick="$('#modal_refund').modal('toggle')"
@@ -93,7 +94,7 @@
                                   v-model="refundReason">商品与描述不一致</label>
                     <br>
                     <br>
-                    <label>理由：<input type="text" v-model="refundReason"></label>
+                    <label>理由：<textarea v-model="refundReason" class="form-control"></textarea></label>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">取消</button>
@@ -108,6 +109,41 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- 填写退款理由的模态弹出窗 -->
+
+    <!-- 填写评价内容的模态弹出窗 -->
+    <div class="modal fade" id="modal_evaluate_orders">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">评价订单</h4>
+                </div>
+                <div class="modal-body">
+                    <label><input type="radio" name="evaluateLevel" value="Good" v-model="evaluateLevel">好评</label>
+                    <br>
+                    <label><input type="radio" name="evaluateLevel" value="Normal" v-model="evaluateLevel">中评</label>
+                    <br>
+                    <label><input type="radio" name="evaluateLevel" value="Bad" v-model="evaluateLevel">差评</label>
+                    <br>
+                    <br>
+                    <label>评价：<textarea v-model="evaluateContent" class="form-control"></textarea></label>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary"
+                            @click="evaluateOrders(selectedOrdersId, evaluateContent, evaluateLevel)"
+                            data-dismiss="modal">评价
+                    </button>
+                </div>
+                <%--</form>--%>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- 填写评价内容的模态弹出窗 -->
 
 </content>
 

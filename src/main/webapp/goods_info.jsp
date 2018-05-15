@@ -112,11 +112,20 @@
                             "/img/ic_gender_man.png":"/img/ic_gender_woman.png"}"/>
                         </div>
                         <div class="evaluate">
-                            <img src="${evaluate.evaluateLevel==0?"/img/ic_evaluate_bad.png":
-                            (evaluate.evaluateLevel==1?"/img/ic_evaluate_normal.png":"/img/ic_evaluate_good.png")}"/>
+                            <c:choose>
+                                <c:when test="${evaluate.level == 'Good'}">
+                                    <span class="label label-success">好评</span>
+                                </c:when>
+                                <c:when test="${evaluate.level == 'Normal'}">
+                                    <span class="label label-warning">中评</span>
+                                </c:when>
+                                <c:when test="${evaluate.level == 'Bad'}">
+                                    <span class="label label-danger">差评</span>
+                                </c:when>
+                            </c:choose>
                         </div>
                         <span class="name">${evaluate.orders.customer.nickname}</span>
-                        <span class="time">${evaluate.createTime}</span>
+                        <span class="time">${evaluate.createdOn}</span>
                     </div>
                     <div class="content">${evaluate.content}</div>
                 </div>
@@ -140,7 +149,8 @@
             </div>
             <div class="modal-body">
                 <div style="height: 100px;width: 100px">
-                    <img src="/rest/picture/${requestScope.goods.shop.seller.head.pictureId}" style="height: 100% ;width: 100%;">
+                    <img src="/rest/picture/${requestScope.goods.shop.seller.head.pictureId}"
+                         style="height: 100% ;width: 100%;">
                 </div>
                 <div>商家昵称：${requestScope.goods.shop.seller.nickname}</div>
                 <div>商家姓名：${requestScope.goods.shop.seller.realName}</div>
