@@ -62,11 +62,11 @@
     <div class="panel panel-primary">
         <div class="panel-heading">个人信息</div>
         <div class="panel-body">
-            <div class="user_head"><img src="${sessionScope.customer.headUrl}${headTempId}"/></div>
+            <div class="user_head"><img src="/rest/picture/${sessionScope.customer.head.pictureId}${headTempId}"/></div>
             <div class="user_info">
                 <div>昵称：<span>${sessionScope.customer.nickname}</span></div>
                 <div>姓名：<span>${sessionScope.customer.realName}</span></div>
-                <div>性别：<span>${sessionScope.customer.gender==1? "男" : "女"}</span></div>
+                <div>性别：<span>${sessionScope.customer.gender}</span></div>
                 <div>电话：<span>${sessionScope.customer.phone}</span></div>
             </div>
         </div>
