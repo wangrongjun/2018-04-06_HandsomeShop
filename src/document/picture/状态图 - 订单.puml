@@ -1,0 +1,23 @@
+@startuml
+
+state "Created：订单已创建，等待卖家发货" as Created
+state "Pending_Receive：卖家已发货，买家等待收货" as Pending_Receive
+state "Received：买家已经收货" as Received
+state "Pending_Refund：买家申请退款，等待卖家退款" as Pending_Refund
+state "Closed：订单关闭" as Closed
+state "Finish：订单完成" as Finish
+
+[*] --> Created : 买家下单
+Created --> Pending_Receive : 卖家发货
+Created -right-> Pending_Refund : 买家申请退款
+Pending_Receive --> Pending_Refund : 买家申请退款
+Pending_Receive --> Received : 买家确认收货
+Received --> Pending_Refund : 买家申请退款
+
+Pending_Refund --> Closed : 卖家退款
+Received --> Finish : 买家对订单进行评价
+
+Closed --> [*]
+Finish --> [*]
+
+@enduml

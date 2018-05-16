@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>英俊商城 - 商家首页</title>
+    <title>英俊商城 - 卖家首页</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index_seller.css">
     <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>

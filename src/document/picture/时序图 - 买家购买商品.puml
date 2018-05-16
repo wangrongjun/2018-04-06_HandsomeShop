@@ -1,6 +1,6 @@
 @startuml
 
-actor 顾客 as customer
+actor 买家 as customer
 participant 页面 as view
 control 业务层和持久层 as sc
 
@@ -14,7 +14,7 @@ view     -> sc   : 根据商品id查询商品详情
 sc       -> view : 返回商品详细信息
 customer <- view : 显示商品详细信息
 
-customer -> view : 选择商品颜色并加入购物车
+customer -> view : 选择数量并加入购物车
 view     -> sc   : 添加购物车记录
 sc       -> view : 添加成功提示
 customer <- view : 提示添加成功

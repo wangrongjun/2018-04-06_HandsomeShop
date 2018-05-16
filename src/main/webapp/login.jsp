@@ -100,7 +100,7 @@
                 </label> &nbsp;
                 <label><input type="radio" name="identity" value="seller"
                               <c:if test="${identity=='seller'}">checked="checked"</c:if>>
-                    商家</label>
+                    卖家</label>
             </div>
             <div>
                 <label for="validateCode">验证码：</label>

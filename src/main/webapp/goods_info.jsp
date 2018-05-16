@@ -145,17 +145,17 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">商家信息</h4>
+                <h4 class="modal-title">卖家信息</h4>
             </div>
             <div class="modal-body">
                 <div style="height: 100px;width: 100px">
                     <img src="/rest/picture/${requestScope.goods.shop.seller.head.pictureId}"
                          style="height: 100% ;width: 100%;">
                 </div>
-                <div>商家昵称：${requestScope.goods.shop.seller.nickname}</div>
-                <div>商家姓名：${requestScope.goods.shop.seller.realName}</div>
-                <div>商家性别：${requestScope.goods.shop.seller.gender}</div>
-                <div>商家电话：${requestScope.goods.shop.seller.phone}</div>
+                <div>卖家昵称：${requestScope.goods.shop.seller.nickname}</div>
+                <div>卖家姓名：${requestScope.goods.shop.seller.realName}</div>
+                <div>卖家性别：${requestScope.goods.shop.seller.gender}</div>
+                <div>卖家电话：${requestScope.goods.shop.seller.phone}</div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>

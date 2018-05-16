@@ -69,7 +69,7 @@
                 <label>
                     <input type="radio" name="identity" value="customer" checked="checked">客户
                 </label> &nbsp;
-                <label><input type="radio" name="identity" value="seller">商家</label>
+                <label><input type="radio" name="identity" value="seller">卖家</label>
             </div>
             <button type="reset" class="btn btn-default">重置</button>
             <button type="submit" class="btn btn-primary">注册</button>

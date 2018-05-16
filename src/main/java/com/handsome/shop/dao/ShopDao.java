@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface ShopDao extends Dao<Shop, Integer> {
 
-    List<Shop> queryBySellerId(int sellerId);//查询某个商家的所有商店
+    List<Shop> queryBySellerId(int sellerId);//查询某个卖家的所有商店
 
 }

@@ -1,0 +1,23 @@
+@startuml
+
+rectangle 订单 as orders
+rectangle 商品 as goods
+rectangle 收货地址 as contact
+rectangle 买家 as customer
+rectangle 评价 as evaluate
+
+customer -left- orders : 1:n
+contact -left- orders : 1:n
+customer -right- contact : 1:n
+goods -right- orders : 1:n
+evaluate -right- orders : 1:n
+
+orders -up- (订单id)
+orders -up- (订单状态)
+orders -- (创建日期)
+orders -- (收货地址)
+orders -- (购买数量)
+orders -- (总价)
+orders -- (备注留言)
+
+@enduml

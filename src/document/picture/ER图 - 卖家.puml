@@ -1,0 +1,21 @@
+@startuml
+
+rectangle 卖家 as seller
+rectangle 商店 as shop
+
+seller -right- shop : 1:n
+
+seller -up- (卖家id)
+seller -up- (手机号)
+seller -up- (密码)
+seller -left- (姓名)
+seller -- (昵称)
+seller -- (性别)
+seller -- (头像)
+
+shop -up- (商店id)
+shop -up- (商店名称)
+shop -- (商店描述)
+shop -- (商店头像)
+
+@enduml

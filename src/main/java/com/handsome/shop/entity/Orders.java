@@ -16,19 +16,19 @@ public class Orders extends BaseEntity {
 
     public enum Status {
         /**
-         * 订单已创建，等待商家发货
+         * 订单已创建，等待卖家发货
          */
         Created(0),
         /**
-         * 商家已发货，顾客等待收货
+         * 卖家已发货，买家等待收货
          */
         Pending_Receive(1),
         /**
-         * 顾客已经收货
+         * 买家已经收货
          */
         Received(2),
         /**
-         * 顾客申请退款，等待商家退款
+         * 买家申请退款，等待卖家退款
          */
         Pending_Refund(3),
         /**
@@ -57,7 +57,7 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "goodsId")
     private Goods goods;
     private int buyCount;//该商品购买的数量
-    private double price;//订单创建时商品的总价格（预防下单后商家修改该商品的价格导致出错）
+    private double price;//订单创建时商品的总价格（预防下单后卖家修改该商品的价格导致出错）
     @ManyToOne
     @JoinColumn(name = "contactId")
     private Contact contact;// 订单所对应的收货地址

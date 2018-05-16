@@ -1,0 +1,16 @@
+@startuml
+
+rectangle 商品 as goods
+rectangle 商店 as shop
+rectangle 卖家 as seller
+
+seller -right- shop : 1:n
+shop -right- goods : 1:n
+
+goods -up- (商品id)
+goods -up- (商品名称)
+goods -right- (商品图片)
+goods -- (商品描述)
+goods -- (商品价格)
+
+@enduml

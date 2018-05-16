@@ -30,7 +30,7 @@
         <a href="${pageContext.request.contextPath}/login.jsp">登录</a>
         <a href="${pageContext.request.contextPath}/register.jsp">注册</a>
         <%
-        } else if (customer != null && seller == null) {// 顾客登录
+        } else if (customer != null && seller == null) {// 买家登录
             ShopCarDao shopCarDao = SpringContextHolder.getBean(ShopCarDao.class);
             OrdersDao ordersDao = SpringContextHolder.getBean(OrdersDao.class);
             long shopCarCount = shopCarDao.queryCountByCustomerId(customer.getCustomerId());
@@ -43,7 +43,7 @@
         <%--<a href="${pageContext.request.contextPath}/contact">我的收货地址</a>--%>
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
         <%
-        } else if (customer == null) {// 商家登录
+        } else if (customer == null) {// 卖家登录
         %>
         <a href="#"><%=seller.getNickname()%>
         </a>

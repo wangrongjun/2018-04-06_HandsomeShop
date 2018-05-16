@@ -1,0 +1,12 @@
+@startuml
+
+rectangle 买家 as customer
+rectangle 收货地址 as contact
+rectangle 购物车记录 as shopCar
+rectangle 卖家 as seller
+rectangle 商店 as shop
+rectangle 商品 as goods
+rectangle 订单 as orders
+rectangle 评价 as evaluate
+
+@enduml

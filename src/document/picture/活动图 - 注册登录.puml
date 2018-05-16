@@ -1,5 +1,7 @@
 ﻿@startuml
 
+title 注册登录活动图
+
 (*) --> if "已注册" then
 --> [是] 登录
 else
@@ -8,6 +10,7 @@ else
 --> [注册成功] 登录
 endif
 登录 --> [登录失败] 登录
-登录 -left-> (*)
+--> 修改个人信息
+-right-> (*)
 
 @enduml

@@ -1,8 +1,8 @@
 @startuml
 
-title 商家管理商品时序图
+title 卖家管理商品时序图
 
-actor 商家 as seller
+actor 卖家 as seller
 participant 页面 as view
 control 业务层和持久层 as sc
 

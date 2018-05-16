@@ -1,0 +1,38 @@
+@startuml
+
+skinparam monochrome true
+
+title 系统结构图
+
+rectangle Web购物网站 as root
+rectangle 买家
+rectangle 卖家
+rectangle "登\n录\n注\n册" as c1
+rectangle "浏\n览\n商\n品" as c2
+rectangle "加\n购\n物\n车" as c3
+rectangle "提\n交\n订\n单" as c4
+rectangle "确\n认\n收\n货" as c5
+rectangle "评\n价\n订\n单" as c6
+rectangle "申\n请\n退\n款" as c7
+rectangle "登\n录\n注\n册" as s1
+rectangle "管\n理\n商\n店" as s2
+rectangle "管\n理\n商\n品" as s3
+rectangle "查\n看\n订\n单" as s4
+rectangle "确\n认\n发\n货" as s5
+
+root == 买家
+root == 卖家
+买家 === c1
+买家 === c2
+买家 === c3
+买家 === c4
+买家 === c5
+买家 === c6
+买家 === c7
+卖家 === s1
+卖家 === s2
+卖家 === s3
+卖家 === s4
+卖家 === s5
+
+@enduml

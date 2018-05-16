@@ -59,7 +59,7 @@ public class LoginController extends BaseController {
                 request.setAttribute("msg", "用户名或密码错误");
                 return "login";
             }
-        } else {// 如果是商家登录
+        } else {// 如果是卖家登录
             Seller seller = sellerDao.queryByPhone(phone);
             if (seller != null && password.equals(seller.getPassword())) {
                 request.getSession().invalidate();
