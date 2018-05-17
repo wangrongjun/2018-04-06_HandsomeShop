@@ -25,17 +25,15 @@
         </div>
 
         <div class="goods_type_box">
-            <%--<span>商品类型：</span>--%>
-            <%--<c:forEach var="goodsType" items="${sessionScope.goodsTypeList}">--%>
-            <%--<a href="${pageContext.request.contextPath}/searchGoodsListByType?goodsTypeId=${goodsType.goodsTypeId}">--%>
-            <%--${goodsType.name}--%>
-            <%--</a>--%>
-            <%--</c:forEach>--%>
-            <div id="iframe-wrap">
-                <iframe id="iframe" src="${pageContext.request.contextPath}/index_category.html" frameborder="0"
-                        width="100%"
-                        height="200px"></iframe>
-            </div>
+            <span>商品类型：</span>
+            <c:forEach var="goodsType" items="${sessionScope.goodsTypeList}">
+                <a href="${pageContext.request.contextPath}/searchGoodsListByType?goodsTypeId=${goodsType.goodsTypeId}">
+                        ${goodsType.name}
+                </a>
+            </c:forEach>
+            <%--<div id="iframe-wrap">--%>
+            <%--<iframe id="iframe" src="${pageContext.request.contextPath}/index_category.html" frameborder="0" width="100%" height="200px"></iframe>--%>
+            <%--</div>--%>
         </div>
 
         <%--<a class="ad" title="618狂欢节会场" href="#">--%>

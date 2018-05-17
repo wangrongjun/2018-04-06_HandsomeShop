@@ -122,7 +122,7 @@ public class DaoInsertTest extends BaseDaoTest {
         Goods 菜心 = new Goods("菜心", "新鲜的菜心一斤，纯天然无农药", 7.5, 200, 蔬菜, 生鲜店, pics("goods_13.jpg", "goods_14.jpg", "goods_15.jpg"));
         Goods 苹果 = new Goods("苹果", "新鲜的苹果一斤，纯天然无农药", 11.2, 80, 水果, 生鲜店, pics("goods_16.jpg"));
         Goods 辣条 = new Goods("辣条", "老外都抢着吃，欲购从速！", 2.5, 250, 零食, 零食店, pics("goods_17.jpg"));
-        Goods 可乐 = new Goods("可乐", "透心凉，心飞扬！", 5, 300, 食品, 零食店, pics("goods_18.jpg", "goods_19.jpg"));
+        Goods 可乐 = new Goods("可乐", "透心凉，心飞扬！", 5, 300, 饮料, 零食店, pics("goods_18.jpg", "goods_19.jpg"));
 
         sellerDao.insert(张三);
         sellerDao.insert(李四);
@@ -201,20 +201,18 @@ public class DaoInsertTest extends BaseDaoTest {
         evaluateDao.insert(evaluate4);
 
         // 添加额外的无意义数据
-//        for (int i = 1; i <= 50; i++) {
-//            Customer customer = new Customer("155" + i, "123", "user" + i, "nick" + i, i % 4 == 0 ? "男" : "女",
-//                    pic("customer_" + (i % 2 + 1) + ".jpg"));
-//            customerDao.insert(customer);
-//        }
-//        Shop shop = new Shop(张三, "张三的商店", "张三的商店的描述", "/admin/img/shop_1.jpg");
-//        shopDao.insert(shop);
-//        for (int i = 1; i <= 103; i++) {
-//            Goods goods = new Goods("商品" + i, "商品描述" + i,
-//                    i, goodsTypeDao.queryById(i % 10 + 1), shop, 500 + i * 100);
-//            goodsDao.insert(goods);
-//            GoodsImage goodsImage = new GoodsImage(goods, "/admin/img/goods_" + (i % 19 + 1) + ".jpg");
-//            goodsImageDao.insert(goodsImage);
-//        }
+        for (int i = 1; i <= 50; i++) {
+            Customer customer = new Customer("155" + i, "123", "user" + i, "nick" + i, i % 4 == 0 ? "男" : "女",
+                    pic("customer_" + (i % 2 + 1) + ".jpg"));
+            customerDao.insert(customer);
+        }
+        Shop shop = new Shop(张三, "张三的商店", "张三的商店的描述", pic("shop_1.jpg"));
+        shopDao.insert(shop);
+        for (int i = 1; i <= 103; i++) {
+            Goods goods = new Goods("商品" + i, "商品描述" + i, 500 + i * 100, i,
+                    goodsTypeDao.queryById(i % 5 + 1), shop, pics("goods_" + (i % 19 + 1) + ".jpg"));
+            goodsDao.insert(goods);
+        }
 
     }
 

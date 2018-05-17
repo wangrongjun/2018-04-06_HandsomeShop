@@ -25,10 +25,10 @@
 
 <div class="text-center">
     <div class="sort_box btn-group">
-        <button class="btn btn-default <c:if test="${sortType==0}">active</c:if>">综合排序</button>
+        <button class="btn btn-default <c:if test="${sortType==0}">active</c:if>" onclick="reload(0,0)">综合排序</button>
         <button class="btn btn-default <c:if test="${sortType==1}">active</c:if>">销量由高到低</button>
-        <button class="btn btn-default <c:if test="${sortType==2}">active</c:if>">价格由低到高</button>
-        <button class="btn btn-default <c:if test="${sortType==3}">active</c:if>">价格由高到低</button>
+        <button class="btn btn-default <c:if test="${sortType==2}">active</c:if>" onclick="reload(0,2)">价格由低到高</button>
+        <button class="btn btn-default <c:if test="${sortType==3}">active</c:if>" onclick="reload(0,3)">价格由高到低</button>
     </div>
 </div>
 

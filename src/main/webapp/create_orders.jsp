@@ -151,13 +151,13 @@
             <div class="modal-body">
                 <div>
                     <div>
-                        收件人名字：<input type="text" id="addContactReceiver"/>
+                        收件人名字：<input type="text" class="form-control" id="addContactReceiver"/>
                     </div>
                     <div>
-                        收件人电话：<input type="text" id="addContactPhone"/>
+                        收件人电话：<input type="text" class="form-control" id="addContactPhone"/>
                     </div>
                     <div>
-                        收件人地址：<input type="text" id="addContactAddress"/>
+                        收件人地址：<input type="text" class="form-control" id="addContactAddress"/>
                     </div>
                 </div>
             </div>

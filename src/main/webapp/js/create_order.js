@@ -2,7 +2,7 @@ var contentVm;
 var selectContactModelVm;
 $(function () {
     // 在发起JQuery的Ajax请求前后，显示和去除遮罩层
-    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI());
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
     contentVm = new Vue({
         el: "#content",
