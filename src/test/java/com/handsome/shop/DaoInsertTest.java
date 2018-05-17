@@ -216,15 +216,6 @@ public class DaoInsertTest extends BaseDaoTest {
 //            goodsImageDao.insert(goodsImage);
 //        }
 
-        try {
-            FileInputStream fis = new FileInputStream("E:/Test/1.jpg");
-            Blob picture = Hibernate.getLobCreator(session).createBlob(fis, fis.available());
-            pictureDao.insert(new Picture(Picture.PictureType.jpg, picture));
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     private Date d(String dateTime) {

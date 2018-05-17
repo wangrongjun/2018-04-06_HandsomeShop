@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Base64;
@@ -26,15 +27,6 @@ public class ShopController extends BaseController {
     @GetMapping
     public List<Shop> listShop(@RequestParam int sellerId) {
         return shopDao.queryBySellerId(sellerId);
-    }
-
-    @PostMapping
-    public HttpStatus add(@Validated Shop shop, BindingResult shopResult) {
-        if (shopResult.hasErrors()) {
-            throw new IllegalArgumentException(shopResult.getAllErrors().get(0).getDefaultMessage());
-        }
-        // TODO
-        return null;
     }
 
 }

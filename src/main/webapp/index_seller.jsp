@@ -40,7 +40,7 @@
                 </div>
             </div>
             <%--添加商店的按钮--%>
-            <div class="shop_item_box col-sm-3" @click="addShop">
+            <div class="shop_item_box col-sm-3" onclick="$('#modal_add_shop').modal('toggle')">
                 <div class="img_box">
                     <img src="${pageContext.request.contextPath}/img/ic_add.png" class="img">
                 </div>
@@ -48,6 +48,46 @@
             </div>
         </div>
     </div>
+
+    <!-- 创建商店的模态弹出窗 -->
+    <div class="modal fade" id="modal_add_shop">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">创建商店</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>
+                            商店名称：<input class="form-control" type="text" v-model="shopName"/>
+                        </div>
+                        <br>
+                        <div>
+                            商店描述：<input class="form-control" type="text" v-model="shopDescription"/>
+                        </div>
+                        <br>
+                        <div>
+                            <%--商店头像：<input class="form-control" type="file" name="shopHead"--%>
+                            <%--accept="image/gif,image/jpeg,image/jpg,image/png">--%>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary"
+                            @click="createShop(shopName, shopDescription)"
+                            data-dismiss="modal">创建商店
+                    </button>
+                </div>
+                <%--</form>--%>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- 创建商店的模态弹出窗 -->
 
 </content>
 
