@@ -8,6 +8,9 @@
 }
 
 /*每个商店项的细节*/
+.shop_item_box {
+    border: 1px solid transparent;
+}
 
 .shop_item_box:hover {
     border: 1px solid red;

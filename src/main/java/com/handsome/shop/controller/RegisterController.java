@@ -1,6 +1,7 @@
 package com.handsome.shop.controller;
 
 import com.handsome.shop.dao.CustomerDao;
+import com.handsome.shop.dao.PictureDao;
 import com.handsome.shop.dao.SellerDao;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Picture;
@@ -27,6 +28,8 @@ public class RegisterController extends BaseController {
     @Resource
     private CustomerDao customerDao;
     @Resource
+    private PictureDao pictureDao;
+    @Resource
     private SessionFactory sessionFactory;// TODO 这个东西不利于测试，以后想办法移到dao层！
 
     @PostMapping("/register")
@@ -43,10 +46,12 @@ public class RegisterController extends BaseController {
                 request.setAttribute("msg", "该手机号已注册");
                 return "register";
             }
-            FileInputStream fis = new FileInputStream("src/main/webapp/admin/img/user_default_head.jpg");
+            String picturePath = request.getServletContext().getRealPath("/admin/img/user_default_head.jpg");
+            FileInputStream fis = new FileInputStream(picturePath);
             // TODO 以后OpenSessionInView不用之后，要改为openSession
             Blob pictureData = sessionFactory.getCurrentSession().getLobHelper().createBlob(fis, fis.available());
             Picture head = new Picture(Picture.PictureType.jpg, pictureData);
+            pictureDao.insert(head);
             Customer customer = new Customer(phone, password, realName, nickname, "man".equals(gender) ? "男" : "女", head);
             customerDao.insert(customer);
             request.setAttribute("phone", phone);

@@ -1,7 +1,9 @@
+let contentVue;
+
 $(function () {
     $(document).ajaxStart($.blockUI).ajaxStop($.unblockIU);
 
-    new Vue({
+    contentVue = new Vue({
         el: "#content",
         data: {
             sellerId: sellerId,
@@ -21,19 +23,17 @@ function showShopInfo(shopId) {
 }
 
 function createShop(shopName, shopDescription) {
-    // formData.append("shopName", shopName);
-    // formData.append("shopDescription", shopDescription);
-    // formData.append("shopHead", $("#shop_head")[0].files[0]);
     $.ajax({
-        url: "/createShop",
+        url: "/rest/shop",
         type: "POST",
         data: {
+            sellerId: sellerId,
             shopName: shopName,
             shopDescription: shopDescription,
         },
         cache: false,
-        success: function (response) {
-            alert("" + response);
+        success: function (data) {
+            contentVue.shopList.push(data);
         },
         error: function (xhr, errorMsg, exception) {
             alert("" + exception);

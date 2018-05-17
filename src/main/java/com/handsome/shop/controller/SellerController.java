@@ -1,16 +1,14 @@
 package com.handsome.shop.controller;
 
 import com.handsome.shop.controller.rest.ShopController;
+import com.handsome.shop.dao.PictureDao;
+import com.handsome.shop.dao.ShopDao;
 import com.handsome.shop.entity.Seller;
 import com.handsome.shop.entity.Shop;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.util.GsonConverter;
-import com.handsome.shop.util.RequestStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +32,6 @@ public class SellerController extends BaseController {
         request.setAttribute("sellerId", seller.getSellerId());
         request.setAttribute("shopListJson", shopListJson);
         return "index_seller";
-    }
-
-    @PostMapping("/createShop")
-    public RequestStatus add(@RequestParam String shopName,
-                             @RequestParam String shopDescription) {
-        return RequestStatus.success();
     }
 
 }

@@ -3,6 +3,7 @@ package com.handsome.shop.util;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.GsonBuilder;
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.hibernate.proxy.HibernateProxy;
 
 /**
@@ -14,7 +15,7 @@ public class GsonConverter {
      * 该方法专门用来解析Hibernate查询返回的对象。
      * <p>
      * 该方法可以避免：
-     * 1. Hibernate使用延迟加载时，Gson无法解析HibernateProxy代理对象而抛出异常。
+     * 1. Hibernate使用延迟加载时，Gson无法解析HibernateProxy和BlobProxy代理对象而抛出异常。
      * 2. 一对多的两个实体类相互引用，导致Gson解析进入死循环的情况。
      * <p>
      * 问题解决的原理：
@@ -51,7 +52,8 @@ public class GsonConverter {
 
             @Override
             public boolean shouldSkipClass(Class<?> clazz) {
-                return HibernateProxy.class.isAssignableFrom(clazz);
+                return HibernateProxy.class.isAssignableFrom(clazz) || BlobProxy.class.isAssignableFrom(clazz);
+
             }
         };
 
