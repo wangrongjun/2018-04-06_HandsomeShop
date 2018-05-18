@@ -3,6 +3,7 @@
 <%@ page import="com.handsome.shop.dao.ShopCarDao" %>
 <%@ page import="com.handsome.shop.framework.SpringContextHolder" %>
 <%@ page import="com.handsome.shop.entity.Seller" %>
+<%@ page import="com.handsome.shop.entity.Orders" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangrongjun
@@ -44,9 +45,12 @@
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
         <%
         } else if (customer == null) {// 卖家登录
+            OrdersDao ordersDao = SpringContextHolder.getBean(OrdersDao.class);
+            int ordersCount = ordersDao.queryCreatedCountBySellerId(seller.getSellerId());
         %>
         <a href="#"><%=seller.getNickname()%>
         </a>
+        <a href="${pageContext.request.contextPath}/sellerOrders">待处理的订单(<%=ordersCount%>)</a>
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
         <%
         } else {

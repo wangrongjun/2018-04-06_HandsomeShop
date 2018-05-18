@@ -27,10 +27,26 @@ public class OrdersDaoImpl extends HibernateDao<Orders, Integer> implements Orde
     }
 
     @Override
-    public int queryCountByGoodsId(int goodsId) {
-        return queryCount(Where.eq("goods.id", goodsId));
+    public List<Orders> queryCreatedBySellerId(int sellerId, Pager<Orders> pager) {
+        Where where = Where.
+                eq("goods.shop.seller.id", sellerId).
+                notEqual("status", Orders.Status.Closed.toString()).
+                notEqual("status", Orders.Status.Finish.toString()).
+                isNull("obsoleteDate");
+        return query(where, pager);
     }
 
+    @Override
+    public int queryCreatedCountBySellerId(int sellerId) {
+        Where where = Where.
+                eq("goods.shop.seller.id", sellerId).
+                notEqual("status", Orders.Status.Closed.toString()).
+                notEqual("status", Orders.Status.Finish.toString()).
+                isNull("obsoleteDate");
+        return queryCount(where);
+    }
+
+    // TODO 在HibernateDao中实现
     @Override
     public void deleteLogically(int ordersId) {
         Orders orders = queryById(ordersId);

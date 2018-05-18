@@ -12,9 +12,11 @@ import java.util.List;
 public interface OrdersDao extends Dao<Orders, Integer> {
     List<Orders> queryByCustomerId(int customerId, Pager<Orders> pager);
 
-    int queryCountByCustomerId(int customerId);
+    int queryCountByCustomerId(int seller);
 
-    int queryCountByGoodsId(int goodsId);
+    List<Orders> queryCreatedBySellerId(int sellerId, Pager<Orders> pager);
+
+    int queryCreatedCountBySellerId(int sellerId);
 
     void deleteLogically(int ordersId);
 }

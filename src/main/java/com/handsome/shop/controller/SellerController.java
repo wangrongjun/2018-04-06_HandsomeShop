@@ -1,12 +1,16 @@
 package com.handsome.shop.controller;
 
+import com.handsome.shop.controller.rest.OrdersController;
 import com.handsome.shop.controller.rest.ShopController;
 import com.handsome.shop.dao.PictureDao;
 import com.handsome.shop.dao.ShopDao;
+import com.handsome.shop.entity.Orders;
 import com.handsome.shop.entity.Seller;
 import com.handsome.shop.entity.Shop;
+import com.handsome.shop.entity.view.PageParam;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.util.GsonConverter;
+import com.handsome.shop.util.Pager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -22,6 +26,8 @@ public class SellerController extends BaseController {
 
     @Resource
     private ShopController shopController;
+    @Resource
+    private OrdersController ordersController;
 
     @GetMapping("/sellerIndex")
     public String listOwnerShop(HttpServletRequest request) {
@@ -32,6 +38,15 @@ public class SellerController extends BaseController {
         request.setAttribute("sellerId", seller.getSellerId());
         request.setAttribute("shopListJson", shopListJson);
         return "index_seller";
+    }
+
+    @GetMapping("/sellerOrders")
+    public String listOrders(HttpServletRequest request) {
+        Integer sellerId = getLoginSellerFromSession(request).getSellerId();
+        Pager<Orders> pager = ordersController.listBySeller(sellerId, new PageParam("-createdOn"), createBR());
+        request.setAttribute("ordersCount", pager.getTotalCount());
+        request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(), "Shop.seller", "Refund.orders"));
+        return "seller_orders_list";
     }
 
 }

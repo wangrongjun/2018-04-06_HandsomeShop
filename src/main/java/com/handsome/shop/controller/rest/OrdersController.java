@@ -49,6 +49,18 @@ public class OrdersController extends BaseController {
         return pager;
     }
 
+    @GetMapping("/seller")
+    @ReturnObjectToJsonIgnoreFields({"Goods.shop", "Refund.orders"})
+    public Pager<Orders> listBySeller(@RequestParam Integer sellerId,
+                                      @Valid PageParam pageParam, BindingResult pageParamResult) {
+        if (pageParamResult.hasErrors()) {
+            throw new IllegalArgumentException(pageParamResult.getAllErrors().get(0).getDefaultMessage());
+        }
+        Pager<Orders> pager = pageParam.toPager(Orders.class);
+        ordersDao.queryCreatedBySellerId(sellerId, pager);
+        return pager;
+    }
+
     @PostMapping
     public RequestStatus create(@RequestParam Integer customerId,
                                 @RequestParam Integer goodsId,
