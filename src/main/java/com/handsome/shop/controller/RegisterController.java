@@ -64,10 +64,12 @@ public class RegisterController extends BaseController {
                 request.setAttribute("msg", "该手机号已注册");
                 return "register";
             }
-            FileInputStream fis = new FileInputStream("src/main/webapp/admin/img/user_default_head.jpg");
+            String picturePath = request.getServletContext().getRealPath("/admin/img/user_default_head.jpg");
+            FileInputStream fis = new FileInputStream(picturePath);
             // TODO 以后OpenSessionInView不用之后，要改为openSession
             Blob pictureData = sessionFactory.getCurrentSession().getLobHelper().createBlob(fis, fis.available());
             Picture head = new Picture(Picture.PictureType.jpg, pictureData);
+            pictureDao.insert(head);
             Seller seller = new Seller(phone, password, realName, nickname, "男".equals(gender) ? "男" : "女", head);
             sellerDao.insert(seller);
             request.setAttribute("phone", phone);

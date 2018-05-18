@@ -69,7 +69,7 @@ public class OrdersController extends BaseController {
                                 @NotBlank String remark) {
         Goods goods = goodsDao.queryById(goodsId);
         Orders orders = new Orders(new Customer(customerId), goods, count, count * goods.getPrice(),
-                new Contact(contactId), remark, Orders.Status.Pending_Receive);
+                new Contact(contactId), remark, Orders.Status.Created);
         ordersDao.insert(orders);
         return RequestStatus.success();
     }
