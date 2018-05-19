@@ -5,6 +5,7 @@ import com.handsome.shop.entity.Goods;
 import com.handsome.shop.dao.EvaluateDao;
 import com.handsome.shop.dao.GoodsDao;
 import com.handsome.shop.framework.BaseController;
+import com.handsome.shop.util.GsonConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,9 +54,11 @@ public class GoodsController extends BaseController {
     public String showGoodsInfo(HttpServletRequest request, HttpServletResponse response, @PathVariable Integer goodsId) {
         Goods goods = goodsDao.queryById(goodsId);
         List<Evaluate> evaluateList = evaluateDao.queryByGoodsId(goodsId);
-        request.setAttribute("goods", goods);
-        response.setHeader("Content-Length", null);
-        request.setAttribute("evaluateList", evaluateList);
+
+        request.setAttribute("goodsJson", GsonConverter.toJson(goods,
+                "GoodsAttrName.goods", "GoodsAttrValue.goodsAttrName", "Seller.shopList"));
+        request.setAttribute("evaluateListJson", GsonConverter.toJson(evaluateList,
+                "Orders.goods", "Orders.contact", "Orders.refund"));
         return "goods_info";
     }
 

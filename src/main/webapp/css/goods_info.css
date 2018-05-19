@@ -90,6 +90,10 @@ li {
     margin-top: 20px;
 }
 
+#goods_attribute .attr_name, #goods_attribute .attr_value {
+    margin: 5px;
+}
+
 /*-----------操作按钮------------*/
 
 .buy_box {

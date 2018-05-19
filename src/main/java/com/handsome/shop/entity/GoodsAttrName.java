@@ -20,6 +20,7 @@ public class GoodsAttrName extends BaseEntity {
     private String name;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "goodsAttrNameId")
+    @OrderBy("goodsAttrValueId")
     private Set<GoodsAttrValue> attrValues;
 
     public GoodsAttrName() {

@@ -38,6 +38,7 @@ public class Goods extends BaseEntity {
     private String attrComb;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "goodsId")
+    @OrderBy("goodsAttrNameId")
     private Set<GoodsAttrName> goodsAttrNames;
 
     @Override
