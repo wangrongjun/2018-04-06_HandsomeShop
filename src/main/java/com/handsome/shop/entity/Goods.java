@@ -34,6 +34,11 @@ public class Goods extends BaseEntity {
     @JoinTable(joinColumns = @JoinColumn(name = "goodsId"), inverseJoinColumns = @JoinColumn(name = "pictureId"))
     @OrderBy("pictureId")
     private Set<Picture> pictureSet;
+    @Column(length = 5000)
+    private String attrComb;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "goodsId")
+    private Set<GoodsAttrName> goodsAttrNames;
 
     @Override
     public String toString() {
@@ -46,6 +51,7 @@ public class Goods extends BaseEntity {
                 ", goodsType=" + goodsType +
                 ", shop=" + shop +
                 ", pictureSet=" + pictureSet +
+                ", attrComb='" + attrComb + '\'' +
                 '}';
     }
 
@@ -128,5 +134,21 @@ public class Goods extends BaseEntity {
 
     public void setPictureSet(Set<Picture> pictureList) {
         this.pictureSet = pictureList;
+    }
+
+    public String getAttrComb() {
+        return attrComb;
+    }
+
+    public void setAttrComb(String attribute) {
+        this.attrComb = attribute;
+    }
+
+    public Set<GoodsAttrName> getGoodsAttrNames() {
+        return goodsAttrNames;
+    }
+
+    public void setGoodsAttrNames(Set<GoodsAttrName> goodsAttrNames) {
+        this.goodsAttrNames = goodsAttrNames;
     }
 }

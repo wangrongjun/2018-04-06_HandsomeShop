@@ -41,11 +41,15 @@ public class DaoInsertTest extends BaseDaoTest {
     @Resource
     private EvaluateDao evaluateDao;
     @Resource
-    private ContactDao addressDao;
+    private ContactDao contactDao;
     @Resource
     private PictureDao pictureDao;
     @Resource
     private RefundDao refundDao;
+    @Resource
+    private GoodsAttrNameDao goodsAttrNameDao;
+    @Resource
+    private GoodsAttrValueDao goodsAttrValueDao;
 
     @BeforeClass
     public static void rebuildDatabase() throws IOException {
@@ -114,6 +118,12 @@ public class DaoInsertTest extends BaseDaoTest {
         Shop 手机旗舰店 = new Shop(张三, "手机旗舰店", "出售最新的三星，苹果手机", pic("shop_2.jpg"));
         Shop 生鲜店 = new Shop(李四, "生鲜店", "各种新鲜水果，蔬菜应有尽有！", pic("shop_3.jpg"));
         Shop 零食店 = new Shop(李四, "零食店", "吃货预备营！", pic("shop_4.jpg"));
+        sellerDao.insert(张三);
+        sellerDao.insert(李四);
+        shopDao.insert(东方电脑城);
+        shopDao.insert(手机旗舰店);
+        shopDao.insert(生鲜店);
+        shopDao.insert(零食店);
 
         Goods 宏基笔记本 = new Goods("宏基笔记本", "Aspire最新版", 3200, 20, 笔记本, 东方电脑城, pics("goods_1.jpg", "goods_2.jpg", "goods_3.jpg", "goods_4.jpg", "goods_5.jpg"));
         Goods 苹果笔记本 = new Goods("苹果笔记本", "超薄迷你", 5400, 60, 笔记本, 东方电脑城, pics("goods_6.jpg", "goods_7.jpg", "goods_8.jpg"));
@@ -123,13 +133,6 @@ public class DaoInsertTest extends BaseDaoTest {
         Goods 苹果 = new Goods("苹果", "新鲜的苹果一斤，纯天然无农药", 11.2, 80, 水果, 生鲜店, pics("goods_16.jpg"));
         Goods 辣条 = new Goods("辣条", "老外都抢着吃，欲购从速！", 2.5, 250, 零食, 零食店, pics("goods_17.jpg"));
         Goods 可乐 = new Goods("可乐", "透心凉，心飞扬！", 5, 300, 饮料, 零食店, pics("goods_18.jpg", "goods_19.jpg"));
-
-        sellerDao.insert(张三);
-        sellerDao.insert(李四);
-        shopDao.insert(东方电脑城);
-        shopDao.insert(手机旗舰店);
-        shopDao.insert(生鲜店);
-        shopDao.insert(零食店);
         goodsDao.insert(宏基笔记本);
         goodsDao.insert(苹果笔记本);
         goodsDao.insert(三星E7手机);
@@ -139,9 +142,41 @@ public class DaoInsertTest extends BaseDaoTest {
         goodsDao.insert(辣条);
         goodsDao.insert(可乐);
 
+        GoodsAttrName 颜色 = new GoodsAttrName(宏基笔记本, "颜色");
+        GoodsAttrName 内存 = new GoodsAttrName(宏基笔记本, "内存");
+        goodsAttrNameDao.insert(颜色);
+        goodsAttrNameDao.insert(内存);
+        GoodsAttrValue 白色 = new GoodsAttrValue(颜色, "白色");
+        GoodsAttrValue 黑色 = new GoodsAttrValue(颜色, "黑色");
+        GoodsAttrValue 红色 = new GoodsAttrValue(颜色, "红色");
+        GoodsAttrValue 内存4G = new GoodsAttrValue(内存, "4G");
+        GoodsAttrValue 内存8G = new GoodsAttrValue(内存, "8G");
+        goodsAttrValueDao.insert(白色);
+        goodsAttrValueDao.insert(黑色);
+        goodsAttrValueDao.insert(红色);
+        goodsAttrValueDao.insert(内存4G);
+        goodsAttrValueDao.insert(内存8G);
+        // 不加这个，下面的update会把GoodsAttrName的goodsId清除
+        宏基笔记本.setGoodsAttrNames(new HashSet<>(Arrays.asList(颜色, 内存)));
+        String attrComb = "[" +
+                "{attrValuesId:[:白色, :内存4G], inventory:3, price:3200}," +
+                "{attrValuesId:[:黑色, :内存4G], inventory:5, price:3200}," +
+                "{attrValuesId:[:红色, :内存4G], inventory:7, price:3200}," +
+                "{attrValuesId:[:白色, :内存8G], inventory:9, price:3500}," +
+                "{attrValuesId:[:黑色, :内存8G], inventory:11, price:3500}," +
+                "{attrValuesId:[:红色, :内存8G], inventory:13, price:3500}" +
+                "]";
+        attrComb = attrComb.
+                replace(":白色", 白色.getGoodsAttrValueId() + "").
+                replace(":黑色", 黑色.getGoodsAttrValueId() + "").
+                replace(":红色", 红色.getGoodsAttrValueId() + "").
+                replace(":内存4G", 内存4G.getGoodsAttrValueId() + "").
+                replace(":内存8G", 内存8G.getGoodsAttrValueId() + "");
+        宏基笔记本.setAttrComb(attrComb);
+        goodsDao.update(宏基笔记本);
+
         Customer 王荣俊 = new Customer("110", "123", "王荣俊", "英俊", "男", pic("customer_1.jpg"));
         Customer 沫沫 = new Customer("120", "123", "沫沫", "沫宝儿", "女", pic("customer_2.jpg"));
-
         customerDao.insert(王荣俊);
         customerDao.insert(沫沫);
 
@@ -152,10 +187,10 @@ public class DaoInsertTest extends BaseDaoTest {
 
         Contact contact1 = new Contact(王荣俊, "13710512633", "柏林", "广州市番禺区沙头大大", true);
         Contact contact2 = new Contact(王荣俊, "15521302233", "王荣俊", "广州市番禺区广州大学城XX学校XX宿舍", false);
-        Contact contact3 = new Contact(沫沫, "13023796942", "沫沫", "广州市天河区车陂冬景花园XX座XX号", true);
-        addressDao.insert(contact1);
-        addressDao.insert(contact2);
-        addressDao.insert(contact3);
+        Contact contact3 = new Contact(王荣俊, "13023796942", "女朋友沫沫", "广州市天河区车陂冬景花园XX座XX号", true);
+        contactDao.insert(contact1);
+        contactDao.insert(contact2);
+        contactDao.insert(contact3);
 
         Orders orders1 = new Orders(王荣俊, 三星E7手机, 1, 三星E7手机.getPrice(), contact1, "备注1", Orders.Status.Created);
         Orders orders2 = new Orders(王荣俊, 宏基笔记本, 1, 宏基笔记本.getPrice(), contact1, "备注2", Orders.Status.Pending_Receive);
@@ -200,7 +235,7 @@ public class DaoInsertTest extends BaseDaoTest {
         evaluateDao.insert(evaluate3);
         evaluateDao.insert(evaluate4);
 
-        // 添加额外的无意义数据
+        /* 添加额外的无意义数据
         for (int i = 1; i <= 50; i++) {
             Customer customer = new Customer("155" + i, "123", "user" + i, "nick" + i, i % 4 == 0 ? "男" : "女",
                     pic("customer_" + (i % 2 + 1) + ".jpg"));
@@ -212,7 +247,7 @@ public class DaoInsertTest extends BaseDaoTest {
             Goods goods = new Goods("商品" + i, "商品描述" + i, 500 + i * 100, i,
                     goodsTypeDao.queryById(i % 5 + 1), shop, pics("goods_" + (i % 19 + 1) + ".jpg"));
             goodsDao.insert(goods);
-        }
+        }*/
 
     }
 

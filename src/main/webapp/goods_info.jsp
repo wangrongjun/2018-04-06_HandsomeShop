@@ -30,7 +30,6 @@
                 <c:forEach var="picture" items="${requestScope.goods.pictureSet}">
                     <li><img src="/rest/picture/${picture.pictureId}"></li>
                 </c:forEach>
-                <%--<li><img src="${pageContext.request.contextPath}/admin/img/goods_1.jpg"></li>--%>
             </ul>
             <ol>
                 <c:forEach var="picture" items="${requestScope.goods.pictureSet}">
@@ -42,7 +41,7 @@
         <div class="right_box">
             <div class="goods_info_box">
                 <div class="goods_name">
-                    商品名称：
+                    商品名称
                     <span id="goods_name">${requestScope.goods.goodsName}</span>
                 </div>
 
@@ -58,6 +57,17 @@
                     商品类型：
                     <span id="goods_type">${requestScope.goods.goodsType.name}</span>
                 </div>
+            </div>
+
+            <hr>
+            选择商品属性：
+            <div id="goods_attribute">
+                <c:forEach var="attrName" varStatus="status" items="${requestScope.goods.goodsAttrNames}">
+                    <div class="text-info">${attrName.name}</div>
+                    <c:forEach var="attrValue" items="${attrName.attrValues}">
+                        <span class="label label-default">${attrValue.value}</span>
+                    </c:forEach>
+                </c:forEach>
             </div>
 
             <form action="${pageContext.request.contextPath}/confirmOrders" method="post">

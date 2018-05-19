@@ -1,7 +1,7 @@
 .order_item {
     width: 80%;
     margin: 10px auto;
-    position: relative;
+    /*position: relative;*/
     box-shadow: 0 0 3px grey;
     background-color: #fef;
     padding: 10px;
@@ -9,7 +9,7 @@
 }
 
 .goods_image {
-    width: 200px;
+    width: 250px;
     height: 200px;
     display: inline-block;
     float: left;

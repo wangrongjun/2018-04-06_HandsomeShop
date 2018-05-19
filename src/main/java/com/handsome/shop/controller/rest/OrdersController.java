@@ -38,7 +38,7 @@ public class OrdersController extends BaseController {
     private EvaluateDao evaluateDao;
 
     @GetMapping
-    @ReturnObjectToJsonIgnoreFields({"Goods.shop", "Refund.orders"})
+    @ReturnObjectToJsonIgnoreFields({"Goods.shop", "Refund.orders", "Goods.goodsAttrNames" })
     public Pager<Orders> listByCustomer(@RequestParam Integer customerId,
                                         @Valid PageParam pageParam, BindingResult pageParamResult) {
         if (pageParamResult.hasErrors()) {
