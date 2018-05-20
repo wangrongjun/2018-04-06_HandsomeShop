@@ -27,7 +27,7 @@ public class Evaluate extends BaseEntity {
     @Id
     @GeneratedValue
     private Integer evaluateId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ordersId")
     private Orders orders;// Order外键，对某次购物（即一份订单）的评价
     private String content;// 评价内容

@@ -58,7 +58,7 @@ public class GoodsController extends BaseController {
         request.setAttribute("goodsJson", GsonConverter.toJson(goods,
                 "GoodsAttrName.goods", "GoodsAttrValue.goodsAttrName", "Seller.shopList"));
         request.setAttribute("evaluateListJson", GsonConverter.toJson(evaluateList,
-                "Orders.goods", "Orders.contact", "Orders.refund"));
+                "Orders.contact", "Orders.refund", "Goods.goodsAttrNames", "Seller.shopList"));
         return "goods_info";
     }
 

@@ -67,7 +67,7 @@ public class CustomerController extends BaseController {
         Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createdOn"), createBR());
         request.setAttribute("ordersCount", pager.getTotalCount());
         request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(),
-                "Shop.seller", "Refund.orders","Goods.goodsAttrNames"));
+                "Shop.seller", "Refund.orders", "Goods.goodsAttrNames"));
         return "customer_orders_list";
     }
 
@@ -78,12 +78,12 @@ public class CustomerController extends BaseController {
         List<Contact> contactList = contactDao.queryByCustomerId(customer.getCustomerId());
 
         request.setAttribute("customerJson", GsonConverter.toJson(customer));
-        request.setAttribute("goodsJson", GsonConverter.toJson(goods, "Goods.shop"));
+        request.setAttribute("goodsJson", GsonConverter.toJson(goods, "Goods.shop",
+                "GoodsAttrName.goods", "GoodsAttrValue.goodsAttrName", "Seller.shopList"));
         request.setAttribute("contactListJson", GsonConverter.toJson(contactList));
         request.setAttribute("count", count);
         return "create_orders";
     }
-
 
     @PostMapping("/user/head")
     public String uploadUserHead(HttpServletRequest request) {

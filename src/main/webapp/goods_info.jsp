@@ -37,17 +37,11 @@
                 <li v-for="picture in goods.pictureSet">
                     <img :src="'/rest/picture/' + picture.pictureId">
                 </li>
-                <%--<c:forEach var="picture" items="${requestScope.goods.pictureSet}">--%>
-                <%--<li><img src="/rest/picture/${picture.pictureId}"></li>--%>
-                <%--</c:forEach>--%>
             </ul>
             <ol>
                 <li v-for="picture in goods.pictureSet">
                     <img :src="'/rest/picture/' + picture.pictureId">
                 </li>
-                <%--<c:forEach var="picture" items="${requestScope.goods.pictureSet}">--%>
-                <%--<li><img src="/rest/picture/${picture.pictureId}"></li>--%>
-                <%--</c:forEach>--%>
             </ol>
         </div>
 
@@ -73,19 +67,14 @@
             </div>
 
             <hr>
+
             选择商品属性：
             <div id="goods_attribute">
                 <template v-for="attrName in goods.goodsAttrNames">
-                    <div class="attr_name text-info">{{attrName.name}}</div>
+                    <div class="attr_name text-info" @click="">{{attrName.name}}</div>
                     <span class="attr_value label label-default"
                           v-for="attrValue in attrName.attrValues">{{attrValue.value}}</span>
                 </template>
-                <%--<c:forEach var="attrName" varStatus="status" items="${requestScope.goods.goodsAttrNames}">--%>
-                <%--<div class="text-info">${attrName.name}</div>--%>
-                <%--<c:forEach var="attrValue" items="${attrName.attrValues}">--%>
-                <%--<span class="label label-default">${attrValue.value}</span>--%>
-                <%--</c:forEach>--%>
-                <%--</c:forEach>--%>
             </div>
 
             <form action="${pageContext.request.contextPath}/confirmOrders" method="post">
@@ -102,6 +91,7 @@
 
     <hr/>
 
+    <%--商店信息--%>
     <div class="seller_box">
         <div class="seller_head">
             <img :src="'/rest/picture/' + goods.shop.head.pictureId"/>
@@ -117,51 +107,40 @@
             </div>
         </div>
     </div>
+    <%--商店信息--%>
 
     <hr/>
 
+    <%--用户评价--%>
     <div class="evaluate_box">
         <div class="text-center">用户评价</div>
         <div class="divider"></div>
-
-        <%--<c:if test="${requestScope.evaluateList.size()==0}">--%>
-        <%--<div class="text-center">暂无评价</div>--%>
-        <%--</c:if>--%>
-        <div class="text-center" v-if="evaluateList.length == 0">暂无评价</div>
-
-        <c:forEach var="evaluate" items="${requestScope.evaluateList}">
+        <div class="text-center" v-if="evaluateList.length === 0">暂无评价</div>
+        <template v-for="evaluate in evaluateList">
             <div class="item_box">
                 <div class="head">
-                    <img src="/rest/picture/${evaluate.orders.customer.head.pictureId}"/>
+                    <img :src="'/rest/picture/' + evaluate.orders.customer.head.pictureId"/>
                 </div>
                 <div class="right">
                     <div>
                         <div class="gender">
-                            <img src="${evaluate.orders.customer.gender=='男'?
-                            "/img/ic_gender_man.png":"/img/ic_gender_woman.png"}"/>
+                            <img :src="getGenderPictureUrl(evaluate)"/>
                         </div>
                         <div class="evaluate">
-                            <c:choose>
-                                <c:when test="${evaluate.level == 'Good'}">
-                                    <span class="label label-success">好评</span>
-                                </c:when>
-                                <c:when test="${evaluate.level == 'Normal'}">
-                                    <span class="label label-warning">中评</span>
-                                </c:when>
-                                <c:when test="${evaluate.level == 'Bad'}">
-                                    <span class="label label-danger">差评</span>
-                                </c:when>
-                            </c:choose>
+                            <span class="label label-success" v-if="evaluate.level == 'Good'">好评</span>
+                            <span class="label label-warning" v-if="evaluate.level == 'Normal'">中评</span>
+                            <span class="label label-danger" v-if="evaluate.level == 'Bad'">差评</span>
                         </div>
-                        <span class="name">${evaluate.orders.customer.nickname}</span>
-                        <span class="time">${evaluate.createdOn}</span>
+                        <span class="name">{{evaluate.orders.customer.nickname}}</span>
+                        <span class="time">{{evaluate.createdOn}}</span>
                     </div>
-                    <div class="content">${evaluate.content}</div>
+                    <div class="content">{{evaluate.content}}</div>
                 </div>
             </div>
             <div class="divider"></div>
-        </c:forEach>
+        </template>
     </div>
+    <%--用户评价--%>
 
     <%--显示卖家信息的窗口--%>
     <div class="modal fade" id="mymodal">

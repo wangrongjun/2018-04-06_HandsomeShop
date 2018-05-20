@@ -10,7 +10,15 @@ $(function () {
             evaluateList: evaluateList,
             buyCount: 1,
         },
-        methods: {}
+        methods: {
+            getGenderPictureUrl: function (evaluate) {
+                if (evaluate.orders.customer.gender == "男") {
+                    return "/img/ic_gender_man.png";
+                } else {
+                    return "/img/ic_gender_woman.png";
+                }
+            }
+        },
     });
 
     <!--调用Luara来轮播图片-->
@@ -28,16 +36,13 @@ function showSellerInfo() {
 }
 
 function addGoodsToShopCar() {
-    var count = $("#count").val();
-    var goodsId = "${requestScope.goods.goodsId}";
-
     var url = "/shopCar";
-    var data = {count: count, goodsId: goodsId};
+    var data = {count: contentVm.buyCount, goodsId: contentVm.goods.goodsId};
     $.post(url, data, function (result, status) {
         if (result === true && status === "success") {
             if (result === true) {
                 alert("已添加到购物车！");
-                window.location.href = "/goods/" + goodsId;
+                window.location.href = "/goods/" + contentVm.goods.goodsId;
             } else {
                 alert("添加失败！");
             }
