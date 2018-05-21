@@ -2,6 +2,7 @@ package com.handsome.shop;
 
 import com.handsome.shop.dao.*;
 import com.handsome.shop.entity.*;
+import com.wangrj.java_lib.java_util.DataUtil;
 import com.wangrj.java_lib.java_util.DateUtil;
 import com.wangrj.java_lib.java_util.StreamUtil;
 import com.wangrj.java_lib.java_util.TextUtil;
@@ -112,8 +113,8 @@ public class DaoInsertTest extends BaseDaoTest {
         goodsTypeRelationDao.addRelation(食品, 零食);
         goodsTypeRelationDao.addRelation(食品, 饮料);
 
-        Seller 张三 = new Seller("210", "123", "张三", "明月公主", "女", pic("seller_1.jpg"));
-        Seller 李四 = new Seller("220", "123", "李四", "型男", "男", pic("seller_2.jpg"));
+        Seller 张三 = new Seller("210", DataUtil.md5("123"), "张三", "明月公主", "女", pic("seller_1.jpg"));
+        Seller 李四 = new Seller("220", DataUtil.md5("123"), "李四", "型男", "男", pic("seller_2.jpg"));
         Shop 东方电脑城 = new Shop(张三, "东方电脑城", "专卖电脑及其设备", pic("shop_1.jpg"));
         Shop 手机旗舰店 = new Shop(张三, "手机旗舰店", "出售最新的三星，苹果手机", pic("shop_2.jpg"));
         Shop 生鲜店 = new Shop(李四, "生鲜店", "各种新鲜水果，蔬菜应有尽有！", pic("shop_3.jpg"));
@@ -175,8 +176,8 @@ public class DaoInsertTest extends BaseDaoTest {
         宏基笔记本.setAttrComb(attrComb);
         goodsDao.update(宏基笔记本);
 
-        Customer 王荣俊 = new Customer("110", "123", "王荣俊", "英俊", "男", pic("customer_1.jpg"));
-        Customer 沫沫 = new Customer("120", "123", "沫沫", "沫宝儿", "女", pic("customer_2.jpg"));
+        Customer 王荣俊 = new Customer("110", DataUtil.md5("123"), "王荣俊", "英俊", "男", pic("customer_1.jpg"));
+        Customer 沫沫 = new Customer("120", DataUtil.md5("123"), "沫沫", "沫宝儿", "女", pic("customer_2.jpg"));
         customerDao.insert(王荣俊);
         customerDao.insert(沫沫);
 
@@ -237,7 +238,7 @@ public class DaoInsertTest extends BaseDaoTest {
 
         /* 添加额外的无意义数据
         for (int i = 1; i <= 50; i++) {
-            Customer customer = new Customer("155" + i, "123", "user" + i, "nick" + i, i % 4 == 0 ? "男" : "女",
+            Customer customer = new Customer("155" + i, DataUtil.md5("123"), "user" + i, "nick" + i, i % 4 == 0 ? "男" : "女",
                     pic("customer_" + (i % 2 + 1) + ".jpg"));
             customerDao.insert(customer);
         }

@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class BaseController {
 
+    protected boolean isLogin(HttpServletRequest request) {
+        return getLoginCustomerFromSession(request) != null || getLoginSellerFromSession(request) != null;
+    }
+
     protected Customer getLoginCustomerFromSession(HttpServletRequest request) {
         return (Customer) request.getSession().getAttribute(C.SESSION_CUSTOMER);
     }

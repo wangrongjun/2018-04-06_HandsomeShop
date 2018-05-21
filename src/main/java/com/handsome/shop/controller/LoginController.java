@@ -6,6 +6,7 @@ import com.handsome.shop.dao.SellerDao;
 import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Seller;
 import com.handsome.shop.framework.BaseController;
+import com.wangrj.java_lib.java_util.DataUtil;
 import com.wangrj.web_lib.util.ImageCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,7 @@ public class LoginController extends BaseController {
                         @RequestParam String validateCode,
                         String autoLogin) throws IOException {
 
-        removeCookie(request);// 如果客户点击登录了，就移除之前的cookie，防止登录失败时变回cookie的内容。
+        removeCookie(response);// 如果客户点击登录了，就移除之前的cookie，防止登录失败时变回cookie的内容。
 
         // 如果验证码不匹配
         if (!ImageCode.validateCode(request, validateCode)) {
@@ -46,13 +47,15 @@ public class LoginController extends BaseController {
             return "login";
         }
 
+        password = DataUtil.md5(password);// 密码转换为密文
         if (identity.equals(C.SESSION_CUSTOMER)) {// 如果是客户登录
             Customer customer = customerDao.queryByPhone(phone);
             if (customer != null && password.equals(customer.getPassword())) {
                 request.getSession().invalidate();
                 setLoginCustomerToSession(request, customer);
-                addCookie(response, phone, password, C.SESSION_CUSTOMER, autoLogin);
-//                request.getRequestDispatcher("/").forward(request, response);
+                if ("true".equals(autoLogin)) {
+                    addCookie(response, phone, password, C.SESSION_CUSTOMER, autoLogin);
+                }
                 response.sendRedirect("/");
                 return null;
             } else {
@@ -64,8 +67,9 @@ public class LoginController extends BaseController {
             if (seller != null && password.equals(seller.getPassword())) {
                 request.getSession().invalidate();
                 setLoginSellerToSession(request, seller);
-                addCookie(response, phone, password, C.SESSION_SELLER, autoLogin);
-//                request.getRequestDispatcher("/").forward(request, response);
+                if ("true".equals(autoLogin)) {
+                    addCookie(response, phone, password, C.SESSION_SELLER, autoLogin);
+                }
                 response.sendRedirect("/");
                 return null;
             } else {
@@ -78,6 +82,7 @@ public class LoginController extends BaseController {
     @GetMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
+        removeCookie(response);
         response.sendRedirect("/");
     }
 
@@ -102,26 +107,34 @@ public class LoginController extends BaseController {
         response.addCookie(cookie);
     }
 
-    private void removeCookie(HttpServletRequest request) {
-//        Cookie cookie = new Cookie("phone", null);
-//        cookie.setMaxAge(0);// 有效期为0，即马上失效
-//        response.addCookie(cookie);
-//        cookie = new Cookie("password", null);
-//        cookie.setMaxAge(0);// 有效期为7天
-//        response.addCookie(cookie);
-//        cookie = new Cookie("identity", null);
-//        cookie.setMaxAge(0);// 有效期为7天
-//        response.addCookie(cookie);
+    private void removeCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("phone", null);
+        cookie.setMaxAge(0);// 通过设置有效期为0来移除
+        response.addCookie(cookie);
 
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if ("phone".equals(cookie.getName()) ||
-                    "password".equals(cookie.getName()) ||
-                    "identity".equals(cookie.getName()) ||
-                    "autoLogin".equals(cookie.getName())) {
-                cookie.setMaxAge(0);// 通过设置有效期为0来移除
-            }
-        }
+        cookie = new Cookie("password", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        cookie = new Cookie("identity", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        cookie = new Cookie("autoLogin", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if ("phone".equals(cookie.getName()) ||
+//                        "password".equals(cookie.getName()) ||
+//                        "identity".equals(cookie.getName()) ||
+//                        "autoLogin".equals(cookie.getName())) {
+//                    cookie.setMaxAge(0);// 通过设置有效期为0来移除
+//                }
+//            }
+//        }
     }
 
 }

@@ -2,8 +2,6 @@ package com.handsome.shop.controller;
 
 import com.handsome.shop.controller.rest.OrdersController;
 import com.handsome.shop.controller.rest.ShopController;
-import com.handsome.shop.dao.PictureDao;
-import com.handsome.shop.dao.ShopDao;
 import com.handsome.shop.entity.Orders;
 import com.handsome.shop.entity.Seller;
 import com.handsome.shop.entity.Shop;
@@ -45,7 +43,8 @@ public class SellerController extends BaseController {
         Integer sellerId = getLoginSellerFromSession(request).getSellerId();
         Pager<Orders> pager = ordersController.listBySeller(sellerId, new PageParam("-createdOn"), createBR());
         request.setAttribute("ordersCount", pager.getTotalCount());
-        request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(), "Shop.seller", "Refund.orders"));
+        request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(),
+                "Shop.seller", "Refund.orders", "Goods.goodsAttrNames"));
         return "seller_orders_list";
     }
 

@@ -7,6 +7,7 @@ import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Picture;
 import com.handsome.shop.entity.Seller;
 import com.handsome.shop.framework.BaseController;
+import com.wangrj.java_lib.java_util.DataUtil;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +53,7 @@ public class RegisterController extends BaseController {
             Blob pictureData = sessionFactory.getCurrentSession().getLobHelper().createBlob(fis, fis.available());
             Picture head = new Picture(Picture.PictureType.jpg, pictureData);
             pictureDao.insert(head);
-            Customer customer = new Customer(phone, password, realName, nickname, "man".equals(gender) ? "男" : "女", head);
+            Customer customer = new Customer(phone, DataUtil.md5(password), realName, nickname, "man".equals(gender) ? "男" : "女", head);
             customerDao.insert(customer);
             request.setAttribute("phone", phone);
             request.setAttribute("password", password);
@@ -70,7 +71,7 @@ public class RegisterController extends BaseController {
             Blob pictureData = sessionFactory.getCurrentSession().getLobHelper().createBlob(fis, fis.available());
             Picture head = new Picture(Picture.PictureType.jpg, pictureData);
             pictureDao.insert(head);
-            Seller seller = new Seller(phone, password, realName, nickname, "男".equals(gender) ? "男" : "女", head);
+            Seller seller = new Seller(phone, DataUtil.md5(password), realName, nickname, "男".equals(gender) ? "男" : "女", head);
             sellerDao.insert(seller);
             request.setAttribute("phone", phone);
             request.setAttribute("password", password);

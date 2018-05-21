@@ -106,7 +106,8 @@
                 <label for="validateCode">验证码：</label>
                 <input type="text" name="validateCode" id="validateCode">
                 <div id="validateCodeImageBox">
-                    <img src="${pageContext.request.contextPath}/validateCode.jsp" id="validateCodeImg" onclick="refreshValidateCode()">
+                    <img src="${pageContext.request.contextPath}/validateCode.jsp" id="validateCodeImg"
+                         onclick="refreshValidateCode()">
                 </div>
             </div>
             <button type="reset" class="btn btn-default">重置</button>

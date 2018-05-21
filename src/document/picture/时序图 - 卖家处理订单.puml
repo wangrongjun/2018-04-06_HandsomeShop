@@ -1,0 +1,24 @@
+@startuml
+
+title 卖家管理商品时序图
+
+actor 卖家 as seller
+participant 页面 as view
+control 业务层和持久层 as sc
+
+seller -> view : 查看未处理的订单
+view   -> sc   : 根据卖家id查询相关的未处理订单
+sc     -> view : 返回订单列表
+seller <- view : 显示订单列表
+
+seller -> view : 对某一确认发货
+view   -> sc   : 根据订单id改变订单状态为“等待买家收货”
+sc     -> view : 改变订单状态成功
+seller <- view : 提示确认发货操作成功
+
+seller -> view : 对某一确认退款
+view   -> sc   : 根据订单id改变订单状态为“已关闭”
+sc     -> view : 改变订单状态成功
+seller <- view : 提示确认退款操作成功
+
+@enduml
