@@ -56,9 +56,9 @@ public class GoodsController extends BaseController {
         List<Evaluate> evaluateList = evaluateDao.queryByGoodsId(goodsId);
 
         request.setAttribute("goodsJson", GsonConverter.toJson(goods,
-                "GoodsAttrName.goods", "GoodsAttrValue.goodsAttrName", "Seller.shopList"));
+                "GoodsAttrName.goods", "GoodsAttrValue.goodsAttrName", "Shop.goodsSet", "Seller.shopList"));
         request.setAttribute("evaluateListJson", GsonConverter.toJson(evaluateList,
-                "Orders.contact", "Orders.refund", "Goods.goodsAttrNames", "Seller.shopList"));
+                "Orders.contact", "Orders.refund", "Goods.goodsAttrNames", "Shop.goodsSet", "Seller.shopList"));
         return "goods_info";
     }
 

@@ -46,7 +46,7 @@ public class CustomerController extends BaseController {
         return contactDao.queryByCustomerId(customer.getCustomerId());
     }
 
-    @RequestMapping("/shop/{shopId}")
+    @GetMapping("/shop/{shopId}")
     public String showShopDetail(HttpServletRequest request,
                                  @PathVariable int shopId,
                                  @RequestParam(defaultValue = "0") int pageIndex) {
@@ -67,7 +67,7 @@ public class CustomerController extends BaseController {
         Pager<Orders> pager = ordersController.listByCustomer(customerId, new PageParam("-createdOn"), createBR());
         request.setAttribute("ordersCount", pager.getTotalCount());
         request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(),
-                "Shop.seller", "Refund.orders", "Goods.goodsAttrNames"));
+                "Shop.seller", "Refund.orders", "Goods.goodsAttrNames", "Shop.goodsSet"));
         return "customer_orders_list";
     }
 

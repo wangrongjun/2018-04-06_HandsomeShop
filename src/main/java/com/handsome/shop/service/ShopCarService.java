@@ -5,6 +5,6 @@ package com.handsome.shop.service;
  */
 public interface ShopCarService {
 
-    boolean addGoodsToShopCar(int customerId, int goodsId);
+    void addGoodsToShopCar(int customerId, int goodsId);
 
 }

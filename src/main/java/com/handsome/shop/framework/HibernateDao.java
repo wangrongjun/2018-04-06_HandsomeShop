@@ -12,7 +12,6 @@ import org.hibernate.query.Query;
 import javax.annotation.Resource;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,40 +103,35 @@ public class HibernateDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public boolean insert(T entity) {
+    public void insert(T entity) {
         Session session = getSession();
         session.save(entity);
-        return true;
     }
 
     @Override
-    public boolean delete(Where where) {
+    public void delete(Where where) {
         Session session = getSession();
         String hql = "delete from " + getTableName() + (where == null ? "" : where);
         session.createQuery(hql, getEntityClass()).executeUpdate();
-        return true;
     }
 
     @Override
-    public boolean deleteAll() {
+    public void deleteAll() {
         Session session = getSession();
         String hql = "delete from " + getTableName();
         session.createQuery(hql, getEntityClass()).executeUpdate();
-        return true;
     }
 
     @Override
-    public boolean deleteById(ID id) {
+    public void deleteById(ID id) {
         Session session = getSession();
         session.delete(queryById(id));
-        return true;
     }
 
     @Override
-    public boolean update(T entity) {
+    public void update(T entity) {
         Session session = getSession();
         session.update(entity);
-        return true;
     }
 
     @Override

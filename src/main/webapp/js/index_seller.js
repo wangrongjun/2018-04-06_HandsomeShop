@@ -19,7 +19,7 @@ $(function () {
 });
 
 function showShopInfo(shopId) {
-    alert("showShopInfo: " + shopId);
+    window.location.href = "/seller/shop/" + shopId;
 }
 
 function createShop(shopName, shopDescription) {

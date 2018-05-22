@@ -9,11 +9,14 @@ import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.framework.ReturnObjectToJsonIgnoreFields;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Blob;
@@ -34,13 +37,13 @@ public class ShopController extends BaseController {
     private SessionFactory sessionFactory;// TODO 想办法把这个东西移走
 
     @GetMapping
-    public List<Shop> listShop(@RequestParam Integer sellerId) {
+    public List<Shop> list(@RequestParam Integer sellerId) {
         return shopDao.queryBySellerId(sellerId);
     }
 
     @GetMapping("/{shopId}")
     @ReturnObjectToJsonIgnoreFields("")
-    public Shop getShopDetail(@PathVariable int shopId) {
+    public Shop get(@PathVariable int shopId) {
         return shopDao.queryById(shopId);
     }
 

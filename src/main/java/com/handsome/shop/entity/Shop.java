@@ -26,6 +26,7 @@ public class Shop extends BaseEntity {
     private Picture head;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "shopId")
+    @OrderBy("goodsId")
     private Set<Goods> goodsSet;
 
     @Override

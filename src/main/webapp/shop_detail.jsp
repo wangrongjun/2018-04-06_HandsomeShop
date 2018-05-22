@@ -30,27 +30,31 @@
 
     <div class="text-center">
         <h2>{{shop.shopName}}</h2>
-        <div>商店描述：{{shop.description}}</div>
+        <br>
+        <div>{{shop.description}}</div>
+        <br>
         <div style="height: 120px;width: 120px;margin: 0 auto;">
             <img :src="'/rest/picture/' + shop.head.pictureId" style="height: 100% ;width: 100%;">
         </div>
-        <button v-if="editable === true" onclick="$('#modal_update_shop_info').modal('toggle')">修改商店信息</button>
+        <br>
+        <button class="btn btn-info" v-if="editable === true" onclick="$('#modal_update_shop_info').modal('toggle')">
+            修改商店信息
+        </button>
+        <button class="btn btn-warning" v-if="editable === true" @click="updateShopHead()">修改商店头像</button>
     </div>
 
     <hr>
 
-    <div class="text-center" v-if="!shop.goodsList || shop.goodsList.length == 0">
+    <div class="text-center" v-if="!shop.goodsSet || shop.goodsSet.length == 0">
         <h2>抱歉，没有商品！</h2>
     </div>
     <div class="goods_box container" v-else>
         <div class="row">
-            <div class="col-sm-3" v-for="(goods, index) in shop.goodsList">
+            <div class="col-sm-3" v-for="goods in shop.goodsSet">
                 <div class="goods">
                     <div class="goods_image">
-                        <a :href="'/goods/' + goods.goodsId">
-                            <template v-if="getPictureUrl(index) != null">
-                                <img :src="getPictureUrl(index)"/>
-                            </template>
+                        <a :href="'/seller/goods/' + goods.goodsId">
+                            <img :src="'/rest/picture/' + goods.pictureSet[0].pictureId"/>
                         </a>
                     </div>
                     <a :href="'/goods/' + goods.goodsId" class="goods_name">{{goods.goodsName}}</a>
@@ -76,12 +80,13 @@
                     <h4 class="modal-title">添加收货地址</h4>
                 </div>
                 <div class="modal-body">
-                    <label>商店名称：<input type="text" class="form-control" v-model="shop.shopName"></label>
-                    <label>商店描述：<input type="text" class="form-control" v-model="shop.description"></label>
+                    <label>商店名称：<input type="text" class="form-control" v-model="newShopName"></label>
+                    <label>商店描述：<input type="text" class="form-control" v-model="newDescription"></label>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button class="btn btn-primary" onclick="alert('修改')" data-dismiss="modal">修改</button>
+                    <button class="btn btn-primary" @click="updateShopInfo()" data-dismiss="modal">修改
+                    </button>
                 </div>
             </div>
         </div>

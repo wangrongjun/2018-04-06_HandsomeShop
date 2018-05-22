@@ -19,8 +19,8 @@ public class ShopCarServiceImpl implements ShopCarService {
     private ShopCarDao shopCarDao;
 
     @Override
-    public boolean addGoodsToShopCar(int customerId, int goodsId) {
-        return shopCarDao.insert(new ShopCar(new Customer(customerId), new Goods(goodsId)));
+    public void addGoodsToShopCar(int customerId, int goodsId) {
+        shopCarDao.insert(new ShopCar(new Customer(customerId), new Goods(goodsId)));
     }
 
 }

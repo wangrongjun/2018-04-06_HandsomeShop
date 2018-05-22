@@ -50,7 +50,7 @@
         %>
         <a href="#"><%=seller.getNickname()%>
         </a>
-        <a href="${pageContext.request.contextPath}/sellerOrders">待处理的订单(<%=ordersCount%>)</a>
+        <a href="${pageContext.request.contextPath}/seller/orders">待处理的订单(<%=ordersCount%>)</a>
         <a href="${pageContext.request.contextPath}/logout">[退出登录]</a>
         <%
         } else {

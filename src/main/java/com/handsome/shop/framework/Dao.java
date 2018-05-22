@@ -9,19 +9,19 @@ import java.util.List;
 /**
  * by wangrongjun on 2018/4/14.
  */
-public interface Dao<T,ID> {
+public interface Dao<T, ID> {
 
     int executeUpdate(String hql, Object... parameters);
 
-    boolean insert(T entity);
+    void insert(T entity);
 
-    boolean delete(Where where);
+    void delete(Where where);
 
-    boolean deleteAll();
+    void deleteAll();
 
-    boolean deleteById(ID id);
+    void deleteById(ID id);
 
-    boolean update(T entity);
+    void update(T entity);
 
     T queryById(ID id);
 

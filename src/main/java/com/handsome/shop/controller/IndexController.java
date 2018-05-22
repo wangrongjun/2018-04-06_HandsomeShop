@@ -86,7 +86,7 @@ public class IndexController extends BaseController {
 
         // 如果用户已经登录并且身份是卖家，就显示卖家首页
         if (getLoginSellerFromSession(request) != null) {
-            request.getRequestDispatcher("/sellerIndex").forward(request, response);
+            request.getRequestDispatcher("/seller").forward(request, response);
             return null;
         }
 
