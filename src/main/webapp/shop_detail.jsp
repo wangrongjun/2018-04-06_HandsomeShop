@@ -8,27 +8,85 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>${requestScope.shop.shopName}</title>
+    <title>商店详情</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css">
+    <%--TODO 把goods_box变为vue组件--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/goods_box.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index_seller.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script>
+        let editable = ${requestScope.editable != null ? requestScope.editable : "false"};
+        let shop = ${requestScope.shopJson};
+    </script>
+    <script src="${pageContext.request.contextPath}/js/shop_detail.js"></script>
 </head>
 <body>
 
 <jsp:include page="header.jsp"/>
 
-<content>
+<content id="content">
 
     <div class="text-center">
-        <h1>${requestScope.shop.shopName}</h1>
+        <h2>{{shop.shopName}}</h2>
+        <div>商店描述：{{shop.description}}</div>
         <div style="height: 120px;width: 120px;margin: 0 auto;">
-            <img src="/rest/picture/${requestScope.shop.seller.head.pictureId}" style="height: 100% ;width: 100%;">
+            <img :src="'/rest/picture/' + shop.head.pictureId" style="height: 100% ;width: 100%;">
         </div>
-        <div>卖家姓名：${requestScope.shop.seller.realName}</div>
-        <div>卖家性别：${requestScope.shop.seller.gender}</div>
-        <div>卖家电话：${requestScope.shop.seller.phone}</div>
+        <button v-if="editable === true" onclick="$('#modal_update_shop_info').modal('toggle')">修改商店信息</button>
     </div>
 
     <hr>
 
-    <jsp:include page="goods_box.jsp"/>
+    <div class="text-center" v-if="!shop.goodsList || shop.goodsList.length == 0">
+        <h2>抱歉，没有商品！</h2>
+    </div>
+    <div class="goods_box container" v-else>
+        <div class="row">
+            <div class="col-sm-3" v-for="(goods, index) in shop.goodsList">
+                <div class="goods">
+                    <div class="goods_image">
+                        <a :href="'/goods/' + goods.goodsId">
+                            <template v-if="getPictureUrl(index) != null">
+                                <img :src="getPictureUrl(index)"/>
+                            </template>
+                        </a>
+                    </div>
+                    <a :href="'/goods/' + goods.goodsId" class="goods_name">{{goods.goodsName}}</a>
+                    <div class="price">￥ {{goods.price}}</div>
+                    <div class="remain_and_sell">
+                        <span class="remain">库存：<span id="remainCount">0</span>&nbsp;件</span>
+                        <span class="sell">销量：<span id="sellCount">0</span>&nbsp;笔</span>
+                    </div>
+                    <div class="description">{{goods.description}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改商店信息的模态弹出窗 -->
+    <div class="modal fade" id="modal_update_shop_info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">添加收货地址</h4>
+                </div>
+                <div class="modal-body">
+                    <label>商店名称：<input type="text" class="form-control" v-model="shop.shopName"></label>
+                    <label>商店描述：<input type="text" class="form-control" v-model="shop.description"></label>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" onclick="alert('修改')" data-dismiss="modal">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改商店信息的模态弹出窗 -->
 
 </content>
 

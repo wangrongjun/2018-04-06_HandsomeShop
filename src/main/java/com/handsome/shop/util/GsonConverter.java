@@ -3,6 +3,7 @@ package com.handsome.shop.util;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.GsonBuilder;
+import com.wangrj.java_lib.java_util.GsonUtil;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -10,6 +11,15 @@ import org.hibernate.proxy.HibernateProxy;
  * by wangrongjun on 2018/5/3.
  */
 public class GsonConverter {
+
+    public static String toJson(Object object, String... ignoreFieldNameList) {
+        return GsonUtil.toJsonIgnoreFields(
+                object,
+                true,
+                new Class[]{HibernateProxy.class, BlobProxy.class},
+                ignoreFieldNameList
+        );
+    }
 
     /**
      * 该方法专门用来解析Hibernate查询返回的对象。
@@ -24,14 +34,14 @@ public class GsonConverter {
      *
      * @param ignoreFieldNameList such as "goods" or "GoodsImage.goods"
      */
-    public static String toJson(Object object, String... ignoreFieldNameList) {
+    public static String toJson111(Object object, String... ignoreFieldNameList) {
         ExclusionStrategy exclusionStrategy = new ExclusionStrategy() {
             @Override
             public boolean shouldSkipField(FieldAttributes f) {
                 if (ignoreFieldNameList == null || ignoreFieldNameList.length == 0) {
                     return false;
                 }
-                // TODO 把循环得出结果用一个Map来缓存
+                // TODO 把循环得出的结果用一个Map来缓存
                 for (String ignoreFieldName : ignoreFieldNameList) {
                     if (ignoreFieldName.contains(".")) {
                         String[] split = ignoreFieldName.split("\\.");

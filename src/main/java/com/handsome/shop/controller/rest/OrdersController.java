@@ -38,7 +38,7 @@ public class OrdersController extends BaseController {
     private EvaluateDao evaluateDao;
 
     @GetMapping
-    @ReturnObjectToJsonIgnoreFields({"Goods.shop", "Refund.orders", "Goods.goodsAttrNames" })
+    @ReturnObjectToJsonIgnoreFields({"Goods.shop", "Refund.orders", "Goods.goodsAttrNames"})
     public Pager<Orders> listByCustomer(@RequestParam Integer customerId,
                                         @Valid PageParam pageParam, BindingResult pageParamResult) {
         if (pageParamResult.hasErrors()) {
@@ -160,8 +160,14 @@ public class OrdersController extends BaseController {
      */
     @PutMapping("/{ordersId}/action/sellerRefund")
     public RequestStatus sellerRefund(@PathVariable Integer ordersId) {
-        // TODO 卖家退款
-        return RequestStatus.success(ordersId);
+        Orders orders = ordersDao.queryById(ordersId);
+        Orders.Status newStatus = getNewStatus(orders.getStatus(), "sellerRefund");
+        orders.setStatus(newStatus);
+        ordersDao.update(orders);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("newStatus", newStatus.toString());
+        return RequestStatus.success(result);
     }
 
     /**
@@ -189,7 +195,8 @@ public class OrdersController extends BaseController {
             case "customerApplyForRefund":// 买家申请退款
                 if (currStatus == Orders.Status.Created ||
                         currStatus == Orders.Status.Pending_Receive ||
-                        currStatus == Orders.Status.Received) {
+                        currStatus == Orders.Status.Received ||
+                        currStatus == Orders.Status.Finish) {
                     nextStatus = Orders.Status.Pending_Refund;
                 }
                 break;

@@ -1,13 +1,15 @@
 package com.handsome.shop;
 
 import com.handsome.shop.dao.*;
-import com.handsome.shop.entity.*;
-import com.wangrj.java_lib.java_util.LogUtil;
+import com.handsome.shop.entity.Shop;
+import com.handsome.shop.util.GsonConverter;
+import com.wangrj.java_lib.hibernate.Where;
+import com.wangrj.java_lib.java_util.FileUtil;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * by wangrongjun on 2018/4/14.
@@ -45,10 +47,15 @@ public class DaoQueryUpdateDeleteTest extends BaseDaoTest {
     private GoodsAttrValueDao goodsAttrValueDao;
 
     @Test
-    public void testQuery() {
+    public void testQuery() throws IOException {
 
-        Goods goods = goodsDao.queryById(69);
-        System.out.println(goods);
+        Shop shop = shopDao.query(Where.eq("shopName", "东方电脑城")).get(0);
+        String json = GsonConverter.toJson(shop, "Goods.goodsAttrNames", "Goods.shop", "Seller.shopList");
+        System.out.println(json);
+        FileUtil.write(json, "E:/Test/a.txt");
+
+//        Goods goods = goodsDao.queryById(69);
+//        System.out.println(goods);
 
 //        List<Orders> ordersList = ordersDao.queryByCustomerId(customerDao.queryByPhone("15521302230").getCustomerId(), null);
 //        for (Orders orders : ordersList) {

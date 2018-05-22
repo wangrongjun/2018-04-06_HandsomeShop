@@ -5,17 +5,80 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" type="text/css" href="/css/customer_order_list.css"/>
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
     <script src="/js/jquery-1.9.0.min.js"></script>
     <script src="/js/bootstrap.min-3.2.0.js"></script>
     <script src="/js/jquery.blockUI.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/util/DateUtil.js"></script>
+    <script type="text/x-template" id="blog_template">
+        <div>
+            <h2>{{title}}</h2>
+            <button @click="$emit('small_text')">缩小</button>
+            <button @click="$emit('large_text')">放大</button>
+            <span>{{blog_font_size}}</span>
+            <p>{{content}}</p>
+            <hr/>
+        </div>
+    </script>
+    <script>
+        $(function () {
+            Vue.component("blog", {
+                props: ["blog_font_size", "title", "content"],
+                template: "#blog_template",
+                template111: `
+                    <div>
+                        <h2>{{title}}</h2>
+                        <button @click="$emit('small_text')">缩小</button>
+                        <button @click="$emit('large_text')">放大</button>
+                        <span>{{blog_font_size}}</span>
+                        <p>{{content}}</p>
+                        <hr/>
+                    </div>
+                `
+            });
+
+            new Vue({
+                el: "#root",
+                data: {
+                    blogFontSize: 1,
+                    blogList: [
+                        {
+                            title: "Blog A",
+                            content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci amet dolore ducimus, eum illo, ipsum molestiae nemo perspiciatis quod, sit temporibus tenetur unde velit veritatis? Beatae earum repellat tenetur."
+                        },
+                        {
+                            title: "Blog B",
+                            content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci amet dolore ducimus, eum illo, ipsum molestiae nemo perspiciatis quod, sit temporibus tenetur unde velit veritatis? Beatae earum repellat tenetur."
+                        },
+                        {
+                            title: "Blog C",
+                            content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci amet dolore ducimus, eum illo, ipsum molestiae nemo perspiciatis quod, sit temporibus tenetur unde velit veritatis? Beatae earum repellat tenetur."
+                        },
+                    ]
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 
-<label><input type="radio" name="refundReason" value="not_like">&nbsp;不喜欢</label>
-<br>
-<label><input type="radio" name="refundReason" value="mistake">&nbsp;拍错了</label>
+<div id="root">
+    <div :style="{fontSize: blogFontSize + 'em'}">
+        <blog
+                v-for="blog in blogList"
+                :title="blog.title"
+                :content="blog.content"
+                @large_text="blogFontSize += 0.1"
+                @small_text="blogFontSize -= 0.1"
+                :blog_font_size="blogFontSize"
+        />
+    </div>
+</div>
 
 </body>
 </html>

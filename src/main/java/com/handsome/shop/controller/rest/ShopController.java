@@ -38,6 +38,12 @@ public class ShopController extends BaseController {
         return shopDao.queryBySellerId(sellerId);
     }
 
+    @GetMapping("/{shopId}")
+    @ReturnObjectToJsonIgnoreFields("")
+    public Shop getShopDetail(@PathVariable int shopId) {
+        return shopDao.queryById(shopId);
+    }
+
     @PostMapping
     public Shop add(HttpServletRequest request,
                     @RequestParam Integer sellerId,

@@ -34,7 +34,7 @@ $(function () {
             showLogisticsBtn: function (ordersStatus) {
                 return ordersStatus === "Pending_Receive";
             },
-            showSendGoodsBtn: function (ordersStatus) {
+            showConfirmDeliverGoodsBtn: function (ordersStatus) {
                 return ordersStatus === "Created";
             },
             showConfirmRefundBtn: function (ordersStatus) {
@@ -42,6 +42,7 @@ $(function () {
             },
             queryLogistics: queryLogistics,
             deliverGoods: deliverGoods,
+            confirmRefund: confirmRefund,
         },
     });
 });
@@ -54,11 +55,29 @@ function deliverGoods(ordersId) {
     $.ajax({
         url: "/rest/orders/" + ordersId + "/action/sellerDeliverGoods",
         type: "PUT",
-        success: function (data) {
+        success: function (response) {
             for (let i = 0; i < contentVm.ordersList.length; i++) {
                 let orders = contentVm.ordersList[i];
                 if (orders.ordersId === ordersId) {
-                    orders.status = data.data.newStatus;
+                    orders.status = response.data.newStatus;
+                }
+            }
+        },
+        error: function (xhr, errorMsg, exception) {
+            alert("fail: " + exception);
+        }
+    });
+}
+
+function confirmRefund(ordersId) {
+    $.ajax({
+        url: "/rest/orders/" + ordersId + "/action/sellerRefund",
+        type: "PUT",
+        success: function (response) {
+            for (let i = 0; i < contentVm.ordersList.length; i++) {
+                let orders = contentVm.ordersList[i];
+                if (orders.ordersId === ordersId) {
+                    orders.status = response.data.newStatus;
                 }
             }
         },

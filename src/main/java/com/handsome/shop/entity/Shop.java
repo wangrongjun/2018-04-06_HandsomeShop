@@ -4,6 +4,7 @@ import com.handsome.shop.framework.BaseEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * by wangrongjun on 2017/6/16.
@@ -23,6 +24,9 @@ public class Shop extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "headId")
     private Picture head;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "shopId")
+    private Set<Goods> goodsSet;
 
     @Override
     public String toString() {
@@ -87,5 +91,13 @@ public class Shop extends BaseEntity {
 
     public void setHead(Picture head) {
         this.head = head;
+    }
+
+    public Set<Goods> getGoodsSet() {
+        return goodsSet;
+    }
+
+    public void setGoodsSet(Set<Goods> goodsSet) {
+        this.goodsSet = goodsSet;
     }
 }

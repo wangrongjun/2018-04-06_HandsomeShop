@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>GoodsBox</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min-3.2.0.css">
+    <link rel="stylesheet" href="/css/goods_box.css">
+    <script src="/js/jquery-1.9.0.min.js"></script>
+    <script src="/js/bootstrap.min-3.2.0.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/util/TextUtil.js"></script>
+    <script src="/js/goods_box.js"></script>
+</head>
+<body id="goods_box">
+
+<div class="text-center" v-if="showSortBtns">
+    <div class="sort_box btn-group">
+        <button class="btn btn-default" :class="active: sortType===0" onclick="reload(0,0)">综合排序</button>
+        <button class="btn btn-default" :class="active: sortType===1" onclick="reload(0,0)">销量由高到低</button>
+        <button class="btn btn-default" :class="active: sortType===2" onclick="reload(0,2)">价格由低到高</button>
+        <button class="btn btn-default" :class="active: sortType===3" onclick="reload(0,3)">价格由高到低</button>
+    </div>
+</div>
+
+<div class="goods_box container">
+    <div class="row">
+        <div class="col-sm-3" v-for="(goods,index) in goodsList">
+            <div class="goods">
+                <div class="goods_image">
+                    <a :href="'/goods/' + goods.goodsId">
+                        <template v-if="getPictureUrl(index) != null">
+                            <img :src="getPictureUrl(index)"/>
+                        </template>
+                    </a>
+                </div>
+                <a :href="'/goods/' + goods.goodsId" class="goods_name">{{goods.goodsName}}</a>
+                <div class="price">￥ {{goods.price}}</div>
+                <div class="remain_and_sell">
+                    <span class="remain">库存：<span id="remainCount">0</span>&nbsp;件</span>
+                    <span class="sell">销量：<span id="sellCount">0</span>&nbsp;笔</span>
+                </div>
+                <div class="description">{{goods.description}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--换页--%>
+<div class="change_page_box">
+    <ul class="pagination" v-if="totalCount > 0">
+        <!--<li><a href="#">&laquo;&nbsp;首页</a></li>-->
+        <template v-for="index in pageCount">
+            <li :class="active : index===pageIndex">
+                <a href="javascript:void(0);" @click="reload(index, sortType)">
+                    {{index + 1}}
+                </a>
+            </li>
+        </template>
+        <!--<li><a href="javascript:void(0);">尾页&nbsp;&raquo;</a></li>-->
+    </ul>
+    <div class="text-center" v-else>
+        <h2>抱歉，没有商品！</h2>
+    </div>
+</div>
+
+</body>
+</html>

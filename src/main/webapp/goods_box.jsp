@@ -16,7 +16,6 @@
             charset="utf-8"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript"
             charset="utf-8"></script>
-    <script src="${pageContext.request.contextPath}/js/wang.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 

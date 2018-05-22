@@ -32,8 +32,8 @@ function createShop(shopName, shopDescription) {
             shopDescription: shopDescription,
         },
         cache: false,
-        success: function (data) {
-            contentVue.shopList.push(data);
+        success: function (response) {
+            contentVue.shopList.push(response);
         },
         error: function (xhr, errorMsg, exception) {
             alert("" + exception);

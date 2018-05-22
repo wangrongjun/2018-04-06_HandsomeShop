@@ -28,7 +28,7 @@
 
 <content id="content">
 
-    <div class="text-center"><h1>我的订单({{ordersCount}})</h1></div>
+    <div class="text-center"><h1>待处理订单({{ordersCount}})</h1></div>
 
     <div v-for="orders in ordersList" class="order_item">
         <div class="goods_image">
@@ -52,10 +52,10 @@
                     <button v-if="showLogisticsBtn(orders.status)" @click="queryLogistics(orders.ordersId)"
                             class="btn btn-default">查看物流
                     </button>
-                    <button v-if="showSendGoodsBtn(orders.status)" @click="deliverGoods(orders.ordersId)"
+                    <button v-if="showConfirmDeliverGoodsBtn(orders.status)" @click="deliverGoods(orders.ordersId)"
                             class="btn btn-success">确认发货
                     </button>
-                    <button v-if="showConfirmRefundBtn(orders.status)"
+                    <button v-if="showConfirmRefundBtn(orders.status)" @click="confirmRefund(orders.ordersId)"
                             class="btn btn-warning">确认退款
                     </button>
                 </div>

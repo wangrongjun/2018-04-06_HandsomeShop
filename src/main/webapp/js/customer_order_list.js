@@ -72,11 +72,11 @@ function receiveGoods(ordersId) {
     $.ajax({
         url: "/rest/orders/" + ordersId + "/action/customerReceiveGoods",
         type: "PUT",
-        success: function (data) {
+        success: function (response) {
             for (let i = 0; i < contentVm.ordersList.length; i++) {
                 let orders = contentVm.ordersList[i];
                 if (orders.ordersId === ordersId) {
-                    orders.status = data.data.newStatus;
+                    orders.status = response.data.newStatus;
                 }
             }
         },
@@ -95,12 +95,12 @@ function evaluateOrders(ordersId, evaluateContent, evaluateLevel) {
             evaluateContent: evaluateContent,
             evaluateLevel: evaluateLevel
         },
-        success: function (data) {
+        success: function (response) {
             for (let i = 0; i < contentVm.ordersList.length; i++) {
                 let orders = contentVm.ordersList[i];
                 if (orders.ordersId === ordersId) {
-                    orders.status = data.data.newStatus;
-                    orders.refund = data.data.refund;
+                    orders.status = response.data.newStatus;
+                    orders.refund = response.data.refund;
                 }
             }
         },
@@ -118,12 +118,12 @@ function applyForRefund(ordersId, refundReason) {
             _method: "PUT",
             refundReason: refundReason
         },
-        success: function (data) {
+        success: function (response) {
             for (let i = 0; i < contentVm.ordersList.length; i++) {
                 let orders = contentVm.ordersList[i];
                 if (orders.ordersId === ordersId) {
-                    orders.status = data.data.newStatus;
-                    orders.refund = data.data.refund;
+                    orders.status = response.data.newStatus;
+                    orders.refund = response.data.refund;
                 }
             }
         },
@@ -140,7 +140,7 @@ function deleteOrders(ordersId) {
     $.ajax({
         url: "/rest/orders/" + ordersId,
         type: "DELETE",
-        success: function (data) {
+        success: function (response) {
             contentVm.ordersCount--;
             for (let i = 0; i < contentVm.ordersList.length; i++) {
                 const orders = contentVm.ordersList[i];

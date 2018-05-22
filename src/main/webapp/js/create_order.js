@@ -44,8 +44,8 @@ function addContact() {
         url: "/rest/customer/" + customer.customerId + "/contact",
         type: "POST",
         data: newContact,
-        success: function (data) {
-            newContact.contactId = data.data;
+        success: function (response) {
+            newContact.contactId = response.data;
             Vue.set(selectContactModelVm.contactList, selectContactModelVm.contactList.length, newContact);
             contentVm.selectedContact = newContact;
         },
@@ -66,7 +66,7 @@ function createOrder() {
             remark: contentVm.remark,
             contactId: contentVm.selectedContact.contactId
         },
-        success: function (data) {
+        success: function (response) {
             // 不是跳转到新地址，而是直接把新地址覆盖了当前地址，防止用户点击后退
             window.location.replace("/create_orders_succeed.jsp");
         },
