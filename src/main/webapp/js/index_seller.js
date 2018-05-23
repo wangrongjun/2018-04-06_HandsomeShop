@@ -1,19 +1,18 @@
 let contentVue;
 
 $(function () {
-    $(document).ajaxStart($.blockUI).ajaxStop($.unblockIU);
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
     contentVue = new Vue({
         el: "#content",
         data: {
             sellerId: sellerId,
             shopList: shopList,
-            shopName: null,// 创建商店时用到
-            shopDescription: null,// 创建商店时用到
+            // shopName: null,// 创建商店时用到
+            // shopDescription: null,// 创建商店时用到
         },
         methods: {
             showShopInfo: showShopInfo,
-            createShop: createShop,
         }
     });
 });
@@ -22,21 +21,20 @@ function showShopInfo(shopId) {
     window.location.href = "/seller/shop/" + shopId;
 }
 
-function createShop(shopName, shopDescription) {
+function createShop() {
+    let formData = new FormData(document.querySelector("#create_shop_form"));
     $.ajax({
         url: "/rest/shop",
         type: "POST",
-        data: {
-            sellerId: sellerId,
-            shopName: shopName,
-            shopDescription: shopDescription,
-        },
+        data: formData,
+        processData: false,
+        contentType: false,
         cache: false,
-        success: function (response) {
-            contentVue.shopList.push(response);
+        success: function (result) {
+            contentVue.shopList.push(result);
         },
-        error: function (xhr, errorMsg, exception) {
-            alert("" + exception);
+        error: function (xhr, status, error) {
+            alert(error);
         }
     });
 }

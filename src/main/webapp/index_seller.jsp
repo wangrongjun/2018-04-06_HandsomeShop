@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index_seller.css">
     <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/js/util/PicturePreviewUtil.js"></script>
     <script>
         var sellerId = ${requestScope.sellerId};
         var shopList = ${requestScope.shopListJson};
@@ -60,32 +62,33 @@
                     <h4 class="modal-title">创建商店</h4>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        <div>
-                            商店名称：<input class="form-control" type="text" v-model="shopName"/>
-                        </div>
+                    <form id="create_shop_form" enctype="multipart/form-data">
+                        <input type="hidden" name="sellerId" :value="sellerId">
+                        <label>
+                            商店名称：<input class="form-control" type="text" name="shopName"/>
+                        </label>
                         <br>
-                        <div>
-                            商店描述：<input class="form-control" type="text" v-model="shopDescription"/>
-                        </div>
+                        <label>
+                            商店描述：<input class="form-control" type="text" name="shopDescription"/>
+                        </label>
                         <br>
-                        <div>
-                            <%--商店头像：<input class="form-control" type="file" name="shopHead"--%>
-                            <%--accept="image/gif,image/jpeg,image/jpg,image/png">--%>
-                        </div>
-                    </div>
+                        <label>
+                            商店头像：
+                            <input class="form-control" type="file" name="shopHead"
+                                   onchange="previewNewShopHead('#shop_head_preview', 'input[name=shopHead]')">
+                        </label>
+                        <img style="max-width: 300px;max-height: 300px" src="" id="shop_head_preview">
+                    </form>
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">取消</button>
                     <button class="btn btn-primary"
-                            @click="createShop(shopName, shopDescription)"
+                            onclick="createShop()"
                             data-dismiss="modal">创建商店
                     </button>
                 </div>
-                <%--</form>--%>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
     <!-- 创建商店的模态弹出窗 -->
 

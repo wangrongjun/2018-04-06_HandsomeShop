@@ -7,17 +7,13 @@ import com.handsome.shop.entity.Seller;
 import com.handsome.shop.entity.Shop;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.framework.ReturnObjectToJsonIgnoreFields;
-import org.hibernate.Hibernate;
+import com.handsome.shop.util.PictureTypeUtil;
 import org.hibernate.SessionFactory;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.util.List;
@@ -48,15 +44,18 @@ public class ShopController extends BaseController {
     }
 
     @PostMapping
-    public Shop add(HttpServletRequest request,
-                    @RequestParam Integer sellerId,
+    public Shop add(@RequestParam Integer sellerId,
                     @RequestParam String shopName,
-                    @RequestParam String shopDescription) throws IOException {
-        String picturePath = request.getServletContext().getRealPath("/admin/img/shop_default_head.jpg");
-        FileInputStream fis = new FileInputStream(picturePath);
-        Blob pictureData = Hibernate.getLobCreator(sessionFactory.getCurrentSession()).createBlob(fis, fis.available());
-        Picture picture = new Picture(Picture.PictureType.jpg, pictureData);
+                    @RequestParam String shopDescription,
+                    @RequestParam MultipartFile shopHead) throws IOException {
+        if (shopHead.isEmpty()) {
+            throw new IllegalArgumentException("shopHead is empty");
+        }
+        Picture.PictureType pictureType = PictureTypeUtil.toPictureType(shopHead.getContentType());
+        Blob pictureData = toBlob(shopHead.getInputStream());
+        Picture picture = new Picture(pictureType, pictureData);
         pictureDao.insert(picture);
+
         Shop shop = new Shop(new Seller(sellerId), shopName, shopDescription, picture);
         shopDao.insert(shop);
         return shop;

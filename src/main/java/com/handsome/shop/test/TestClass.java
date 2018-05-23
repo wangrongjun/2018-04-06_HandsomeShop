@@ -1,7 +1,10 @@
 package com.handsome.shop.test;
 
 import com.wangrj.java_lib.math.encrypt.rsa.RSA;
+import org.springframework.http.HttpStatus;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -16,13 +19,15 @@ import java.util.stream.Collectors;
 public class TestClass {
 
     public static void main(String[] args) {
-        List<String> list = Arrays.asList("a", "c", "b", "d");
-        String s = list.stream().sorted().map(String::toUpperCase).collect(Collectors.joining(","));
-        System.out.println(s);
-
-//        LocalDateTime dateTime = LocalDateTime.now();
-//        String s = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-//        System.out.println(s);
+        try {
+            Constructor[] constructors = HttpStatus.class.getDeclaredConstructors();
+            Constructor constructor = constructors[0];
+            constructor.setAccessible(true);
+            HttpStatus httpStatus = (HttpStatus) constructor.newInstance("One", 2, 400, "errorMsg");
+            System.out.println(httpStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

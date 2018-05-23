@@ -7,6 +7,5 @@ public class C {
 
     public static final String SESSION_CUSTOMER = "customer";
     public static final String SESSION_SELLER = "seller";
-    public static final String SESSION_ADDRESS_LIST = "addressList";
 
 }

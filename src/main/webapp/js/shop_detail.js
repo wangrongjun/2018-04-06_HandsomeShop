@@ -8,9 +8,6 @@ $(function () {
         data: {
             editable: editable,
             shop: shop,
-            // newShopName: shop.shopName,// 保存更新商品信息的模态弹出窗的输入框内容
-            // newDescription: shop.description,// 保存更新商品信息的模态弹出窗的输入框内容
-            // newShopHead: newShopHead,
         },
         methods: {},
     });
@@ -23,13 +20,13 @@ function updateShopInfo() {
         alert("不能为空");
         return;
     }
-    let formData = new FormData($("#update_shop_info_form")[0]);
+    let formData = new FormData(document.querySelector("#update_shop_info_form"));
     $.ajax({
         url: "/seller/shop/" + contentVm.shop.shopId + "/updateShopInfo",
-        type: "POST",// 只要上传文件，就必须是POST。否则会报400 - Bad Request。可以借助SpringMVC的HiddenHttpMethodFilter实现PUT请求。
+        type: "POST",// 只要上传文件，就必须是POST。否则会报400 - Bad Request。说明：即使使用SpringMVC的HiddenHttpMethodFilter也无法实现PUT请求，因为在multipart/form-data下，request.getParameter("_method")返回null。
         data: formData,
-        processData: false,// 不处理发送的数据
-        contentType: false,// 不能设置Content-Type请求头。注意！是false！不是null！
+        processData: false,// 不处理发送的数据。没有的话报400 - Bad Request。
+        contentType: false,// 不能设置Content-Type请求头。注意！是false！不是null！否则报400 - Bad Request。
         cache: false,// 上传的文件不需要缓存
         success: function (result) {
             contentVm.shop.shopName = shopName;

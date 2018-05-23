@@ -83,14 +83,16 @@
                     <form id="update_shop_info_form" enctype="multipart/form-data">
                         <label>商店名称：<input type="text" class="form-control" name="shopName"
                                            :value="shop.shopName"></label>
+                        <br>
                         <label>商店描述：<input type="text" class="form-control" name="description"
                                            :value="shop.description"></label>
+                        <br>
                         <label>
-                            商店头像：
+                            商店头像（如果没有选择，则维持不变）：
                             <input type="file" class="form-control" name="shopHead"
                                    onchange="previewNewShopHead('#shop_head_preview', 'input[name=shopHead]')">
-                            <img style="max-height: 300px;max-width: 300px" src="" id="shop_head_preview">
                         </label>
+                        <img style="max-height: 300px;max-width: 300px" src="" id="shop_head_preview">
                     </form>
                 </div>
                 <div class="modal-footer">
