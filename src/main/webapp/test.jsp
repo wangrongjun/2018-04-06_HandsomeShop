@@ -14,57 +14,47 @@
     <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue-router.js"></script>
+    <script>
+        function upload() {
+            let formData = new FormData($("#form")[0]);
+            $.ajax({
+                url: "/test1",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (result) {
+                    alert(result);
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 
-<div id="app">
-    <button @click="font++">放大字体</button>
-    <button @click="font--">缩小字体</button>
-    {{font}}
-    <div v-bind:style="{fontSize: font + 'em'}">{{hello}}</div>
-    <button-counter></button-counter>
-    <button-counter></button-counter>
-    <button-counter></button-counter>
-</div>
+<form action="${pageContext.request.contextPath}/test1" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="number" name="testId" value="1">
+    <input type="text" name="testName" value="a">
+    <input type="file" name="testFile">
+    <input type="submit" value="上传">
+</form>
 
-<script>
-    const router = new VueRouter({
-        routes: [
-            {
-                path: "/wang",
-                component: {
-                    template: `
-                        <transition name="slide-left">
-                            <div>Wang id: {{$route.query}} hash:{{$route.hash}}</div>
-                        </transition>
-                    `
-                }
-            },
-            {
-                path: "/footer",
-                component: {
-                    template: "<div>#footer</div>"
-                }
-            },
-        ]
-    });
+<br>
+<hr>
+<br>
 
-    // 定义一个名为 button-counter 的新组件
-    Vue.component('button-counter', {
-        data: function () {
-            return {count: 1};
-        },
-        template: '<button @click="count++">You clicked me {{ count }} times.</button>'
-    });
-    new Vue({
-        el: "#app",
-        // router: router,
-        data: {
-            font: 2,
-            hello: "Hello World!!!"
-        },
-    });
-</script>
+<form id="form" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="number" name="testId" value="1">
+    <input type="text" name="testName" value="a">
+    <input type="file" name="testFile">
+</form>
+<button onclick="upload()">上传</button>
 
 </body>
 </html>

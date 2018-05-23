@@ -14,6 +14,7 @@ import com.wangrj.java_lib.java_util.TextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -102,9 +103,23 @@ public class IndexController extends BaseController {
         return "index";
     }
 
-    @RequestMapping("/test")
-    public String test(@RequestParam Integer testId) {
-        System.out.println(testId);
+    @RequestMapping("/test1")
+    public String test1(HttpServletRequest request,
+                        @RequestParam Integer testId,
+                        @RequestParam String testName,
+                        @RequestParam MultipartFile testFile) {
+        String name = testFile.getName();
+        return "test";
+    }
+
+    @RequestMapping("/test2")
+    public void test2(HttpServletRequest request, String testName) {
+        System.out.println(testName);
+    }
+
+    @RequestMapping("/test3")
+    public String test3(@RequestParam MultipartFile testFile) {
+        String name = testFile.getName();
         return "test";
     }
 

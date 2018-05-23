@@ -40,7 +40,6 @@
         <button class="btn btn-info" v-if="editable === true" onclick="$('#modal_update_shop_info').modal('toggle')">
             修改商店信息
         </button>
-        <button class="btn btn-warning" v-if="editable === true" @click="updateShopHead()">修改商店头像</button>
     </div>
 
     <hr>
@@ -77,15 +76,20 @@
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">添加收货地址</h4>
+                    <h4 class="modal-title">修改商店信息</h4>
                 </div>
                 <div class="modal-body">
-                    <label>商店名称：<input type="text" class="form-control" v-model="newShopName"></label>
-                    <label>商店描述：<input type="text" class="form-control" v-model="newDescription"></label>
+                    <form id="update_shop_info_form" enctype="multipart/form-data">
+                        <label>商店名称：<input type="text" class="form-control" name="shopName"
+                                           :value="shop.shopName"></label>
+                        <label>商店描述：<input type="text" class="form-control" name="description"
+                                           :value="shop.description"></label>
+                        <label>商店头像：<input type="file" class="form-control" name="shopHead"></label>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button class="btn btn-primary" @click="updateShopInfo()" data-dismiss="modal">修改
+                    <button class="btn btn-primary" onclick="updateShopInfo()" data-dismiss="modal">修改
                     </button>
                 </div>
             </div>

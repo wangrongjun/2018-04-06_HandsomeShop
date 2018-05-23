@@ -8,57 +8,38 @@ $(function () {
         data: {
             editable: editable,
             shop: shop,
-            newShopName: shop.shopName,// 保存更新商品信息的模态弹出窗的输入框内容
-            newDescription: shop.description,// 保存更新商品信息的模态弹出窗的输入框内容
+            // newShopName: shop.shopName,// 保存更新商品信息的模态弹出窗的输入框内容
+            // newDescription: shop.description,// 保存更新商品信息的模态弹出窗的输入框内容
+            // newShopHead: newShopHead,
         },
-        methods: {
-            updateShopInfo: updateShopInfo,
-            updateShopHead: updateShopHead,
-        },
+        methods: {},
     });
 });
 
 function updateShopInfo() {
-    if (contentVm.newShopName === "" || contentVm.newDescription === "") {
+    let shopName = $("input[name=shopName]").val();
+    let description = $("input[name=description]").val();
+    if (shopName == null || description == null) {
         alert("不能为空");
         return;
     }
+    let formData = new FormData($("#update_shop_info_form")[0]);
     $.ajax({
-        url: "/seller/shop/" + contentVm.shop.shopId + "/updateInfo",
-        type: "POST",
-        data: {
-            _method: "PUT",
-            shopName: contentVm.newShopName,
-            description: contentVm.newDescription,
+        url: "/seller/shop/" + contentVm.shop.shopId + "/updateShopInfo",
+        type: "POST",// 只要上传文件，就必须是POST。否则会报400 - Bad Request。可以借助SpringMVC的HiddenHttpMethodFilter实现PUT请求。
+        data: formData,
+        processData: false,// 不处理发送的数据
+        contentType: false,// 不能设置Content-Type请求头。注意！是false！不是null！
+        cache: false,// 上传的文件不需要缓存
+        success: function (result) {
+            contentVm.shop.shopName = shopName;
+            contentVm.shop.description = description;
+            if (result) {
+                contentVm.shop.head.pictureId = result;
+            }
         },
-        success: function (response) {
-            contentVm.shop.shopName = contentVm.newShopName;
-            contentVm.shop.description = contentVm.newDescription;
-        },
-        error: function (xhr, errorMsg, exception) {
-            alert("操作失败！错误信息：" + exception);
+        error: function (xhr, status, error) {
+            alert("操作失败！错误信息：" + error);
         }
     });
-}
-
-let $shop_head_field = null;
-
-function updateShopHead() {
-    if ($shop_head_field == null) {
-        $("body").append(`
-            <form style='visibility: hidden' id='shop_head_form' enctype="multipart/form-data">
-                <input type='hidden' name='_method' value="PUT">
-                <input id='shop_head_field' type='file' name='shopHead'>
-            </form>
-        `);
-        $shop_head_field = $("#shop_head_field");
-    }
-    $shop_head_field.on("change", function () {
-        console.log("selected file: " + $shop_head_field.val());
-        let $shop_head_form = $("#shop_head_form");
-        $shop_head_form.attr("action", "/seller/shop/" + contentVm.shop.shopId + "/updateHead");
-        $shop_head_form.attr("method", "POST");
-        $shop_head_form.submit();
-    });
-    $shop_head_field.click();
 }
