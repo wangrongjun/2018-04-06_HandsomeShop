@@ -75,16 +75,19 @@ public class SellerController extends BaseController {
     public Integer updateShopInfo(@PathVariable int shopId,
                                   @RequestParam String shopName,
                                   @RequestParam String description,
-                                  MultipartFile shopHead) {
-        boolean empty = shopHead.isEmpty();
-        String name = shopHead.getName();
-        String originalFilename = shopHead.getOriginalFilename();
-        String contentType = shopHead.getContentType();
-
+                                  MultipartFile shopHead) throws IOException {
         Shop shop = shopDao.queryById(shopId);
         shop.setShopName(shopName);
         shop.setDescription(description);
+        if (!shopHead.isEmpty()) {
+            Picture.PictureType pictureType = PictureTypeUtil.toPictureType(shopHead.getContentType());
+            Blob pictureData = toBlob(shopHead.getInputStream());
+            Picture picture = new Picture(pictureType, pictureData);
+            pictureDao.insert(picture);
+            shop.setHead(picture);
+        }
         shopDao.update(shop);
+
         return shop.getHead().getPictureId();
     }
 

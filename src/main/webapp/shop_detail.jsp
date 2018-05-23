@@ -16,6 +16,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/js/util/PicturePreviewUtil.js"></script>
     <script>
         let editable = ${requestScope.editable != null ? requestScope.editable : "false"};
         let shop = ${requestScope.shopJson};
@@ -84,7 +85,12 @@
                                            :value="shop.shopName"></label>
                         <label>商店描述：<input type="text" class="form-control" name="description"
                                            :value="shop.description"></label>
-                        <label>商店头像：<input type="file" class="form-control" name="shopHead"></label>
+                        <label>
+                            商店头像：
+                            <input type="file" class="form-control" name="shopHead"
+                                   onchange="previewNewShopHead('#shop_head_preview', 'input[name=shopHead]')">
+                            <img style="max-height: 300px;max-width: 300px" src="" id="shop_head_preview">
+                        </label>
                     </form>
                 </div>
                 <div class="modal-footer">
