@@ -19,6 +19,7 @@ li {
     background-color: #ffe;
     width: 80%;
     padding: 10px;
+    min-height: 400px;
 }
 
 /*----------左边的商品图片轮播---------*/

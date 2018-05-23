@@ -6,6 +6,7 @@ $(function () {
     contentVm = new Vue({
         el: "#content",
         data: {
+            editable: editable,
             goods: goods,
             evaluateList: evaluateList,
             buyCount: 1,
@@ -17,6 +18,9 @@ $(function () {
                 } else {
                     return "/img/ic_gender_woman.png";
                 }
+            },
+            toEditGoodsPage: function () {
+                window.location.href = "/seller/goods/" + contentVm.goods.goodsId + "/edit";
             }
         },
     });

@@ -15,6 +15,7 @@ import java.util.Set;
 public class Goods extends BaseEntity {
 
     // TODO 加一个字段：firstImage，那么在查询商品列表时，就不用为每个商品查询图片列表。适当的冗余可以极大地提高效率。
+    // 或者加一个字段：head 作为缩略图。这个缩略图是添加商品时上传的第一张图片
     // TODO 加一个字段：sellCount，那么在查询商品列表时，就不用为每个商品查询总销量。适当的冗余可以极大地提高效率。
 
     @Id

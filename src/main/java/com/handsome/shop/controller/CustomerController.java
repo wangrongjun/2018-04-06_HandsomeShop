@@ -50,14 +50,10 @@ public class CustomerController extends BaseController {
     public String showShopDetail(HttpServletRequest request,
                                  @PathVariable int shopId,
                                  @RequestParam(defaultValue = "0") int pageIndex) {
-        int totalCount = goodsDao.queryCountByShopId(shopId);
-        List<Goods> goodsList = goodsDao.queryByShopId(shopId, pageIndex * 12, 12);
         Shop shop = shopDao.queryById(shopId);
+        String shopJson = GsonConverter.toJson(shop, "Shop.seller", "Goods.shop", "Goods.goodsAttrNames");
 
-        request.setAttribute("pageIndex", pageIndex);
-        request.setAttribute("totalCount", totalCount);
-        request.setAttribute("goodsList", goodsList);
-        request.setAttribute("shop", shop);
+        request.setAttribute("shopJson", shopJson);
         return "shop_detail";
     }
 

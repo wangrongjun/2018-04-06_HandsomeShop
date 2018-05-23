@@ -20,6 +20,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <script>
+        let editable = ${requestScope.editable != null ? requestScope.editable : "false"};
         let goods = ${requestScope.goodsJson};
         let evaluateList = ${requestScope.evaluateListJson};
     </script>
@@ -48,10 +49,10 @@
         <div class="right_box">
             <div class="goods_info_box">
                 <div class="goods_name">
-                    商品名称
+                    商品名称：
                     <span id="goods_name">{{goods.goodsName}}</span>
+                    <button class="btn btn-default" v-if="editable" @click="toEditGoodsPage()">编辑商品信息</button>
                 </div>
-
                 <div class="goods_price">
                     商品价格：￥
                     <span id="goods_price">{{goods.price}}</span>
@@ -68,7 +69,7 @@
 
             <hr>
 
-            选择商品属性：
+            商品属性：
             <div id="goods_attribute">
                 <template v-for="attrName in goods.goodsAttrNames">
                     <div class="attr_name text-info" @click="">{{attrName.name}}</div>
@@ -77,7 +78,7 @@
                 </template>
             </div>
 
-            <form action="${pageContext.request.contextPath}/confirmOrders" method="post">
+            <form v-if="!editable" action="${pageContext.request.contextPath}/confirmOrders" method="post">
                 <input type="hidden" name="goodsId" v-model="goods.goodsId"/>
                 <div class="buy_box">
                     <label for="count">购买数量：</label>

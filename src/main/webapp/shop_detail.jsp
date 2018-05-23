@@ -16,6 +16,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
     <script src="${pageContext.request.contextPath}/js/util/PicturePreviewUtil.js"></script>
     <script>
         let editable = ${requestScope.editable != null ? requestScope.editable : "false"};
@@ -41,6 +42,9 @@
         <button class="btn btn-info" v-if="editable === true" onclick="$('#modal_update_shop_info').modal('toggle')">
             修改商店信息
         </button>
+        <button class="btn btn-warning" v-if="editable === true" @click="toAddGoodsPage(shop.shopId)">
+            添加商品
+        </button>
     </div>
 
     <hr>
@@ -53,7 +57,7 @@
             <div class="col-sm-3" v-for="goods in shop.goodsSet">
                 <div class="goods">
                     <div class="goods_image">
-                        <a :href="'/seller/goods/' + goods.goodsId">
+                        <a :href="'/goods/' + goods.goodsId">
                             <img :src="'/rest/picture/' + goods.pictureSet[0].pictureId"/>
                         </a>
                     </div>

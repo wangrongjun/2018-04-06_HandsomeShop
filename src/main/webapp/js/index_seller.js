@@ -1,9 +1,9 @@
-let contentVue;
+let contentVm;
 
 $(function () {
     $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
-    contentVue = new Vue({
+    contentVm = new Vue({
         el: "#content",
         data: {
             sellerId: sellerId,
@@ -31,7 +31,7 @@ function createShop() {
         contentType: false,
         cache: false,
         success: function (result) {
-            contentVue.shopList.push(result);
+            contentVm.shopList.push(result);
         },
         error: function (xhr) {
             alert(xhr.responseText);

@@ -4,6 +4,7 @@ import com.handsome.shop.entity.Evaluate;
 import com.handsome.shop.entity.Goods;
 import com.handsome.shop.dao.EvaluateDao;
 import com.handsome.shop.dao.GoodsDao;
+import com.handsome.shop.entity.Seller;
 import com.handsome.shop.framework.BaseController;
 import com.handsome.shop.util.GsonConverter;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * by wangrongjun on 2017/11/2.
@@ -54,6 +56,13 @@ public class GoodsController extends BaseController {
     public String showGoodsInfo(HttpServletRequest request, HttpServletResponse response, @PathVariable Integer goodsId) {
         Goods goods = goodsDao.queryById(goodsId);
         List<Evaluate> evaluateList = evaluateDao.queryByGoodsId(goodsId);
+
+        Seller seller = getLoginSellerFromSession(request);
+        if (seller != null) {
+            if (Objects.equals(goods.getShop().getSeller().getSellerId(), seller.getSellerId())) {
+                request.setAttribute("editable", true);
+            }
+        }
 
         request.setAttribute("goodsJson", GsonConverter.toJson(goods,
                 "GoodsAttrName.goods", "GoodsAttrValue.goodsAttrName", "Shop.goodsSet", "Seller.shopList"));

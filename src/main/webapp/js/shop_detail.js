@@ -9,7 +9,11 @@ $(function () {
             editable: editable,
             shop: shop,
         },
-        methods: {},
+        methods: {
+            toAddGoodsPage: function (shopId) {
+                window.location.href = "/seller/shop/" + shopId + "/addGoods";
+            }
+        },
     });
 });
 
