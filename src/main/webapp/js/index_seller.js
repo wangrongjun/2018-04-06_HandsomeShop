@@ -33,8 +33,8 @@ function createShop() {
         success: function (result) {
             contentVue.shopList.push(result);
         },
-        error: function (xhr, status, error) {
-            alert(error);
+        error: function (xhr) {
+            alert(xhr.responseText);
         }
     });
 }
