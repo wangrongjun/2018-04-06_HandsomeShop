@@ -62,7 +62,7 @@ public class SellerController extends BaseController {
         Pager<Orders> pager = ordersController.listBySeller(sellerId, new PageParam("-createdOn"), createBR());
         request.setAttribute("ordersCount", pager.getTotalCount());
         request.setAttribute("ordersListJson", GsonConverter.toJson(pager.getDataList(),
-                "Shop.seller", "Refund.orders", "Goods.goodsAttrNames"));
+                "Shop.seller", "Shop.goodsSet", "Refund.orders", "Goods.goodsAttrNames"));
         return "seller_orders_list";
     }
 

@@ -48,6 +48,7 @@
                 <div>总价：￥ <span>{{orders.price}}</span></div>
                 <div>备注：{{orders.remark}}</div>
                 <div>订单状态：<span>{{ordersStatusMsg(orders.status)}}</span></div>
+                <div v-if="orders.refund">退款理由：{{orders.refund.reason}}</div>
                 <div class="btn_box">
                     <button v-if="showLogisticsBtn(orders.status)" @click="queryLogistics(orders.ordersId)"
                             class="btn btn-default">查看物流

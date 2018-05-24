@@ -78,10 +78,9 @@
             <br>
             <label>
                 商品分类：
-                <input type="text" name="goodsTypeId" :value="goodsTypeList[0].goodsTypeId">
-                <%--<select class="form-control" name="goodsTypeId">--%>
-                    <%--<option v-for="goodsType in goodsTypeList" value="goodsType.goodsTypeId">{{goodsType.name}}</option>--%>
-                <%--</select>--%>
+                <select class="form-control" name="goodsTypeId" form="add_goods_form">
+                    <option v-for="goodsType in goodsTypeList" :value="goodsType.goodsTypeId">{{goodsType.name}}</option>
+                </select>
             </label>
 
             <br>
