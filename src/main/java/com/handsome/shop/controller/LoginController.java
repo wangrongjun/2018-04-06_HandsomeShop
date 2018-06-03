@@ -7,7 +7,7 @@ import com.handsome.shop.entity.Customer;
 import com.handsome.shop.entity.Seller;
 import com.handsome.shop.framework.BaseController;
 import com.wangrj.java_lib.java_util.DataUtil;
-import com.wangrj.web_lib.util.ImageCode;
+import com.wangrj.java_lib.web.ImageCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

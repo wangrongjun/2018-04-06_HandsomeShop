@@ -1,2 +1,2 @@
-drop database handsome_shop_new;
-create database handsome_shop_new charset=utf8;
+drop database handsome_shop;
+create database handsome_shop charset=utf8;

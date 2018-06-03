@@ -69,5 +69,8 @@
     <beans profile="test">
         <context:property-placeholder location="classpath:application.test.properties"/>
     </beans>
+    <beans profile="production">
+        <context:property-placeholder location="classpath:application.production.properties"/>
+    </beans>
 
 </beans>

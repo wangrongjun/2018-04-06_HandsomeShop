@@ -41,5 +41,11 @@
             <property name="location" value="classpath:application.test.properties"/>
         </bean>
     </beans>
+    <beans profile="production">
+        <context:property-placeholder location="classpath:application.production.properties"/>
+        <bean class="com.handsome.shop.framework.SpringProperty">
+            <property name="location" value="classpath:application.production.properties"/>
+        </bean>
+    </beans>
 
 </beans>
