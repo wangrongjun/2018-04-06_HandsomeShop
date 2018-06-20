@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>我的订单</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/order_list.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
-    <script src="${pageContext.request.contextPath}/js/util/DateUtil.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery.blockUI.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/util/DateUtil.js"></script>
     <script>
         let ordersCount = ${requestScope.ordersCount};
         let ordersList = ${requestScope.ordersListJson};

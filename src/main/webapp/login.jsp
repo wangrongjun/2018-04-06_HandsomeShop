@@ -9,10 +9,10 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header_content_footer.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js"></script>
     <title>用户登录</title>
     <style type="text/css">
         content {

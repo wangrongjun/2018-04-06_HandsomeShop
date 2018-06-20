@@ -9,10 +9,10 @@
 <html>
 <head>
     <title>404</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header_content_footer.css">
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 

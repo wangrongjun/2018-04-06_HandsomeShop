@@ -1,9 +1,8 @@
-<%@ page import="com.handsome.shop.entity.Customer" %>
 <%@ page import="com.handsome.shop.dao.OrdersDao" %>
 <%@ page import="com.handsome.shop.dao.ShopCarDao" %>
-<%@ page import="com.handsome.shop.framework.SpringContextHolder" %>
+<%@ page import="com.handsome.shop.entity.Customer" %>
 <%@ page import="com.handsome.shop.entity.Seller" %>
-<%@ page import="com.handsome.shop.entity.Orders" %>
+<%@ page import="com.handsome.shop.framework.SpringContextHolder" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangrongjun

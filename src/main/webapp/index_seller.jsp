@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>英俊商城 - 卖家首页</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index_seller.css">
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
-    <script src="${pageContext.request.contextPath}/js/util/PicturePreviewUtil.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery.blockUI.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/util/PicturePreviewUtil.js"></script>
     <script>
         var sellerId = ${requestScope.sellerId};
         var shopList = ${requestScope.shopListJson};

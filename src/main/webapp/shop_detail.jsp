@@ -9,15 +9,15 @@
 <html>
 <head>
     <title>商店详情</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css">
     <%--TODO 把goods_box变为vue组件--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/goods_box.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index_seller.css">
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
-    <script src="${pageContext.request.contextPath}/js/util/PicturePreviewUtil.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery.blockUI.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/util/PicturePreviewUtil.js"></script>
     <script>
         let editable = ${requestScope.editable != null ? requestScope.editable : "false"};
         let shop = ${requestScope.shopJson};

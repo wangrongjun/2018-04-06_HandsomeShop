@@ -11,14 +11,14 @@
 <head>
     <title>${requestScope.goods.goodsName}</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/luara.left.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header_content_footer.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/goods_info.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.luara.0.0.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.blockUI.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery.luara.0.0.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery.blockUI.js"></script>
+    <script src="${pageContext.request.contextPath}/web_lib/js/vue.js"></script>
     <script>
         let editable = ${requestScope.editable != null ? requestScope.editable : "false"};
         let goods = ${requestScope.goodsJson};

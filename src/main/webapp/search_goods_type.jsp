@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>${sessionScope.goodsTypeList.get(requestScope.goodsTypeId-1).name}</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min-3.2.0.css"/>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.9.0.min.js" type="text/javascript"
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/web_lib/css/bootstrap.min-3.2.0.css"/>
+    <script src="${pageContext.request.contextPath}/web_lib/js/jquery-1.9.0.min.js" type="text/javascript"
             charset="utf-8"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min-3.2.0.js" type="text/javascript"
+    <script src="${pageContext.request.contextPath}/web_lib/js/bootstrap.min-3.2.0.js" type="text/javascript"
             charset="utf-8"></script>
     <style type="text/css">
         .goods_type_box {
