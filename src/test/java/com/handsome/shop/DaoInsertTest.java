@@ -236,7 +236,7 @@ public class DaoInsertTest extends BaseDaoTest {
         evaluateDao.insert(evaluate3);
         evaluateDao.insert(evaluate4);
 
-        /* 添加额外的无意义数据
+        /* 添加额外的无意义数据 */
         for (int i = 1; i <= 50; i++) {
             Customer customer = new Customer("155" + i, DataUtil.md5("123"), "user" + i, "nick" + i, i % 4 == 0 ? "男" : "女",
                     pic("customer_" + (i % 2 + 1) + ".jpg"));
@@ -248,8 +248,7 @@ public class DaoInsertTest extends BaseDaoTest {
             Goods goods = new Goods("商品" + i, "商品描述" + i, 500 + i * 100, i,
                     goodsTypeDao.queryById(i % 5 + 1), shop, pics("goods_" + (i % 19 + 1) + ".jpg"));
             goodsDao.insert(goods);
-        }*/
-
+        }
     }
 
     private Date d(String dateTime) {
