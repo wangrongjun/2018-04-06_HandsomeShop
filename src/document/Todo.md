@@ -13,19 +13,25 @@
 * 创建订单后需要用户确认
 * 使用支付宝接口模拟付款
 
-## 技术改进
+## 技术改进（数据存储）
 
-* [完成]改进项目：改为使用 SpringMVC 的模式
 * [完成]改进项目：HibernateDao 的 id 类型参数化
-* 改进项目：使用 Hibernate 提供的 JdbcTemplate
+* [完成]Orders的receiver和phone改为contact
+* [完成]给每个实体类加上createdOn，modifiedOn，isObsolete
 * [完成]改进项目：在数据库中保存图片，编写一个请求方法返回图片
 * [完成]无限分类（闭包集实现树型结构）
 * [完成]Address表改名为Contact
-* [完成]Orders的receiver和phone改为contact
-* [完成]给每个实体类加上createdOn，modifiedOn，isObsolete
+* [完成]密码使用md5加密保存
+* 改进项目：使用 SpringData 框架
+* 使用Redis进行主页和商品详情页的缓存。缓存策略：有效期1小时。
+  同时监听会影响到主页和商品详情页的修改方法，即时更新缓存。
+* Goods表新增缩略图字段
+
+## 技术改进（接口服务）
+
+* [完成]改进项目：改为使用 SpringMVC 的模式
 * [完成]去掉所有 center 标签
 * [完成]文件上传使用SpringMVC的框架
-* [完成]密码使用md5加密保存
 * 使用Hibernate Validator参数校验框架校验参数
 * 请求的一切错误（包括找不到请求方法，请求方法参数出错，请求方法内部抛出异常）
   都返回纯文本的错误信息，而不要返回html页面。
@@ -34,8 +40,6 @@
 * 使用支付宝接口模拟支付过程
 * 预防XSS攻击
 * 把所有jsp改为html，所有页面都通过ajax加载数据
-* 使用Redis进行主页和商品详情页的缓存。缓存策略：有效期1小时。
-  同时监听会影响到主页和商品详情页的修改方法，即时更新缓存。
 
 ## 二期过程
 
